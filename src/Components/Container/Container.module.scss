@@ -1,8 +1,9 @@
+@import "@/styles/mixins.scss";
+
 .container,
 .container-s {
   position: relative;
   width: 100%;
-  max-width: 2560px;
   z-index: 1;
   max-width: calc(1440px + var(--spacing-container) * 2);
   padding-right: var(--spacing-container);
