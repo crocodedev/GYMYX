@@ -1,4 +1,4 @@
-@import "@/styles/style.scss";
+@import "@/styles/mixins.scss";
 
 .header {
   position: fixed;
@@ -6,6 +6,14 @@
   left: 0;
   z-index: 10;
   width: 100%;
+
+  @include media-breakpoint-down(xl) {
+    padding: 24px 20px;
+  }
+
+  @include media-breakpoint-up(xl) {
+    padding: 0 30px;
+  }
 
   &__wrapper {
     position: relative;
