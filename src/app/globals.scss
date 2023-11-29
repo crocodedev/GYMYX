@@ -7,13 +7,7 @@
 }
 
 :root {
-  @include media-breakpoint-down(lg) {
-    --spacing-container: 12px;
-  }
-
-  @include media-breakpoint-up(lg) {
-    --spacing-container: 20px;
-  }
+  --spacing-container: 20px;
 }
 
 html,
