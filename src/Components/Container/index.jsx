@@ -1,7 +1,11 @@
 import styles from "./Container.module.scss"
 
-const Container = ({ children }) => {
-  return <div className={styles.container}>{children}</div>
+const Container = ({ size = "xl", children }) => {
+  return (
+    <div className={`${size === "xl" ? styles.container : styles.containerXl}`}>
+      {children}
+    </div>
+  )
 }
 
 export default Container

@@ -1,7 +1,7 @@
 @import "@/styles/mixins.scss";
 
 .container,
-.container-s {
+.containerXl {
   position: relative;
   width: 100%;
   z-index: 1;
@@ -12,8 +12,7 @@
   margin-left: auto;
 }
 
-.container,
-.container-s {
+.container {
   @include media-breakpoint-down(sm) {
     max-width: $breakpoints-xs;
   }
@@ -33,24 +32,42 @@
   @include media-breakpoint-between(xl, xxl) {
     max-width: $breakpoints-xl;
   }
-}
 
-.container-s {
-  @include media-breakpoint-between(xxl, xxxl) {
-    max-width: 1200px;
-  }
-
-  @include media-breakpoint-up(xxxl) {
-    max-width: 1455px;
-  }
-}
-
-.container {
   @include media-breakpoint-between(xxl, xxxl) {
     max-width: $breakpoints-xxl;
   }
 
   @include media-breakpoint-up(xxxl) {
     max-width: $breakpoints-xxxl;
+  }
+}
+
+.containerXl {
+  @include media-breakpoint-down(sm) {
+    max-width: $breakpoints-xs;
+  }
+
+  @include media-breakpoint-between(sm, md) {
+    max-width: $breakpoints-sm;
+  }
+
+  @include media-breakpoint-between(md, lg) {
+    max-width: $breakpoints-md;
+  }
+
+  @include media-breakpoint-between(lg, xl) {
+    max-width: $breakpoints-lg;
+  }
+
+  @include media-breakpoint-between(xl, xxl) {
+    max-width: $breakpoints-xl + 100;
+  }
+
+  @include media-breakpoint-between(xxl, xxxl) {
+    max-width: $breakpoints-xxl + 100;
+  }
+
+  @include media-breakpoint-up(xxxl) {
+    max-width: $breakpoints-xxxl + 100;
   }
 }
