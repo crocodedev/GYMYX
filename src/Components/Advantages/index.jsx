@@ -2,6 +2,7 @@
 
 import Container from "../Container"
 import Slider from "../Slider"
+import styles from "./Advantages.module.scss"
 
 const slides = [
   {
@@ -57,7 +58,7 @@ const slides = [
 
 const Advantages = () => {
   return (
-    <section>
+    <section className={styles.advantages}>
       <Container>
         <Slider items={slides} />
       </Container>
