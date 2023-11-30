@@ -1,0 +1,228 @@
+@import "@/styles/mixins.scss";
+
+.prices-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  @include media-breakpoint-down(md) {
+    margin-top: 30px;
+  }
+
+  @include media-breakpoint-between(sm, xl) {
+    padding: 8%;
+  }
+
+  @include media-breakpoint-between(xl, xxxl) {
+    padding: 0 15%;
+  }
+
+  @include media-breakpoint-up(xxxl) {
+    padding: 0 22%;
+  }
+
+  &__col {
+    &:first-of-type {
+      @include media-breakpoint-down(md) {
+        margin-top: 25px;
+      }
+
+      @include media-breakpoint-between(md, xl) {
+        margin-top: 60px;
+      }
+
+      @include media-breakpoint-between(xl, xxl) {
+        margin-top: 50px;
+      }
+
+      @include media-breakpoint-up(xxl) {
+        margin-top: 15px;
+      }
+    }
+
+    &:last-of-type {
+      @include media-breakpoint-down(md) {
+        margin-top: 120px;
+      }
+
+      @include media-breakpoint-between(md, xl) {
+        margin-top: 245px;
+      }
+
+      @include media-breakpoint-up(xl) {
+        margin-top: 230px;
+      }
+    }
+
+    &-right {
+    }
+  }
+
+  &__price-value {
+    display: flex;
+    align-items: flex-end;
+    white-space: nowrap;
+
+    &:not(:last-child) {
+      @include media-breakpoint-down(md) {
+        margin-bottom: 140px;
+      }
+
+      @include media-breakpoint-between(md, xl) {
+        margin-bottom: 285px;
+      }
+
+      @include media-breakpoint-between(xl, xxl) {
+        margin-bottom: 250px;
+      }
+
+      @include media-breakpoint-up(xxl) {
+        margin-bottom: 230px;
+      }
+    }
+  }
+
+  &__price-value-amount {
+    color: var(--white, #fff);
+    text-align: right;
+    font-weight: 600;
+    line-height: 107.3%;
+
+    @include media-breakpoint-down(md) {
+      font-size: 30px;
+      letter-spacing: -0.3px;
+    }
+
+    @include media-breakpoint-between(md, xl) {
+      font-size: 50px;
+    }
+
+    @include media-breakpoint-between(xl, xxl) {
+      font-size: 76px;
+    }
+
+    @include media-breakpoint-up(xxl) {
+      font-size: 100px;
+    }
+  }
+
+  &__price-value-prefix {
+    color: var(--white, #fff);
+    font-weight: 600;
+    letter-spacing: -0.5px;
+
+    @include media-breakpoint-down(md) {
+      font-size: 18px;
+    }
+
+    @include media-breakpoint-between(md, xl) {
+      font-size: 32px;
+    }
+
+    @include media-breakpoint-between(xl, xxl) {
+      font-size: 44px;
+    }
+
+    @include media-breakpoint-up(xxl) {
+      font-size: 50px;
+    }
+  }
+
+  &__time-line {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__time-line-item {
+    position: relative;
+
+    @include media-breakpoint-down(md) {
+      padding-bottom: 75px;
+    }
+
+    @include media-breakpoint-up(md) {
+      padding-bottom: 145px;
+    }
+
+    &:first-of-type {
+      &::before {
+        content: "";
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        width: 2px;
+        background: linear-gradient(0deg, #fff -200%, transparent 100%);
+        z-index: -1;
+        transform: translateX(-50%);
+
+        @include media-breakpoint-down(md) {
+          height: 25px;
+        }
+
+        @include media-breakpoint-up(md) {
+          height: 50px;
+        }
+      }
+    }
+
+    &:last-of-type {
+      @include media-breakpoint-down(md) {
+        padding-bottom: 25px;
+      }
+
+      @include media-breakpoint-up(md) {
+        padding-bottom: 50px;
+      }
+
+      &::after {
+        background: linear-gradient(180deg, #fff -200%, transparent 100%);
+      }
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 2px;
+      height: 100%;
+      background: #fff;
+      z-index: -1;
+      transform: translateX(-50%);
+    }
+  }
+
+  &__time-line-item-dot {
+    position: relative;
+    background: var(--blue-base, #294ae7);
+    border-radius: 50%;
+
+    @include media-breakpoint-down(md) {
+      width: 10px;
+      height: 10px;
+    }
+
+    @include media-breakpoint-up(md) {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  &__time-line-item-value {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: calc(100% - 20px * -1);
+    color: var(--white, #fff);
+    font-weight: 500;
+    line-height: 135%;
+
+    @include media-breakpoint-down(md) {
+      font-size: 12px;
+    }
+
+    @include media-breakpoint-up(md) {
+      font-size: 26px;
+    }
+  }
+}

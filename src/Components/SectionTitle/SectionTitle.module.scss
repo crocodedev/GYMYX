@@ -20,7 +20,12 @@
     letter-spacing: -0.4px;
   }
 
-  @include media-breakpoint-up(xl) {
+  @include media-breakpoint-between(xl, xxl) {
+    font-size: 44px;
+    letter-spacing: -0.5px;
+  }
+
+  @include media-breakpoint-up(xxl) {
     font-size: 66px;
     letter-spacing: -0.66px;
   }
