@@ -23,7 +23,7 @@ const AboutUs = () => {
             <BorderLabel label={"как это работает?"} />
             <div className={styles["about-us__list"]}>
               {LIST.map(({ text }, index) => (
-                <AboutUsItem title={index + 1} text={text} />
+                <AboutUsItem key={text} title={index + 1} text={text} />
               ))}
             </div>
           </div>
