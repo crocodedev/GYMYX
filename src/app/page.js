@@ -1,5 +1,6 @@
-import AboutUs from "@/Components/AboutUs"
 import Hero from "@/Components/Hero"
+import AboutUs from "@/Components/AboutUs"
+import Advantages from "@/Components/Advantages"
 import Image from "next/image"
 
 export default function Home() {
@@ -7,6 +8,7 @@ export default function Home() {
     <>
       <Hero />
       <AboutUs />
+      <Advantages />
     </>
   )
 }
