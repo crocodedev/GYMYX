@@ -4,6 +4,7 @@ import Advantages from "@/Components/Advantages"
 import Image from "next/image"
 import Prices from "@/Components/Prices"
 import ChooseHealth from "@/Components/ChooseHealth"
+import Equipment from "@/Components/Equipment"
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
       <Advantages />
       <Prices />
       <ChooseHealth />
+      <Equipment/>
     </>
   )
 }
