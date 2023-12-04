@@ -7,7 +7,13 @@
 }
 
 :root {
-  --spacing-container: 20px;
+  @include media-breakpoint-down(xl) {
+    --spacing-container: 30px;
+  }
+
+  @include media-breakpoint-up(xl) {
+    --spacing-container: 80px;
+  }
 }
 
 html,
