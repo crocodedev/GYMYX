@@ -72,7 +72,12 @@
   }
 
   &-size-m {
-    @include media-breakpoint-down(xxl) {
+    @include media-breakpoint-down(md) {
+      padding: 5px 12px;
+      font-size: 12px;
+    }
+
+    @include media-breakpoint-between(md,xxl) {
       padding: 8px 18px;
       font-size: 18px;
     }
