@@ -50,7 +50,7 @@ const Faq = () => {
   }
 
   return (
-    <section className={styles.faq}>
+    <section id="faq" className={styles.faq}>
       <Container>
         <div>
           <p className={styles.faq__title}>Ответы на вопросы</p>

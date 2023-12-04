@@ -57,7 +57,7 @@ const ITEMS = [
 
 const Equipment = () => {
   return (
-    <section className={styles.equipment}>
+    <section id="gym" className={styles.equipment}>
       <Container>
         <SectionTitle title="Оборудование в зале" />
         <div className={styles.equipment__grid}>

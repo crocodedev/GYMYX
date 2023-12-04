@@ -1,7 +1,7 @@
 "use client"
 
+import { Link as ScrollLink, animateScroll as scroll } from "react-scroll"
 import { useState } from "react"
-
 import styles from "./Header.module.scss"
 import Link from "next/link"
 import Button from "@/Components/Button"
@@ -21,11 +21,46 @@ const Header = () => {
           <img src="/icons/logo.svg" alt="logo icon" />
         </Link>
         <div className={styles.header__nav}>
-          <div className={styles["header__nav-item"]}>Преимущества</div>
-          <div className={styles["header__nav-item"]}>Зал</div>
-          <div className={styles["header__nav-item"]}>Прайс</div>
-          <div className={styles["header__nav-item"]}>Адреса</div>
-          <div className={styles["header__nav-item"]}>Вопросы</div>
+          <ScrollLink
+            to="advantages"
+            smooth={true}
+            duration={500}
+            className={styles["header__nav-item"]}
+          >
+            Преимущества
+          </ScrollLink>
+          <ScrollLink
+            to="gym"
+            smooth={true}
+            duration={500}
+            className={styles["header__nav-item"]}
+          >
+            Зал
+          </ScrollLink>
+          <ScrollLink
+            to="prices"
+            smooth={true}
+            duration={500}
+            className={styles["header__nav-item"]}
+          >
+            Прайс
+          </ScrollLink>
+          <ScrollLink
+            to="map"
+            smooth={true}
+            duration={500}
+            className={styles["header__nav-item"]}
+          >
+            Адреса
+          </ScrollLink>
+          <ScrollLink
+            to="faq"
+            smooth={true}
+            duration={500}
+            className={styles["header__nav-item"]}
+          >
+            Вопросы
+          </ScrollLink>
         </div>
         <div className={styles.header__controls}>
           <Button label={"Записаться"} />
