@@ -1,0 +1,118 @@
+@import "@/styles/mixins.scss";
+
+.map-area {
+  position: relative;
+  overflow: hidden;
+
+  @include media-breakpoint-down(md) {
+    height: 215px;
+    border-radius: 7px;
+  }
+
+  @include media-breakpoint-between(md, xl) {
+    height: 550px;
+    border-radius: 15px;
+  }
+
+  @include media-breakpoint-up(xl) {
+    height: 805px;
+    border-radius: 20px;
+  }
+
+  [class*="ground-pane"] {
+    filter: grayscale(1);
+  }
+
+  &__btns-zoom {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    z-index: 5;
+
+    @include media-breakpoint-down(md) {
+      bottom: 18px;
+      left: 18px;
+    }
+
+    @include media-breakpoint-between(md, xl) {
+      bottom: 25px;
+      left: 25px;
+    }
+
+    @include media-breakpoint-up(xl) {
+      bottom: 35px;
+      left: 35px;
+    }
+
+    > button:first-child {
+      margin-bottom: 10px;
+    }
+  }
+
+  &__btn-zoom {
+    color: var(--white, #fff);
+    text-align: center;
+    font-weight: 550;
+    background: var(--black, #212428);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    @include media-breakpoint-down(md) {
+      width: 25px;
+      height: 25px;
+      font-size: 18px;
+      border-radius: 5px;
+    }
+
+    @include media-breakpoint-between(md, xl) {
+      width: 45px;
+      height: 45px;
+      font-size: 28px;
+      border-radius: 10px;
+    }
+
+    @include media-breakpoint-up(xl) {
+      width: 62px;
+      height: 62px;
+      font-size: 44px;
+      border-radius: 10px;
+    }
+  }
+
+  &__btn-geo {
+    position: absolute;
+    z-index: 5;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+
+    @include media-breakpoint-down(md) {
+      bottom: 15px;
+      right: 12px;
+      width: 28px;
+      height: 28px;
+    }
+
+    @include media-breakpoint-between(md, xl) {
+      bottom: 15px;
+      right: 15px;
+      width: 45px;
+      height: 45px;
+    }
+
+    @include media-breakpoint-up(xl) {
+      bottom: 35px;
+      right: 35px;
+      width: 66px;
+      height: 66px;
+    }
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
