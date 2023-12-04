@@ -40,7 +40,7 @@ const Map = () => {
   }, [])
 
   return (
-    <div className={styles.map}>
+    <section id="map" className={styles.map}>
       <Container>
         <div className={styles.map__wrapper}>
           <MapArea
@@ -56,11 +56,17 @@ const Map = () => {
               </p>
               <p className={styles.map__text}>{currentPlacemark?.address}</p>
             </div>
-            <Button className={styles.map__btn} size="l" variant="blue" label="Выбрать" icon="arrow" />
+            <Button
+              className={styles.map__btn}
+              size="l"
+              variant="blue"
+              label="Выбрать"
+              icon="arrow"
+            />
           </div>
         </div>
       </Container>
-    </div>
+    </section>
   )
 }
 

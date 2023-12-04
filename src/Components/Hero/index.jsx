@@ -4,7 +4,7 @@ import styles from "./Hero.module.scss"
 
 const Hero = () => {
   return (
-    <div className={styles.hero}>
+    <section id="hero" className={styles.hero}>
       <picture className={styles.hero__img}>
         <source media="(max-width: 768px)" srcSet="/images/hero_mobile.png" />
         <img src="/images/hero.png" alt="hero image" />
@@ -31,7 +31,7 @@ const Hero = () => {
           </div>
         </Container>
       </div>
-    </div>
+    </section>
   )
 }
 

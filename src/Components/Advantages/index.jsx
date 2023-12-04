@@ -58,7 +58,7 @@ const slides = [
 
 const Advantages = () => {
   return (
-    <section className={styles.advantages}>
+    <section id="advantages" className={styles.advantages}>
       <Container>
         <Slider items={slides} />
       </Container>

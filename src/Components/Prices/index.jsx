@@ -6,7 +6,7 @@ import PricesList from "./PricesList"
 
 const Prices = () => {
   return (
-    <section className={styles.prices}>
+    <section id="prices" className={styles.prices}>
       <Container>
         <div className={styles.prices__wrapper}>
           <PriceLabel />
