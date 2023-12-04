@@ -6,6 +6,7 @@ import Prices from "@/Components/Prices"
 import ChooseHealth from "@/Components/ChooseHealth"
 import Equipment from "@/Components/Equipment"
 import Map from "@/Components/Map"
+import Faq from "@/Components/Faq"
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
       <ChooseHealth />
       <Equipment />
       <Map />
+      <Faq />
     </>
   )
 }
