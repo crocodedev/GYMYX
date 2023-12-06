@@ -17,6 +17,7 @@
     "swiper": "^11.0.5"
   },
   "devDependencies": {
+    "@babel/eslint-parser": "^7.23.3",
     "eslint": "^8",
     "eslint-config-next": "14.0.3",
     "sass": "^1.69.5"
