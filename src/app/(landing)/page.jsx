@@ -1,11 +1,11 @@
-import Hero from "@/Components/Hero"
-import AboutUs from "@/Components/AboutUs"
-import Advantages from "@/Components/Advantages"
-import Prices from "@/Components/Prices"
-import ChooseHealth from "@/Components/ChooseHealth"
-import Equipment from "@/Components/Equipment"
-import Map from "@/Components/Map"
-import Faq from "@/Components/Faq"
+import Hero from "@/Sections/Hero"
+import AboutUs from "@/Sections/AboutUs"
+import Advantages from "@/Sections/Advantages"
+import Prices from "@/Sections/Prices"
+import ChooseHealth from "@/Sections/ChooseHealth"
+import Equipment from "@/Sections/Equipment"
+import Map from "@/Sections/Map"
+import Faq from "@/Sections/Faq"
 
 export default function Home() {
   return (

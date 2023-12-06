@@ -1,7 +1,7 @@
-import BorderLabel from "../BorderLabel"
-import Container from "../Container"
+import BorderLabel from "@/Components/BorderLabel"
+import Container from "@/Components/Container"
 import styles from "./AboutUs.module.scss"
-import AboutUsItem from "./AboutUsItem"
+import AboutUsItem from "@/Components/AboutUs/AboutUsItem"
 
 const LIST = [
   { text: "Забронируйте удобный слот" },

@@ -1,8 +1,8 @@
 import { Montserrat } from "next/font/google"
 import "./../globals.scss"
 
-import Header from "@/Components/Header"
-import Footer from "@/Components/Footer"
+import Header from "@/Sections/Header"
+import Footer from "@/Sections/Footer"
 
 const MontserratFont = Montserrat({ subsets: ["latin"] })
 
