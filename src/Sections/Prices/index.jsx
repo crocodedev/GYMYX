@@ -1,8 +1,8 @@
-import SectionTitle from "../SectionTitle"
-import Container from "../Container"
+import SectionTitle from "../../Components/SectionTitle"
+import Container from "../../Components/Container"
 import styles from "./Prices.module.scss"
-import PriceLabel from "./PriceLabel"
-import PricesList from "./PricesList"
+import PriceLabel from "../../Components/Prices/PriceLabel"
+import PricesList from "../../Components/Prices/PricesList"
 
 const Prices = () => {
   return (

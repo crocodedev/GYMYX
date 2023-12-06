@@ -1,11 +1,11 @@
 "use client"
 
-import { Link as ScrollLink, animateScroll as scroll } from "react-scroll"
+import { Link as ScrollLink} from "react-scroll"
 import { useState } from "react"
 import styles from "./Header.module.scss"
 import Link from "next/link"
 import Button from "@/Components/Button"
-import MobileMenu from "./MobileMenu"
+import MobileMenu from "@/Components/Header/MobileMenu"
 
 const Header = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false)

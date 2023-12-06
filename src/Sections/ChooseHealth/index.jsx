@@ -1,4 +1,4 @@
-import Container from "../Container"
+import Container from "@/Components/Container"
 import styles from "./ChooseHealth.module.scss"
 
 const ChooseHealth = () => {

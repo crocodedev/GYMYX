@@ -1,6 +1,6 @@
-import Container from "../Container"
-import SectionTitle from "../SectionTitle"
-import EquipmentItem from "./EquipmentItem"
+import Container from "@/Components/Container"
+import SectionTitle from "@/Components/SectionTitle"
+import EquipmentItem from "@/Components/Equipment/EquipmentItem"
 
 import styles from "./Equipment.module.scss"
 

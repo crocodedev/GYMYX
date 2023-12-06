@@ -1,10 +1,10 @@
 "use client"
 
-import Container from "../Container"
-import FaqItem from "./FaqItem"
+import Container from "@/Components/Container"
+import FaqItem from "@/Components/Faq/FaqItem"
 import styles from "./Faq.module.scss"
 import { useState } from "react"
-import Button from "../Button"
+import Button from "@/Components/Button"
 
 const ITEMS = [
   {

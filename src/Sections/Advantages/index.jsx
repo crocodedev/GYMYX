@@ -1,7 +1,7 @@
 "use client"
 
-import Container from "../Container"
-import Slider from "../Slider"
+import Container from "@/Components/Container"
+import Slider from "@/Components/Container"
 import styles from "./Advantages.module.scss"
 
 const slides = [

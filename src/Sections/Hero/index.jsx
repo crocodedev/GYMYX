@@ -1,5 +1,5 @@
-import Button from "../Button"
-import Container from "../Container"
+import Button from "@/Components/Button"
+import Container from "@/Components/Container"
 import styles from "./Hero.module.scss"
 
 const Hero = () => {
