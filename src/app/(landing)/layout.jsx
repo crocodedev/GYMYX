@@ -15,7 +15,7 @@ export default function LandingLayout({ children }) {
   return (
     <html lang="en">
       <body className={MontserratFont.className}>
-        <Header />
+        <Header isLanding={true}/>
         <main className="main">{children}</main>
         <Footer />
       </body>

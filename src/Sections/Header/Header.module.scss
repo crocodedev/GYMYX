@@ -7,6 +7,12 @@
   z-index: 10;
   width: 100%;
 
+  &.is-landing {
+    @include media-breakpoint-down(xl) {
+      display: none;
+    }
+  }
+
   @include media-breakpoint-down(xl) {
     padding: 0 20px;
   }
@@ -94,6 +100,19 @@
 
     @include media-breakpoint-down(xl) {
       display: none;
+    }
+  }
+
+  &__controls-account-text {
+    color: var(--white, #fff);
+    font-weight: 600;
+
+    @include media-breakpoint-between(xl, xxl) {
+      font-size: 18px;
+    }
+
+    @include media-breakpoint-up(xxl) {
+      font-size: 22px;
     }
   }
 
