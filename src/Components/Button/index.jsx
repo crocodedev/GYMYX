@@ -1,6 +1,7 @@
 import styles from "./Button.module.scss"
 
 const Button = ({
+  disabled = false,
   onClick,
   className = "",
   size = "m",
@@ -9,11 +10,12 @@ const Button = ({
   icon,
 }) => {
   return (
-    <div
+    <button
       onClick={onClick}
       className={`${className} ${styles.button} ${
         variant ? styles[`button-${variant}`] : ""
       } ${styles[`button-size-${size}`]}`}
+      disabled={disabled}
     >
       {label}
       {icon && (
@@ -21,7 +23,7 @@ const Button = ({
           <img style={{ transform: "rotate(180deg)" }} src="/icons/arrow.svg" />
         </div>
       )}
-    </div>
+    </button>
   )
 }
 

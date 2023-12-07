@@ -7,7 +7,7 @@ import Link from "next/link"
 import Button from "@/Components/Button"
 import MobileMenu from "@/Components/Header/MobileMenu"
 
-const Header = () => {
+const Header = ({isLanding = false, isLogined}) => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   const handleMobileMenuToggle = () => {
@@ -15,7 +15,7 @@ const Header = () => {
   }
 
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} ${styles["is-landing"]}`}>
       <div className={styles.header__wrapper}>
         <Link href="/" className={styles.header__logo}>
           <img src="/icons/logo.svg" alt="logo icon" />
@@ -63,7 +63,13 @@ const Header = () => {
           </ScrollLink>
         </div>
         <div className={styles.header__controls}>
-          <Button label={"Записаться"} />
+          {isLanding && <Button label={"Записаться"} />}
+          {!isLanding && ( 
+            <>
+            {!isLogined && <p className={styles["header__controls-account-text"]}>Войти</p>}
+            {isLogined &&  <p className={styles["header__controls-account-text"]}>Наволокин В.</p> }
+            </>
+          )}
           <div className={styles["header__controls-account"]}>
             <img src="/icons/account.svg" alt="account icon" />
           </div>
