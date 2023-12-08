@@ -15,7 +15,7 @@ const Header = ({isLanding = false, isLogined}) => {
   }
 
   return (
-    <header className={`${styles.header} ${styles["is-landing"]}`}>
+    <header className={`${styles.header} ${isLanding ? styles["is-landing"]: ""}`}>
       <div className={styles.header__wrapper}>
         <Link href="/" className={styles.header__logo}>
           <img src="/icons/logo.svg" alt="logo icon" />

@@ -6,16 +6,6 @@
   margin: 0;
 }
 
-:root {
-  @include media-breakpoint-down(xl) {
-    --spacing-container: 30px;
-  }
-
-  @include media-breakpoint-up(xl) {
-    --spacing-container: 80px;
-  }
-}
-
 html,
 body {
   max-width: 100vw;
@@ -31,6 +21,39 @@ body {
 
 .main {
   flex-grow: 1;
+  padding-bottom: 94px;
+
+  &.account {
+    @include media-breakpoint-down(xl) {
+      padding-top: 10px;
+    }
+
+    @include media-breakpoint-between(xl, xxl) {
+      padding-top: calc(79px + 30px);
+    }
+
+    @include media-breakpoint-up(xxl) {
+      padding-top: calc(84px + 50px);
+      padding-bottom: 94px;
+    }
+  }
+}
+
+.account-page-wrapper {
+  display: flex;
+  flex-direction: column;
+
+  @include media-breakpoint-down(xl) {
+    gap: 20px;
+  }
+
+  @include media-breakpoint-between(xl, xxl) {
+    gap: 30px;
+  }
+
+  @include media-breakpoint-up(xxl) {
+    gap: 40px;
+  }
 }
 
 a {

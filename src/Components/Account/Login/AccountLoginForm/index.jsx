@@ -108,7 +108,7 @@ const AccountLoginForm = ({ handleToogleModal }) => {
         return
       }
 
-      console.log('OKKKKK ')
+      console.log("OKKKKK ")
       cookie.set("access_token", result?.data.access_token, {
         expires: result?.data.expires_in,
       })
@@ -141,6 +141,7 @@ const AccountLoginForm = ({ handleToogleModal }) => {
         )}
         {data.receivedCode && (
           <Input
+            type="number"
             refElement={inputCodeRef}
             onChange={handleChangeCode}
             placeholder={"Код из SMS"}
@@ -151,7 +152,7 @@ const AccountLoginForm = ({ handleToogleModal }) => {
           <Button
             onClick={handleSubmitLogin}
             disabled={data.phone.valid && data.agreePolicy ? false : true}
-            className={styles["account-login-form__btn"]}
+            fullSize={true}
             size="l"
             variant="blue"
             icon="arrow"
@@ -162,7 +163,7 @@ const AccountLoginForm = ({ handleToogleModal }) => {
           <Button
             disabled={data.code ? (data.code.length < 4 ? true : false) : true}
             onClick={handleSubmitCheckCode}
-            className={styles["account-login-form__btn"]}
+            fullSize={true}
             size="l"
             variant="blue"
             label={"Подтвердить"}

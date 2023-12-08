@@ -1,7 +1,8 @@
 @import "@/styles/mixins.scss";
 
 .container,
-.containerXl {
+.containerM,
+.containerXL {
   position: relative;
   width: 100%;
   z-index: 1;
@@ -10,6 +11,27 @@
   padding-left: var(--spacing-container);
   margin-right: auto;
   margin-left: auto;
+}
+
+.container,
+.conatinerXL {
+  @include media-breakpoint-down(xl) {
+    --spacing-container: 30px;
+  }
+
+  @include media-breakpoint-up(xl) {
+    --spacing-container: 80px;
+  }
+}
+
+.containerM {
+  @include media-breakpoint-down(xl) {
+    --spacing-container: 15px;
+  }
+
+  @include media-breakpoint-up(xl) {
+    --spacing-container: 80px;
+  }
 }
 
 .container {
@@ -42,7 +64,33 @@
   }
 }
 
-.containerXl {
+.containerM {
+  @include media-breakpoint-down(sm) {
+    max-width: $breakpoints-xs;
+  }
+
+  @include media-breakpoint-between(sm, md) {
+    max-width: $breakpoints-sm;
+  }
+
+  @include media-breakpoint-between(md, lg) {
+    max-width: $breakpoints-md;
+  }
+
+  @include media-breakpoint-between(lg, xl) {
+    max-width: $breakpoints-lg;
+  }
+
+  @include media-breakpoint-between(xl, xxl) {
+    max-width: $breakpoints-xl;
+  }
+
+  @include media-breakpoint-up(xxl) {
+    max-width: 1374px;
+  }
+}
+
+.containerXL {
   @include media-breakpoint-down(sm) {
     max-width: $breakpoints-xs;
   }

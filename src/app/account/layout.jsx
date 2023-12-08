@@ -15,7 +15,7 @@ export default function AccountLayout({ children }) {
     <html lang="en">
       <body className={MontserratFont.className}>
         <Header isLogined={true} />
-        <main className="main">{children}</main>
+        <main className="main account">{children}</main>
       </body>
     </html>
   )

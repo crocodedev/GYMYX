@@ -7,7 +7,7 @@
   z-index: 10;
   width: 100%;
 
-  &.is-landing {
+  &:not(.is-landing) {
     @include media-breakpoint-down(xl) {
       display: none;
     }

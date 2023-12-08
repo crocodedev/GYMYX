@@ -1,0 +1,43 @@
+@import "@/styles/mixins.scss";
+
+.profile-stats {
+  &__wrapper {
+    background: var(--white-transperent, rgba(255, 255, 255, 0.1));
+
+    @include media-breakpoint-down(lg) {
+      padding: 18px;
+      padding-right: 0;
+      border-radius: 15px;
+    }
+
+    @include media-breakpoint-up(lg) {
+      padding: 40px 40px 40px 30px;
+      border-radius: 30px;
+    }
+  }
+
+  &__list {
+    @include media-breakpoint-down(lg) {
+      margin-top: 20px;
+    }
+
+    @include media-breakpoint-up(lg) {
+      margin-top: 40px;
+    }
+
+    cursor: grab;
+  }
+
+  &__list-wrapper {
+    > div > div {
+      @include media-breakpoint-down(md) {
+        width: fit-content;
+        padding-right: 20px;
+      }
+
+      @include media-breakpoint-up(md) {
+        width: 76px;
+      }
+    }
+  }
+}
