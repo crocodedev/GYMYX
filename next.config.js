@@ -5,6 +5,9 @@ const nextConfig = {
   sassOptions: {
     includePaths: [path.join(__dirname, "styles")],
   },
+  images: {
+    domains: ['gymyx.cro.codes'],
+  },
 }
 
 module.exports = nextConfig

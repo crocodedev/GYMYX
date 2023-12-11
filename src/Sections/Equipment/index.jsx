@@ -4,64 +4,29 @@ import EquipmentItem from "@/Components/Equipment/EquipmentItem"
 
 import styles from "./Equipment.module.scss"
 
-const ITEMS = [
-  {
-    id: 1,
-    title: "Весы",
-    image: "/images/equipment/Equipment-1.png",
-    content: "Отслеживайте результаты продуктивных тренировок",
-  },
-  {
-    id: 2,
-    title: "Станция",
-    image: "/images/equipment/Equipment-2.png",
-    content: "Тренировки под любимую музыку стали еще проще ",
-  },
-  {
-    id: 3,
-    title: "Кондиционер",
-    image: "/images/equipment/Equipment-3.png",
-    content: "Подстройте температуру под себя ",
-  },
-  {
-    id: 4,
-    title: "Рама и штанга",
-    image: "/images/equipment/Equipment-4.png",
-    content: "Используйте во время силовых тренировок",
-  },
-  {
-    id: 5,
-    title: "Беговая дорожка",
-    image: "/images/equipment/Equipment-5.png",
-    content: "Незаменимый инструмент для комфортного и эффективного кардио. Бегайте, не смотря на погодные условия.",
-  },
-  {
-    id: 6,
-    title: "Скамья и гантели",
-    image: "/images/equipment/Equipment-6.png",
-    content: "Универсальные тренажеры для комплексной тренировки",
-  },
-  {
-    id: 7,
-    title: "Для разминки",
-    image: "/images/equipment/Equipment-7.png",
-    content: "Для здоровой поясницы и разминки",
-  },
-  {
-    id: 8,
-    title: "Функционал",
-    image: "/images/equipment/Equipment-8.png",
-    content: "Для интенсивных и функциональных тренировок",
-  },
-]
+const Equipment = ({ alias, fields }) => {
+  const title = fields.find((item) => item.name === "title")?.value || ""
+  const list = fields.find((item) => item.name === "list")?.value || []
+  
+  const items = list.map((item, index) => {
+    const title = item.find((field) => field.name === "title")?.value || "";
+    const text = item.find((field) => field.name === "text")?.value || "";
+    const image = item.find((field) => field.name === "image")?.value || "";
 
-const Equipment = () => {
+    return {
+      id: index,
+      title: title,
+      image: image,
+      content: text,
+    }
+  })
+
   return (
-    <section id="gym" className={styles.equipment}>
+    <section id={alias} className={styles.equipment}>
       <Container>
-        <SectionTitle title="Оборудование в зале" />
+        <SectionTitle title={title} />
         <div className={styles.equipment__grid}>
-          {ITEMS.map(({ id, ...props }) => (
+          {items.map(({ id, ...props }) => (
             <EquipmentItem key={id} props={...props} />
           ))}
         </div>
