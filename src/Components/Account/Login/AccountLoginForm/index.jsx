@@ -1,7 +1,8 @@
 "use client"
 
+import { signIn } from "next-auth/react"
 import cookie from "js-cookie"
-
+import { useRouter } from "next/navigation"
 import Input from "@/Components/Input"
 import AccountCheckBox from "@/Components/Account/Login/AccountCheckBox"
 import AccountRepeatCode from "@/Components/Account/Login/AccountRepeatCode"
@@ -23,6 +24,7 @@ const INIT_FORM_DATA = {
 
 const AccountLoginForm = ({ handleToogleModal }) => {
   const inputRef = useRef()
+  const router = useRouter()
   const inputCodeRef = useRef()
   const [data, setData] = useState(INIT_FORM_DATA)
 
@@ -62,63 +64,42 @@ const AccountLoginForm = ({ handleToogleModal }) => {
   }
 
   const handleSubmitLogin = async () => {
-    try {
-      const response = await fetch("https://gymyx.cro.codes/api/users/auth", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ phone: data.phone.value }),
-      })
+    const result = await fetch("/api/login/send-code", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ phone: data.phone.value }),
+    })
 
-      if (!response.ok) {
-        throw new Error("Network response was not ok")
-      }
-
-      const result = await response.json()
+    const response = await result.json()
+    if (!response.error) {
       setData((prev) => {
         return {
           ...prev,
-          receivedCode: result.data.code,
+          receivedCode: response.data,
         }
       })
-    } catch (error) {
-      console.error("Error fetching data:", error)
     }
   }
 
   const handleSubmitCheckCode = async () => {
-    try {
-      const response = await fetch(
-        "https://gymyx.cro.codes/api/users/auth/code",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ code: data.code }),
-        }
-      )
-      const result = await response.json()
+    const result = await fetch("/api/login/verify-code", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ code: data.code }),
+    })
 
-      if (!response.ok) {
-        if (result?.message === "Unauthorized") {
-          handleToogleModal()
-        }
-        return
-      }
-
-      console.log("OKKKKK ")
-      cookie.set("access_token", result?.data.access_token, {
-        expires: result?.data.expires_in,
-      })
-    } catch (error) {
-      console.log(
-        "ERROR =>",
-        error?.message === "Unauthorized",
-        error,
-        error?.message
-      )
+    const response = await result.json()
+    if (!response.error) {
+      console.log("SUCCESS AUTH", response)
+      // cookie.set("access_token", result?.data.access_token, {
+      // expires: result?.data.expires_in,
+      //   })
+      //   router.push("/account/profile")
+      await signIn("credentials", { token: response.data.access_token})
     }
   }
 

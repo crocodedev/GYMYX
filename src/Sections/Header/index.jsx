@@ -1,21 +1,27 @@
 "use client"
 
-import { Link as ScrollLink} from "react-scroll"
+import { Link as ScrollLink } from "react-scroll"
 import { useState } from "react"
 import styles from "./Header.module.scss"
 import Link from "next/link"
 import Button from "@/Components/Button"
 import MobileMenu from "@/Components/Header/MobileMenu"
+import { useSession } from "next-auth/react"
 
-const Header = ({isLanding = false, isLogined}) => {
+const Header = ({ isLanding = false, isLogined }) => {
+  const sesstion = useSession()
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   const handleMobileMenuToggle = () => {
     setMobileMenuOpen(!isMobileMenuOpen)
   }
 
+  console.log("SESSTION", sesstion)
+
   return (
-    <header className={`${styles.header} ${isLanding ? styles["is-landing"]: ""}`}>
+    <header
+      className={`${styles.header} ${isLanding ? styles["is-landing"] : ""}`}
+    >
       <div className={styles.header__wrapper}>
         <Link href="/" className={styles.header__logo}>
           <img src="/icons/logo.svg" alt="logo icon" />
@@ -64,10 +70,16 @@ const Header = ({isLanding = false, isLogined}) => {
         </div>
         <div className={styles.header__controls}>
           {isLanding && <Button label={"Записаться"} />}
-          {!isLanding && ( 
+          {!isLanding && (
             <>
-            {!isLogined && <p className={styles["header__controls-account-text"]}>Войти</p>}
-            {isLogined &&  <p className={styles["header__controls-account-text"]}>Наволокин В.</p> }
+              {!isLogined && (
+                <p className={styles["header__controls-account-text"]}>Войти</p>
+              )}
+              {isLogined && (
+                <p className={styles["header__controls-account-text"]}>
+                  Наволокин В.
+                </p>
+              )}
             </>
           )}
           <div className={styles["header__controls-account"]}>

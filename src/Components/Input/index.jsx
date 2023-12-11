@@ -14,7 +14,6 @@ const Input = memo(
             mask="+7 (999) 999-99-99"
             maskChar="_"
             placeholder={placeholder}
-            maxLength={maxLength}
           />
         </div>
       )
@@ -28,7 +27,6 @@ const Input = memo(
             mask="9999"
             maskChar=""
             placeholder={placeholder}
-            maxLength={maxLength}
           />
         </div>
       )
