@@ -1,14 +1,14 @@
 "use client"
 
-import { Link as ScrollLink} from "react-scroll"
+import { Link as ScrollLink } from "react-scroll"
 import { useState } from "react"
 import styles from "./Header.module.scss"
 import Link from "next/link"
 import Button from "@/Components/Button"
 import MobileMenu from "@/Components/Header/MobileMenu"
+import Image from "next/image"
 
-const Header = ({isLanding = false, isLogined}) => {
-
+const Header = ({ isLanding = false, isLogined, data }) => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   const fields = data.section.fields
@@ -48,10 +48,16 @@ const Header = ({isLanding = false, isLogined}) => {
         </div>
         <div className={styles.header__controls}>
           {isLanding && <Button label={"Записаться"} />}
-          {!isLanding && ( 
+          {!isLanding && (
             <>
-            {!isLogined && <p className={styles["header__controls-account-text"]}>Войти</p>}
-            {isLogined &&  <p className={styles["header__controls-account-text"]}>Наволокин В.</p> }
+              {!isLogined && (
+                <p className={styles["header__controls-account-text"]}>Войти</p>
+              )}
+              {isLogined && (
+                <p className={styles["header__controls-account-text"]}>
+                  Наволокин В.
+                </p>
+              )}
             </>
           )}
           <div className={styles["header__controls-account"]}>
@@ -67,7 +73,11 @@ const Header = ({isLanding = false, isLogined}) => {
           <span></span>
         </div>
       </div>
-      <MobileMenu toggleVisibility={handleMobileMenuToggle} items={menu} isShow={isMobileMenuOpen} />
+      <MobileMenu
+        toggleVisibility={handleMobileMenuToggle}
+        items={menu}
+        isShow={isMobileMenuOpen}
+      />
     </header>
   )
 }
