@@ -27,7 +27,7 @@ const Equipment = ({ alias, fields }) => {
         <SectionTitle title={title} />
         <div className={styles.equipment__grid}>
           {items.map(({ id, ...props }) => (
-            <EquipmentItem key={id} props={...props} />
+            <EquipmentItem key={id} props={props} />
           ))}
         </div>
       </Container>
