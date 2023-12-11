@@ -36,7 +36,7 @@ export default async function LandingLayout({ children, params }) {
   return (
     <html lang="en">
       <body className={MontserratFont.className}>
-        <Header data={headerData} />
+        <Header isLanding={true} data={headerData}/>
         <main className="main">{children}</main>
         <Footer data={footerData} />
       </body>

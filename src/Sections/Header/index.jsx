@@ -7,9 +7,8 @@ import Link from "next/link"
 import Button from "@/Components/Button"
 import MobileMenu from "@/Components/Header/MobileMenu"
 
-import Image from "next/image"
+const Header = ({isLanding = false, isLogined}) => {
 
-const Header = ({ data }) => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   const fields = data.section.fields
@@ -21,7 +20,7 @@ const Header = ({ data }) => {
   }
 
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} ${styles["is-landing"]}`}>
       <div className={styles.header__wrapper}>
         <Link href="/" className={styles.header__logo}>
           <Image alt="" width={500} height={500} src={logo?.src || ""} />
@@ -48,7 +47,13 @@ const Header = ({ data }) => {
           })}
         </div>
         <div className={styles.header__controls}>
-          <Button label={"Записаться"} />
+          {isLanding && <Button label={"Записаться"} />}
+          {!isLanding && ( 
+            <>
+            {!isLogined && <p className={styles["header__controls-account-text"]}>Войти</p>}
+            {isLogined &&  <p className={styles["header__controls-account-text"]}>Наволокин В.</p> }
+            </>
+          )}
           <div className={styles["header__controls-account"]}>
             <img src="/icons/account.svg" alt="account icon" />
           </div>
