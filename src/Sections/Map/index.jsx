@@ -8,47 +8,46 @@ import Select from "../../Components/Select"
 import styles from "./Map.module.scss"
 import MapArea from "../../Components/Map/MapArea"
 
-const MAP_PLACEMARK = [
-  {
-    id: 1,
-    coords: "55.695804, 37.485664",
-    title: "Раменки",
-    subtitle: "Фитнес-клуб в ЖК Небо. Площадь — 1000 кв. м.",
-    address: "г. Москва, Мичуринский пр., 56",
-  },
-  {
-    id: 2,
-    coords: "55.751474, 37.618900",
-    title: "Кремль",
-    subtitle: "Кремль",
-    address: "Ивановская площадь, Москва",
-  },
-  {
-    id: 3,
-    coords: "55.158136, 30.213884",
-    title: "CODE.",
-    subtitle: "CODE. IT компания",
-    address: "улица Чкалова, 56А, Витебск",
-  },
-]
+const preparePlacemarks = (items) => {
+  return items.map((item, index) => {
+    const title = item.find((field) => field.name === "title")?.value || ""
+    const subtitle =
+      item.find((field) => field.name === "subtitle")?.value || ""
+    const address = item.find((field) => field.name === "address")?.value || ""
+    const coords = item.find((field) => field.name === "coords")?.value || ""
+    return {
+      id: index,
+      coords: coords,
+      title: title,
+      subtitle: subtitle,
+      address: address,
+    }
+  })
+}
 
-const Map = () => {
-  const [currentPlacemark, setCurrentPlacemark] = useState()
+const Map = ({ alias, fields }) => {
+  const [placemarks, setPlacemarks] = useState([])
+  const [currentPlacemark, setCurrentPlacemark] = useState({})
 
   useEffect(() => {
-    setCurrentPlacemark(MAP_PLACEMARK[0])
+    const items = fields.find((item) => item.name === "items")?.value || []
+    const placemarksTemp = preparePlacemarks(items)
+    setPlacemarks(placemarksTemp)
+    setCurrentPlacemark(placemarksTemp[0])
   }, [])
 
+  if (!placemarks.length) return
+
   return (
-    <section id="map" className={styles.map}>
+    <section id={alias} className={styles.map}>
       <Container>
         <div className={styles.map__wrapper}>
           <MapArea
             currentPlacemark={currentPlacemark}
-            Placemarks={MAP_PLACEMARK}
+            Placemarks={placemarks}
           />
           <div className={styles.map__content}>
-            <Select onChange={setCurrentPlacemark} childrens={MAP_PLACEMARK} />
+            <Select onChange={setCurrentPlacemark} childrens={placemarks} />
             <div className={styles.map__info}>
               <p className={styles.map__title}>{currentPlacemark?.title}</p>
               <p className={styles.map__subtitle}>

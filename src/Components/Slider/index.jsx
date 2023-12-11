@@ -38,7 +38,7 @@ const sliderPcSettings = {
   },
 }
 
-const Slider = ({ items }) => {
+const Slider = ({ title, items }) => {
   const [slider, setSlider] = useState()
   const [activeIndexSlide, setIndexActiveSlide] = useState(1)
   const [sliderSettings, setSliderSettings] = useState(null)
@@ -62,20 +62,22 @@ const Slider = ({ items }) => {
   }
 
   useEffect(() => {
-    const isMobile = window.matchMedia("(max-width: 767px)").matches
+    const isMobile = window.matchMedia("(max-width: 992px)").matches
     setSliderSettings(isMobile ? sliderMobileSettings : sliderPcSettings)
   }, [])
 
   return (
     <>
       <div className={styles.slider__heading}>
-        <SectionTitle title="Наши плюсы" />
-        <SliderControls
-          handleNextSlide={nextSlide}
-          handlePrevSlide={prevSlide}
-          activeSlide={activeIndexSlide}
-          countSlides={slider?.slides?.length}
-        />
+        <SectionTitle title={title} />
+        {items.length > 3 && (
+          <SliderControls
+            handleNextSlide={nextSlide}
+            handlePrevSlide={prevSlide}
+            activeSlide={activeIndexSlide}
+            countSlides={slider?.slides?.length}
+          />
+        )}
       </div>
       {sliderSettings && (
         <Swiper

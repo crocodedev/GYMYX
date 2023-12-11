@@ -8,7 +8,6 @@ import styles from "./MapArea.module.scss"
 
 const MapArea = ({ Placemarks, currentPlacemark }) => {
   const mapRef = useRef(null)
-  const [isShow, setIsShow] = useState(false)
 
   const handleZoomIn = () => {
     const map = mapRef.current
@@ -41,35 +40,30 @@ const MapArea = ({ Placemarks, currentPlacemark }) => {
     map?.panTo(getCoords(currentPlacemark?.coords), { flying: true })
   }, [currentPlacemark])
 
-  useEffect(() => {
-    setIsShow(true)
-  }, [])
-
   return (
     <div className={styles["map-area"]}>
       <YMaps>
-        {isShow && (
-          <Map
-            style={mapStyle}
-            options={mapOptions}
-            defaultState={{
-              center: getCoords(currentPlacemark?.coords),
-              zoom: 15,
-            }}
-            instanceRef={(map) => {
-              map?.behaviors.disable("scrollZoom")
-              mapRef.current = map
-            }}
-          >
-            {Placemarks?.map(({ id, coords }) => (
-              <Placemark
-                key={id}
-                geometry={getCoords(coords)}
-                options={createSvgMarker(window.innerWidth)}
-              />
-            ))}
-          </Map>
-        )}
+        <Map
+          style={mapStyle}
+          options={mapOptions}
+          defaultState={{
+            center: getCoords(currentPlacemark?.coords),
+            zoom: 15,
+          }}
+          instanceRef={(map) => {
+            map?.behaviors.disable("scrollZoom")
+            mapRef.current = map
+          }}
+        >
+          {Placemarks?.map(({ id, coords }) => (
+            <Placemark
+              key={id}
+              geometry={getCoords(coords)}
+              options={createSvgMarker(window.innerWidth)}
+            />
+          ))}
+        </Map>
+
         <div className={styles["map-area__btns-zoom"]}>
           <button
             onClick={handleZoomIn}
