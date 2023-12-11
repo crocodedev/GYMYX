@@ -38,7 +38,11 @@ const Footer = ({ data }) => {
                     item.find((field) => field.name === "image")?.value?.src ||
                     ""
                   return (
-                    <Link href={url} className={styles["footer__socials-item"]}>
+                    <Link
+                      key={url}
+                      href={url}
+                      className={styles["footer__socials-item"]}
+                    >
                       <Image
                         src={image}
                         width={60}
@@ -63,7 +67,11 @@ const Footer = ({ data }) => {
                   const url =
                     item.find((field) => field.name === "url")?.value || ""
                   return (
-                    <Link href={url} className={styles["footer__info-link"]}>
+                    <Link
+                      key={url}
+                      href={url}
+                      className={styles["footer__info-link"]}
+                    >
                       {title}
                     </Link>
                   )

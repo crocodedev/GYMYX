@@ -14,7 +14,11 @@ export const metadata = {
 }
 
 async function getData() {
-  const res = await fetch("https://gymyx.cro.codes/api/pages/index")
+  const res = await fetch("https://gymyx.cro.codes/api/pages/index", {
+    next: {
+      revalidate: 60,
+    },
+  })
 
   if (!res.ok) {
     throw new Error("Failed to fetch data")
@@ -36,7 +40,7 @@ export default async function LandingLayout({ children, params }) {
   return (
     <html lang="en">
       <body className={MontserratFont.className}>
-        <Header isLanding={true} data={headerData}/>
+        <Header isLanding={true} data={headerData} />
         <main className="main">{children}</main>
         <Footer data={footerData} />
       </body>

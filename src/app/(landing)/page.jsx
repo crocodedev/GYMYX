@@ -8,7 +8,11 @@ import Map from "@/Sections/Map"
 import Faq from "@/Sections/Faq"
 
 async function getData() {
-  const res = await fetch("https://gymyx.cro.codes/api/pages/index")
+  const res = await fetch("https://gymyx.cro.codes/api/pages/index", {
+    next: {
+      revalidate: 60,
+    },
+  })
 
   if (!res.ok) {
     throw new Error("Failed to fetch data")

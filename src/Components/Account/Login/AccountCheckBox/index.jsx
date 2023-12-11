@@ -29,4 +29,6 @@ const AccountCheckBox = memo(({ value, onChange }) => {
   )
 })
 
+AccountCheckBox.displayName = 'AccountCheckBox';
+
 export default AccountCheckBox
