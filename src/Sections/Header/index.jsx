@@ -7,10 +7,15 @@ import Link from "next/link"
 import Button from "@/Components/Button"
 import MobileMenu from "@/Components/Header/MobileMenu"
 import { useSession } from "next-auth/react"
+import Image from "next/image"
 
-const Header = ({ isLanding = false, isLogined }) => {
+const Header = ({ isLanding = false, isLogined, data }) => {
   const sesstion = useSession()
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false)
+
+  const fields = data.section.fields
+  const logo = fields.find((field) => field.name === "logo")?.value
+  const menu = fields.find((field) => field.name === "Menu")?.value
 
   const handleMobileMenuToggle = () => {
     setMobileMenuOpen(!isMobileMenuOpen)
@@ -24,49 +29,28 @@ const Header = ({ isLanding = false, isLogined }) => {
     >
       <div className={styles.header__wrapper}>
         <Link href="/" className={styles.header__logo}>
-          <img src="/icons/logo.svg" alt="logo icon" />
+          <Image alt="" width={500} height={500} src={logo?.src || ""} />
         </Link>
         <div className={styles.header__nav}>
-          <ScrollLink
-            to="advantages"
-            smooth={true}
-            duration={500}
-            className={styles["header__nav-item"]}
-          >
-            Преимущества
-          </ScrollLink>
-          <ScrollLink
-            to="gym"
-            smooth={true}
-            duration={500}
-            className={styles["header__nav-item"]}
-          >
-            Зал
-          </ScrollLink>
-          <ScrollLink
-            to="prices"
-            smooth={true}
-            duration={500}
-            className={styles["header__nav-item"]}
-          >
-            Прайс
-          </ScrollLink>
-          <ScrollLink
-            to="map"
-            smooth={true}
-            duration={500}
-            className={styles["header__nav-item"]}
-          >
-            Адреса
-          </ScrollLink>
-          <ScrollLink
-            to="faq"
-            smooth={true}
-            duration={500}
-            className={styles["header__nav-item"]}
-          >
-            Вопросы
-          </ScrollLink>
+          {menu.slice(0, 5).map((item) => {
+            const title =
+              item.find((field) => field.name === "title")?.value || ""
+            const handle =
+              item.find((field) => field.name === "handle_to")?.value || ""
+
+            return (
+              <ScrollLink
+                key={handle}
+                to={handle}
+                smooth={true}
+                offset={-65}
+                duration={500}
+                className={styles["header__nav-item"]}
+              >
+                {title}
+              </ScrollLink>
+            )
+          })}
         </div>
         <div className={styles.header__controls}>
           {isLanding && <Button label={"Записаться"} />}
@@ -95,7 +79,11 @@ const Header = ({ isLanding = false, isLogined }) => {
           <span></span>
         </div>
       </div>
-      <MobileMenu isShow={isMobileMenuOpen} />
+      <MobileMenu
+        toggleVisibility={handleMobileMenuToggle}
+        items={menu}
+        isShow={isMobileMenuOpen}
+      />
     </header>
   )
 }

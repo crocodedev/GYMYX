@@ -3,63 +3,44 @@
 import Container from "@/Components/Container"
 import FaqItem from "@/Components/Faq/FaqItem"
 import styles from "./Faq.module.scss"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Button from "@/Components/Button"
 
-const ITEMS = [
-  {
-    id: 1,
-    qustion: "Можно ли отменить запись?",
-    answer:
-      "Да, запись можно отменить за 4 часа до предполагаемого времени — вся сумма вернётся обратно на карту.",
-  },
-  {
-    id: 2,
-    qustion: "Какое оборудование в залах?",
-    answer:
-      "Да, запись можно отменить за 4 часа до предполагаемого времени — вся сумма вернётся обратно на карту.",
-  },
-  {
-    id: 3,
-    qustion: "Сколько человек может находиться в зале?",
-    answer:
-      "Да, запись можно отменить за 4 часа до предполагаемого времени — вся сумма вернётся обратно на пись можно отменить за 4 часа до ожно отменить за 4 часа до предполагаемого времени — вся сумма вернётся обратно на пись можно отменить за 4 часа до ожно отменить за 4 часа до предполагаемого времени — вся сумма вернётся обратно на пись можно отменить за 4 часа до ожно отменить за 4 часа до предполагаемого времени — вся сумма вернётся обратно на пись можно отменить за 4 часа до предполагаемого времени — вся сумма вернётся обратно на пись можно отменить за 4 часа до предполагаемого времени — вся сумма вернётся обратно на пись можно отменить за 4 часа до предполагаемого времени — вся сумма вернётся обратно на пись можно отменить за 4 часа до предполагаемого времени — вся сумма вернётся обратно на пись можно отменить за 4 часа до предполагаемого времени — вся сумма вернётся обратно на карту.",
-  },
-  {
-    id: 4,
-    qustion: "Я новичок: как мне работать с тренажёрами?",
-    answer: "Да, запись можнна карту.",
-  },
-  {
-    id: 5,
-    qustion: "Я новичок: как мне работать с тренажёрами?",
-    answer: "Да, запись можнна карту.",
-  },
-  {
-    id: 6,
-    qustion: "Я новичок: как мне работать с тренажёрами?",
-    answer: "Да, запись можнна карту.",
-  },
-]
-
-const Faq = () => {
+const Faq = ({ alias, fields }) => {
+  const [items, setItems] = useState([])
   const [countShow, setCountShow] = useState(5)
+  const title = fields.find((item) => item.name === "title")?.value || ""
 
   const handleShowMore = () => {
     setCountShow((prev) => prev + 5)
   }
 
+  useEffect(() => {
+    const list = fields.find((item) => item.name === "items")?.value
+    const items = list.map((item, index) => {
+      const title = item.find((field) => field.name === "title")?.value || ""
+      const text = item.find((field) => field.name === "text")?.value || ""
+
+      return {
+        id: index,
+        qustion: title,
+        answer: text,
+      }
+    })
+    setItems(items)
+  }, [])
+
   return (
-    <section id="faq" className={styles.faq}>
+    <section id={alias} className={styles.faq}>
       <Container>
         <div>
-          <p className={styles.faq__title}>Ответы на вопросы</p>
+          <p className={styles.faq__title}>{title}</p>
           <div>
-            {ITEMS.slice(0, countShow).map(({ id, qustion, answer }) => (
+            {items.slice(0, countShow).map(({ id, qustion, answer }) => (
               <FaqItem key={id} question={qustion} answer={answer} />
             ))}
           </div>
-          {countShow < ITEMS.length && (
+          {countShow < items.length && (
             <div className={styles.faq__controls}>
               <Button
                 onClick={handleShowMore}
