@@ -2,30 +2,26 @@
 
 import Container from "@/Components/Container"
 import styles from "./ChooseHealth.module.scss"
+import Image from "next/image"
 
 const ChooseHealth = ({ alias, fields }) => {
-  const image = fields.find((item) => item.name === "image")?.value || ""
+  const image = fields.find((item) => item.name === "image")?.value?.src || ""
   const image_mobile =
-    fields.find((item) => item.name === "image_mobile")?.value || ""
+    fields.find((item) => item.name === "image_mobile")?.value?.src || ""
 
   return (
     <section id={alias} className={styles["choose-health"]}>
       <Container>
-        {/* <picture className={styles["choose-health__image"]}>
-          <source
-            media="(max-width: 992px)"
-            srcSet="/images/chooseHealth-mobile.png"
+        <picture className={styles["choose-health__image"]}>
+          <source media="(max-width: 992px)" srcSet={image_mobile} />
+          <Image
+            src={image}
+            alt="choose health image"
+            width={1920}
+            height={1080}
+            quality={100}
           />
-          <img src="/images/chooseHealth.png" alt="choose health image" />
-        </picture> */}
-              {/* <Image
-        className={styles["choose-health__image"]}
-        src={image.value}
-        alt="Description of hero image"
-        width={1920}
-        height={1080}
-        srcSet={`${image_mobile.value} 992px`}
-      /> */}
+        </picture>
       </Container>
     </section>
   )
