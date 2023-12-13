@@ -37,7 +37,7 @@ export default async function Home() {
   const sections = data.modules.map(({ section }) => section)
 
   const SECTIONS_RENDER = sections.map(({ name, alias, fields }) => {
-    if (alias != "header_landing" && alias != "footer") {
+    if (alias != "header" && alias != "footer") {
       const SectionComponent = SECTION_MAP[alias]
       return <SectionComponent key={alias} alias={alias} fields={fields} />
     }

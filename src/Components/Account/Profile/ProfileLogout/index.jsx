@@ -1,8 +1,8 @@
 import styles from "./ProfileLogout.module.scss"
 
-const ProfileLogout = () => {
+const ProfileLogout = ({ handleClick }) => {
   return (
-    <button className={styles["profile-logout"]}>
+    <button onClick={handleClick} className={styles["profile-logout"]}>
       <p className={styles["profile-logout__text"]}>Выйти</p>
       <div className={styles["profile-logout__icon"]}>
         <img

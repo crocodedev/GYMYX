@@ -1,15 +1,15 @@
 "use client"
 
 import { signIn } from "next-auth/react"
-import cookie from "js-cookie"
 import { useRouter } from "next/navigation"
 import Input from "@/Components/Input"
 import AccountCheckBox from "@/Components/Account/Login/AccountCheckBox"
 import AccountRepeatCode from "@/Components/Account/Login/AccountRepeatCode"
 import Button from "@/Components/Button"
+import { useSession } from "next-auth/react"
 
 import styles from "./AccountLoginForm.module.scss"
-import { useCallback, useRef, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import { checkValidPhone, formatPhoneNumber } from "@/Utils/helpers"
 
 const INIT_FORM_DATA = {
@@ -24,8 +24,9 @@ const INIT_FORM_DATA = {
 
 const AccountLoginForm = ({ handleToogleModal }) => {
   const inputRef = useRef()
-  const router = useRouter()
+  const session = useSession()
   const inputCodeRef = useRef()
+  const router = useRouter()
   const [data, setData] = useState(INIT_FORM_DATA)
 
   const handleChangePhone = useCallback(() => {
@@ -94,14 +95,26 @@ const AccountLoginForm = ({ handleToogleModal }) => {
 
     const response = await result.json()
     if (!response.error) {
-      console.log("SUCCESS AUTH", response)
-      // cookie.set("access_token", result?.data.access_token, {
-      // expires: result?.data.expires_in,
-      //   })
-      //   router.push("/account/profile")
-      await signIn("credentials", { token: response.data.access_token})
+      const responseCredentials = await signIn("credentials", {
+        token: response.data.access_token,
+        redirect: false,
+      })
+    } else {
+      handleToogleModal()
     }
   }
+
+  useEffect(() => {
+    if (session.status === "authenticated") {
+      let url = ""
+      if (session?.data?.user?.full_name) {
+        url = "/account/profile"
+      } else {
+        url = "/account/login/create-profile"
+      }
+      router.push(url)
+    }
+  }, [session.status])
 
   return (
     <div className={styles["account-login-form"]}>

@@ -1,12 +1,24 @@
 @import "@/styles/mixins.scss";
 
-.profile-edit-form {
+.profile-create-form {
   position: relative;
 
-  @include media-breakpoint-down(lg) {
+  &__wrapper {
   }
 
-  &__wrapper {
+  &__message-error {
+    text-align: center;
+    color: red;
+
+    @include media-breakpoint-down(lg) {
+      font-size: 12px;
+      margin-top: 10px;
+    }
+
+    @include media-breakpoint-up(lg) {
+      font-size: 14px;
+      margin-top: 20px;
+    }
   }
 
   &__data {
@@ -47,26 +59,12 @@
     }
   }
 
-  &__error-field {
-    text-align: center;
-    color: red;
-
-    @include media-breakpoint-down(lg) {
-      font-size: 12px;
-      margin-top: 10px;
-    }
-
-    @include media-breakpoint-up(lg) {
-      font-size: 14px;
-      margin-top: 20px;
-    }
-  }
-
   &__avatar {
     display: flex;
     border-radius: 50%;
     overflow: hidden;
     cursor: pointer;
+    background: var(--white-transperent, rgba(255, 255, 255, 0.1));
 
     @include media-breakpoint-down(md) {
       width: 150px;

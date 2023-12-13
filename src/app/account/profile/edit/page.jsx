@@ -4,7 +4,10 @@ import ProfileEditForm from "@/Sections/Account/ProfileEditForm"
 const ProfileEdit = () => {
   return (
     <div className="account-page-wrapper">
-      <ProfileEditHeading />
+      <ProfileEditHeading
+        buttonLabel={"Выйти из редактирования"}
+        sectionTitle={"Редактирование профиля"}
+      />
       <ProfileEditForm />
     </div>
   )

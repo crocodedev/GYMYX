@@ -1,3 +1,7 @@
+"use client"
+
+import { signOut } from "next-auth/react"
+
 import ProfileInfo from "@/Components/Account/Profile/ProfileInfo"
 import ProfileLogout from "@/Components/Account/Profile/ProfileLogout"
 import Button from "@/Components/Button"
@@ -15,7 +19,9 @@ const ProfileHeading = () => {
             <Link href={"/account/profile/edit"}>
               <Button variant="blue" size="m" label={"Редактировать"} />
             </Link>
-            <ProfileLogout />
+            <ProfileLogout
+              handleClick={() => signOut({ callbackUrl: "/account/login" })}
+            />
           </div>
         </div>
       </Container>

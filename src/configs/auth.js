@@ -5,7 +5,6 @@ export const authConfig = {
     CredentialsProvider({
       authorize: async (credentials) => {
         const { token } = credentials
-        console.log("CREADENTIALS", credentials)
 
         const response = await fetch("https://gymyx.cro.codes/api/users", {
           method: "GET",
@@ -16,20 +15,53 @@ export const authConfig = {
         })
 
         if (!response.ok) {
-          return false
+          return null
         }
 
         const result = await response.json()
-        const user = result.data
+        const user = {
+          ...result.data,
+          token: token,
+        }
+
         return user
       },
     }),
   ],
+  secret: process.env.NEXTAUTH_SECRET,
   session: {
     strategy: "jwt",
   },
-  secret: process.env.NEXTAUTH_SECRET,
-  //   pages: {
-  //     signIn: "/",
-  //   },
+  callbacks: {
+    async jwt({ trigger, token, user, account, session }) {
+      if (trigger === "update") {
+        return {
+          ...token,
+          ...session,
+        }
+      }
+      if (account && user) {
+        return {
+          ...token,
+          accessToken: user.token,
+          full_name: user.full_name,
+          phone: user.phone,
+          email: user.email,
+          image: user.image,
+        }
+      }
+
+      return token
+    },
+
+    async session({ session, token }) {
+      session.user.accessToken = token.accessToken
+      session.user.full_name = token.full_name
+      session.user.phone = token.phone
+      session.user.email = token.email
+      session.user.image = token.image
+
+      return session
+    },
+  },
 }

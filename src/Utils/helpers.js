@@ -8,15 +8,23 @@ export const checkValidPhone = (value) => {
 }
 
 export const formatPhoneNumber = (phoneNumber) => {
-  const cleaned = ('' + phoneNumber).replace(/\D/g, '');
+  const cleaned = ("" + phoneNumber).replace(/\D/g, "")
 
-  const country = cleaned.slice(0, 1);
-  const region = cleaned.slice(1, 4);
-  const firstBlock = cleaned.slice(4, 7);
-  const secondBlock = cleaned.slice(7, 9);
-  const thirdBlock = cleaned.slice(9, 11);
+  const country = cleaned.slice(0, 1)
+  const region = cleaned.slice(1, 4)
+  const firstBlock = cleaned.slice(4, 7)
+  const secondBlock = cleaned.slice(7, 9)
+  const thirdBlock = cleaned.slice(9, 11)
 
-  const formattedNumber = `+${country} (${region}) ${firstBlock}-${secondBlock}-${thirdBlock}`;
+  const formattedNumber = `+${country} (${region}) ${firstBlock}-${secondBlock}-${thirdBlock}`
 
-  return formattedNumber;
+  return formattedNumber
+}
+
+export const getFioShort = (fio) => {
+  if (fio != "") {
+    const fioData = fio.split(" ")
+    return `${fioData[0]} ${fioData[1].charAt(1)}.`
+  }
+  return fio
 }

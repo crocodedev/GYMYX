@@ -1,7 +1,7 @@
 "use client"
 
 import { Link as ScrollLink } from "react-scroll"
-import { useState } from "react"
+import { useState, useEffect, useLayoutEffect } from "react"
 import styles from "./Header.module.scss"
 import Link from "next/link"
 import Button from "@/Components/Button"
@@ -9,11 +9,16 @@ import MobileMenu from "@/Components/Header/MobileMenu"
 import { useSession } from "next-auth/react"
 import Image from "next/image"
 
-const Header = ({ isLanding = false, isLogined, data }) => {
+import { getFioShort } from "@/Utils/helpers"
+
+const Header = ({ isLanding = false, data }) => {
   const sesstion = useSession()
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [userData, setUserData] = useState(null)
 
-  const fields = data.section.fields
+  const fields = data?.section?.fields
+  if (!fields) return null
+
   const logo = fields.find((field) => field.name === "logo")?.value
   const menu = fields.find((field) => field.name === "Menu")?.value
 
@@ -21,7 +26,18 @@ const Header = ({ isLanding = false, isLogined, data }) => {
     setMobileMenuOpen(!isMobileMenuOpen)
   }
 
-  console.log("SESSTION", sesstion)
+  useLayoutEffect(() => {
+    if (
+      sesstion?.status === "authenticated" &&
+      sesstion?.data?.user?.full_name
+    ) {
+      setUserData({
+        isLogined: true,
+        fio: getFioShort(sesstion?.data?.user?.full_name),
+        image: sesstion?.data?.user?.image,
+      })
+    }
+  }, [sesstion])
 
   return (
     <header
@@ -29,7 +45,7 @@ const Header = ({ isLanding = false, isLogined, data }) => {
     >
       <div className={styles.header__wrapper}>
         <Link href="/" className={styles.header__logo}>
-          <Image alt="" width={500} height={500} src={logo?.src || ""} />
+          <Image alt="" width={200} height={50} src={logo?.src || ""} />
         </Link>
         <div className={styles.header__nav}>
           {menu.slice(0, 5).map((item) => {
@@ -56,19 +72,40 @@ const Header = ({ isLanding = false, isLogined, data }) => {
           {isLanding && <Button label={"Записаться"} />}
           {!isLanding && (
             <>
-              {!isLogined && (
-                <p className={styles["header__controls-account-text"]}>Войти</p>
+              {!userData?.isLogined && (
+                <Link
+                  href="/account/login"
+                  className={styles["header__controls-account-text"]}
+                >
+                  Войти
+                </Link>
               )}
-              {isLogined && (
+              {userData?.isLogined && (
                 <p className={styles["header__controls-account-text"]}>
-                  Наволокин В.
+                  {userData?.fio}
                 </p>
               )}
             </>
           )}
-          <div className={styles["header__controls-account"]}>
-            <img src="/icons/account.svg" alt="account icon" />
-          </div>
+          {isLanding && (
+            <Link
+              href={"/account/login"}
+              className={styles["header__controls-account"]}
+            >
+              <img src="/icons/account.svg" alt="account icon" />
+            </Link>
+          )}
+          {!isLanding && (
+            <Link
+              href={"/account/profile"}
+              className={styles["header__controls-account"]}
+            >
+              <img
+                src={userData?.image || "/icons/avatar.svg"}
+                alt="account icon"
+              />
+            </Link>
+          )}
         </div>
         <div
           onClick={handleMobileMenuToggle}
