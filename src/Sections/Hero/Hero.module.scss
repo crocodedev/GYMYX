@@ -66,7 +66,8 @@
     }
 
     @include media-breakpoint-up(md) {
-      max-width: 730px;
+      max-width: 770px;
+      padding-left: 40px;
     }
   }
 

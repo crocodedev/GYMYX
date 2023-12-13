@@ -14,7 +14,19 @@ const Input = memo(
             mask="+7 (999) 999-99-99"
             maskChar="_"
             placeholder={placeholder}
-            maxLength={maxLength}
+          />
+        </div>
+      )
+    } else if (type === "number") {
+      return (
+        <div className={styles.input}>
+          <InputMask
+            ref={refElement}
+            onChange={onChange}
+            className={styles.input__field}
+            mask="9999"
+            maskChar=""
+            placeholder={placeholder}
           />
         </div>
       )
@@ -22,7 +34,7 @@ const Input = memo(
       return (
         <div className={styles.input}>
           <input
-            type="tel"
+            type="text"
             maxLength={maxLength}
             ref={refElement}
             onChange={onChange}

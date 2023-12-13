@@ -1,14 +1,15 @@
 "use client"
 
-import cookie from "js-cookie"
-
+import { signIn } from "next-auth/react"
+import { useRouter } from "next/navigation"
 import Input from "@/Components/Input"
 import AccountCheckBox from "@/Components/Account/Login/AccountCheckBox"
 import AccountRepeatCode from "@/Components/Account/Login/AccountRepeatCode"
 import Button from "@/Components/Button"
+import { useSession } from "next-auth/react"
 
 import styles from "./AccountLoginForm.module.scss"
-import { useCallback, useRef, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import { checkValidPhone, formatPhoneNumber } from "@/Utils/helpers"
 
 const INIT_FORM_DATA = {
@@ -23,7 +24,9 @@ const INIT_FORM_DATA = {
 
 const AccountLoginForm = ({ handleToogleModal }) => {
   const inputRef = useRef()
+  const session = useSession()
   const inputCodeRef = useRef()
+  const router = useRouter()
   const [data, setData] = useState(INIT_FORM_DATA)
 
   const handleChangePhone = useCallback(() => {
@@ -62,65 +65,56 @@ const AccountLoginForm = ({ handleToogleModal }) => {
   }
 
   const handleSubmitLogin = async () => {
-    try {
-      const response = await fetch("https://gymyx.cro.codes/api/users/auth", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ phone: data.phone.value }),
-      })
+    const result = await fetch("/api/login/send-code", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ phone: data.phone.value }),
+    })
 
-      if (!response.ok) {
-        throw new Error("Network response was not ok")
-      }
-
-      const result = await response.json()
+    const response = await result.json()
+    if (!response.error) {
       setData((prev) => {
         return {
           ...prev,
-          receivedCode: result.data.code,
+          receivedCode: response.data,
         }
       })
-    } catch (error) {
-      console.error("Error fetching data:", error)
     }
   }
 
   const handleSubmitCheckCode = async () => {
-    try {
-      const response = await fetch(
-        "https://gymyx.cro.codes/api/users/auth/code",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ code: data.code }),
-        }
-      )
-      const result = await response.json()
+    const result = await fetch("/api/login/verify-code", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ code: data.code }),
+    })
 
-      if (!response.ok) {
-        if (result?.message === "Unauthorized") {
-          handleToogleModal()
-        }
-        return
-      }
-
-      console.log('OKKKKK ')
-      cookie.set("access_token", result?.data.access_token, {
-        expires: result?.data.expires_in,
+    const response = await result.json()
+    if (!response.error) {
+      const responseCredentials = await signIn("credentials", {
+        token: response.data.access_token,
+        redirect: false,
       })
-    } catch (error) {
-      console.log(
-        "ERROR =>",
-        error?.message === "Unauthorized",
-        error,
-        error?.message
-      )
+    } else {
+      handleToogleModal()
     }
   }
+
+  useEffect(() => {
+    if (session.status === "authenticated") {
+      let url = ""
+      if (session?.data?.user?.full_name) {
+        url = "/account/profile"
+      } else {
+        url = "/account/login/create-profile"
+      }
+      router.push(url)
+    }
+  }, [session.status])
 
   return (
     <div className={styles["account-login-form"]}>
@@ -141,6 +135,7 @@ const AccountLoginForm = ({ handleToogleModal }) => {
         )}
         {data.receivedCode && (
           <Input
+            type="number"
             refElement={inputCodeRef}
             onChange={handleChangeCode}
             placeholder={"Код из SMS"}
@@ -151,7 +146,7 @@ const AccountLoginForm = ({ handleToogleModal }) => {
           <Button
             onClick={handleSubmitLogin}
             disabled={data.phone.valid && data.agreePolicy ? false : true}
-            className={styles["account-login-form__btn"]}
+            fullSize={true}
             size="l"
             variant="blue"
             icon="arrow"
@@ -162,7 +157,7 @@ const AccountLoginForm = ({ handleToogleModal }) => {
           <Button
             disabled={data.code ? (data.code.length < 4 ? true : false) : true}
             onClick={handleSubmitCheckCode}
-            className={styles["account-login-form__btn"]}
+            fullSize={true}
             size="l"
             variant="blue"
             label={"Подтвердить"}

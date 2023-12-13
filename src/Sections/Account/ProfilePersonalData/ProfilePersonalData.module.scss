@@ -1,0 +1,16 @@
+@import "@/styles/mixins.scss";
+
+.profile-personal-data {
+  &__col {
+    display: grid;
+
+    @include media-breakpoint-down(lg) {
+      gap: 20px;
+    }
+
+    @include media-breakpoint-up(lg) {
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+  }
+}

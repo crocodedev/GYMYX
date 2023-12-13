@@ -4,6 +4,7 @@ import AccountLoginForm from "@/Components/Account/Login/AccountLoginForm"
 import styles from "./LoginAuth.module.scss"
 import Modal from "@/Components/Modal"
 import { useState } from "react"
+import Button from "@/Components/Button"
 
 const LoginAuth = () => {
   const [isShowModal, setIsShowModal] = useState(false)
@@ -12,11 +13,15 @@ const LoginAuth = () => {
     <section className={styles["account-auth"]}>
       <div className={styles["account-auth__wrapper"]}>
         {isShowModal && (
-          <Modal
-            handleClose={setIsShowModal}
-            text={"Неверный код"}
-            buttonLabel={"Понятно"}
-          />
+          <Modal handleClose={setIsShowModal} text={"Неверный код"}>
+            <Button
+              onClick={() => setIsShowModal((prev) => !prev)}
+              size="l"
+              fullSize={true}
+              variant="blue"
+              label="Понятно"
+            />
+          </Modal>
         )}
         <AccountLoginForm
           handleToogleModal={() => setIsShowModal((prev) => !prev)}

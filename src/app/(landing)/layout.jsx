@@ -1,12 +1,11 @@
 import { Montserrat } from "next/font/google"
 import "./../globals.scss"
 
-import React from "react"
-
 import Header from "@/Sections/Header"
 import Footer from "@/Sections/Footer"
+import { Providers } from "@/Components/Providers"
 
-const MontserratFont = Montserrat({ subsets: ["latin"] })
+const MontserratFont = Montserrat({ subsets: ["cyrillic-ext"] })
 
 export const metadata = {
   title: "Create Next App",
@@ -31,7 +30,7 @@ export default async function LandingLayout({ children, params }) {
   const { data } = await getData()
 
   const headerData = data.modules.find(
-    (item) => item.section.alias === "header_landing"
+    (item) => item.section.alias === "header"
   )
   const footerData = data.modules.find(
     (item) => item.section.alias === "footer"
@@ -40,9 +39,12 @@ export default async function LandingLayout({ children, params }) {
   return (
     <html lang="en">
       <body className={MontserratFont.className}>
-        <Header isLanding={true} data={headerData} />
-        <main className="main">{children}</main>
-        <Footer data={footerData} />
+        {/* <body> */}
+        <Providers>
+          <Header isLanding={true} data={headerData} />
+          <main className="main">{children}</main>
+          <Footer data={footerData} />
+        </Providers>
       </body>
     </html>
   )

@@ -8,11 +8,13 @@ const Button = ({
   variant = "",
   label,
   icon,
+  fullSize = false
 }) => {
+  
   return (
     <button
       onClick={onClick}
-      className={`${className} ${styles.button} ${
+      className={`${className} ${fullSize ? styles["full-size"] : ""} ${styles.button} ${
         variant ? styles[`button-${variant}`] : ""
       } ${styles[`button-size-${size}`]}`}
       disabled={disabled}

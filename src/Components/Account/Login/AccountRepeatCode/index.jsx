@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import styles from "./AccountRepeatCode.module.scss"
 
-const INIT_TIMEOUT = 5
+const INIT_TIMEOUT = 60
 
 const AccountRepeatCode = ({ targetPhone, handleClickChange, handleClick }) => {
   const [timeOut, setTimeOut] = useState(INIT_TIMEOUT)
