@@ -31,6 +31,11 @@ export const authConfig = {
   secret: process.env.NEXTAUTH_SECRET,
   session: {
     strategy: "jwt",
+    maxAge: 10 * 24 * 60 * 60,
+  },
+  pages: {
+    signOut: "/account/login",
+    signIn: "/account/login",
   },
   callbacks: {
     async jwt({ trigger, token, user, account, session }) {

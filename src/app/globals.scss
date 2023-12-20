@@ -60,3 +60,224 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+.booking-calendar__calendar {
+  .p-datepicker-inline {
+    background: transparent;
+    border: none;
+
+    color: var(--white, #fff);
+    text-align: center;
+    font-family: inherit;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+
+    @include media-breakpoint-down(xl) {
+      font-size: 16px;
+    }
+
+    @include media-breakpoint-between(xl, xxl) {
+      font-size: 26px;
+    }
+
+    @include media-breakpoint-up(xxl) {
+      font-size: 38px;
+    }
+
+    span:hover {
+      background: transparent;
+    }
+  }
+
+  .p-datepicker-header {
+    background: transparent;
+    border: unset;
+    justify-content: center;
+    position: relative;
+
+    @include media-breakpoint-down(xl) {
+      margin-bottom: 14px;
+      gap: 14px;
+    }
+
+    @include media-breakpoint-between(xl, xxl) {
+      margin-bottom: 28px;
+      gap: 20px;
+    }
+
+    @include media-breakpoint-up(xxl) {
+      margin-bottom: 50px;
+      gap: 30px;
+    }
+  }
+
+  .p-datepicker-prev,
+  .p-datepicker-next {
+    color: white;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+
+    @include media-breakpoint-down(xl) {
+      width: 15px;
+      height: 15px;
+    }
+
+    @include media-breakpoint-up(xl) {
+      width: 22px;
+      height: 30px;
+    }
+
+    &:hover {
+      background: transparent;
+    }
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .p-datepicker-prev {
+    left: 20%;
+  }
+
+  .p-datepicker-next {
+    right: 20%;
+  }
+
+  .p-datepicker-title {
+    color: var(--white, #fff);
+    text-align: center;
+    font-family: inherit;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 135%;
+
+    @include media-breakpoint-down(xl) {
+      font-size: 12px;
+    }
+
+    @include media-breakpoint-between(xl, xxl) {
+      font-size: 20px;
+    }
+
+    @include media-breakpoint-up(xxl) {
+      font-size: 26px;
+    }
+
+    > button:first-child {
+      order: 2;
+    }
+
+    > button:not(:first-child) {
+      order: 1;
+    }
+  }
+
+  .p-datepicker table td > span {
+    text-align: center;
+    font-family: inherit;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+
+    @include media-breakpoint-down(xl) {
+      font-size: 16px;
+      width: 30px;
+      height: 30px;
+    }
+
+    @include media-breakpoint-between(xl, xxl) {
+      font-size: 26px;
+      width: 50px;
+      height: 50px;
+    }
+
+    @include media-breakpoint-up(xxl) {
+      font-size: 38px;
+      width: 70px;
+      height: 70px;
+    }
+  }
+
+  .p-datepicker table td > span.p-highlight {
+    border-radius: 17px;
+    background: var(--white, #fff) !important;
+    color: var(--dark-grey, #37393d);
+  }
+
+  .p-datepicker table td > span {
+    border-radius: 17px;
+  }
+
+  .p-datepicker:not(.p-disabled)
+    table
+    td
+    span:not(.p-highlight):not(.p-disabled):hover,
+  .p-datepicker table td.p-datepicker-today > span {
+    background: var(--white, #ffffff36);
+    color: var(--dark-grey, #37393d);
+  }
+
+  .p-datepicker table th > span {
+    color: var(--white, #fff);
+    text-align: center;
+    font-family: inherit;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 135%;
+
+    @include media-breakpoint-down(xl) {
+      font-size: 12px;
+    }
+
+    @include media-breakpoint-between(xl, xxl) {
+      font-size: 20px;
+    }
+
+    @include media-breakpoint-up(xxl) {
+      font-size: 26px;
+    }
+  }
+
+  .p-datepicker-title {
+    display: flex;
+
+    @include media-breakpoint-down(lg) {
+      gap: 5px;
+    }
+
+    @include media-breakpoint-up(lg) {
+      gap: 10px;
+    }
+  }
+
+  .p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-year,
+  .p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-month {
+    color: var(--white, #fff);
+    text-align: center;
+    font-family: inherit;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 135%;
+
+    @include media-breakpoint-down(xl) {
+      font-size: 12px;
+    }
+
+    @include media-breakpoint-between(xl, xxl) {
+      font-size: 20px;
+    }
+
+    @include media-breakpoint-up(xxl) {
+      font-size: 26px;
+    }
+  }
+
+  .p-datepicker .p-yearpicker .p-yearpicker-year.p-highlight {
+    background: transparent;
+    color: var(--white, #fff);
+  }
+}

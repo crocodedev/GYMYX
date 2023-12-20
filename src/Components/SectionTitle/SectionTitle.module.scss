@@ -5,13 +5,18 @@
   font-weight: 600;
   line-height: 120%;
 
+  &--center {
+    @include media-breakpoint-down(lg) {
+      text-align: center;
+    }
+  }
+
   @include media-breakpoint-down(md) {
     font-size: 28px;
     letter-spacing: -0.28px;
   }
 
   @include media-breakpoint-down(lg) {
-    text-align: center;
     width: 100%;
   }
 

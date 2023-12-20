@@ -4,7 +4,7 @@ import CreateProfile from "@/Sections/Login/CreateProfile"
 const LoginCreateProfile = () => {
   return (
     <div className="account-page-wrapper">
-      <ProfileEditHeading sectionTitle={"Добавить данные профиля"} />
+      <ProfileEditHeading isButtonBack={false} sectionTitle={"Добавить данные профиля"} />
       <CreateProfile />
     </div>
   )

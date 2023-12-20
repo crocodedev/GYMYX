@@ -2,15 +2,22 @@ import { scroller } from "react-scroll"
 import Button from "@/Components/Button"
 import styles from "./MobileMenu.module.scss"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 
 const MobileMenu = ({ items, isShow, toggleVisibility }) => {
-  const handleClickMobileMenuItem = (target) => {
-    scroller.scrollTo(target, {
-      duration: 500,
-      delay: 0,
-      smooth: "easeInOutQuart",
-      offset: -70,
-    })
+  const router = useRouter()
+  const handleClickMobileMenuItem = (target, link) => {
+    if (target !== "#") {
+      scroller.scrollTo(target, {
+        duration: 500,
+        delay: 0,
+        smooth: "easeInOutQuart",
+        offset: -70,
+      })
+    } else {
+      router.push(link)
+    }
+
     toggleVisibility()
   }
 
@@ -27,10 +34,13 @@ const MobileMenu = ({ items, isShow, toggleVisibility }) => {
               const handle =
                 item.find((field) => field.name === "handle_to")?.value || ""
 
+              const link =
+                item.find((field) => field.name === "link_to")?.value || ""
+
               return (
                 <div
-                  onClick={() => handleClickMobileMenuItem(handle)}
-                  key={`${handle}-mobile`}
+                  onClick={() => handleClickMobileMenuItem(handle, link)}
+                  key={`${handle !== "#" ? handle : link}-mobile`}
                   className={styles["mobile-menu__nav-item"]}
                 >
                   {title}

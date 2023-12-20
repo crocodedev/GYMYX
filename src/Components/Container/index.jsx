@@ -1,6 +1,6 @@
 import styles from "./Container.module.scss"
 
-const Container = ({ size = "xl", children }) => {
+const Container = ({ size = "", children }) => {
   return (
     <div className={`${styles[`container${size.toUpperCase()}`]}`}>
       {children}
