@@ -1,7 +1,18 @@
+"use client"
+
 import Container from "@/Components/Container"
 import styles from "./ProfileTrainings.module.scss"
+import { useSession } from "next-auth/react"
+
+import { getTrainingData } from "./helpers"
 
 const ProfileTrainings = () => {
+  const { data } = useSession()
+
+  getTrainingData(data?.user?.accessToken).then((data) => {
+    console.log("training", data)
+  })
+
   return (
     <section className={styles["profile-trainings"]}>
       <Container size="M">

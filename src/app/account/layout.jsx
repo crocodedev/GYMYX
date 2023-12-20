@@ -4,6 +4,7 @@ import "./../globals.scss"
 import { Providers } from "@/Components/Providers"
 const MontserratFont = Montserrat({ subsets: ["latin"] })
 import Header from "@/Sections/Header"
+import MobileBar from "@/Components/MobileBar"
 
 export const metadata = {
   title: "Create Next App",
@@ -26,7 +27,6 @@ async function getData() {
 
 export default async function AccountLayout({ children }) {
   const { data } = await getData()
-
   const headerData = data.modules.find(
     (item) => item.section.alias === "account_header"
   )
@@ -36,6 +36,7 @@ export default async function AccountLayout({ children }) {
       <body className={MontserratFont.className}>
         <Providers>
           <Header isLanding={false} data={headerData} />
+          <MobileBar />
           <main className="main account">{children}</main>
         </Providers>
       </body>

@@ -1,5 +1,4 @@
-import LoginAuth from "@/Sections/LoginAuth"
-
+import LoginAuth from "@/Sections/Account/LoginAuth"
 const Login = () => {
   return <LoginAuth />
 }

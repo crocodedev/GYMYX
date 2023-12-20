@@ -13,7 +13,16 @@
   margin-left: auto;
 }
 
-.container,
+.container {
+  @include media-breakpoint-down(xl) {
+    --spacing-container: 15px;
+  }
+
+  @include media-breakpoint-up(xl) {
+    --spacing-container: 50px;
+  }
+}
+
 .conatinerXL {
   @include media-breakpoint-down(xl) {
     --spacing-container: 30px;

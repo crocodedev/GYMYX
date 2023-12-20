@@ -84,11 +84,16 @@
     }
 
     @include media-breakpoint-between(xl, xxl) {
-      font-size: 18px;
-      padding: 28.5px 30px;
+      font-size: 14px;
+      padding: 28.5px 15px;
     }
 
-    @include media-breakpoint-up(xxl) {
+    @include media-breakpoint-between(xxl, xxxl) {
+      font-size: 16px;
+      padding: 28.5px 25px;
+    }
+
+    @include media-breakpoint-up(xxxl) {
       font-size: 22px;
       padding: 28.5px 40px;
     }
@@ -106,12 +111,20 @@
   &__controls-account-text {
     color: var(--white, #fff);
     font-weight: 600;
+    -webkit-line-clamp: 1;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 
     @include media-breakpoint-between(xl, xxl) {
-      font-size: 18px;
+      font-size: 14px;
     }
 
-    @include media-breakpoint-up(xxl) {
+    @include media-breakpoint-between(xxl, xxxl) {
+      font-size: 16px;
+    }
+
+    @include media-breakpoint-up(xxxl) {
       font-size: 22px;
     }
   }
@@ -127,6 +140,7 @@
     svg {
       width: 100%;
       height: 100%;
+      object-fit: cover;
     }
   }
 

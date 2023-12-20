@@ -1,12 +1,13 @@
 "use client"
 
+import Link from "next/link"
 import { signOut } from "next-auth/react"
 
 import ProfileInfo from "@/Components/Account/Profile/ProfileInfo"
 import ProfileLogout from "@/Components/Account/Profile/ProfileLogout"
 import Button from "@/Components/Button"
 import Container from "@/Components/Container"
-import Link from "next/link"
+
 import styles from "./PrfileHeading.module.scss"
 
 const ProfileHeading = () => {

@@ -44,9 +44,7 @@ const AccountRepeatCode = ({ targetPhone, handleClickChange, handleClick }) => {
         </div>
       </div>
       {timeOut !== 0 && (
-        <p
-          className={`${styles["account-repeat-code__text"]} ${styles["gray"]}`}
-        >
+        <p className={`${styles["account-repeat-code__text"]}`}>
           Получить повторно через {timeOut} с
         </p>
       )}

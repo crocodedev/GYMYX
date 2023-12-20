@@ -173,7 +173,10 @@ const ProfileEditForm = () => {
     var formdata = new FormData()
     formdata.append("full_name", `${data.name.value} ${data.lastname.value}`)
     formdata.append("email", data.email.value)
-    formdata.append("phone", checkValidPhone(data.phone.value).value)
+
+    if (data.phone.value !== sessionData.user.phone) {
+      formdata.append("phone", checkValidPhone(data.phone.value).value)
+    }
 
     if (data.image.value) {
       formdata.append("image", data.image.value)

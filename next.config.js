@@ -6,7 +6,13 @@ const nextConfig = {
     includePaths: [path.join(__dirname, "styles")],
   },
   images: {
-    domains: ['gymyx.cro.codes'],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "gymyx.cro.codes",
+        pathname: "**",
+      },
+    ],
   },
 }
 

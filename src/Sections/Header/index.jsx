@@ -10,6 +10,7 @@ import { useSession } from "next-auth/react"
 import Image from "next/image"
 
 import { getFioShort } from "@/Utils/helpers"
+import MobileBar from "@/Components/MobileBar"
 
 const Header = ({ isLanding = false, data }) => {
   const sesstion = useSession()
@@ -51,20 +52,36 @@ const Header = ({ isLanding = false, data }) => {
           {menu.slice(0, 5).map((item) => {
             const title =
               item.find((field) => field.name === "title")?.value || ""
+
             const handle =
               item.find((field) => field.name === "handle_to")?.value || ""
 
+            const link =
+              item.find((field) => field.name === "link_to")?.value || ""
+
+            if (handle !== "#") {
+              return (
+                <ScrollLink
+                  key={handle}
+                  to={handle}
+                  smooth={true}
+                  offset={-65}
+                  duration={500}
+                  className={styles["header__nav-item"]}
+                >
+                  {title}
+                </ScrollLink>
+              )
+            }
             return (
-              <ScrollLink
-                key={handle}
-                to={handle}
-                smooth={true}
-                offset={-65}
-                duration={500}
+              <Link
+                key={link}
+                href={link}
+                passHref
                 className={styles["header__nav-item"]}
               >
                 {title}
-              </ScrollLink>
+              </Link>
             )
           })}
         </div>
@@ -89,7 +106,7 @@ const Header = ({ isLanding = false, data }) => {
           )}
           {isLanding && (
             <Link
-              href={"/account/login"}
+              href={userData ? "/account/profile" : "/account/login"}
               className={styles["header__controls-account"]}
             >
               <img src="/icons/account.svg" alt="account icon" />

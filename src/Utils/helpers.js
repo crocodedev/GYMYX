@@ -28,3 +28,58 @@ export const getFioShort = (fio) => {
   }
   return fio
 }
+
+export const generateBookingDates = (count = 31) => {
+  const currentDate = new Date()
+  const dates = []
+
+  for (let i = 0; i < count; i++) {
+    const date = new Date()
+    date.setDate(currentDate.getDate() + i)
+
+    const dayOfWeek = date.toLocaleDateString("ru-RU", { weekday: "short" })
+    const dayOfMonth = date.getDate()
+    const monthNumber = date.getMonth() + 1
+    const monthLabel = date.toLocaleDateString("ru-RU", { month: "long" })
+    const year = date.getFullYear()
+
+    dates.push({
+      id: i,
+      dayOfMonth,
+      dayOfWeek,
+      month: {
+        number: monthNumber,
+        label: monthLabel,
+      },
+      year,
+    })
+  }
+
+  return dates
+}
+
+export const formatDate = (inputDate) => {
+  const months = [
+    "января",
+    "февраля",
+    "марта",
+    "апреля",
+    "мая",
+    "июня",
+    "июля",
+    "августа",
+    "сентября",
+    "октября",
+    "ноября",
+    "декабря",
+  ]
+
+  const date = new Date(inputDate)
+  const day = date.getDate()
+  const month = months[date.getMonth()]
+  let year = date.getFullYear()
+  if (new Date().getFullYear() === year) {
+    year = ""
+  }
+  return `${day} ${month} ${year}`
+}

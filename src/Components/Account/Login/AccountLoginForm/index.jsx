@@ -28,6 +28,19 @@ const AccountLoginForm = ({ handleToogleModal }) => {
   const inputCodeRef = useRef()
   const router = useRouter()
   const [data, setData] = useState(INIT_FORM_DATA)
+  const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    if (session.status === "authenticated") {
+      let url = ""
+      if (session?.data?.user?.full_name) {
+        url = "/account/profile"
+      } else {
+        url = "/account/login/create-profile"
+      }
+      router.push(url)
+    }
+  }, [session.status])
 
   const handleChangePhone = useCallback(() => {
     const phone = checkValidPhone(inputRef.current.value)
@@ -65,6 +78,7 @@ const AccountLoginForm = ({ handleToogleModal }) => {
   }
 
   const handleSubmitLogin = async () => {
+    setLoading(true)
     const result = await fetch("/api/login/send-code", {
       method: "POST",
       headers: {
@@ -82,9 +96,11 @@ const AccountLoginForm = ({ handleToogleModal }) => {
         }
       })
     }
+    setLoading(false)
   }
 
   const handleSubmitCheckCode = async () => {
+    setLoading(true)
     const result = await fetch("/api/login/verify-code", {
       method: "POST",
       headers: {
@@ -95,26 +111,15 @@ const AccountLoginForm = ({ handleToogleModal }) => {
 
     const response = await result.json()
     if (!response.error) {
-      const responseCredentials = await signIn("credentials", {
+      await signIn("credentials", {
         token: response.data.access_token,
         redirect: false,
       })
     } else {
       handleToogleModal()
     }
+    setLoading(false)
   }
-
-  useEffect(() => {
-    if (session.status === "authenticated") {
-      let url = ""
-      if (session?.data?.user?.full_name) {
-        url = "/account/profile"
-      } else {
-        url = "/account/login/create-profile"
-      }
-      router.push(url)
-    }
-  }, [session.status])
 
   return (
     <div className={styles["account-login-form"]}>
@@ -149,8 +154,8 @@ const AccountLoginForm = ({ handleToogleModal }) => {
             fullSize={true}
             size="l"
             variant="blue"
-            icon="arrow"
-            label={"Продолжить"}
+            icon={!loading ? "arrow" : ""}
+            label={!loading ? "Продолжить" : "Загрузка"}
           />
         )}
         {data.receivedCode && (
@@ -160,7 +165,7 @@ const AccountLoginForm = ({ handleToogleModal }) => {
             fullSize={true}
             size="l"
             variant="blue"
-            label={"Подтвердить"}
+            label={!loading ? "Подтвердить" : "Загрузка"}
           />
         )}
         {!data.receivedCode && (
