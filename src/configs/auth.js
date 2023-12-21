@@ -49,12 +49,12 @@ export const authConfig = {
         return {
           ...token,
           accessToken: user.token,
-          full_name: user.full_name,
-          phone: user.phone,
-          email: user.email,
-          image: user.image,
-          is_active_enter_code: user.is_active_enter_code,
-          enter_code: user.enter_code,
+          full_name: user?.full_name || null,
+          phone: user?.phone || null,
+          email: user?.email || null,
+          image: user?.image || null,
+          is_active_enter_code: user?.is_active_enter_code || null,
+          enter_code: user?.enter_code || null,
         }
       }
 
