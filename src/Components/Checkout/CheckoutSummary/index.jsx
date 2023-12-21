@@ -41,6 +41,8 @@ const CheckoutSummary = ({ items, gym }) => {
     ).then(({ data }) => {
       if (data?.payment_link) {
         router.push(data?.payment_link)
+      } else if (data?.status) {
+        router.push("/account/training")
       } else {
         setError(true)
       }
