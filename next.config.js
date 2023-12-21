@@ -5,6 +5,15 @@ const nextConfig = {
   sassOptions: {
     includePaths: [path.join(__dirname, "styles")],
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "gymyx.cro.codes",
+        pathname: "**",
+      },
+    ],
+  },
 }
 
 module.exports = nextConfig

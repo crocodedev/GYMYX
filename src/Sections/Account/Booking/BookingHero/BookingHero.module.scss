@@ -1,0 +1,121 @@
+@import "@/styles/mixins.scss";
+
+.booking-hero {
+  position: relative;
+
+  &__wrapper {
+    position: relative;
+    overflow: hidden;
+
+    background: linear-gradient(
+        270deg,
+        rgba(255, 255, 255, 0) 11.37%,
+        #294ae7 92.21%
+      ),
+      transparent no-repeat;
+
+    @include media-breakpoint-down(lg) {
+      padding: 18px;
+      border-radius: 30px;
+    }
+
+    @include media-breakpoint-between(lg, xxl) {
+      padding: 25px;
+      border-radius: 20px;
+    }
+
+    @include media-breakpoint-up(xxl) {
+      padding: 40px 40px 45px 40px;
+      border-radius: 30px;
+    }
+  }
+
+  &__bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__content {
+  }
+
+  &__text {
+    color: var(--white, #fff);
+    font-weight: 500;
+    line-height: 112%;
+    width: 100%;
+
+    @include media-breakpoint-down(lg) {
+      font-size: 16px;
+      letter-spacing: -0.16px;
+      margin-top: 30px;
+      max-width: 260px;
+    }
+
+    @include media-breakpoint-up(lg) {
+      max-width: 521px;
+    }
+
+    @include media-breakpoint-between(lg, xxl) {
+      margin-top: 50px;
+      font-size: 28px;
+      letter-spacing: -0.4px;
+    }
+
+    @include media-breakpoint-up(xxl) {
+      margin-top: 75px;
+      font-size: 40px;
+      letter-spacing: -0.4px;
+    }
+  }
+
+  &__address {
+    color: var(--white, #fff);
+    font-weight: 500;
+    line-height: 135%;
+    max-width: 521px;
+    width: 100%;
+
+    @include media-breakpoint-down(lg) {
+      font-size: 12px;
+      margin-bottom: 75px;
+      max-width: 260px;
+    }
+
+    @include media-breakpoint-up(lg) {
+      max-width: 521px;
+    }
+
+    @include media-breakpoint-between(lg, xxl) {
+      font-size: 20px;
+    }
+
+    @include media-breakpoint-up(xxl) {
+      font-size: 26px;
+    }
+  }
+
+  &__content-inner-wrapper {
+    display: flex;
+
+    margin-top: 30px;
+    justify-content: space-between;
+
+    @include media-breakpoint-down(lg) {
+      flex-direction: column;
+    }
+
+    @include media-breakpoint-up(lg) {
+      align-items: center;
+    }
+  }
+}

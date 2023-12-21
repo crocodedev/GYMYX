@@ -1,0 +1,71 @@
+@import "@/styles/mixins.scss";
+
+.booking-sign-up-heading {
+  position: relative;
+  margin-bottom: 35px;
+
+
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+
+    @include media-breakpoint-down(lg) {
+      flex-direction: column;
+    }
+
+    @include media-breakpoint-up(lg) {
+      align-items: center;
+    }
+  }
+
+  &__title {
+    color: var(--white, #fff);
+    font-weight: 600;
+    line-height: 117%;
+
+    @include media-breakpoint-down(lg) {
+      font-size: 23px;
+      letter-spacing: -0.234px;
+    }
+
+    @include media-breakpoint-between(lg, xxl) {
+      font-size: 36px;
+      letter-spacing: -0.5px;
+    }
+
+    @include media-breakpoint-up(xxl) {
+      font-size: 50px;
+      letter-spacing: -0.5px;
+    }
+  }
+
+  &__info {
+    display: flex;
+    align-items: center;
+
+    @include media-breakpoint-down(lg) {
+      margin-top: 14px;
+      justify-content: space-between;
+    }
+  }
+
+  &__info-title {
+    color: var(--white, #fff);
+    font-weight: 500;
+    line-height: 135%;
+
+    @include media-breakpoint-down(lg) {
+      font-size: 12px;
+    }
+
+    @include media-breakpoint-between(lg, xxl) {
+      font-size: 20px;
+      margin-right: 20px;
+    }
+
+    @include media-breakpoint-up(xxl) {
+      font-size: 26px;
+      margin-right: 30px;
+    }
+  }
+}

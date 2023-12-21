@@ -1,0 +1,188 @@
+@import "@/styles/mixins.scss";
+
+.hero {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @include media-breakpoint-down(lg) {
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(0deg, #212428, transparent);
+    }
+  }
+
+  &__img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__content-wrapper {
+    width: 100%;
+
+    @include media-breakpoint-down(lg) {
+      height: 100%;
+    }
+
+    @include media-breakpoint-up(lg) {
+      position: absolute;
+      bottom: 16%;
+    }
+
+    > div {
+      height: 100%;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+
+    @include media-breakpoint-down(lg) {
+      height: 100%;
+      justify-content: flex-end;
+      padding: 60px 0;
+      max-width: 320px;
+      margin: 0 auto;
+    }
+
+    @include media-breakpoint-up(md) {
+      max-width: 770px;
+      padding-left: 40px;
+    }
+  }
+
+  &__title {
+    color: var(--white, #fff);
+    margin-bottom: 20px;
+    line-height: 117%;
+    font-weight: 600;
+
+    @include media-breakpoint-down(md) {
+      text-align: center;
+      font-size: 28px;
+      letter-spacing: -0.28px;
+    }
+
+    @include media-breakpoint-between(md, xl) {
+      font-size: 38px;
+      line-height: 117%;
+      letter-spacing: -0.5px;
+    }
+
+    @include media-breakpoint-up(xl) {
+      font-size: 50px;
+      letter-spacing: -0.5px;
+    }
+  }
+
+  &__subtitle {
+    color: var(--white, #fff);
+    font-size: 30px;
+    font-weight: 500;
+    margin-bottom: 35px;
+
+    @include media-breakpoint-down(md) {
+      display: none;
+    }
+  }
+
+  &__info {
+    display: flex;
+    align-items: center;
+
+    @include media-breakpoint-down(md) {
+      flex-direction: column;
+      width: 100%;
+    }
+  }
+
+  &__price {
+    color: var(--white, #fff);
+    font-weight: 500;
+
+    @include media-breakpoint-down(md) {
+      text-align: center;
+      font-size: 16px;
+      line-height: 112%;
+      letter-spacing: -0.16px;
+      margin-bottom: 10px;
+    }
+
+    @include media-breakpoint-between(md, xl) {
+      font-size: 22px;
+      margin-right: 20px;
+    }
+
+    @include media-breakpoint-up(xl) {
+      font-size: 30px;
+      margin-right: 40px;
+    }
+  }
+
+  &__price-value {
+    color: var(--white, #fff);
+    font-weight: 600;
+
+    @include media-breakpoint-down(md) {
+      font-size: 30px;
+      line-height: 110%;
+      letter-spacing: -0.3px;
+      margin-left: 10px;
+    }
+
+    @include media-breakpoint-between(md, xl) {
+      font-size: 46px;
+      line-height: 110%;
+      letter-spacing: -0.7px;
+      margin-left: 20px;
+    }
+
+    @include media-breakpoint-up(xl) {
+      font-size: 70px;
+      line-height: 110%;
+      letter-spacing: -0.7px;
+      margin-left: 20px;
+    }
+  }
+
+  &__price-prefix {
+    color: var(--white, #fff);
+    font-weight: 600;
+    line-height: 117%;
+
+    @include media-breakpoint-down(md) {
+      font-size: 24px;
+      letter-spacing: -0.24px;
+    }
+
+    @include media-breakpoint-between(md, xl) {
+      font-size: 30px;
+      letter-spacing: -0.5px;
+    }
+
+    @include media-breakpoint-up(xl) {
+      font-size: 50px;
+      letter-spacing: -0.5px;
+    }
+  }
+}
