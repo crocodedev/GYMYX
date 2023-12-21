@@ -54,7 +54,7 @@ export const authConfig = {
           email: user.email,
           image: user.image,
           is_active_enter_code: user.is_active_enter_code,
-          enter_code: user.enter_code
+          enter_code: user.enter_code,
         }
       }
 
@@ -63,12 +63,12 @@ export const authConfig = {
 
     async session({ session, token }) {
       session.user.accessToken = token.accessToken
-      session.user.full_name = token.full_name
-      session.user.phone = token.phone
-      session.user.email = token.email
-      session.user.image = token.image
-      session.user.is_active_enter_code = token.is_active_enter_code
-      session.user.enter_code = token.enter_code
+      session.user.full_name = token?.full_name || null
+      session.user.phone = token?.phone || null
+      session.user.email = token?.email || null
+      session.user.image = token?.image || null
+      session.user.is_active_enter_code = token?.is_active_enter_code || null
+      session.user.enter_code = token?.enter_code || null
 
       return session
     },
