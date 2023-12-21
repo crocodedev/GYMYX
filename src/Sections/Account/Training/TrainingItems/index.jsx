@@ -16,8 +16,6 @@ const TrainingItems = ({ items = [], archive, selectedDate }) => {
     }
   }, [items, selectedDate])
 
-  console.log("renderingItems", renderingItems)
-
   return (
     <div className={styles["training-items"]}>
       <div className={styles["training-items__list"]}>
