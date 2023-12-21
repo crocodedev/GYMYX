@@ -10,7 +10,6 @@ const ProfileTrainings = () => {
   const { data } = useSession()
 
   getTrainingData(data?.user?.accessToken).then((data) => {
-    console.log("training", data)
   })
 
   return (

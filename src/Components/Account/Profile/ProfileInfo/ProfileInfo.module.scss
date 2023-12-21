@@ -78,6 +78,14 @@
   &__code {
     display: flex;
     align-items: center;
+
+    &.active{
+      background: var(--blue-base-gradient, linear-gradient(90deg, #294ae7 0%, #0d2dc8 100%));
+    }
+
+    &:not(.active){
+      opacity: 0.5;
+    }
   }
 
   &__code-text {
