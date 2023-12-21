@@ -8,12 +8,14 @@ import Button from "@/Components/Button"
 import MobileMenu from "@/Components/Header/MobileMenu"
 import { useSession } from "next-auth/react"
 import Image from "next/image"
+import { usePathname } from "next/navigation"
 
 import { getFioShort } from "@/Utils/helpers"
 import MobileBar from "@/Components/MobileBar"
 
 const Header = ({ isLanding = false, data }) => {
   const sesstion = useSession()
+  const pathname = usePathname()
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [userData, setUserData] = useState(null)
 
@@ -78,7 +80,9 @@ const Header = ({ isLanding = false, data }) => {
                 key={link}
                 href={link}
                 passHref
-                className={styles["header__nav-item"]}
+                className={`${styles["header__nav-item"]} ${
+                  pathname.includes(link) ? styles["active"] : ""
+                }`}
               >
                 {title}
               </Link>

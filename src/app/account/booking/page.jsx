@@ -1,7 +1,7 @@
 "use client"
 
-import BookingHero from "@/Sections/Booking/BookingHero"
-import BookingVariants from "@/Sections/Booking/BookingVariants"
+import BookingHero from "@/Sections/Account/Booking/BookingHero"
+import BookingVariants from "@/Sections/Account/Booking/BookingVariants"
 
 import Modal from "@/Components/Modal"
 import Button from "@/Components/Button"

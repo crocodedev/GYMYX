@@ -2,7 +2,7 @@ import { Montserrat } from "next/font/google"
 import "./../globals.scss"
 
 import Header from "@/Sections/Header"
-import Footer from "@/Sections/Footer"
+import Footer from "@/Sections/Landing/Footer"
 import { Providers } from "@/Components/Providers"
 
 const MontserratFont = Montserrat({ subsets: ["cyrillic-ext"] })

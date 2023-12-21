@@ -17,7 +17,7 @@ export async function POST(request) {
       }
 
       const result = await response.json()
-      return Response.json({ data: result.data })
+      return Response.json({ data: result})
     } catch (error) {
       return Response.json({ error: "Error fetching data" })
     }

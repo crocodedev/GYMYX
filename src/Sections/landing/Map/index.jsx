@@ -2,11 +2,11 @@
 
 import { useState, useEffect } from "react"
 
-import Button from "../../Components/Button"
-import Container from "../../Components/Container"
-import Select from "../../Components/Select"
+import Button from "@/Components/Button"
+import Container from "@/Components/Container"
+import Select from "@/Components/Select"
 import styles from "./Map.module.scss"
-import MapArea from "../../Components/Map/MapArea"
+import MapArea from "@/Components/Map/MapArea"
 
 const preparePlacemarks = (items) => {
   return items.map((item, index) => {

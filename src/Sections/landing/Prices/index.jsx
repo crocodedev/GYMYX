@@ -1,8 +1,8 @@
-import SectionTitle from "../../Components/SectionTitle"
-import Container from "../../Components/Container"
+import SectionTitle from "../../../Components/SectionTitle"
+import Container from "../../../Components/Container"
 import styles from "./Prices.module.scss"
-import PriceLabel from "../../Components/Prices/PriceLabel"
-import PricesList from "../../Components/Prices/PricesList"
+import PriceLabel from "../../../Components/Prices/PriceLabel"
+import PricesList from "../../../Components/Prices/PricesList"
 
 const Prices = ({ alias, fields }) => {
   const title = fields.find((item) => item.name === "title")?.value || ""

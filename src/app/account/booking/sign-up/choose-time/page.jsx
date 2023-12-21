@@ -1,11 +1,11 @@
 "use client"
 
-import BookingSignUpHeading from "@/Sections/Booking/BookingSignUpHeading"
-import BookingSignUpTags from "@/Sections/Booking/BookingSignUpTags"
-import BookingSignUpContent from "@/Sections/Booking/BookingSignUpContent"
-import BookingSteps from "@/Sections/Booking/BookingSteps"
-import NavigationBack from "@/Sections/NavigationBack"
-import BookingTimePricing from "@/Sections/Booking/BookingTimePricing"
+import BookingSignUpHeading from "@/Sections/Account/Booking/BookingSignUpHeading"
+import BookingSignUpTags from "@/Sections/Account/Booking/BookingSignUpTags"
+import BookingSignUpContent from "@/Sections/Account/Booking/BookingSignUpContent"
+import BookingSteps from "@/Sections/Account/Booking/BookingSteps"
+import NavigationBack from "@/Sections/Account/NavigationBack"
+import BookingTimePricing from "@/Sections/Account/Booking/BookingTimePricing"
 
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"

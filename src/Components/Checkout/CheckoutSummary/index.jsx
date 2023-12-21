@@ -13,7 +13,7 @@ import {
   prepareDataForBooking,
 } from "./helpers"
 
-const CheckoutSummary = ({ items, gym}) => {
+const CheckoutSummary = ({ items, gym }) => {
   const router = useRouter()
   const { data: sessionData } = useSession()
   const [loading, setLoading] = useState(false)
@@ -53,7 +53,10 @@ const CheckoutSummary = ({ items, gym}) => {
       <div className={styles["checkout-summary__wrapper"]}>
         <div className={styles["checkout-summary__list"]}>
           {list?.map(({ value, count, price }) => (
-            <div className={styles["checkout-summary__item"]}>
+            <div
+              key={`${count}_${value}_${price}}`}
+              className={styles["checkout-summary__item"]}
+            >
               <p>
                 Тренировка {price} ₽/ч ({count})
               </p>

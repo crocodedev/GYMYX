@@ -91,7 +91,6 @@ const BookingCalendar = () => {
 
     const newDates = value.map((valueItem) => {
       const time = getTime(valueItem)
-      console.log('time',valueItem,time)
       return {
         value: valueItem,
         time: time?.time || [],
@@ -101,17 +100,15 @@ const BookingCalendar = () => {
     setDates(newDates)
   }
 
-  const handleMonthChange = (e) => {}
-
   useEffect(() => {
     setLoading(true)
     if (!!visitDate?.length) {
       setDates(visitDate)
     }
-    setLoading(false)
 
     takeAvailableDatesTwoMonth(gym.id).then((data) => {
       setAvailableDates(data)
+      setLoading(false)
     })
   }, [gym])
 
@@ -140,7 +137,7 @@ const BookingCalendar = () => {
           fullSize={true}
           variant="blue"
           size="l"
-          label={"Далее"}
+          label={!loading ? "Далее" : "Загрузка"}
           icon="arrow"
         />
       </div>

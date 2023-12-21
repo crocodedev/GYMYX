@@ -1,10 +1,10 @@
 import styles from "./CheckoutList.module.scss"
 
-import CheckoutListCard from "./CheckoutListCard"
 import { useSelector, useDispatch } from "react-redux"
 import { updateBookingData } from "@/redux/bookingSlice"
 
 import { sortVisitDates, canDelete } from "./helpers"
+import BookingCard from "@/Components/Booking/BookingCard"
 
 const CheckoutList = ({ items }) => {
   const dispatch = useDispatch()
@@ -23,7 +23,7 @@ const CheckoutList = ({ items }) => {
         {items.map(({ time, value }, index) => {
           return time.map((timeZome) => {
             return (
-              <CheckoutListCard
+              <BookingCard
                 isSingle={timeZome.length === 1 && items.length === 1}
                 key={index}
                 onClickDelete={handleDeleteItem}
