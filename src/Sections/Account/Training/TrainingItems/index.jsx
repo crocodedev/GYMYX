@@ -11,15 +11,17 @@ const TrainingItems = ({ items = [], archive, selectedDate }) => {
         .filter((training) => training.date === selectedDate.date)
         .map((training) => training)
       setRenderingItems(filteredItems)
-    }else{
-      setRenderingItems([]);
+    } else {
+      setRenderingItems([])
     }
   }, [items, selectedDate])
+
+  console.log("renderingItems", renderingItems)
 
   return (
     <div className={styles["training-items"]}>
       <div className={styles["training-items__list"]}>
-        {renderingItems.map(({ id, date, time }) => {
+        {renderingItems.map(({ id, date, time, gym }) => {
           return (
             <BookingCard
               isSingle={archive}
@@ -27,6 +29,8 @@ const TrainingItems = ({ items = [], archive, selectedDate }) => {
               key={id}
               date={date}
               time={time}
+              gymTitle={gym?.name}
+              address={gym?.address}
             />
           )
         })}
