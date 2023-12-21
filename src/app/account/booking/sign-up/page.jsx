@@ -2,11 +2,11 @@
 
 import Button from "@/Components/Button"
 import Modal from "@/Components/Modal"
-import BookingSignUpHeading from "@/Sections/Booking/BookingSignUpHeading"
-import BookingCalendar from "@/Sections/Booking/BookingCalendar"
-import BookingSteps from "@/Sections/Booking/BookingSteps"
+import BookingSignUpHeading from "@/Sections/Account/Booking/BookingSignUpHeading"
+import BookingCalendar from "@/Sections/Account/Booking/BookingCalendar"
+import BookingSteps from "@/Sections/Account/Booking/BookingSteps"
 import { useSelector } from "react-redux"
-import BookingSignUpContent from "@/Sections/Booking/BookingSignUpContent"
+import BookingSignUpContent from "@/Sections/Account/Booking/BookingSignUpContent"
 import { useState } from "react"
 
 const BookingSignUp = () => {

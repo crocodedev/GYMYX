@@ -1,12 +1,19 @@
 @import "@/styles/mixins.scss";
 
-.checkout-list-card {
+.booking-card {
   position: relative;
-  background: var(
-    --blue-gradient-diagonal,
-    linear-gradient(108deg, #294ae7 0%, #0d2dc8 100%)
-  );
   box-shadow: 0px 0px 21px 0px rgba(22, 23, 26, 0.6);
+
+  &.older {
+    background: var(--white-transperent, rgba(255, 255, 255, 0.1));
+  }
+
+  &:not(.older) {
+    background: var(
+      --blue-gradient-diagonal,
+      linear-gradient(108deg, #294ae7 0%, #0d2dc8 100%)
+    );
+  }
 
   @include media-breakpoint-down(lg) {
     border-radius: 15px;
@@ -66,7 +73,12 @@
       margin-right: 20px;
     }
 
-    @include media-breakpoint-up(xxl) {
+    @include media-breakpoint-between(xxl, xxxl) {
+      font-size: 44px;
+      margin-right: 30px;
+    }
+
+    @include media-breakpoint-up(xxxl) {
       font-size: 50px;
       margin-right: 30px;
     }

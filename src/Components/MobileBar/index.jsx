@@ -36,11 +36,13 @@ const MobileBar = () => {
   const pathname = usePathname()
 
   if (!data?.user?.full_name) return
+
   return (
     <div className={styles["mobile-bar"]}>
       <div className={styles["mobile-bar__wrapper"]}>
         {MENU.map(({ title, link, sublink, icon }) => (
           <Link
+            key={title}
             href={link}
             className={`${styles["mobile-bar__btn"]} ${
               pathname.includes(link) || pathname.includes(sublink)

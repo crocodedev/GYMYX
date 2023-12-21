@@ -1,11 +1,11 @@
-import Hero from "@/Sections/Hero"
-import AboutUs from "@/Sections/AboutUs"
-import Advantages from "@/Sections/Advantages"
-import Prices from "@/Sections/Prices"
-import ChooseHealth from "@/Sections/ChooseHealth"
-import Equipment from "@/Sections/Equipment"
-import Map from "@/Sections/Map"
-import Faq from "@/Sections/Faq"
+import Hero from "@/Sections/landing/Hero"
+import AboutUs from "@/Sections/landing/AboutUs"
+import Advantages from "@/Sections/landing/Advantages"
+import Prices from "@/Sections/landing/Prices"
+import ChooseHealth from "@/Sections/landing/ChooseHealth"
+import Equipment from "@/Sections/landing/Equipment"
+import Map from "@/Sections/landing/Map"
+import Faq from "@/Sections/landing/Faq"
 
 async function getData() {
   const res = await fetch("https://gymyx.cro.codes/api/pages/index", {

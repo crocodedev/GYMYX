@@ -1,6 +1,6 @@
-import NavigationBack from "@/Sections/NavigationBack"
-import BookingSignUpHeading from "@/Sections/Booking/BookingSignUpHeading"
-import CheckoutContent from "@/Sections/Checkout/CheckoutContent"
+import NavigationBack from "@/Sections/Account/NavigationBack"
+import BookingSignUpHeading from "@/Sections/Account/Booking/BookingSignUpHeading"
+import CheckoutContent from "@/Sections/Account/Checkout/CheckoutContent"
 
 const Checkout = () => {
   return (

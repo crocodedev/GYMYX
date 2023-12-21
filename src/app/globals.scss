@@ -21,11 +21,15 @@ body {
 
 .main {
   flex-grow: 1;
-  padding-bottom: 94px;
 
   &.account {
     @include media-breakpoint-down(xl) {
       padding-top: 10px;
+      padding-bottom: 150px;
+    }
+
+    @include media-breakpoint-up(xl) {
+      padding-bottom: 94px;
     }
 
     @include media-breakpoint-between(xl, xxl) {
@@ -34,7 +38,6 @@ body {
 
     @include media-breakpoint-up(xxl) {
       padding-top: calc(84px + 50px);
-      padding-bottom: 94px;
     }
   }
 }
@@ -61,7 +64,8 @@ a {
   text-decoration: none;
 }
 
-.booking-calendar__calendar {
+.booking-calendar__calendar,
+.training-calendar__calendar {
   .p-datepicker-inline {
     background: transparent;
     border: none;

@@ -83,3 +83,18 @@ export const formatDate = (inputDate) => {
   }
   return `${day} ${month} ${year}`
 }
+
+export const formatTime = (inputTime) => {
+  const timeArray = inputTime.split(":")
+  const hours = parseInt(timeArray[0], 10)
+  const minutes = parseInt(timeArray[1], 10)
+
+  if (!isNaN(hours) && !isNaN(minutes)) {
+    const formattedTime = `${hours.toString().padStart(2, "0")}:${minutes
+      .toString()
+      .padStart(2, "0")}`
+    return formattedTime
+  } else {
+    return ""
+  }
+}

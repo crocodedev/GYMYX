@@ -77,7 +77,14 @@
     align-items: center;
     justify-content: center;
     color: var(--white, #fff);
-    font-weight: 600;
+
+    &.active {
+      font-weight: 800;
+    }
+
+    &:not(.active) {
+      font-weight: 600;
+    }
 
     @include media-breakpoint-down(xl) {
       display: none;
