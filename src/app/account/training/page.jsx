@@ -54,7 +54,7 @@ const Training = () => {
     })
 
     setLoading(false)
-  }, [sessionData])
+  }, [])
 
   useEffect(() => {
     const dataTemp = getDataForPeriod(selectedTab, allTrainingsDates)

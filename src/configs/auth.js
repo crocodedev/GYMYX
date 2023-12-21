@@ -53,6 +53,8 @@ export const authConfig = {
           phone: user.phone,
           email: user.email,
           image: user.image,
+          is_active_enter_code: user.is_active_enter_code,
+          enter_code: user.enter_code
         }
       }
 
@@ -65,6 +67,8 @@ export const authConfig = {
       session.user.phone = token.phone
       session.user.email = token.email
       session.user.image = token.image
+      session.user.is_active_enter_code = token.is_active_enter_code
+      session.user.enter_code = token.enter_code
 
       return session
     },
