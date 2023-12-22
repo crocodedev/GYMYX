@@ -4,7 +4,7 @@ import { useSession } from "next-auth/react"
 import { useEffect, useState } from "react"
 
 import PageHeading from "@/Sections/Account/PageHeading"
-import TrainingTabs from "@/Sections/Account/Training/TrainingTabs"
+import NavigationTabs from "@/Sections/Account/NavigationTabs"
 import TrainingContent from "@/Sections/Account/Training/TrainingContent"
 import TrainingCalendar from "@/Sections/Account/Training/TrainingCalendar"
 import TrainingItems from "@/Sections/Account/Training/TrainingItems"
@@ -97,7 +97,7 @@ const Training = () => {
   return (
     <div className="account-page-wrapper">
       <PageHeading title={"Мои тренировки"} />
-      <TrainingTabs
+      <NavigationTabs
         items={TABS}
         selectedTab={selectedTab}
         handleChangeTab={handleChangeSelectedTab}
