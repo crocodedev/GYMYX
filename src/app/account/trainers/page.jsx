@@ -1,34 +1,33 @@
-"use client";
-
 import { useSession } from "next-auth/react";
-import { useEffect, useState } from "react";
 import Loading from "@/Components/Loading";
 import Container from "@/Components/Container";
 import TrainersSlider from "@/Sections/Account/Trainers/TrainersSlider";
 
-// export const getTrainingData = async (token) => {
-//   const result = await fetch("/api/booking/get-bookings", {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify({ token }),
-//   });
+export const getTrainersData = async () => {
+  const res = await fetch("https://gymyx.cro.codes/api/pages/trainers");
 
-//   const response = await result.json();
-//   if (!response.error) {
-//     return response;
-//   }
-// };
+  const response = await res.json();
 
-const Training = () => {
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  } else {
+    console.log(response);
+  }
+
+  return response;
+};
+
+const Trainings = async () => {
+  const { data } = await getTrainersData();
+  const objectData = data.modules[0].section.fields[0];
+
   return (
     <section className="trainers-page-wrapper">
       <Container>
-        <TrainersSlider />
+        <TrainersSlider data={objectData} />
       </Container>
     </section>
   );
 };
 
-export default Training;
+export default Trainings;
