@@ -37,6 +37,7 @@ const ProfileStats = () => {
     if (!sessionData) return
 
     getTrainingData(sessionData?.user?.accessToken).then(({ data = [] }) => {
+      const currentMonth = new Date().getMonth() + 1;
       const tempMonths = [
         { id: 1, label: "Янв", count: 0 },
         { id: 2, label: "Февр", count: 0 },
@@ -56,13 +57,19 @@ const ProfileStats = () => {
         const monthNumber = new Date(date).getMonth() + 1
         const month = tempMonths.filter(({ id }) => id === monthNumber)
         if (!!month?.length) {
-          month[0].count += 1
+          month[0].count += 5
         }
       })
 
-      setMonthsStats(tempMonths)
+      const sortedMonths = [
+        ...tempMonths.slice(currentMonth - 1), // Добавляем -1, чтобы включить текущий месяц в срез
+        ...tempMonths.slice(0, currentMonth - 1)
+      ];
+      setMonthsStats(sortedMonths)
     })
   }, [sessionData])
+
+  console.log(monthsStats)
 
   return (
     <section className={styles["profile-stats"]}>
@@ -74,10 +81,10 @@ const ProfileStats = () => {
               className={`swiper-container ${styles["profile-stats__list-wrapper"]}`}
               {...sliderSettings}
             >
-              {monthsStats.map(({ id, label, count }, index) => (
+              {monthsStats.map(({ id, label, count }) => (
                 <SwiperSlide key={id}>
                   <ProfileStatsItem
-                    isCurrent={index === new Date().getMonth()}
+                    isCurrent={id === new Date().getMonth()+1}
                     label={label}
                     count={count}
                   />

@@ -9,7 +9,12 @@ const TrainingItems = ({ items = [], archive, selectedDate }) => {
     if (selectedDate) {
       const filteredItems = items
         .filter((training) => training.date === selectedDate.date)
+        .sort(
+          (a, b) =>
+            new Date(`${a.date} ${a.time}`) - new Date(`${b.date} ${b.time}`)
+        )
         .map((training) => training)
+      console.log("filteredItems", filteredItems)
       setRenderingItems(filteredItems)
     } else {
       setRenderingItems([])

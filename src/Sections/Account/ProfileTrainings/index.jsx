@@ -6,11 +6,39 @@ import { useSession } from "next-auth/react"
 
 import { getTrainingData } from "./helpers"
 
-const ProfileTrainings = () => {
-  const { data } = useSession()
+import { useState, useEffect } from "react"
+import Loading from "@/Components/Loading"
+import { formatDate, formatTime } from "@/Utils/helpers"
 
-  getTrainingData(data?.user?.accessToken).then((data) => {
-  })
+const ProfileTrainings = () => {
+  const { data: sessionData } = useSession()
+  const [closestTraining,setClosestTraining] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(()=>{
+    if(!sessionData) return;
+
+    getTrainingData(sessionData?.user?.accessToken).then(({data})=>{
+      function parseDateTime(date, time) {
+        return new Date(`${date}T${time}`);
+      }
+      
+      if(data){
+        const sortedData = data.sort((a, b) => {
+          const dateA = parseDateTime(a.date, a.time);
+          const dateB = parseDateTime(b.date, b.time);
+          return dateA - dateB;
+        });
+        
+        const closestTraining = sortedData[0];
+        setClosestTraining(closestTraining)
+      }
+      setLoading(false);
+    })
+  },[sessionData])
+
+  if(loading) return <Loading full_screen={true}/>
+  if(!closestTraining) return; 
 
   return (
     <section className={styles["profile-trainings"]}>
@@ -25,18 +53,18 @@ const ProfileTrainings = () => {
           <div className={styles["profile-trainings__content"]}>
             <div className={styles["profile-trainings__date"]}>
               <p className={styles["profile-trainings__date-value"]}>
-                23 декабря
+                {formatDate(closestTraining.date)}
               </p>
               <div className={styles["profile-trainings__date-time"]}>
-                00:30
+                {formatTime(closestTraining.time)}
               </div>
             </div>
             <div className={styles["profile-trainings__col"]}>
               <p className={styles["profile-trainings__title"]}>
-                Раменки, ЖК Небо
+                {closestTraining?.gym?.name || ""}
               </p>
               <p className={styles["profile-trainings__text"]}>
-                г. Москва, Мичуринский пр., 5
+              {closestTraining?.gym?.address || ""}
               </p>
             </div>
           </div>

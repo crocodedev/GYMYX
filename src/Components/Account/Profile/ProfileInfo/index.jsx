@@ -31,13 +31,13 @@ const ProfileInfo = () => {
           <span>{userData.lastname}</span>
         </p>
         {userData.enter_code && (
-          <div
-            className={`${styles["profile-info__code"]} ${
-              userData?.is_active_enter_code ? styles["active"] : ""
-            }`}
-          >
+          <div className={`${styles["profile-info__code"]}`}>
             <p className={styles["profile-info__code-text"]}>код доступа</p>
-            <p className={styles["profile-info__code-value"]}>
+            <p
+              className={`${styles["profile-info__code-value"]} ${
+                userData?.is_active_enter_code ? styles["active"] : ""
+              }`}
+            >
               {userData.enter_code}
             </p>
           </div>
