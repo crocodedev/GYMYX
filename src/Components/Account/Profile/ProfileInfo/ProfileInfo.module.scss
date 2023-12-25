@@ -78,14 +78,6 @@
   &__code {
     display: flex;
     align-items: center;
-
-    &.active{
-      background: var(--blue-base-gradient, linear-gradient(90deg, #294ae7 0%, #0d2dc8 100%));
-    }
-
-    &:not(.active){
-      opacity: 0.5;
-    }
   }
 
   &__code-text {
@@ -113,6 +105,17 @@
     font-weight: 600;
     background: var(--white-transperent, rgba(255, 255, 255, 0.1));
     text-align: center;
+
+    &.active {
+      background: var(
+        --blue-base-gradient,
+        linear-gradient(90deg, #294ae7 0%, #0d2dc8 100%)
+      );
+    }
+
+    &:not(.active) {
+      opacity: 0.5;
+    }
 
     @include media-breakpoint-down(lg) {
       font-size: 12px;

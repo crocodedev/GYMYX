@@ -52,8 +52,6 @@ const Training = () => {
       setSelectedDate(data[0])
       setLoading(false)
     })
-
-    setLoading(false)
   }, [])
 
   useEffect(() => {
