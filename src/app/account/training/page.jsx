@@ -52,9 +52,7 @@ const Training = () => {
       setSelectedDate(data[0])
       setLoading(false)
     })
-
-    setLoading(false)
-  }, [])
+  }, [sessionData])
 
   useEffect(() => {
     const dataTemp = getDataForPeriod(selectedTab, allTrainingsDates)
@@ -92,7 +90,7 @@ const Training = () => {
     setSelectedTab(index)
   }
 
-  if (loading) return <Loading />
+  if (loading) return <Loading full_screen={true} />
 
   return (
     <div className="account-page-wrapper">

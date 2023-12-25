@@ -5,6 +5,21 @@ import NavigationTabs from "@/Sections/Account/NavigationTabs"
 import GidList from "@/Sections/Account/Gid/GidList"
 import { useState, useEffect } from "react"
 import Loading from "@/Components/Loading"
+import Container from "@/Components/Container"
+
+export const getGids = async () => {
+  const result = await fetch("/api/gids/get-gids", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+
+  const response = await result.json()
+  if (!response.error) {
+    return response
+  }
+}
 
 const Gid = () => {
   const [tags, setTags] = useState([])
@@ -15,44 +30,12 @@ const Gid = () => {
 
   useEffect(() => {
     setLoading(true)
-    setTimeout(() => {
-      setGids([
-        {
-          id: 1,
-          title: "1",
-          link: "",
-          trainingTime: "7-8 минут",
-          duration: "12:05",
-          description: "Для разминки в самом начале тренировки",
-          tags: ["Кардио", "Ноги"],
-          isViewed: false,
-          locked: true,
-        },
-        {
-          id: 2,
-          title: "2",
-          link: "",
-          trainingTime: "7-8 минут",
-          duration: "05:42",
-          description: "Для разминки в самом начале тренировки 2222",
-          tags: ["Ноги"],
-          isViewed: true,
-          locked: false,
-        },
-        {
-          id: 3,
-          title: "3",
-          link: "",
-          trainingTime: "7-8 минут",
-          duration: "05:42",
-          description: "Для разминки в самом начале тренировки 2222",
-          tags: ["Руки"],
-          isViewed: true,
-          locked: false,
-        },
-      ])
+    getGids().then(({ data }) => {
+      if (data) {
+        setGids(data)
+      }
       setLoading(false)
-    }, 1000)
+    })
   }, [])
 
   useEffect(() => {
@@ -71,7 +54,6 @@ const Gid = () => {
   useEffect(() => {
     if (activeTag) {
       const tag = tags[activeTag]
-      console.log("ACTIVE TAG = > ", tag)
       const resultItems =
         gids.filter((item) => item.tags.includes(tag?.title)) || []
 
@@ -83,18 +65,26 @@ const Gid = () => {
     setActiveTag(index)
   }
 
-  if (!gids?.length) return <Loading full_screen={true} />
+  if (loading) return <Loading full_screen={true} />
 
   return (
     <div className="account-page-wrapper">
       <PageHeading title={"Гид по тренажёрам"} />
-      <NavigationTabs
-        items={tags}
-        selectedTab={activeTag}
-        handleChangeTab={handleChangeTag}
-        itemIcon={null}
-      />
-      <GidList items={!!renderedItems?.length ? renderedItems : gids} />
+      {!!gids?.length ? (
+        <>
+          <NavigationTabs
+            items={tags}
+            selectedTab={activeTag}
+            handleChangeTab={handleChangeTag}
+            itemIcon={null}
+          />
+          <GidList items={!!renderedItems?.length ? renderedItems : gids} />
+        </>
+      ) : (
+        <Container>
+          <p style={{ color: "white" }}>{"Пока что здесь пусто :("}</p>
+        </Container>
+      )}
     </div>
   )
 }

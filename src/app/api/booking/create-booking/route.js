@@ -25,7 +25,6 @@ export async function POST(request) {
       const data = await response.json()
       return Response.json({ data })
     } catch (error) {
-      console.log("error ", error)
       return Response.json({ error: "Error fetching data" })
     }
   } else {

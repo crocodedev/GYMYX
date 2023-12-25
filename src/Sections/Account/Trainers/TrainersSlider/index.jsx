@@ -1,16 +1,16 @@
-"use client";
+"use client"
 
-import Container from "@/Components/Container";
-import styles from "./TrainersSlider.module.scss";
+import Container from "@/Components/Container"
+import styles from "./TrainersSlider.module.scss"
 import Loading from "@/Components/Loading";
-import { useSession } from "next-auth/react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import { useState, useEffect } from "react";
+import { useSession } from "next-auth/react"
+import { Swiper, SwiperSlide } from "swiper/react"
+import "swiper/css"
+import { useState, useEffect } from "react"
 
-import SliderControls from "@/Components/Slider/SliderControls";
-import SectionTitle from "@/Components/SectionTitle";
-import TrainersItem from "../TrainersItem";
+import SliderControls from "@/Components/Slider/SliderControls"
+import SectionTitle from "@/Components/SectionTitle"
+import TrainersItem from "../TrainersItem"
 import { getTrainersData } from "@/app/account/trainers/page";
 
 const TrainersSlider = () => {
@@ -44,25 +44,25 @@ const TrainersSlider = () => {
         slidesPerView: 2.55,
       },
     },
-  };
+  }
 
   const nextSlide = () => {
-    slider.slideNext();
-    setIndexActiveSlide(slider.activeIndex + 1);
-  };
+    slider.slideNext()
+    setIndexActiveSlide(slider.activeIndex + 1)
+  }
 
   const prevSlide = () => {
-    slider.slidePrev();
-    setIndexActiveSlide(slider.activeIndex + 1);
-  };
+    slider.slidePrev()
+    setIndexActiveSlide(slider.activeIndex + 1)
+  }
 
   const onChangeSlide = (e) => {
-    setIndexActiveSlide(e.activeIndex + 1);
-  };
+    setIndexActiveSlide(e.activeIndex + 1)
+  }
 
   const handleInit = (e) => {
-    setSlider(e);
-  };
+    setSlider(e)
+  }
 
   useEffect(() => {
     const isMobile = window.matchMedia("(max-width: 992px)").matches;
@@ -97,7 +97,7 @@ const TrainersSlider = () => {
           autoHeight
           {...sliderSettings}
         >
-          {dataTrainers.value.map((dataTrainers) => (
+          {dataTrainers.value.map((dataTrainers, index) => (
             <SwiperSlide
               className={styles["trainers-item"]}
               key={dataTrainers[0].value}
@@ -121,4 +121,4 @@ const TrainersSlider = () => {
   );
 };
 
-export default TrainersSlider;
+export default TrainersSlider

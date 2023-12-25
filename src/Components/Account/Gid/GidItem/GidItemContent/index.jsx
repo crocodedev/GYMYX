@@ -1,15 +1,31 @@
+import { useState } from "react"
 import styles from "./GidItemContent.module.scss"
 
 const GidItemContent = ({ duration, link, title, lock, isViewed }) => {
+  const [isPlayed, setIsPlayed] = useState(false)
+  const handleClickPlay = () => {
+    setIsPlayed((prev) => !prev)
+  }
+
   return (
     <div className={styles["gid-item-content"]}>
       <div className={styles["gid-item-content__bg"]}>
         <img src="/images/advantagesjpeg.jpeg" alt="grid item image" />
       </div>
-      <p className={styles["gid-item-content__time"]}>{duration}</p>
-      <button className={styles["gid-item-content__btn"]}>
-        <img src="/icons/play.svg" alt="play icon button" />
-      </button>
+      {isPlayed && (
+        <iframe className={styles["gid-item-content__video"]} src={link} />
+      )}
+      {!isPlayed && (
+        <p className={styles["gid-item-content__time"]}>{duration}</p>
+      )}
+      {!isPlayed && (
+        <button
+          onClick={handleClickPlay}
+          className={styles["gid-item-content__btn"]}
+        >
+          <img src="/icons/play.svg" alt="play icon button" />
+        </button>
+      )}
       <button
         className={`${styles["gid-item-content__btn-lock"]} ${
           lock ? styles["active"] : ""
