@@ -5,10 +5,6 @@ import styles from "./TrainersItem.module.scss";
 import Button from "@/Components/Button";
 
 const TrainersItem = ({ data, className }) => {
-  console.log(data);
-
-  console.log();
-
   const [showMore, setShowMore] = useState(false);
 
   const handleShow = () => {
@@ -50,8 +46,8 @@ const TrainersItem = ({ data, className }) => {
           </p>
         </div>
         <ul className={styles["trainers-item__more-list"]}>
-          {data[3].value.split(",").map((el) => (
-            <li>{el}</li>
+          {data[3].value.split(",").map((el, index) => (
+            <li key={index}>{el}</li>
           ))}
         </ul>
         <div className={styles["trainers-item__more-contact"]}>

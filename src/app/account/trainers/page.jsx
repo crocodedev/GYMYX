@@ -10,21 +10,15 @@ export const getTrainersData = async () => {
 
   if (!res.ok) {
     throw new Error("Failed to fetch data");
-  } else {
-    console.log(response);
   }
-
   return response;
 };
 
 const Trainings = async () => {
-  const { data } = await getTrainersData();
-  const objectData = data.modules[0].section.fields[0];
-
   return (
     <section className="trainers-page-wrapper">
       <Container>
-        <TrainersSlider data={objectData} />
+        <TrainersSlider />
       </Container>
     </section>
   );
