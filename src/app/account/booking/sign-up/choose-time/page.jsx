@@ -9,6 +9,7 @@ import BookingTimePricing from "@/Sections/Account/Booking/BookingTimePricing"
 
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
+import { useSession } from "next-auth/react"
 
 const variants = [
   { value: "00:00", bgColor: "#7B92FF" },
@@ -18,18 +19,31 @@ const variants = [
 ]
 
 const chooseTime = () => {
+  const { data: sessionData } = useSession()
   const { gym } = useSelector((state) => state.booking)
   const [pricesVariants, setPricesVariants] = useState([])
 
   useEffect(() => {
-    if (gym?.prices) {
-      setPricesVariants(
-        gym.prices.map((item, index) => {
+    if (gym?.prices && sessionData) {
+      let variantsTemp = []
+      // if (sessionData.user.enter_code) {
+        variantsTemp = gym.prices.map((item, index) => {
           return { ...item, bgColor: variants[index]?.bgColor }
         })
-      )
+      // } else {
+      //   variantsTemp = [
+      //     {
+      //       start: "00:00:00",
+      //       end: "23:00:00",
+      //       price: gym?.min_price,
+      //       bgColor: variants[0]?.bgColor,
+      //     },
+      //   ]
+      // }
+
+      setPricesVariants(variantsTemp)
     }
-  }, [gym])
+  }, [gym, sessionData])
 
   return (
     <>

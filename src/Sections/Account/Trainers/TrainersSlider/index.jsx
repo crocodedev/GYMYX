@@ -1,20 +1,20 @@
-"use client";
+"use client"
 
-import Container from "@/Components/Container";
-import styles from "./TrainersSlider.module.scss";
-import { useSession } from "next-auth/react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import { useState, useEffect } from "react";
+import Container from "@/Components/Container"
+import styles from "./TrainersSlider.module.scss"
+import { useSession } from "next-auth/react"
+import { Swiper, SwiperSlide } from "swiper/react"
+import "swiper/css"
+import { useState, useEffect } from "react"
 
-import SliderControls from "@/Components/Slider/SliderControls";
-import SectionTitle from "@/Components/SectionTitle";
-import TrainersItem from "../TrainersItem";
+import SliderControls from "@/Components/Slider/SliderControls"
+import SectionTitle from "@/Components/SectionTitle"
+import TrainersItem from "../TrainersItem"
 
 const TrainersSlider = ({ data }) => {
-  const [slider, setSlider] = useState();
-  const [activeIndexSlide, setIndexActiveSlide] = useState(1);
-  const [sliderSettings, setSliderSettings] = useState(null);
+  const [slider, setSlider] = useState()
+  const [activeIndexSlide, setIndexActiveSlide] = useState(1)
+  const [sliderSettings, setSliderSettings] = useState(null)
 
   const sliderPcSettings = {
     spaceBetween: 25,
@@ -39,30 +39,30 @@ const TrainersSlider = ({ data }) => {
         slidesPerView: 2.55,
       },
     },
-  };
+  }
 
   const nextSlide = () => {
-    slider.slideNext();
-    setIndexActiveSlide(slider.activeIndex + 1);
-  };
+    slider.slideNext()
+    setIndexActiveSlide(slider.activeIndex + 1)
+  }
 
   const prevSlide = () => {
-    slider.slidePrev();
-    setIndexActiveSlide(slider.activeIndex + 1);
-  };
+    slider.slidePrev()
+    setIndexActiveSlide(slider.activeIndex + 1)
+  }
 
   const onChangeSlide = (e) => {
-    setIndexActiveSlide(e.activeIndex + 1);
-  };
+    setIndexActiveSlide(e.activeIndex + 1)
+  }
 
   const handleInit = (e) => {
-    setSlider(e);
-  };
+    setSlider(e)
+  }
 
   useEffect(() => {
-    const isMobile = window.matchMedia("(max-width: 992px)").matches;
-    isMobile ? handleInit : setSliderSettings(sliderPcSettings);
-  }, []);
+    const isMobile = window.matchMedia("(max-width: 992px)").matches
+    isMobile ? handleInit : setSliderSettings(sliderPcSettings)
+  }, [])
 
   return data ? (
     <div className={styles["trainers-slider"]}>
@@ -103,7 +103,7 @@ const TrainersSlider = ({ data }) => {
         </div>
       )}
     </div>
-  ) : null;
-};
+  ) : null
+}
 
-export default TrainersSlider;
+export default TrainersSlider

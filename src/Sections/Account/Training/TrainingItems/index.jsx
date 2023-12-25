@@ -14,7 +14,6 @@ const TrainingItems = ({ items = [], archive, selectedDate }) => {
             new Date(`${a.date} ${a.time}`) - new Date(`${b.date} ${b.time}`)
         )
         .map((training) => training)
-      console.log("filteredItems", filteredItems)
       setRenderingItems(filteredItems)
     } else {
       setRenderingItems([])

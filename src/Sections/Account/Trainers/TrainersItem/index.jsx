@@ -5,10 +5,6 @@ import styles from "./TrainersItem.module.scss";
 import Button from "@/Components/Button";
 
 const TrainersItem = ({ data, className }) => {
-  console.log(data);
-
-  console.log();
-
   const [showMore, setShowMore] = useState(false);
 
   const handleShow = () => {

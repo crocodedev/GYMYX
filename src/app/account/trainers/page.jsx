@@ -10,8 +10,6 @@ export const getTrainersData = async () => {
 
   if (!res.ok) {
     throw new Error("Failed to fetch data");
-  } else {
-    console.log(response);
   }
 
   return response;
