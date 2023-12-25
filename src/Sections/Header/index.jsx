@@ -1,7 +1,7 @@
 "use client"
 
 import { Link as ScrollLink } from "react-scroll"
-import { useState, useEffect, useLayoutEffect } from "react"
+import { useState, useEffect } from "react"
 import styles from "./Header.module.scss"
 import Link from "next/link"
 import Button from "@/Components/Button"
@@ -11,17 +11,13 @@ import Image from "next/image"
 import { usePathname } from "next/navigation"
 
 import { getFioShort } from "@/Utils/helpers"
-import MobileBar from "@/Components/MobileBar"
 
 const Header = ({ isLanding = false, data }) => {
   const sesstion = useSession()
   const pathname = usePathname()
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [userData, setUserData] = useState(null)
-
   const fields = data?.section?.fields
-  if (!fields) return null
-
   const logo = fields.find((field) => field.name === "logo")?.value
   const menu = fields.find((field) => field.name === "Menu")?.value
 
@@ -29,7 +25,7 @@ const Header = ({ isLanding = false, data }) => {
     setMobileMenuOpen(!isMobileMenuOpen)
   }
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (
       sesstion?.status === "authenticated" &&
       sesstion?.data?.user?.full_name
@@ -41,6 +37,9 @@ const Header = ({ isLanding = false, data }) => {
       })
     }
   }, [sesstion])
+
+
+  if (!fields) return null
 
   return (
     <header

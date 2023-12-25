@@ -18,7 +18,7 @@ const variants = [
   { value: "19:00", bgColor: "#061641" },
 ]
 
-const chooseTime = () => {
+const ChooseTime = () => {
   const { data: sessionData } = useSession()
   const { gym } = useSelector((state) => state.booking)
   const [pricesVariants, setPricesVariants] = useState([])
@@ -64,4 +64,4 @@ const chooseTime = () => {
   )
 }
 
-export default chooseTime
+export default ChooseTime
