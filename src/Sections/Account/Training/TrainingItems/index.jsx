@@ -5,17 +5,27 @@ import BookingCard from "@/Components/Booking/BookingCard";
 import { useSelector, useDispatch } from "react-redux";
 import { updateBookingData, bookingSlice } from "@/redux/bookingSlice";
 
-import { sortVisitDates, canDelete } from "./helpers";
+import { sortVisitDates, canDelete, cancelBooking } from "./helpers";
 
-const TrainingItems = ({ items = [], archive, selectedDate }) => {
+const TrainingItems = ({
+  items = [],
+  archive,
+  selectedDate,
+  handleUpdateDate,
+  token,
+}) => {
   const dispatch = useDispatch();
 
   const [renderingItems, setRenderingItems] = useState([]);
 
-  const handleDeleteItem = (valueDate, valueTime) => {
+  const handleDeleteItem = (id) => {
     if (canDelete(renderingItems)) {
-      const data = sortVisitDates(renderingItems, valueDate, valueTime);
-      setRenderingItems(data);
+      cancelBooking(token, id).then((data) => {
+        if (data.data.status) {
+          console.log("asdsad");
+          handleUpdateDate();
+        }
+      });
     }
   };
 
@@ -40,6 +50,7 @@ const TrainingItems = ({ items = [], archive, selectedDate }) => {
         {renderingItems.map(({ id, date, time, gym }) => {
           return (
             <BookingCard
+              id={id}
               isSingle={archive}
               older={archive}
               onClickDelete={handleDeleteItem}
