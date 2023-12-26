@@ -48,13 +48,11 @@ const TrainersSlider = () => {
   const nextSlide = () => {
     slider.slideNext();
     setIndexActiveSlide(slider.activeIndex + 1);
-    console.log(activeIndexSlide);
   };
 
   const prevSlide = () => {
     slider.slidePrev();
     setIndexActiveSlide(slider.activeIndex + 1);
-    console.log(activeIndexSlide);
   };
 
   const onChangeSlide = (e) => {
