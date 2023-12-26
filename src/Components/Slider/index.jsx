@@ -1,20 +1,20 @@
-"use client"
+"use client";
 
-import { Swiper, SwiperSlide } from "swiper/react"
-import AdvantagesItem from "../Advantages/AdvantagesItem"
-import SectionTitle from "../SectionTitle"
-import SliderControls from "./SliderControls"
-import styles from "./Slider.module.scss"
-import "swiper/css"
-import { useRef, useState, useEffect, useLayoutEffect } from "react"
+import { Swiper, SwiperSlide } from "swiper/react";
+import AdvantagesItem from "../Advantages/AdvantagesItem";
+import SectionTitle from "../SectionTitle";
+import SliderControls from "./SliderControls";
+import styles from "./Slider.module.scss";
+import "swiper/css";
+import { useRef, useState, useEffect, useLayoutEffect } from "react";
 
-import { EffectCards } from "swiper/modules"
+import { EffectCards } from "swiper/modules";
 
 const sliderMobileSettings = {
   effect: "cards",
   centeredSlides: true,
   loop: true,
-}
+};
 
 const sliderPcSettings = {
   spaceBetween: 25,
@@ -32,39 +32,39 @@ const sliderPcSettings = {
     },
 
     1400: {
-      spaceBetween: 50,
+      spaceBetween: 40,
       slidesPerView: 3.2,
     },
   },
-}
+};
 
 const Slider = ({ title, items }) => {
-  const [slider, setSlider] = useState()
-  const [activeIndexSlide, setIndexActiveSlide] = useState(1)
-  const [sliderSettings, setSliderSettings] = useState(null)
+  const [slider, setSlider] = useState();
+  const [activeIndexSlide, setIndexActiveSlide] = useState(1);
+  const [sliderSettings, setSliderSettings] = useState(null);
 
   const nextSlide = () => {
-    slider.slideNext()
-    setIndexActiveSlide(slider.activeIndex + 1)
-  }
+    slider.slideNext();
+    setIndexActiveSlide(slider.activeIndex + 1);
+  };
 
   const prevSlide = () => {
-    slider.slidePrev()
-    setIndexActiveSlide(slider.activeIndex + 1)
-  }
+    slider.slidePrev();
+    setIndexActiveSlide(slider.activeIndex + 1);
+  };
 
   const onChangeSlide = (e) => {
-    setIndexActiveSlide(e.activeIndex + 1)
-  }
+    setIndexActiveSlide(e.activeIndex + 1);
+  };
 
   const handleInit = (e) => {
-    setSlider(e)
-  }
+    setSlider(e);
+  };
 
   useEffect(() => {
-    const isMobile = window.matchMedia("(max-width: 992px)").matches
-    setSliderSettings(isMobile ? sliderMobileSettings : sliderPcSettings)
-  }, [])
+    const isMobile = window.matchMedia("(max-width: 992px)").matches;
+    setSliderSettings(isMobile ? sliderMobileSettings : sliderPcSettings);
+  }, []);
 
   return (
     <>
@@ -95,7 +95,7 @@ const Slider = ({ title, items }) => {
         </Swiper>
       )}
     </>
-  )
-}
+  );
+};
 
-export default Slider
+export default Slider;

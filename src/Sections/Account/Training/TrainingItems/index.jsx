@@ -1,9 +1,23 @@
-import styles from "./TrainingItems.module.scss"
-import { useState, useEffect } from "react"
-import BookingCard from "@/Components/Booking/BookingCard"
+import styles from "./TrainingItems.module.scss";
+
+import { useState, useEffect } from "react";
+import BookingCard from "@/Components/Booking/BookingCard";
+import { useSelector, useDispatch } from "react-redux";
+import { updateBookingData, bookingSlice } from "@/redux/bookingSlice";
+
+import { sortVisitDates, canDelete } from "./helpers";
 
 const TrainingItems = ({ items = [], archive, selectedDate }) => {
-  const [renderingItems, setRenderingItems] = useState([])
+  const dispatch = useDispatch();
+
+  const [renderingItems, setRenderingItems] = useState([]);
+
+  const handleDeleteItem = (valueDate, valueTime) => {
+    if (canDelete(renderingItems)) {
+      const data = sortVisitDates(renderingItems, valueDate, valueTime);
+      setRenderingItems(data);
+    }
+  };
 
   useEffect(() => {
     if (selectedDate) {
@@ -13,12 +27,12 @@ const TrainingItems = ({ items = [], archive, selectedDate }) => {
           (a, b) =>
             new Date(`${a.date} ${a.time}`) - new Date(`${b.date} ${b.time}`)
         )
-        .map((training) => training)
-      setRenderingItems(filteredItems)
+        .map((training) => training);
+      setRenderingItems(filteredItems);
     } else {
-      setRenderingItems([])
+      setRenderingItems([]);
     }
-  }, [items, selectedDate])
+  }, [items, selectedDate]);
 
   return (
     <div className={styles["training-items"]}>
@@ -28,17 +42,18 @@ const TrainingItems = ({ items = [], archive, selectedDate }) => {
             <BookingCard
               isSingle={archive}
               older={archive}
+              onClickDelete={handleDeleteItem}
               key={id}
               date={date}
               time={time}
               gymTitle={gym?.name}
               address={gym?.address}
             />
-          )
+          );
         })}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default TrainingItems
+export default TrainingItems;

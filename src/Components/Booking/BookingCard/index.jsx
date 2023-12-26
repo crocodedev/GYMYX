@@ -1,5 +1,5 @@
-import { formatDate, formatTime } from "@/Utils/helpers"
-import styles from "./BookingCard.module.scss"
+import { formatDate, formatTime } from "@/Utils/helpers";
+import styles from "./BookingCard.module.scss";
 
 const BookingCard = ({
   isSingle,
@@ -11,8 +11,8 @@ const BookingCard = ({
   older = false,
 }) => {
   const handleClickRemove = () => {
-    onClickDelete(date, time)
-  }
+    onClickDelete(date, time);
+  };
 
   return (
     <div
@@ -39,7 +39,7 @@ const BookingCard = ({
         <p className={styles["booking-card__text"]}>{address}</p>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default BookingCard
+export default BookingCard;
