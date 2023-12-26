@@ -44,10 +44,6 @@
 }
 
 .container {
-  @include media-breakpoint-down(sm) {
-    max-width: $breakpoints-xs;
-  }
-
   @include media-breakpoint-between(sm, md) {
     max-width: $breakpoints-sm;
   }
@@ -74,10 +70,6 @@
 }
 
 .containerM {
-  @include media-breakpoint-down(sm) {
-    max-width: $breakpoints-xs;
-  }
-
   @include media-breakpoint-between(sm, md) {
     max-width: $breakpoints-sm;
   }
@@ -100,10 +92,6 @@
 }
 
 .containerXL {
-  @include media-breakpoint-down(sm) {
-    max-width: $breakpoints-xs;
-  }
-
   @include media-breakpoint-between(sm, md) {
     max-width: $breakpoints-sm;
   }
