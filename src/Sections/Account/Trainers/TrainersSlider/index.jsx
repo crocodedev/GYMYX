@@ -1,25 +1,24 @@
-"use client"
+"use client";
 
-import Container from "@/Components/Container"
-import styles from "./TrainersSlider.module.scss"
+import Container from "@/Components/Container";
+import styles from "./TrainersSlider.module.scss";
 import Loading from "@/Components/Loading";
-import { useSession } from "next-auth/react"
-import { Swiper, SwiperSlide } from "swiper/react"
-import "swiper/css"
-import { useState, useEffect } from "react"
+import { useSession } from "next-auth/react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import { useState, useEffect } from "react";
 
-import SliderControls from "@/Components/Slider/SliderControls"
-import SectionTitle from "@/Components/SectionTitle"
-import TrainersItem from "../TrainersItem"
+import SliderControls from "@/Components/Slider/SliderControls";
+import SectionTitle from "@/Components/SectionTitle";
+import TrainersItem from "../TrainersItem";
 import { getTrainersData } from "@/app/account/trainers/page";
 
 const TrainersSlider = () => {
   const [dataTrainers, setDataTrainers] = useState();
   const [slider, setSlider] = useState();
-  const [loading, setLoading] = useState(true);
-
   const [activeIndexSlide, setIndexActiveSlide] = useState(1);
   const [sliderSettings, setSliderSettings] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const sliderPcSettings = {
     spaceBetween: 25,
@@ -41,28 +40,30 @@ const TrainersSlider = () => {
 
       1400: {
         spaceBetween: 40,
-        slidesPerView: 2.55,
+        slidesPerView: 2.4,
       },
     },
-  }
+  };
 
   const nextSlide = () => {
-    slider.slideNext()
-    setIndexActiveSlide(slider.activeIndex + 1)
-  }
+    slider.slideNext();
+    setIndexActiveSlide(slider.activeIndex + 1);
+    console.log(activeIndexSlide);
+  };
 
   const prevSlide = () => {
-    slider.slidePrev()
-    setIndexActiveSlide(slider.activeIndex + 1)
-  }
+    slider.slidePrev();
+    setIndexActiveSlide(slider.activeIndex + 1);
+    console.log(activeIndexSlide);
+  };
 
   const onChangeSlide = (e) => {
-    setIndexActiveSlide(e.activeIndex + 1)
-  }
+    setIndexActiveSlide(e.activeIndex + 1);
+  };
 
   const handleInit = (e) => {
-    setSlider(e)
-  }
+    setSlider(e);
+  };
 
   useEffect(() => {
     const isMobile = window.matchMedia("(max-width: 992px)").matches;
@@ -74,18 +75,20 @@ const TrainersSlider = () => {
     });
   }, []);
 
-  if (loading) return <Loading />;
+  if (loading) return <Loading full_screen={true} />;
 
   return (
     <div className={styles["trainers-slider"]}>
       <div className={styles["trainers-slider__title-wrapper"]}>
         <SectionTitle title={"Тренеры"} />
-        <SliderControls
-          handleNextSlide={nextSlide}
-          handlePrevSlide={prevSlide}
-          activeSlide={activeIndexSlide}
-          countSlides={slider?.slides?.length}
-        />
+        {sliderSettings ? (
+          <SliderControls
+            handleNextSlide={nextSlide}
+            handlePrevSlide={prevSlide}
+            activeSlide={activeIndexSlide}
+            countSlides={slider?.slides?.length}
+          />
+        ) : null}
       </div>
 
       {sliderSettings ? (
@@ -121,4 +124,4 @@ const TrainersSlider = () => {
   );
 };
 
-export default TrainersSlider
+export default TrainersSlider;
