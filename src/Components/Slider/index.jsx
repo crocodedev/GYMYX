@@ -33,7 +33,7 @@ const sliderPcSettings = {
 
     1400: {
       spaceBetween: 40,
-      slidesPerView: 3.2,
+      slidesPerView: 3,
     },
   },
 };

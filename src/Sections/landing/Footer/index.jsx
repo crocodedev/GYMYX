@@ -1,18 +1,18 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import Container from "@/Components/Container"
-import styles from "./Footer.module.scss"
-import Image from "next/image"
+import Link from "next/link";
+import Container from "@/Components/Container";
+import styles from "./Footer.module.scss";
+import Image from "next/image";
 
 const Footer = ({ data }) => {
-  const fields = data.section.fields
+  const fields = data.section.fields;
 
-  const logo = fields.find((field) => field.name === "logo")?.value || ""
-  const socials = fields.find((field) => field.name === "socials")?.value || []
-  const nav = fields.find((field) => field.name === "nav")?.value || []
+  const logo = fields.find((field) => field.name === "logo")?.value || "";
+  const socials = fields.find((field) => field.name === "socials")?.value || [];
+  const nav = fields.find((field) => field.name === "nav")?.value || [];
   const phone_number =
-    fields.find((field) => field.name === "phone_number")?.value || ""
+    fields.find((field) => field.name === "phone_number")?.value || "";
 
   return (
     <footer className={styles.footer}>
@@ -33,10 +33,10 @@ const Footer = ({ data }) => {
               <div className={styles.footer__socials}>
                 {socials.map((item) => {
                   const url =
-                    item.find((field) => field.name === "url")?.value || ""
+                    item.find((field) => field.name === "url")?.value || "";
                   const image =
                     item.find((field) => field.name === "image")?.value?.src ||
-                    ""
+                    "";
                   return (
                     <Link
                       key={url}
@@ -51,7 +51,7 @@ const Footer = ({ data }) => {
                         alt="social logo"
                       />
                     </Link>
-                  )
+                  );
                 })}
               </div>
               <div className={styles.footer__copyright}>
@@ -63,9 +63,9 @@ const Footer = ({ data }) => {
               <div className={styles["footer__info-links"]}>
                 {nav.map((item) => {
                   const title =
-                    item.find((field) => field.name === "title")?.value || ""
+                    item.find((field) => field.name === "title")?.value || "";
                   const url =
-                    item.find((field) => field.name === "url")?.value || ""
+                    item.find((field) => field.name === "url")?.value || "";
                   return (
                     <Link
                       key={url}
@@ -74,7 +74,7 @@ const Footer = ({ data }) => {
                     >
                       {title}
                     </Link>
-                  )
+                  );
                 })}
               </div>
             </div>
@@ -82,7 +82,7 @@ const Footer = ({ data }) => {
         </Container>
       </div>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

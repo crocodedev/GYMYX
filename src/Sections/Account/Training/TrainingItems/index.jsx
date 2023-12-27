@@ -12,22 +12,12 @@ const TrainingItems = ({
   archive,
   selectedDate,
   handleUpdateDate,
+  handleShowDelete,
   token,
 }) => {
   const dispatch = useDispatch();
 
   const [renderingItems, setRenderingItems] = useState([]);
-
-  const handleDeleteItem = (id) => {
-    if (canDelete(renderingItems)) {
-      cancelBooking(token, id).then((data) => {
-        if (data.data.status) {
-          console.log("asdsad");
-          handleUpdateDate();
-        }
-      });
-    }
-  };
 
   useEffect(() => {
     if (selectedDate) {
@@ -44,6 +34,20 @@ const TrainingItems = ({
     }
   }, [items, selectedDate]);
 
+  // const handleShowDeleteFc = (id) => {
+  //   handleShowDelete(() => deleteTrainingItem(id));
+  // };
+
+  const deleteTrainingItem = (id) => {
+    if (canDelete(renderingItems)) {
+      cancelBooking(token, id).then((data) => {
+        if (data.data.status) {
+          handleUpdateDate();
+        }
+      });
+    }
+  };
+
   return (
     <div className={styles["training-items"]}>
       <div className={styles["training-items__list"]}>
@@ -53,7 +57,7 @@ const TrainingItems = ({
               id={id}
               isSingle={archive}
               older={archive}
-              onClickDelete={handleDeleteItem}
+              onClickDelete={deleteTrainingItem}
               key={id}
               date={date}
               time={time}

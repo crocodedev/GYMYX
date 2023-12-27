@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import styles from "./TrainingCalendar.module.scss"
-import { Calendar } from "primereact/calendar"
-import { addLocale } from "primereact/api"
-import "primereact/resources/themes/lara-light-cyan/theme.css"
+import styles from "./TrainingCalendar.module.scss";
+import { Calendar } from "primereact/calendar";
+import { addLocale } from "primereact/api";
+import "primereact/resources/themes/lara-light-cyan/theme.css";
 
 addLocale("ru", {
   firstDayOfWeek: 1,
@@ -49,13 +49,13 @@ addLocale("ru", {
   ],
   today: "Сегодня",
   clear: "Очистить",
-})
+});
 
 const TrainingCalendar = ({ onHandleChange, selectedDate, availableDates }) => {
   const handleChangeSelected = (e) => {
-    const value = e.value
-    onHandleChange(value)
-  }
+    const value = e.value;
+    onHandleChange(value);
+  };
 
   return (
     <div className={styles["training-calendar"]}>
@@ -70,7 +70,7 @@ const TrainingCalendar = ({ onHandleChange, selectedDate, availableDates }) => {
         />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default TrainingCalendar
+export default TrainingCalendar;

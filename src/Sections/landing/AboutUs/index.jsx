@@ -1,17 +1,17 @@
-import BorderLabel from "@/Components/BorderLabel"
-import Container from "@/Components/Container"
-import styles from "./AboutUs.module.scss"
-import AboutUsItem from "@/Components/AboutUs/AboutUsItem"
+import BorderLabel from "@/Components/BorderLabel";
+import Container from "@/Components/Container";
+import styles from "./AboutUs.module.scss";
+import AboutUsItem from "@/Components/AboutUs/AboutUsItem";
 
 const AboutUs = ({ alias, fields }) => {
-  const title = fields.find((item) => item.name === "title")
-  const list = fields.find((item) => item.name === "list")?.value || []
+  const title = fields.find((item) => item.name === "title");
+  const list = fields.find((item) => item.name === "list")?.value || [];
 
   return (
     <section id={alias} className={styles["about-us"]}>
-      <Container>
+      <Container size="XL">
         <div className={styles["about-us__wrapper"]}>
-          <BorderLabel label={"Кто мы ?"} />
+          <BorderLabel label={"кто мы ?"} />
           <h2 className={styles["about-us__title"]}>{title?.value}</h2>
           <div className={styles["about-us__content"]}>
             <BorderLabel label={"как это работает?"} />
@@ -28,7 +28,7 @@ const AboutUs = ({ alias, fields }) => {
         </div>
       </Container>
     </section>
-  )
-}
+  );
+};
 
-export default AboutUs
+export default AboutUs;

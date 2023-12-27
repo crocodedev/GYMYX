@@ -10,6 +10,8 @@ import TrainingCalendar from "@/Sections/Account/Training/TrainingCalendar";
 import TrainingItems from "@/Sections/Account/Training/TrainingItems";
 import Loading from "@/Components/Loading";
 import { formatDate } from "@/Utils/helpers";
+import Modal from "@/Components/Modal";
+import Button from "@/Components/Button";
 
 export const getTrainingData = async (token) => {
   const result = await fetch("/api/booking/get-bookings", {
@@ -43,25 +45,45 @@ const Training = () => {
   const [loading, setLoading] = useState(true);
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTab, setSelectedTab] = useState(0);
+  const [latestDataTrainings, setLatestDataTrainings] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     updateDate();
-  }, [sessionData]);
+  }, [sessionData, sessionData]);
 
   useEffect(() => {
     const dataTemp = getDataForPeriod(selectedTab, allTrainingsDates);
-    setSelectedDate(dataTemp ? dataTemp[0] : null);
+    let targetDate = null;
+    if (!!latestDataTrainings.length && latestDataTrainings.length > 1) {
+      targetDate = latestDataTrainings[0];
+    } else {
+      targetDate = dataTemp[0];
+    }
+    setSelectedDate(targetDate);
     setSortedTrainingsDates(dataTemp || []);
   }, [selectedTab, allTrainingsDates]);
 
   const updateDate = () => {
     if (!sessionData?.user?.accessToken) return;
+    const result = sortedTrainingsDates.filter(
+      ({ date }) => date === selectedDate.date
+    );
 
+    setLatestDataTrainings(result);
     getTrainingData(sessionData?.user?.accessToken).then(({ data = [] }) => {
       setAllTrainingsDates(data);
-      setSelectedDate(data[0]);
       setLoading(false);
     });
+  };
+
+  const handleChangeSelectedDate = (value) => {
+    const selectedDateTemp = allTrainingsDates.filter(
+      ({ date }) => formatDate(date) === formatDate(value)
+    );
+    if (!selectedDateTemp?.length) return;
+
+    setSelectedDate(selectedDateTemp[0]);
   };
 
   const getDataForPeriod = (tab_id, data) => {
@@ -81,44 +103,71 @@ const Training = () => {
     return returnedData;
   };
 
-  const handleChangeSelectedDate = (value) => {
-    const selectedDateTemp = allTrainingsDates.filter(
-      ({ date }) => formatDate(date) === formatDate(value)
-    );
-
-    if (!selectedDateTemp?.length) return;
-    setSelectedDate(selectedDateTemp[0]);
-  };
-
   const handleChangeSelectedTab = (index) => {
     setSelectedTab(index);
+  };
+
+  const handleShow = () => {
+    setShowModal((prev) => !prev);
+  };
+
+  const handleShowDelete = (callbackFc) => {
+    if (typeof callbackFc === "function") {
+      callbackFc();
+    }
+    setShowModal((prev) => !prev);
   };
 
   if (loading) return <Loading full_screen={true} />;
 
   return (
-    <div className="account-page-wrapper">
-      <PageHeading title={"Мои тренировки"} />
-      <NavigationTabs
-        items={TABS}
-        selectedTab={selectedTab}
-        handleChangeTab={handleChangeSelectedTab}
-      />
-      <TrainingContent>
-        <TrainingCalendar
-          selectedDate={selectedDate}
-          onHandleChange={handleChangeSelectedDate}
-          availableDates={sortedTrainingsDates}
+    <>
+      {showModal && (
+        <Modal
+          handleClose={handleShow}
+          text={"Вы точно хотите отменить тренировку?"}
+        >
+          <Button
+            onClick={handleShowDelete}
+            fullSize={true}
+            size="l"
+            label="Да"
+            variant="black"
+          />
+          <Button
+            onClick={handleShow}
+            fullSize={true}
+            size="l"
+            label="Нет"
+            variant="blue"
+          />
+        </Modal>
+      )}
+      <div className="account-page-wrapper">
+        <PageHeading title={"Мои тренировки"} />
+        <NavigationTabs
+          items={TABS}
+          selectedTab={selectedTab}
+          handleChangeTab={handleChangeSelectedTab}
         />
-        <TrainingItems
-          token={sessionData?.user?.accessToken}
-          handleUpdateDate={updateDate}
-          selectedDate={selectedDate}
-          archive={selectedTab === 1}
-          items={sortedTrainingsDates}
-        />
-      </TrainingContent>
-    </div>
+        <TrainingContent>
+          <TrainingCalendar
+            selectedDate={selectedDate}
+            onHandleChange={handleChangeSelectedDate}
+            availableDates={sortedTrainingsDates}
+          />
+          <TrainingItems
+            token={sessionData?.user?.accessToken}
+            handleUpdateDate={updateDate}
+            handleShowDelete={handleShowDelete}
+            handleShowModal={handleShow}
+            selectedDate={selectedDate}
+            archive={selectedTab === 1}
+            items={sortedTrainingsDates}
+          />
+        </TrainingContent>
+      </div>
+    </>
   );
 };
 

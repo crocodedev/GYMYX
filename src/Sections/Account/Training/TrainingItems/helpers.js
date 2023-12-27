@@ -23,21 +23,6 @@ export function canDelete(arr) {
   return status;
 }
 
-export async function cancelBooking(token, id) {
-  const result = await fetch("/api/booking/cancel-booking", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ token, id }),
-  });
-
-  const response = await result.json();
-  if (!response.error) {
-    return response;
-  }
-}
-
 export function prepareDataForBooking(arr) {
   const result = {};
 
@@ -52,4 +37,19 @@ export function prepareDataForBooking(arr) {
   });
 
   return result;
+}
+
+export async function cancelBooking(token, id) {
+  const result = await fetch("/api/booking/cancel-booking", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ token, id }),
+  });
+
+  const response = await result.json();
+  if (!response.error) {
+    return response;
+  }
 }

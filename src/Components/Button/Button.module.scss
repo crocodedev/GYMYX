@@ -11,7 +11,6 @@
   align-items: center;
   border: none;
   font-family: inherit;
-  transition: 0.3s ease-out;
 
   &.full-size {
     width: 100%;
@@ -69,12 +68,14 @@
       linear-gradient(90deg, #294ae7 100%, #0d2dc8 100%)
     );
     color: white;
+    transition: all 0.3s ease;
 
     &:hover {
       background: var(
         --blue-base-gradient,
         linear-gradient(90deg, #5b74e9 100%, #4860d4 100%)
       );
+      transition: 0.3s ease;
     }
 
     &:active {
@@ -82,6 +83,7 @@
         --blue-base-gradient,
         linear-gradient(90deg, #8e9eed 100%, #8191df 100%)
       );
+      transition: 0.3s ease;
     }
   }
 
