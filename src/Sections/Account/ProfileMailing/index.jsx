@@ -35,14 +35,12 @@ const ProfileMailing = () => {
       }
     });
 
-    console.log(value);
     changeSubscribe(sessionData?.user?.accessToken, "phone").then((data) => {
       if (data.data.success) {
+        // console.log(data.data);
       }
     });
   };
-
-  console.log(activeVariant);
 
   return (
     <section className={styles["profile-mailing"]}>

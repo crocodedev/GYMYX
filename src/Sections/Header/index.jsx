@@ -1,29 +1,29 @@
-"use client"
+"use client";
 
-import { Link as ScrollLink } from "react-scroll"
-import { useState, useEffect } from "react"
-import styles from "./Header.module.scss"
-import Link from "next/link"
-import Button from "@/Components/Button"
-import MobileMenu from "@/Components/Header/MobileMenu"
-import { useSession } from "next-auth/react"
-import Image from "next/image"
-import { usePathname } from "next/navigation"
+import { Link as ScrollLink } from "react-scroll";
+import { useState, useEffect } from "react";
+import styles from "./Header.module.scss";
+import Link from "next/link";
+import Button from "@/Components/Button";
+import MobileMenu from "@/Components/Header/MobileMenu";
+import { useSession } from "next-auth/react";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
 
-import { getFioShort } from "@/Utils/helpers"
+import { getFioShort } from "@/Utils/helpers";
 
 const Header = ({ isLanding = false, data }) => {
-  const sesstion = useSession()
-  const pathname = usePathname()
-  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [userData, setUserData] = useState(null)
-  const fields = data?.section?.fields
-  const logo = fields.find((field) => field.name === "logo")?.value
-  const menu = fields.find((field) => field.name === "Menu")?.value
+  const sesstion = useSession();
+  const pathname = usePathname();
+  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [userData, setUserData] = useState(null);
+  const fields = data?.section?.fields;
+  const logo = fields.find((field) => field.name === "logo")?.value;
+  const menu = fields.find((field) => field.name === "Menu")?.value;
 
   const handleMobileMenuToggle = () => {
-    setMobileMenuOpen(!isMobileMenuOpen)
-  }
+    setMobileMenuOpen(!isMobileMenuOpen);
+  };
 
   useEffect(() => {
     if (
@@ -34,12 +34,11 @@ const Header = ({ isLanding = false, data }) => {
         isLogined: true,
         fio: getFioShort(sesstion?.data?.user?.full_name),
         image: sesstion?.data?.user?.image,
-      })
+      });
     }
-  }, [sesstion])
+  }, [sesstion]);
 
-
-  if (!fields) return null
+  if (!fields) return null;
 
   return (
     <header
@@ -52,13 +51,13 @@ const Header = ({ isLanding = false, data }) => {
         <div className={styles.header__nav}>
           {menu.slice(0, 5).map((item) => {
             const title =
-              item.find((field) => field.name === "title")?.value || ""
+              item.find((field) => field.name === "title")?.value || "";
 
             const handle =
-              item.find((field) => field.name === "handle_to")?.value || ""
+              item.find((field) => field.name === "handle_to")?.value || "";
 
             const link =
-              item.find((field) => field.name === "link_to")?.value || ""
+              item.find((field) => field.name === "link_to")?.value || "";
 
             if (handle !== "#") {
               return (
@@ -72,7 +71,7 @@ const Header = ({ isLanding = false, data }) => {
                 >
                   {title}
                 </ScrollLink>
-              )
+              );
             }
             return (
               <Link
@@ -85,11 +84,15 @@ const Header = ({ isLanding = false, data }) => {
               >
                 {title}
               </Link>
-            )
+            );
           })}
         </div>
         <div className={styles.header__controls}>
-          {isLanding && <Button label={"Записаться"} />}
+          {isLanding && (
+            <Link href={"/account/login"}>
+              <Button label={"Записаться"} />
+            </Link>
+          )}
           {!isLanding && (
             <>
               {!userData?.isLogined && (
@@ -142,7 +145,7 @@ const Header = ({ isLanding = false, data }) => {
         isShow={isMobileMenuOpen}
       />
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

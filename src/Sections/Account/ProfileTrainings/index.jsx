@@ -27,8 +27,6 @@ const ProfileTrainings = () => {
         return new Date(`${date}T${time}`);
       }
 
-      console.log(data);
-
       if (data) {
         const sortedData = data.sort((a, b) => {
           const dateA = parseDateTime(a.date, a.time);
@@ -68,7 +66,6 @@ const ProfileTrainings = () => {
   };
 
   const handleDeleteItem = (id) => {
-    console.log(closestTraining.id);
     cancelBooking(sessionData?.user?.accessToken, id).then((data) => {
       if (data.data.status) {
         updateData();
