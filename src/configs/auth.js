@@ -1,10 +1,10 @@
-import CredentialsProvider from "next-auth/providers/credentials"
+import CredentialsProvider from "next-auth/providers/credentials";
 
 export const authConfig = {
   providers: [
     CredentialsProvider({
       authorize: async (credentials) => {
-        const { token } = credentials
+        const { token } = credentials;
 
         const response = await fetch("https://gymyx.cro.codes/api/users", {
           method: "GET",
@@ -12,19 +12,19 @@ export const authConfig = {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-        })
+        });
 
         if (!response.ok) {
-          return null
+          return null;
         }
 
-        const result = await response.json()
+        const result = await response.json();
         const user = {
           ...result.data,
           token: token,
-        }
+        };
 
-        return user
+        return user;
       },
     }),
   ],
@@ -43,7 +43,7 @@ export const authConfig = {
         return {
           ...token,
           ...session,
-        }
+        };
       }
       if (account && user) {
         return {
@@ -55,22 +55,24 @@ export const authConfig = {
           image: user?.image || null,
           is_active_enter_code: user?.is_active_enter_code || null,
           enter_code: user?.enter_code || null,
-        }
+          subscriptions: user?.subscriptions || null,
+        };
       }
 
-      return token
+      return token;
     },
 
     async session({ session, token }) {
-      session.user.accessToken = token.accessToken
-      session.user.full_name = token?.full_name || null
-      session.user.phone = token?.phone || null
-      session.user.email = token?.email || null
-      session.user.image = token?.image || null
-      session.user.is_active_enter_code = token?.is_active_enter_code || null
-      session.user.enter_code = token?.enter_code || null
+      session.user.accessToken = token.accessToken;
+      session.user.full_name = token?.full_name || null;
+      session.user.phone = token?.phone || null;
+      session.user.email = token?.email || null;
+      session.user.image = token?.image || null;
+      session.user.is_active_enter_code = token?.is_active_enter_code || null;
+      session.user.enter_code = token?.enter_code || null;
+      session.user.subscriptions = token?.subscriptions || null;
 
-      return session
+      return session;
     },
   },
-}
+};

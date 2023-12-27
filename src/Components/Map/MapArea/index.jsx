@@ -1,44 +1,44 @@
-"use client"
+"use client";
 
-import { useRef, useState, useEffect } from "react"
-import { YMaps, Map, Placemark } from "@pbe/react-yandex-maps"
+import { useRef, useState, useEffect } from "react";
+import { YMaps, Map, Placemark } from "@pbe/react-yandex-maps";
 
-import { createSvgMarker, mapStyle, mapOptions, getCoords } from "../helpers"
-import styles from "./MapArea.module.scss"
+import { createSvgMarker, mapStyle, mapOptions, getCoords } from "../helpers";
+import styles from "./MapArea.module.scss";
 
 const MapArea = ({ Placemarks, currentPlacemark }) => {
-  const mapRef = useRef(null)
+  const mapRef = useRef(null);
 
   const handleZoomIn = () => {
-    const map = mapRef.current
+    const map = mapRef.current;
     if (map) {
-      const currentZoom = map.getZoom()
-      map.setZoom(currentZoom + 1)
+      const currentZoom = map.getZoom();
+      map.setZoom(currentZoom + 1);
     }
-  }
+  };
 
   const handleZoomOut = () => {
-    const map = mapRef.current
+    const map = mapRef.current;
     if (map) {
-      const currentZoom = map.getZoom()
-      map.setZoom(currentZoom - 1)
+      const currentZoom = map.getZoom();
+      map.setZoom(currentZoom - 1);
     }
-  }
+  };
 
   const handleGeolocation = () => {
-    const map = mapRef.current
+    const map = mapRef.current;
     if (map && navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
-        const { latitude, longitude } = position.coords
-        map.panTo([latitude, longitude], { flying: true })
-      })
+        const { latitude, longitude } = position.coords;
+        map.panTo([latitude, longitude], { flying: true });
+      });
     }
-  }
+  };
 
   useEffect(() => {
-    const map = mapRef.current
-    map?.panTo(getCoords(currentPlacemark?.coords), { flying: true })
-  }, [currentPlacemark])
+    const map = mapRef.current;
+    map?.panTo(getCoords(currentPlacemark?.coords), { flying: true });
+  }, [currentPlacemark]);
 
   return (
     <div className={styles["map-area"]}>
@@ -51,8 +51,8 @@ const MapArea = ({ Placemarks, currentPlacemark }) => {
             zoom: 15,
           }}
           instanceRef={(map) => {
-            map?.behaviors.disable("scrollZoom")
-            mapRef.current = map
+            map?.behaviors.disable("scrollZoom");
+            mapRef.current = map;
           }}
         >
           {Placemarks?.map(({ id, coords }) => (
@@ -98,7 +98,7 @@ const MapArea = ({ Placemarks, currentPlacemark }) => {
         </button>
       </YMaps>
     </div>
-  )
-}
+  );
+};
 
-export default MapArea
+export default MapArea;

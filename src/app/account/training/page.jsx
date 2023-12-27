@@ -1,15 +1,17 @@
-"use client"
+"use client";
 
-import { useSession } from "next-auth/react"
-import { useEffect, useState } from "react"
+import { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
 
-import PageHeading from "@/Sections/Account/PageHeading"
-import NavigationTabs from "@/Sections/Account/NavigationTabs"
-import TrainingContent from "@/Sections/Account/Training/TrainingContent"
-import TrainingCalendar from "@/Sections/Account/Training/TrainingCalendar"
-import TrainingItems from "@/Sections/Account/Training/TrainingItems"
-import Loading from "@/Components/Loading"
-import { formatDate } from "@/Utils/helpers"
+import PageHeading from "@/Sections/Account/PageHeading";
+import NavigationTabs from "@/Sections/Account/NavigationTabs";
+import TrainingContent from "@/Sections/Account/Training/TrainingContent";
+import TrainingCalendar from "@/Sections/Account/Training/TrainingCalendar";
+import TrainingItems from "@/Sections/Account/Training/TrainingItems";
+import Loading from "@/Components/Loading";
+import { formatDate } from "@/Utils/helpers";
+import Modal from "@/Components/Modal";
+import Button from "@/Components/Button";
 
 export const getTrainingData = async (token) => {
   const result = await fetch("/api/booking/get-bookings", {
@@ -18,102 +20,155 @@ export const getTrainingData = async (token) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ token }),
-  })
+  });
 
-  const response = await result.json()
+  const response = await result.json();
   if (!response.error) {
-    return response
+    return response;
   }
-}
+};
 
 const TABS = [
   { id: 0, title: "Предстоящие" },
   { id: 1, title: "Архив" },
-]
+];
 
 const concateDateTime = (date, time) => {
-  const fullDateTimeStr = `${date}T${time}`
-  return new Date(fullDateTimeStr)
-}
+  const fullDateTimeStr = `${date}T${time}`;
+  return new Date(fullDateTimeStr);
+};
 
 const Training = () => {
-  const { data: sessionData } = useSession()
-  const [allTrainingsDates, setAllTrainingsDates] = useState([])
-  const [sortedTrainingsDates, setSortedTrainingsDates] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [selectedDate, setSelectedDate] = useState(null)
-  const [selectedTab, setSelectedTab] = useState(0)
+  const { data: sessionData } = useSession();
+  const [allTrainingsDates, setAllTrainingsDates] = useState([]);
+  const [sortedTrainingsDates, setSortedTrainingsDates] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedTab, setSelectedTab] = useState(0);
+  const [latestDataTrainings, setLatestDataTrainings] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    if (!sessionData?.user?.accessToken) return
-
-    getTrainingData(sessionData?.user?.accessToken).then(({ data = [] }) => {
-      setAllTrainingsDates(data)
-      setSelectedDate(data[0])
-      setLoading(false)
-    })
-  }, [sessionData])
+    updateDate();
+  }, [sessionData, sessionData]);
 
   useEffect(() => {
-    const dataTemp = getDataForPeriod(selectedTab, allTrainingsDates)
-    setSelectedDate(dataTemp ? dataTemp[0] : null)
-    setSortedTrainingsDates(dataTemp || [])
-  }, [selectedTab, allTrainingsDates])
-
-  const getDataForPeriod = (tab_id, data) => {
-    let returnedData = []
-    if (tab_id === 0) {
-      //ПРЕДСТОЯЩИЕ
-      returnedData = data.filter(
-        ({ date, time }) => concateDateTime(date, time) >= new Date()
-      )
+    const dataTemp = getDataForPeriod(selectedTab, allTrainingsDates);
+    let targetDate = null;
+    if (!!latestDataTrainings.length && latestDataTrainings.length > 1) {
+      targetDate = latestDataTrainings[0];
     } else {
-      //АРХИВ
-      returnedData = data.filter(
-        ({ date, time }) => concateDateTime(date, time) < new Date()
-      )
+      targetDate = dataTemp[0];
     }
+    setSelectedDate(targetDate);
+    setSortedTrainingsDates(dataTemp || []);
+  }, [selectedTab, allTrainingsDates]);
 
-    return returnedData
-  }
+  const updateDate = () => {
+    if (!sessionData?.user?.accessToken) return;
+    const result = sortedTrainingsDates.filter(
+      ({ date }) => date === selectedDate.date
+    );
+
+    setLatestDataTrainings(result);
+    getTrainingData(sessionData?.user?.accessToken).then(({ data = [] }) => {
+      setAllTrainingsDates(data);
+      setLoading(false);
+    });
+  };
 
   const handleChangeSelectedDate = (value) => {
     const selectedDateTemp = allTrainingsDates.filter(
       ({ date }) => formatDate(date) === formatDate(value)
-    )
+    );
+    if (!selectedDateTemp?.length) return;
 
-    if (!selectedDateTemp?.length) return
-    setSelectedDate(selectedDateTemp[0])
-  }
+    setSelectedDate(selectedDateTemp[0]);
+  };
+
+  const getDataForPeriod = (tab_id, data) => {
+    let returnedData = [];
+    if (tab_id === 0) {
+      //ПРЕДСТОЯЩИЕ
+      returnedData = data.filter(
+        ({ date, time }) => concateDateTime(date, time) >= new Date()
+      );
+    } else {
+      //АРХИВ
+      returnedData = data.filter(
+        ({ date, time }) => concateDateTime(date, time) < new Date()
+      );
+    }
+
+    return returnedData;
+  };
 
   const handleChangeSelectedTab = (index) => {
-    setSelectedTab(index)
-  }
+    setSelectedTab(index);
+  };
 
-  if (loading) return <Loading full_screen={true} />
+  const handleShow = () => {
+    setShowModal((prev) => !prev);
+  };
+
+  const handleShowDelete = (callbackFc) => {
+    if (typeof callbackFc === "function") {
+      callbackFc();
+    }
+    setShowModal((prev) => !prev);
+  };
+
+  if (loading) return <Loading full_screen={true} />;
 
   return (
-    <div className="account-page-wrapper">
-      <PageHeading title={"Мои тренировки"} />
-      <NavigationTabs
-        items={TABS}
-        selectedTab={selectedTab}
-        handleChangeTab={handleChangeSelectedTab}
-      />
-      <TrainingContent>
-        <TrainingCalendar
-          selectedDate={selectedDate}
-          onHandleChange={handleChangeSelectedDate}
-          availableDates={sortedTrainingsDates}
+    <>
+      {showModal && (
+        <Modal
+          handleClose={handleShow}
+          text={"Вы точно хотите отменить тренировку?"}
+        >
+          <Button
+            onClick={handleShowDelete}
+            fullSize={true}
+            size="l"
+            label="Да"
+            variant="black"
+          />
+          <Button
+            onClick={handleShow}
+            fullSize={true}
+            size="l"
+            label="Нет"
+            variant="blue"
+          />
+        </Modal>
+      )}
+      <div className="account-page-wrapper">
+        <PageHeading title={"Мои тренировки"} />
+        <NavigationTabs
+          items={TABS}
+          selectedTab={selectedTab}
+          handleChangeTab={handleChangeSelectedTab}
         />
-        <TrainingItems
-          selectedDate={selectedDate}
-          archive={selectedTab === 1}
-          items={sortedTrainingsDates}
-        />
-      </TrainingContent>
-    </div>
-  )
-}
+        <TrainingContent>
+          <TrainingCalendar
+            selectedDate={selectedDate}
+            onHandleChange={handleChangeSelectedDate}
+            availableDates={sortedTrainingsDates}
+          />
+          <TrainingItems
+            token={sessionData?.user?.accessToken}
+            handleUpdateDate={updateDate}
+            handleShowDelete={handleShowDelete}
+            handleShowModal={handleShow}
+            selectedDate={selectedDate}
+            archive={selectedTab === 1}
+            items={sortedTrainingsDates}
+          />
+        </TrainingContent>
+      </div>
+    </>
+  );
+};
 
-export default Training
+export default Training;

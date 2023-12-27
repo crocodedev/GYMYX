@@ -23,16 +23,6 @@
   }
 }
 
-.conatinerXL {
-  @include media-breakpoint-down(xl) {
-    --spacing-container: 30px;
-  }
-
-  @include media-breakpoint-up(xl) {
-    --spacing-container: 80px;
-  }
-}
-
 .containerM {
   @include media-breakpoint-down(xl) {
     --spacing-container: 15px;
@@ -40,6 +30,16 @@
 
   @include media-breakpoint-up(xl) {
     --spacing-container: 80px;
+  }
+}
+
+.containerXL {
+  @include media-breakpoint-down(xl) {
+    --spacing-container: 26px;
+  }
+
+  @include media-breakpoint-up(xl) {
+    --spacing-container: 34px;
   }
 }
 
@@ -113,6 +113,7 @@
   }
 
   @include media-breakpoint-up(xxxl) {
-    max-width: $breakpoints-xxxl + 100;
+    max-width: $breakpoints-xxxl + 120;
+    //1760
   }
 }

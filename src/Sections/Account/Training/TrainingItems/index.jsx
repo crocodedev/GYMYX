@@ -1,9 +1,23 @@
-import styles from "./TrainingItems.module.scss"
-import { useState, useEffect } from "react"
-import BookingCard from "@/Components/Booking/BookingCard"
+import styles from "./TrainingItems.module.scss";
 
-const TrainingItems = ({ items = [], archive, selectedDate }) => {
-  const [renderingItems, setRenderingItems] = useState([])
+import { useState, useEffect } from "react";
+import BookingCard from "@/Components/Booking/BookingCard";
+import { useSelector, useDispatch } from "react-redux";
+import { updateBookingData, bookingSlice } from "@/redux/bookingSlice";
+
+import { sortVisitDates, canDelete, cancelBooking } from "./helpers";
+
+const TrainingItems = ({
+  items = [],
+  archive,
+  selectedDate,
+  handleUpdateDate,
+  handleShowDelete,
+  token,
+}) => {
+  const dispatch = useDispatch();
+
+  const [renderingItems, setRenderingItems] = useState([]);
 
   useEffect(() => {
     if (selectedDate) {
@@ -13,12 +27,26 @@ const TrainingItems = ({ items = [], archive, selectedDate }) => {
           (a, b) =>
             new Date(`${a.date} ${a.time}`) - new Date(`${b.date} ${b.time}`)
         )
-        .map((training) => training)
-      setRenderingItems(filteredItems)
+        .map((training) => training);
+      setRenderingItems(filteredItems);
     } else {
-      setRenderingItems([])
+      setRenderingItems([]);
     }
-  }, [items, selectedDate])
+  }, [items, selectedDate]);
+
+  // const handleShowDeleteFc = (id) => {
+  //   handleShowDelete(() => deleteTrainingItem(id));
+  // };
+
+  const deleteTrainingItem = (id) => {
+    if (canDelete(renderingItems)) {
+      cancelBooking(token, id).then((data) => {
+        if (data.data.status) {
+          handleUpdateDate();
+        }
+      });
+    }
+  };
 
   return (
     <div className={styles["training-items"]}>
@@ -26,19 +54,21 @@ const TrainingItems = ({ items = [], archive, selectedDate }) => {
         {renderingItems.map(({ id, date, time, gym }) => {
           return (
             <BookingCard
+              id={id}
               isSingle={archive}
               older={archive}
+              onClickDelete={deleteTrainingItem}
               key={id}
               date={date}
               time={time}
               gymTitle={gym?.name}
               address={gym?.address}
             />
-          )
+          );
         })}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default TrainingItems
+export default TrainingItems;
