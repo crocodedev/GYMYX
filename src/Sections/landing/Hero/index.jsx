@@ -1,17 +1,18 @@
-"use client"
+"use client";
 
-import Image from "next/image"
+import Image from "next/image";
 
-import Button from "@/Components/Button"
-import Container from "@/Components/Container"
-import styles from "./Hero.module.scss"
+import Button from "@/Components/Button";
+import Container from "@/Components/Container";
+import styles from "./Hero.module.scss";
+import Link from "next/link";
 
 const Hero = ({ alias, fields }) => {
-  const image = fields.find((item) => item.name === "image")
-  const image_mobile = fields.find((item) => item.name === "image_mobile")
-  const title = fields.find((item) => item.name === "title")
-  const subtitle = fields.find((item) => item.name === "subtitle")
-  const price = fields.find((item) => item.name === "price")
+  const image = fields.find((item) => item.name === "image");
+  const image_mobile = fields.find((item) => item.name === "image_mobile");
+  const title = fields.find((item) => item.name === "title");
+  const subtitle = fields.find((item) => item.name === "subtitle");
+  const price = fields.find((item) => item.name === "price");
 
   return (
     <section id={alias} className={styles.hero}>
@@ -39,13 +40,15 @@ const Hero = ({ alias, fields }) => {
                   <span className={styles["hero__price-prefix"]}>₽/час</span>
                 </span>
               </p>
-              <Button size="l" variant="black" label={"Записаться"} />
+              <Link href={"/account/login"}>
+                <Button size="l" variant="black" label={"Записаться"} />
+              </Link>
             </div>
           </div>
         </Container>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Hero
+export default Hero;

@@ -1,5 +1,6 @@
-import Button from "@/Components/Button"
-import styles from "./PriceLabel.module.scss"
+import Button from "@/Components/Button";
+import styles from "./PriceLabel.module.scss";
+import Link from "next/link";
 
 const PriceLabel = ({ price }) => {
   return (
@@ -7,10 +8,12 @@ const PriceLabel = ({ price }) => {
       <p className={styles["price-label__text"]}>Первая пробная тренировка</p>
       <div className={styles["price-label__bottom"]}>
         <p className={styles["price-label__value"]}>{price} ₽/час</p>
-        <Button size="m" variant="black" label={"Записаться"} />
+        <Link href={"/account/login"}>
+          <Button size="m" variant="black" label={"Записаться"} />
+        </Link>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default PriceLabel
+export default PriceLabel;
