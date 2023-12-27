@@ -1,17 +1,17 @@
-"use client"
+"use client";
 
-import Container from "@/Components/Container"
-import styles from "./ChooseHealth.module.scss"
-import Image from "next/image"
+import Container from "@/Components/Container";
+import styles from "./ChooseHealth.module.scss";
+import Image from "next/image";
 
 const ChooseHealth = ({ alias, fields }) => {
-  const image = fields.find((item) => item.name === "image")?.value?.src || ""
+  const image = fields.find((item) => item.name === "image")?.value?.src || "";
   const image_mobile =
-    fields.find((item) => item.name === "image_mobile")?.value?.src || ""
+    fields.find((item) => item.name === "image_mobile")?.value?.src || "";
 
   return (
     <section id={alias} className={styles["choose-health"]}>
-      <Container>
+      <Container size="XL">
         <picture className={styles["choose-health__image"]}>
           <source media="(max-width: 992px)" srcSet={image_mobile} />
           <Image
@@ -24,7 +24,7 @@ const ChooseHealth = ({ alias, fields }) => {
         </picture>
       </Container>
     </section>
-  )
-}
+  );
+};
 
-export default ChooseHealth
+export default ChooseHealth;

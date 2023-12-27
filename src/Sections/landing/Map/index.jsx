@@ -1,46 +1,46 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
+import { useState, useEffect } from "react";
 
-import Button from "@/Components/Button"
-import Container from "@/Components/Container"
-import Select from "@/Components/Select"
-import styles from "./Map.module.scss"
-import MapArea from "@/Components/Map/MapArea"
+import Button from "@/Components/Button";
+import Container from "@/Components/Container";
+import Select from "@/Components/Select";
+import styles from "./Map.module.scss";
+import MapArea from "@/Components/Map/MapArea";
 
 const preparePlacemarks = (items) => {
   return items.map((item, index) => {
-    const title = item.find((field) => field.name === "title")?.value || ""
+    const title = item.find((field) => field.name === "title")?.value || "";
     const subtitle =
-      item.find((field) => field.name === "subtitle")?.value || ""
-    const address = item.find((field) => field.name === "address")?.value || ""
-    const coords = item.find((field) => field.name === "coords")?.value || ""
+      item.find((field) => field.name === "subtitle")?.value || "";
+    const address = item.find((field) => field.name === "address")?.value || "";
+    const coords = item.find((field) => field.name === "coords")?.value || "";
     return {
       id: index,
       coords: coords,
       title: title,
       subtitle: subtitle,
       address: address,
-    }
-  })
-}
+    };
+  });
+};
 
 const Map = ({ alias, fields }) => {
-  const [placemarks, setPlacemarks] = useState([])
-  const [currentPlacemark, setCurrentPlacemark] = useState({})
+  const [placemarks, setPlacemarks] = useState([]);
+  const [currentPlacemark, setCurrentPlacemark] = useState({});
 
   useEffect(() => {
-    const items = fields.find((item) => item.name === "items")?.value || []
-    const placemarksTemp = preparePlacemarks(items)
-    setPlacemarks(placemarksTemp)
-    setCurrentPlacemark(placemarksTemp[0])
-  }, [])
+    const items = fields.find((item) => item.name === "items")?.value || [];
+    const placemarksTemp = preparePlacemarks(items);
+    setPlacemarks(placemarksTemp);
+    setCurrentPlacemark(placemarksTemp[0]);
+  }, []);
 
-  if (!placemarks.length) return
+  if (!placemarks.length) return;
 
   return (
     <section id={alias} className={styles.map}>
-      <Container>
+      <Container size="XL">
         <div className={styles.map__wrapper}>
           <MapArea
             currentPlacemark={currentPlacemark}
@@ -66,7 +66,7 @@ const Map = ({ alias, fields }) => {
         </div>
       </Container>
     </section>
-  )
-}
+  );
+};
 
-export default Map
+export default Map;

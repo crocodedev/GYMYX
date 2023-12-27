@@ -3,7 +3,7 @@
 .footer {
   position: relative;
   margin: 0 auto;
-  max-width: 1827px;
+  max-width: calc(1827px + calc(48px * 2));
   width: 100%;
 
   @include media-breakpoint-down(lg) {
