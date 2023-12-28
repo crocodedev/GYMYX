@@ -1,7 +1,7 @@
 "use client";
 
 import { useSession } from "next-auth/react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import PageHeading from "@/Sections/Account/PageHeading";
 import NavigationTabs from "@/Sections/Account/NavigationTabs";
@@ -12,6 +12,11 @@ import Loading from "@/Components/Loading";
 import { formatDate } from "@/Utils/helpers";
 import Modal from "@/Components/Modal";
 import Button from "@/Components/Button";
+
+import {
+  cancelBooking,
+  canDelete,
+} from "@/Sections/Account/ProfileTrainings/helpers";
 
 export const getTrainingData = async (token) => {
   const result = await fetch("/api/booking/get-bookings", {
@@ -47,6 +52,8 @@ const Training = () => {
   const [selectedTab, setSelectedTab] = useState(0);
   const [latestDataTrainings, setLatestDataTrainings] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [currentItemId, setCurrentItemId] = useState(null);
+  const [loadingDelete, setLoadingDelete] = useState(false);
 
   useEffect(() => {
     updateDate();
@@ -107,15 +114,28 @@ const Training = () => {
     setSelectedTab(index);
   };
 
-  const handleShow = () => {
+  const handleShow = (id = -1) => {
     setShowModal((prev) => !prev);
+    setCurrentItemId(id);
   };
 
-  const handleShowDelete = (callbackFc) => {
-    if (typeof callbackFc === "function") {
-      callbackFc();
+  const handleClickDelete = () => {
+    if (currentItemId > 0) {
+      setLoadingDelete(true);
+      deleteBookingItem(currentItemId);
     }
-    setShowModal((prev) => !prev);
+  };
+
+  const deleteBookingItem = (id) => {
+    if (canDelete(sortedTrainingsDates)) {
+      cancelBooking(sessionData.user.accessToken, id).then((data) => {
+        if (data.data.status) {
+          updateDate();
+          setLoadingDelete(false);
+          handleShow();
+        }
+      });
+    }
   };
 
   if (loading) return <Loading full_screen={true} />;
@@ -128,10 +148,10 @@ const Training = () => {
           text={"Вы точно хотите отменить тренировку?"}
         >
           <Button
-            onClick={handleShowDelete}
+            onClick={handleClickDelete}
             fullSize={true}
             size="l"
-            label="Да"
+            label={!loadingDelete ? "Да" : "Загрузка"}
             variant="black"
           />
           <Button
@@ -157,10 +177,10 @@ const Training = () => {
             availableDates={sortedTrainingsDates}
           />
           <TrainingItems
+            onDelete={deleteBookingItem}
             token={sessionData?.user?.accessToken}
             handleUpdateDate={updateDate}
-            handleShowDelete={handleShowDelete}
-            handleShowModal={handleShow}
+            handleDeleteItem={handleShow}
             selectedDate={selectedDate}
             archive={selectedTab === 1}
             items={sortedTrainingsDates}
