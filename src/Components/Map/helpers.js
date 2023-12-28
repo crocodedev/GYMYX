@@ -1,12 +1,12 @@
 export const mapStyle = {
   width: "100%",
   height: "100%",
-}
+};
 
 export const mapOptions = {
   suppressMapOpenBlock: true,
   behaviors: ["drag", "dblClickZoom"],
-}
+};
 
 export const createSvgMarker = () => {
   return {
@@ -31,11 +31,12 @@ export const createSvgMarker = () => {
       <path d="M38.3413 50.3913C34.6687 54.1863 30.9962 57.9405 27.3236 61.7354C27.038 62.0619 27.038 62.5516 27.3236 62.8372L30.6289 66.1425C30.9554 66.469 31.445 66.469 31.7715 66.1425L42.2995 55.2064C42.83 54.6352 42.83 53.7374 42.2995 53.1661L39.4839 50.3505C39.1574 50.0649 38.6269 50.0649 38.3413 50.3913Z" fill="#294AE7"/>
       </svg>`
       ),
+
     iconImageSize: window?.innerWidth > 1280 ? [94, 140] : [35, 53],
     iconImageOffset: window?.innerWidth > 1280 ? [-47, -70] : [-17, -27],
-  }
-}
+  };
+};
 
 export const getCoords = (coords = "") => {
-  return coords.replace(/[ ]/, "").split(",").map(parseFloat)
-}
+  return coords.replace(/[ ]/, "").split(",").map(parseFloat);
+};

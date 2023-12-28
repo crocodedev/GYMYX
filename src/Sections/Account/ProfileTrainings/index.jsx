@@ -136,7 +136,6 @@ const ProfileTrainings = () => {
             <div
               className={styles["profile-trainings__btn"]}
               onClick={() => handleClickItem(closestTraining?.id)}
-              // handleDeleteItem(closestTraining?.id)
             >
               <img src="/icons/cross.svg" alt="" />
             </div>

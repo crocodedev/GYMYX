@@ -1,72 +1,102 @@
-"use client"
+"use client";
 
-import PageHeading from "@/Sections/Account/PageHeading"
-import NavigationTabs from "@/Sections/Account/NavigationTabs"
-import GidList from "@/Sections/Account/Gid/GidList"
-import { useState, useEffect } from "react"
-import Loading from "@/Components/Loading"
-import Container from "@/Components/Container"
+import PageHeading from "@/Sections/Account/PageHeading";
+import NavigationTabs from "@/Sections/Account/NavigationTabs";
+import GidList from "@/Sections/Account/Gid/GidList";
+import { useState, useEffect } from "react";
+import Loading from "@/Components/Loading";
+import Container from "@/Components/Container";
+import { useSession } from "next-auth/react";
 
-export const getGids = async () => {
+export const getGids = async (token) => {
   const result = await fetch("/api/gids/get-gids", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-  })
+    body: JSON.stringify({ token }),
+  });
 
-  const response = await result.json()
+  const response = await result.json();
   if (!response.error) {
-    return response
+    return response;
   }
-}
+};
 
 const Gid = () => {
-  const [tags, setTags] = useState([])
-  const [activeTag, setActiveTag] = useState(null)
-  const [renderedItems, setRenderedItems] = useState([])
-  const [gids, setGids] = useState([])
-  const [loading, setLoading] = useState(true)
+  const [tags, setTags] = useState([]);
+  const { data: sessionData } = useSession();
+  const [activeTag, setActiveTag] = useState(null);
+  const [renderedItems, setRenderedItems] = useState([]);
+  const [gids, setGids] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setLoading(true)
-    getGids().then(({ data }) => {
+    setLoading(true);
+    getGids(sessionData?.user?.accessToken).then(({ data }) => {
       if (data) {
-        setGids(data)
+        const sortedData = data
+          .slice()
+          .sort((a, b) => (b.isFavorited ? 1 : -1) - (a.isFavorited ? 1 : -1));
+        setGids(sortedData);
       }
-      setLoading(false)
-    })
-  }, [])
+      setLoading(false);
+    });
+  }, [sessionData]);
+
+  const updateData = (id = -1) => {
+    if (id > -1) {
+      const findedIndex = gids.findIndex((item) => item.id === id);
+      if (gids[findedIndex].isFavorited == false) {
+        const tempGids = [
+          ...gids.slice(0, findedIndex),
+          ...gids.slice(findedIndex + 1),
+        ];
+        tempGids.unshift(gids[findedIndex]);
+        setGids(tempGids);
+      } else {
+        const temp = [];
+        gids.forEach((item) => {
+          if (item.isFavorited) {
+            temp.unshift(item);
+          } else {
+            temp.push(item);
+          }
+        });
+        setGids(temp);
+      }
+      gids[findedIndex].isFavorited = !gids[findedIndex].isFavorited;
+    }
+  };
 
   useEffect(() => {
-    const uniqueTags = []
+    const uniqueTags = [];
 
     gids.forEach(({ tags }) => {
       tags.forEach((tag) => {
-        uniqueTags[tag] = { title: tag }
-      })
-    })
+        uniqueTags[tag] = { title: tag };
+      });
+    });
 
-    const uniqueTagsArray = Object.values(uniqueTags)
-    setTags(uniqueTagsArray)
-  }, [gids])
+    const uniqueTagsArray = Object.values(uniqueTags);
+    setTags(uniqueTagsArray);
+  }, [gids]);
 
   useEffect(() => {
     if (activeTag) {
-      const tag = tags[activeTag]
+      const tag = tags[activeTag];
       const resultItems =
-        gids.filter((item) => item.tags.includes(tag?.title)) || []
+        gids.filter((item) => item.tags.includes(tag?.title)) || [];
 
-      setRenderedItems(resultItems)
+      setRenderedItems(resultItems);
     }
-  }, [activeTag])
+  }, [activeTag]);
 
   const handleChangeTag = (index) => {
-    setActiveTag(index)
-  }
+    setActiveTag(index);
+  };
 
-  if (loading) return <Loading full_screen={true} />
-
+  if (loading) return <Loading full_screen={true} />;
   return (
     <div className="account-page-wrapper">
       <PageHeading title={"Гид по тренажёрам"} />
@@ -78,7 +108,10 @@ const Gid = () => {
             handleChangeTab={handleChangeTag}
             itemIcon={null}
           />
-          <GidList items={!!renderedItems?.length ? renderedItems : gids} />
+          <GidList
+            items={!!renderedItems?.length ? renderedItems : gids}
+            updateData={updateData}
+          />
         </>
       ) : (
         <Container>
@@ -86,7 +119,7 @@ const Gid = () => {
         </Container>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Gid
+export default Gid;

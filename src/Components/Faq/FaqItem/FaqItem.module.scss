@@ -9,7 +9,9 @@
 
   &:not(.active) {
     > p {
-      display: none;
+      opacity: 0;
+      margin: 0;
+      height: 0;
     }
 
     > div > div {
@@ -85,6 +87,7 @@
     color: var(--white, #fff);
     font-weight: 500;
     margin-top: 28px;
+    transition: 0.3s ease;
 
     @include media-breakpoint-down(md) {
       font-size: 12px;
