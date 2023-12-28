@@ -10,19 +10,6 @@ export function sortVisitDates(data, dateToRemove, timeToRemove) {
   return updatedData;
 }
 
-export function canDelete(arr) {
-  let status = false;
-  arr.forEach(({ time }) => {
-    if (arr.length === 1 && time.length === 1) {
-      status = false;
-    } else {
-      status = true;
-    }
-  });
-
-  return status;
-}
-
 export function prepareDataForBooking(arr) {
   const result = {};
 
@@ -52,4 +39,17 @@ export async function cancelBooking(token, id) {
   if (!response.error) {
     return response;
   }
+}
+
+export function canDelete(arr) {
+  let status = false;
+  arr.forEach(({ time }) => {
+    if (arr.length === 1 && time.length === 1) {
+      status = false;
+    } else {
+      status = true;
+    }
+  });
+
+  return status;
 }
