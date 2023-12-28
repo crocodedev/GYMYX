@@ -173,7 +173,13 @@
     font-weight: 600;
     line-height: 102%;
 
-    @include media-breakpoint-down(lg) {
+    @include media-breakpoint-down(md) {
+      letter-spacing: -0.321px;
+      font-size: 24px;
+      text-align: center;
+    }
+
+    @include media-breakpoint-between(md, lg) {
       font-size: 32.122px;
       letter-spacing: -0.321px;
       text-align: center;

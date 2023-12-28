@@ -35,11 +35,14 @@ const ProfileMailing = () => {
       }
     });
 
-    changeSubscribe(sessionData?.user?.accessToken, "phone").then((data) => {
-      if (data.data.success) {
-        // console.log(data.data);
-      }
-    });
+    // changeSubscribe(sessionData?.user?.accessToken, activeVariant).then(
+    //   (data) => {
+    //     if (data.data.success) {
+    //       console.log(data.data);
+    //       console.log(sessionData.user);
+    //     }
+    //   }
+    // );
   };
 
   return (

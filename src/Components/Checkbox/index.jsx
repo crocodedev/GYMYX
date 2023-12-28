@@ -1,4 +1,4 @@
-import styles from "./Checkbox.module.scss"
+import styles from "./Checkbox.module.scss";
 
 const Checkbox = ({ isActive, toggleActive, label }) => {
   return (
@@ -32,7 +32,7 @@ const Checkbox = ({ isActive, toggleActive, label }) => {
       </div>
       <p className={styles.checkbox__label}>{label}</p>
     </div>
-  )
-}
+  );
+};
 
-export default Checkbox
+export default Checkbox;
