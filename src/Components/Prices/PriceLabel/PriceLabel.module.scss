@@ -15,7 +15,7 @@
     padding: 18px;
     border-radius: 15px;
     top: -55px;
-    right: 0;
+    right: 10px;
   }
 
   @include media-breakpoint-up(md) {
@@ -25,13 +25,19 @@
   @include media-breakpoint-between(md, xxl) {
     padding: 24px;
     top: -75px;
-    right: 0;
+    right: 5px;
   }
 
-  @include media-breakpoint-up(xxl) {
+  @include media-breakpoint-between(xxl, xxxl) {
+    padding: 24px;
+    top: -20px;
+    right: 10px;
+  }
+
+  @include media-breakpoint-up(xxxl) {
     padding: 30px 38px;
     top: -20px;
-    right: -20px;
+    right: 10px;
   }
 
   &__text {

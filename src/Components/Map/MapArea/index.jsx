@@ -8,7 +8,13 @@ import styles from "./MapArea.module.scss";
 
 const MapArea = ({ Placemarks, currentPlacemark }) => {
   const mapRef = useRef(null);
+  const [innerWidth, setInnerWidth] = useState(window.innerWidth);
 
+  const handleResize = () => {
+    setInnerWidth((prevWidth) => {
+      return window.innerWidth;
+    });
+  };
   const handleZoomIn = () => {
     const map = mapRef.current;
     if (map) {
@@ -39,6 +45,14 @@ const MapArea = ({ Placemarks, currentPlacemark }) => {
     const map = mapRef.current;
     map?.panTo(getCoords(currentPlacemark?.coords), { flying: true });
   }, [currentPlacemark]);
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
     <div className={styles["map-area"]}>

@@ -1,16 +1,26 @@
-import { useState } from "react"
-import styles from "./GidItemContent.module.scss"
+import { useState } from "react";
+import styles from "./GidItemContent.module.scss";
 
-const GidItemContent = ({ duration, link, title, lock, isViewed }) => {
-  const [isPlayed, setIsPlayed] = useState(false)
+const GidItemContent = ({
+  duration,
+  link,
+  title,
+  lock,
+  isViewed,
+  video_poster,
+  onClickFavorite,
+  onClickVideo,
+}) => {
+  const [isPlayed, setIsPlayed] = useState(false);
   const handleClickPlay = () => {
-    setIsPlayed((prev) => !prev)
-  }
+    setIsPlayed((prev) => !prev);
+    onClickVideo();
+  };
 
   return (
     <div className={styles["gid-item-content"]}>
       <div className={styles["gid-item-content__bg"]}>
-        <img src="/images/advantagesjpeg.jpeg" alt="grid item image" />
+        <img src={video_poster} alt="grid item image" />
       </div>
       {isPlayed && (
         <iframe className={styles["gid-item-content__video"]} src={link} />
@@ -30,6 +40,7 @@ const GidItemContent = ({ duration, link, title, lock, isViewed }) => {
         className={`${styles["gid-item-content__btn-lock"]} ${
           lock ? styles["active"] : ""
         }`}
+        onClick={onClickFavorite}
       >
         <img src="/icons/key.svg" alt="lock  icon button" />
         <span>{lock ? "Закреплено" : "Закрепить"}</span>
@@ -48,7 +59,7 @@ const GidItemContent = ({ duration, link, title, lock, isViewed }) => {
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default GidItemContent
+export default GidItemContent;
