@@ -11,6 +11,7 @@
   align-items: center;
   border: none;
   font-family: inherit;
+   
 
   &.full-size {
     width: 100%;
@@ -63,26 +64,29 @@
   }
 
   &-blue {
-    background: var(
-      --blue-base-gradient,
-      linear-gradient(90deg, #294ae7 100%, #0d2dc8 100%)
-    );
+    // background: var(
+    //   --blue-base-gradient,
+    //   linear-gradient(90deg, #294ae7 100%, #0d2dc8 100%)
+    // );
+    background: #294ae7;
     color: white;
     transition: all 0.3s ease;
 
     &:hover {
-      background: var(
-        --blue-base-gradient,
-        linear-gradient(90deg, #5b74e9 100%, #4860d4 100%)
-      );
+      // background: var(
+      //   --blue-base-gradient,
+      //   linear-gradient(90deg, #5b74e9 100%, #4860d4 100%)
+      // );
+      background: #5b74e9;
       transition: 0.3s ease;
     }
 
     &:active {
-      background: var(
-        --blue-base-gradient,
-        linear-gradient(90deg, #8e9eed 100%, #8191df 100%)
-      );
+      // background: var(
+      //   --blue-base-gradient,
+      //   linear-gradient(90deg, #8e9eed 100%, #8191df 100%)
+      // );
+      background: #8e9eed;
       transition: 0.3s ease;
     }
   }
