@@ -16,7 +16,7 @@
     }
 
     @include media-breakpoint-up(lg) {
-      align-items: center;
+      align-items: flex-start;
     }
   }
 

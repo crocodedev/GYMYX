@@ -86,14 +86,20 @@ const Gid = () => {
     if (activeTag) {
       const tag = tags[activeTag];
       const resultItems =
-        gids.filter((item) => item.tags.includes(tag?.title)) || [];
+        gids.filter((item) => item.tags.includes(tag?.title)) || gids;
 
       setRenderedItems(resultItems);
+    } else {
+      setRenderedItems(gids);
     }
   }, [activeTag]);
 
   const handleChangeTag = (index) => {
-    setActiveTag(index);
+    if (activeTag === null) {
+      setActiveTag(index);
+    } else {
+      setActiveTag(index === activeTag ? null : index);
+    }
   };
 
   if (loading) return <Loading full_screen={true} />;

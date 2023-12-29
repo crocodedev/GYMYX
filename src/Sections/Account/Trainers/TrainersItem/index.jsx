@@ -38,6 +38,7 @@ const TrainersItem = ({ data, className }) => {
             ? styles["trainers-item__more-wrapper--active"]
             : styles["trainers-item__more-wrapper"]
         }
+        onClick={handleShow}
       >
         <div className={styles["trainers-item__text-inner"]}>
           <p className={styles["trainers-item__name"]}>{data[0].value}</p>
