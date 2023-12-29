@@ -8,6 +8,7 @@ const Button = ({
   variant = "",
   label,
   icon,
+  disabledShadow = false,
   fullSize = false,
 }) => {
   return (
@@ -17,7 +18,7 @@ const Button = ({
         styles.button
       } ${variant ? styles[`button-${variant}`] : ""} ${
         styles[`button-size-${size}`]
-      }`}
+      } ${disabledShadow ? styles["shadow"] : ""}`}
       disabled={disabled}
     >
       {label}

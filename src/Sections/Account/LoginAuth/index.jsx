@@ -1,13 +1,13 @@
-"use client"
+"use client";
 
-import AccountLoginForm from "@/Components/Account/Login/AccountLoginForm"
-import styles from "./LoginAuth.module.scss"
-import Modal from "@/Components/Modal"
-import { useState } from "react"
-import Button from "@/Components/Button"
+import AccountLoginForm from "@/Components/Account/Login/AccountLoginForm";
+import styles from "./LoginAuth.module.scss";
+import Modal from "@/Components/Modal";
+import { useState } from "react";
+import Button from "@/Components/Button";
 
 const LoginAuth = () => {
-  const [isShowModal, setIsShowModal] = useState(false)
+  const [isShowModal, setIsShowModal] = useState(false);
 
   return (
     <section className={styles["account-auth"]}>
@@ -20,6 +20,7 @@ const LoginAuth = () => {
               fullSize={true}
               variant="blue"
               label="Понятно"
+              disabledShadow={true}
             />
           </Modal>
         )}
@@ -28,7 +29,7 @@ const LoginAuth = () => {
         />
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default LoginAuth
+export default LoginAuth;

@@ -5,12 +5,12 @@ import Checkbox from "@/Components/Checkbox";
 import { useEffect, useState } from "react";
 
 import styles from "./ProfileMailing.module.scss";
-import { changeSubscribe } from "./helpers";
+import { changeSubscribe, deleteSubscribe } from "./helpers";
 import { useSession } from "next-auth/react";
 
 const ITEMS = [
   { id: 1, label: "E-mail", value: "email" },
-  { id: 2, label: "Sms", value: "sms" },
+  { id: 2, label: "Sms", value: "phone" },
   { id: 3, label: "Не получать рассылку", value: "none" },
 ];
 
@@ -18,31 +18,40 @@ const ProfileMailing = () => {
   const { data: sessionData } = useSession();
   const [activeVariant, setActiveVariant] = useState([]);
 
+  useEffect(() => {
+    updateData();
+  }, [sessionData, sessionData]);
+
+  const updateData = () => {
+    if (sessionData) setActiveVariant([...sessionData.user.subscriptions]);
+  };
+
+  const removeFromArray = (arr, itemToRemove) => {
+    return arr.filter((item) => item !== itemToRemove);
+  };
+
   const toggleVariant = (value) => {
-    setActiveVariant((prev) => {
-      if (value === "none") {
-        return ["none"];
-      } else {
-        const updatedArray = prev.includes("none")
-          ? prev.filter((item) => item !== "none")
-          : prev;
+    setActiveVariant((prevActiveVariant) => [...prevActiveVariant, value]);
 
-        if (updatedArray.includes(value)) {
-          return updatedArray.filter((item) => item !== value);
-        } else {
-          return [...updatedArray, value];
-        }
-      }
-    });
+    activeVariant.includes(value.toString())
+      ? deleteSubscribe(sessionData?.user?.accessToken, value).then((data) => {
+          if (data.data.success) {
+            setActiveVariant((prevActiveVariant) =>
+              removeFromArray(prevActiveVariant, value)
+            );
+            updateData();
+          }
+        })
+      : changeSubscribe(sessionData?.user?.accessToken, value).then((data) => {
+          if (data.data.success) {
+            setActiveVariant((prevActiveVariant) => [
+              ...prevActiveVariant,
+              value,
+            ]);
 
-    // changeSubscribe(sessionData?.user?.accessToken, activeVariant).then(
-    //   (data) => {
-    //     if (data.data.success) {
-    //       console.log(data.data);
-    //       console.log(sessionData.user);
-    //     }
-    //   }
-    // );
+            updateData();
+          }
+        });
   };
 
   return (

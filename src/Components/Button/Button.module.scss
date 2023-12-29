@@ -17,6 +17,10 @@
     width: 100%;
   }
 
+  &.shadow {
+    box-shadow: none !important;
+  }
+
   &:disabled {
     pointer-events: none;
     opacity: 0.5;

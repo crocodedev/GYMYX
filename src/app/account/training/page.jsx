@@ -153,6 +153,7 @@ const Training = () => {
             size="l"
             label={!loadingDelete ? "Да" : "Загрузка"}
             variant="black"
+            disabledShadow={true}
           />
           <Button
             onClick={handleShow}
@@ -160,6 +161,7 @@ const Training = () => {
             size="l"
             label="Нет"
             variant="blue"
+            disabledShadow={true}
           />
         </Modal>
       )}

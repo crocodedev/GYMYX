@@ -1,10 +1,10 @@
-import { useSession } from "next-auth/react"
-import { useEffect, useState } from "react"
-import styles from "./ProfileInfo.module.scss"
+import { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
+import styles from "./ProfileInfo.module.scss";
 
 const ProfileInfo = () => {
-  const session = useSession()
-  const [userData, setUserData] = useState({})
+  const session = useSession();
+  const [userData, setUserData] = useState({});
 
   useEffect(() => {
     setUserData({
@@ -13,8 +13,8 @@ const ProfileInfo = () => {
       image: session?.data?.user?.image || "",
       enter_code: session?.data?.user?.enter_code || null,
       is_active_enter_code: session?.data?.user?.is_active_enter_code || null,
-    })
-  }, [session])
+    });
+  }, [session]);
 
   return (
     <div className={styles["profile-info"]}>
@@ -44,6 +44,6 @@ const ProfileInfo = () => {
         )}
       </div>
     </div>
-  )
-}
-export default ProfileInfo
+  );
+};
+export default ProfileInfo;
