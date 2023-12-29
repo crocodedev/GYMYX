@@ -1,11 +1,11 @@
-import styles from "./ProfileStatsItem.module.scss"
+import styles from "./ProfileStatsItem.module.scss";
 
 const ProfileStatsItem = ({ label, count, isCurrent }) => {
   return (
     <div className={styles["profile-stats-item"]}>
       <div className={styles["profile-stats-item__panel"]}>
         <div
-          style={{ "--percent": `${count * 2}%` }}
+          style={{ "--percent": `${count * 5}%` }}
           className={`${styles["profile-stats-item__column"]} ${
             isCurrent ? styles["isCurrent"] : ""
           } `}
@@ -14,7 +14,7 @@ const ProfileStatsItem = ({ label, count, isCurrent }) => {
       </div>
       <p className={styles["profile-stats-item__count"]}>{count}</p>
     </div>
-  )
-}
+  );
+};
 
-export default ProfileStatsItem
+export default ProfileStatsItem;

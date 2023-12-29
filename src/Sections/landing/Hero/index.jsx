@@ -6,6 +6,7 @@ import Button from "@/Components/Button";
 import Container from "@/Components/Container";
 import styles from "./Hero.module.scss";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 const Hero = ({ alias, fields }) => {
   const image = fields.find((item) => item.name === "image");
@@ -13,6 +14,14 @@ const Hero = ({ alias, fields }) => {
   const title = fields.find((item) => item.name === "title");
   const subtitle = fields.find((item) => item.name === "subtitle");
   const price = fields.find((item) => item.name === "price");
+
+  const [isMobile, setMobile] = useState(false);
+
+  useEffect(() => {
+    window.matchMedia("(max-width: 992px)").matches
+      ? setMobile(true)
+      : setMobile(false);
+  }, []);
 
   return (
     <section id={alias} className={styles.hero}>
@@ -40,9 +49,15 @@ const Hero = ({ alias, fields }) => {
                   <span className={styles["hero__price-prefix"]}>₽/час</span>
                 </span>
               </p>
-              <Link href={"/account/login"}>
-                <Button size="l" variant="black" label={"Записаться"} />
-              </Link>
+              {isMobile ? (
+                <Link href={"/account/login"}>
+                  <Button size="l" variant="blue" label={"Записаться"} />
+                </Link>
+              ) : (
+                <Link href={"/account/login"}>
+                  <Button size="l" variant="black" label={"Записаться"} />
+                </Link>
+              )}
             </div>
           </div>
         </Container>
