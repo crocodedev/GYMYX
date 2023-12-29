@@ -14,16 +14,39 @@ const ITEMS = [
   { id: 3, label: "Не получать рассылку", value: "none" },
 ];
 
+async function getUserData(token) {
+  const response = await fetch("https://gymyx.cro.codes/api/users", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    next: {
+      revalidate: 10,
+    },
+  });
+
+  if (!response.ok) {
+    return null;
+  }
+
+  const result = await response.json();
+  return result?.data || null;
+}
+
 const ProfileMailing = () => {
   const { data: sessionData } = useSession();
   const [activeVariant, setActiveVariant] = useState([]);
+  const [loadingSubmit, setLoadingSubmit] = useState(false);
 
   useEffect(() => {
     updateData();
   }, [sessionData, sessionData]);
 
   const updateData = () => {
-    if (sessionData) setActiveVariant([...sessionData.user.subscriptions]);
+    if (sessionData) {
+      getUserData(sessionData?.user?.accessToken);
+    }
   };
 
   const removeFromArray = (arr, itemToRemove) => {
@@ -31,27 +54,62 @@ const ProfileMailing = () => {
   };
 
   const toggleVariant = (value) => {
+    if (loadingSubmit) return;
+    setLoadingSubmit(true);
     setActiveVariant((prevActiveVariant) => [...prevActiveVariant, value]);
 
-    activeVariant.includes(value.toString())
-      ? deleteSubscribe(sessionData?.user?.accessToken, value).then((data) => {
-          if (data.data.success) {
-            setActiveVariant((prevActiveVariant) =>
-              removeFromArray(prevActiveVariant, value)
-            );
-            updateData();
-          }
-        })
-      : changeSubscribe(sessionData?.user?.accessToken, value).then((data) => {
-          if (data.data.success) {
-            setActiveVariant((prevActiveVariant) => [
-              ...prevActiveVariant,
-              value,
-            ]);
+    if (value != "none") {
+      if (activeVariant.includes("none")) {
+        setActiveVariant((prevActiveVariant) =>
+          removeFromArray(prevActiveVariant, "none")
+        );
+      }
 
-            updateData();
-          }
-        });
+      activeVariant.includes(value.toString())
+        ? deleteSubscribe(sessionData?.user?.accessToken, value).then(
+            (data) => {
+              if (data.data.success) {
+                setActiveVariant((prevActiveVariant) =>
+                  removeFromArray(prevActiveVariant, value)
+                );
+                updateData();
+              }
+              setLoadingSubmit(false);
+            }
+          )
+        : changeSubscribe(sessionData?.user?.accessToken, value).then(
+            (data) => {
+              if (data.data.success) {
+                setActiveVariant((prevActiveVariant) => [
+                  ...prevActiveVariant,
+                  value,
+                ]);
+                updateData();
+              }
+              setLoadingSubmit(false);
+            }
+          );
+    } else {
+      deleteSubscribe(sessionData?.user?.accessToken, "email").then((data) => {
+        if (data.data.success) {
+          setActiveVariant((prevActiveVariant) =>
+            removeFromArray(prevActiveVariant, "email")
+          );
+          updateData();
+        }
+        setLoadingSubmit(false);
+      });
+
+      deleteSubscribe(sessionData?.user?.accessToken, "phone").then((data) => {
+        if (data.data.success) {
+          setActiveVariant((prevActiveVariant) =>
+            removeFromArray(prevActiveVariant, "phone")
+          );
+          updateData();
+        }
+        setLoadingSubmit(false);
+      });
+    }
   };
 
   return (

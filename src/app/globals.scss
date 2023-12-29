@@ -67,6 +67,7 @@ a {
 .booking-calendar__calendar,
 .training-calendar__calendar {
   .p-datepicker-inline {
+    font-family: "Inter var";
     background: transparent;
     border: none;
 
@@ -186,6 +187,8 @@ a {
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+    width: 100% !important;
+    text-align: center !important;
 
     @include media-breakpoint-down(xl) {
       font-size: 16px;

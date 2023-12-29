@@ -1,15 +1,6 @@
 import styles from "./Checkbox.module.scss";
 
-const Checkbox = ({
-  isActive,
-  toggleActive,
-  label,
-  setActiveCur,
-  activeCur,
-}) => {
-  const handleClick = () => {
-    setActiveCur(true);
-  };
+const Checkbox = ({ isActive, toggleActive, label, setActiveCur }) => {
   return (
     <div onClick={toggleActive} className={styles.checkbox}>
       <div className={styles.checkbox__icon}>
