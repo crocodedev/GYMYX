@@ -18,32 +18,44 @@ const variants = [
   { value: "19:00", bgColor: "#061641" },
 ]
 
+const checkIsOnlyTraining = (data) => {
+  let result = true;
+  data.forEach(({time})=>{
+    if(!!time.length) {
+      result = false;
+      return;
+    }
+  })
+
+  return result;
+}
+
 const ChooseTime = () => {
   const { data: sessionData } = useSession()
-  const { gym } = useSelector((state) => state.booking)
+  const { gym, visitDate } = useSelector((state) => state.booking)
   const [pricesVariants, setPricesVariants] = useState([])
 
   useEffect(() => {
     if (gym?.prices && sessionData) {
       let variantsTemp = []
-      // if (sessionData.user.enter_code) {
+      if (sessionData.user.enter_code && !checkIsOnlyTraining(visitDate) || !checkIsOnlyTraining(visitDate)) {
         variantsTemp = gym.prices.map((item, index) => {
           return { ...item, bgColor: variants[index]?.bgColor }
         })
-      // } else {
-      //   variantsTemp = [
-      //     {
-      //       start: "00:00:00",
-      //       end: "23:00:00",
-      //       price: gym?.min_price,
-      //       bgColor: variants[0]?.bgColor,
-      //     },
-      //   ]
-      // }
+      } else {
+        variantsTemp = [
+          {
+            start: "00:00:00",
+            end: "23:00:00",
+            price: gym?.min_price,
+            bgColor: variants[0]?.bgColor,
+          },
+        ]
+      }
 
       setPricesVariants(variantsTemp)
     }
-  }, [gym, sessionData])
+  }, [gym, sessionData, visitDate])
 
   return (
     <>
