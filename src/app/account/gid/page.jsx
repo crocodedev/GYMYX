@@ -83,16 +83,16 @@ const Gid = () => {
   }, [gids]);
 
   useEffect(() => {
-    if (activeTag) {
+    if (activeTag !== null) {
       const tag = tags[activeTag];
-      const resultItems =
-        gids.filter((item) => item.tags.includes(tag?.title)) || gids;
+
+      const resultItems = gids.filter((item) => item.tags.includes(tag.title));
 
       setRenderedItems(resultItems);
     } else {
       setRenderedItems(gids);
     }
-  }, [activeTag]);
+  }, [activeTag, tags, gids]);
 
   const handleChangeTag = (index) => {
     if (activeTag === null) {
