@@ -5,11 +5,12 @@ import { updateBookingData } from "@/redux/bookingSlice"
 
 import { sortVisitDates, canDelete } from "./helpers"
 import BookingCard from "@/Components/Booking/BookingCard"
+import { useSession } from "next-auth/react"
 
 const CheckoutList = ({ items }) => {
   const dispatch = useDispatch()
   const { gym, visitDate } = useSelector((state) => state.booking)
-
+  const { data: sessionData } = useSession()
   const handleDeleteItem = (valueDate, valueTime) => {
     if (canDelete(items)) {
       const data = sortVisitDates(visitDate, valueDate, valueTime)

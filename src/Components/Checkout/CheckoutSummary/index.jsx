@@ -5,7 +5,7 @@ import styles from "./CheckoutSummary.module.scss"
 import { useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
 
-import { useMemo, useState } from "react"
+import { useMemo, useState, useEffect, useRef } from "react"
 import {
   findPrice,
   createBooking,
@@ -17,20 +17,26 @@ const CheckoutSummary = ({ items, gym }) => {
   const router = useRouter()
   const { data: sessionData } = useSession()
   const [loading, setLoading] = useState(false)
+  const [loadingPage, setLoadingPage] = useState(true);
   const [error, setError] = useState(false)
   const [list, setList] = useState([])
+  const [isFirstBooking, setIsFirstBooking] = useState();
   const totalPrice = useMemo(() => {
     let total = 0
 
-    items.forEach((entry) => {
-      entry.time.map((time) => {
-        total += findPrice(time, gym?.prices)
+    items.forEach((entry,indexFirst) => {
+      entry.time.map((time,indexSecond) => {
+        if(isFirstBooking && indexFirst === 0 && indexSecond === 0){
+          total += gym.min_price;
+        }else{
+          total += findPrice(time, gym?.prices)
+        }
       })
     })
 
     setList(countValues(items, gym?.prices))
     return total
-  }, [items, gym])
+  }, [isFirstBooking, items, gym])
 
   const handleSubmit = () => {
     setLoading(true)
@@ -50,21 +56,32 @@ const CheckoutSummary = ({ items, gym }) => {
     })
   }
 
+  useEffect(()=>{
+    if(sessionData?.user){
+      setIsFirstBooking(!sessionData.user.enter_code)
+      setLoadingPage(false)
+    }
+  },[sessionData])
+
+  if(loadingPage) return;
+
   return (
     <div className={styles["checkout-summary"]}>
       <div className={styles["checkout-summary__wrapper"]}>
         <div className={styles["checkout-summary__list"]}>
-          {list?.map(({ value, count, price }) => (
-            <div
-              key={`${count}_${value}_${price}}`}
-              className={styles["checkout-summary__item"]}
-            >
-              <p>
-                Тренировка {price} ₽/ч ({count})
-              </p>
-              <p>{price} ₽</p>
-            </div>
-          ))}
+          {list?.map(({ value, count, price }, index) => {
+            return (
+              <div
+                key={`${count}_${value}_${price}}`}
+                className={styles["checkout-summary__item"]}
+              >
+                <p>
+                  Тренировка {isFirstBooking && index === 0? gym?.min_price : price} ₽/ч ({count})
+                </p>
+                <p>{isFirstBooking && index === 0 ? gym?.min_price : price} ₽</p>
+              </div>
+            )
+          })}
         </div>
         <div className={styles["checkout-summary__summary"]}>
           <p>Итого</p>
