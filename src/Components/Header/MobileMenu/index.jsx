@@ -1,11 +1,15 @@
-import { scroller } from "react-scroll"
-import Button from "@/Components/Button"
-import styles from "./MobileMenu.module.scss"
-import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { scroller } from "react-scroll";
+import Button from "@/Components/Button";
+import styles from "./MobileMenu.module.scss";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+import { useEffect } from "react";
 
 const MobileMenu = ({ items, isShow, toggleVisibility }) => {
-  const router = useRouter()
+  const { data: sessionData } = useSession();
+
+  const router = useRouter();
   const handleClickMobileMenuItem = (target, link) => {
     if (target !== "#") {
       scroller.scrollTo(target, {
@@ -13,13 +17,13 @@ const MobileMenu = ({ items, isShow, toggleVisibility }) => {
         delay: 0,
         smooth: "easeInOutQuart",
         offset: -70,
-      })
+      });
     } else {
-      router.push(link)
+      router.push(link);
     }
 
-    toggleVisibility()
-  }
+    toggleVisibility();
+  };
 
   return (
     <div
@@ -30,12 +34,12 @@ const MobileMenu = ({ items, isShow, toggleVisibility }) => {
           {items &&
             items.map((item) => {
               const title =
-                item.find((field) => field.name === "title")?.value || ""
+                item.find((field) => field.name === "title")?.value || "";
               const handle =
-                item.find((field) => field.name === "handle_to")?.value || ""
+                item.find((field) => field.name === "handle_to")?.value || "";
 
               const link =
-                item.find((field) => field.name === "link_to")?.value || ""
+                item.find((field) => field.name === "link_to")?.value || "";
 
               return (
                 <div
@@ -45,12 +49,12 @@ const MobileMenu = ({ items, isShow, toggleVisibility }) => {
                 >
                   {title}
                 </div>
-              )
+              );
             })}
         </div>
         <div>
           <Link href={"/account/login"}>
-            <Button variant="blue" label={"Зарегистрироваться"} />
+            <Button variant="blue" size="l" label={"Зарегистрироваться"} />
           </Link>
 
           <div className={styles["mobile-menu__login"]}>
@@ -62,10 +66,39 @@ const MobileMenu = ({ items, isShow, toggleVisibility }) => {
               <img src="/icons/login.svg" alt="login icon" />
             </span>
           </div>
+
+          {/* {!sessionData ? (
+            <>
+              <Link href={"/account/login"}>
+                <Button variant="blue" size="l" label={"Зарегистрироваться"} />
+              </Link>
+
+              <div className={styles["mobile-menu__login"]}>
+                <span>У вас есть аккаунт?</span>{" "}
+                <Link href="/account/login">
+                  <u>Войти</u>
+                </Link>
+                <span className={styles["mobile-menu__login-icon"]}>
+                  <img src="/icons/login.svg" alt="login icon" />
+                </span>
+              </div>
+            </>
+          ) : (
+            <Link href="/">
+              <Button
+                size="l"
+                label={"Выйти"}
+                onClick={() => {
+                  signOut({ callbackUrl: "/account/login" });
+                  router.push("/");
+                }}
+              />
+            </Link>
+          )} */}
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default MobileMenu
+export default MobileMenu;
