@@ -9,10 +9,8 @@ import ProfileContacts from "@/Sections/Account/ProfileContacts";
 import ProfileMailing from "@/Sections/Account/ProfileMailing";
 import ProfileTextField from "@/Sections/Account/ProfileTextField";
 
-import Modal from "@/Components/Modal";
-import Button from "@/Components/Button";
 import { useSession } from "next-auth/react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 async function getUserData(token) {
   const response = await fetch("https://gymyx.cro.codes/api/users", {
@@ -37,7 +35,6 @@ async function getUserData(token) {
 const Profile = () => {
   const isFirstUpdate = useRef(true);
   const { data: sessionData, update } = useSession();
-
   useEffect(() => {
     if (sessionData && isFirstUpdate.current) {
       isFirstUpdate.current = false;

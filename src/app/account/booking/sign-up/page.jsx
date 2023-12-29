@@ -1,17 +1,17 @@
-"use client"
+"use client";
 
-import Button from "@/Components/Button"
-import Modal from "@/Components/Modal"
-import BookingSignUpHeading from "@/Sections/Account/Booking/BookingSignUpHeading"
-import BookingCalendar from "@/Sections/Account/Booking/BookingCalendar"
-import BookingSteps from "@/Sections/Account/Booking/BookingSteps"
-import { useSelector } from "react-redux"
-import BookingSignUpContent from "@/Sections/Account/Booking/BookingSignUpContent"
-import { useState } from "react"
+import Button from "@/Components/Button";
+import Modal from "@/Components/Modal";
+import BookingSignUpHeading from "@/Sections/Account/Booking/BookingSignUpHeading";
+import BookingCalendar from "@/Sections/Account/Booking/BookingCalendar";
+import BookingSteps from "@/Sections/Account/Booking/BookingSteps";
+import { useSelector } from "react-redux";
+import BookingSignUpContent from "@/Sections/Account/Booking/BookingSignUpContent";
+import { useState } from "react";
 
 const BookingSignUp = () => {
-  const [showModal, setShowModal] = useState(false)
-  const { gym, variant } = useSelector((state) => state.booking)
+  const [showModal, setShowModal] = useState(false);
+  const { gym, variant } = useSelector((state) => state.booking);
 
   return (
     <>
@@ -26,6 +26,7 @@ const BookingSignUp = () => {
             size="l"
             label="Понятно"
             variant="blue"
+            disabledShadow={true}
           />
         </Modal>
       )}
@@ -44,7 +45,7 @@ const BookingSignUp = () => {
         <BookingSteps stepNumber={1} stepTitle={"Выберите день"} />
       </BookingSignUpContent>
     </>
-  )
-}
+  );
+};
 
-export default BookingSignUp
+export default BookingSignUp;

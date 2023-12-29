@@ -25,25 +25,7 @@ const ProfileTrainings = () => {
   }, [sessionData, sessionData]);
 
   useEffect(() => {
-    if (!sessionData) return;
-
-    getTrainingData(sessionData?.user?.accessToken).then(({ data }) => {
-      function parseDateTime(date, time) {
-        return new Date(`${date}T${time}`);
-      }
-
-      if (data) {
-        const sortedData = data.sort((a, b) => {
-          const dateA = parseDateTime(a.date, a.time);
-          const dateB = parseDateTime(b.date, b.time);
-          return dateA - dateB;
-        });
-
-        const closestTraining = sortedData[0];
-        setClosestTraining(closestTraining);
-      }
-      setLoading(false);
-    });
+    updateData();
   }, [sessionData]);
 
   const updateData = () => {
@@ -116,6 +98,7 @@ const ProfileTrainings = () => {
             label={!loadingDelete ? "Да" : "Загрузка"}
             variant="blue"
             onClick={handleClickDelete}
+            disabledShadow={true}
           />
           <Button
             fullSize={true}
@@ -123,6 +106,7 @@ const ProfileTrainings = () => {
             label="Нет"
             variant="black"
             onClick={handleShow}
+            disabledShadow={true}
           />
         </Modal>
       )}
