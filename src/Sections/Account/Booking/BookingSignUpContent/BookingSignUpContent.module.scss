@@ -13,6 +13,7 @@
     > *:first-child {
       @include media-breakpoint-up(lg) {
         margin-right: 40px;
+        min-width: 720px;
         max-width: 1214px;
       }
     }
