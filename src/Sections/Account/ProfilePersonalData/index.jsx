@@ -26,6 +26,7 @@ const ProfilePersonalData = () => {
             readonly={true}
             prefix={"Телефон"}
             value={userData?.phone}
+            type="tel"
           />
           <ProfileField
             readonly={true}
