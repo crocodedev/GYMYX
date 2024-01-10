@@ -15,7 +15,7 @@
 
 .container {
   @include media-breakpoint-down(xl) {
-    --spacing-container: 15px;
+    --spacing-container: 30px;
   }
 
   @include media-breakpoint-up(xl) {
