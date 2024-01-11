@@ -1,4 +1,4 @@
-@import "@/styles/mixins.scss";
+@import '@/styles/mixins.scss';
 
 .footer {
   position: relative;
@@ -12,22 +12,23 @@
   }
 
   @include media-breakpoint-up(lg) {
-    padding: 0 48px;
-    padding-top: 48px;
+    padding: 0 46px;
+    padding-top: 46px;
   }
 
   &__wrapper {
     position: relative;
     box-shadow: 0px 0px 21px 0px rgba(22, 23, 26, 0.6);
-    border-radius: 40px 40px 0px 0px;
     overflow: hidden;
 
     @include media-breakpoint-down(lg) {
       padding: 20px 8px;
+      border-radius: 17px 17px 0px 0px;
     }
 
     @include media-breakpoint-up(lg) {
       padding: 54px 48px;
+      border-radius: 27px 27px 0px 0px;
     }
   }
 

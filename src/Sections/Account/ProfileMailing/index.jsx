@@ -1,24 +1,24 @@
-"use client";
+'use client';
 
-import ProfileBlockTitle from "@/Components/Account/Profile/ProfileBlockTitle";
-import Checkbox from "@/Components/Checkbox";
-import { useEffect, useState } from "react";
+import ProfileBlockTitle from '@/Components/Account/Profile/ProfileBlockTitle';
+import Checkbox from '@/Components/Checkbox';
+import { useEffect, useState } from 'react';
 
-import styles from "./ProfileMailing.module.scss";
-import { changeSubscribe, deleteSubscribe } from "./helpers";
-import { useSession } from "next-auth/react";
+import styles from './ProfileMailing.module.scss';
+import { changeSubscribe, deleteSubscribe } from './helpers';
+import { useSession } from 'next-auth/react';
 
 const ITEMS = [
-  { id: 1, label: "E-mail", value: "email" },
-  { id: 2, label: "Sms", value: "phone" },
-  { id: 3, label: "Не получать рассылку", value: "none" },
+  { id: 1, label: 'E-mail', value: 'email' },
+  { id: 2, label: 'Sms', value: 'phone' },
+  { id: 3, label: 'Не получать рассылку', value: 'none' },
 ];
 
 async function getUserData(token) {
-  const response = await fetch("https://gymyx.cro.codes/api/users", {
-    method: "GET",
+  const response = await fetch('https://gymyx.cro.codes/api/users', {
+    method: 'GET',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     },
     next: {
@@ -58,53 +58,38 @@ const ProfileMailing = () => {
     setLoadingSubmit(true);
     setActiveVariant((prevActiveVariant) => [...prevActiveVariant, value]);
 
-    if (value != "none") {
-      if (activeVariant.includes("none")) {
-        setActiveVariant((prevActiveVariant) =>
-          removeFromArray(prevActiveVariant, "none")
-        );
+    if (value != 'none') {
+      if (activeVariant.includes('none')) {
+        setActiveVariant((prevActiveVariant) => removeFromArray(prevActiveVariant, 'none'));
       }
 
       activeVariant.includes(value.toString())
-        ? deleteSubscribe(sessionData?.user?.accessToken, value).then(
-            (data) => {
-              if (data.data.success) {
-                setActiveVariant((prevActiveVariant) =>
-                  removeFromArray(prevActiveVariant, value)
-                );
-                updateData();
-              }
-              setLoadingSubmit(false);
+        ? deleteSubscribe(sessionData?.user?.accessToken, value).then((data) => {
+            if (data.data.success) {
+              setActiveVariant((prevActiveVariant) => removeFromArray(prevActiveVariant, value));
+              updateData();
             }
-          )
-        : changeSubscribe(sessionData?.user?.accessToken, value).then(
-            (data) => {
-              if (data.data.success) {
-                setActiveVariant((prevActiveVariant) => [
-                  ...prevActiveVariant,
-                  value,
-                ]);
-                updateData();
-              }
-              setLoadingSubmit(false);
+            setLoadingSubmit(false);
+          })
+        : changeSubscribe(sessionData?.user?.accessToken, value).then((data) => {
+            if (data.data.success) {
+              setActiveVariant((prevActiveVariant) => [...prevActiveVariant, value]);
+              updateData();
             }
-          );
+            setLoadingSubmit(false);
+          });
     } else {
-      deleteSubscribe(sessionData?.user?.accessToken, "email").then((data) => {
+      deleteSubscribe(sessionData?.user?.accessToken, 'email').then((data) => {
         if (data.data.success) {
-          setActiveVariant((prevActiveVariant) =>
-            removeFromArray(prevActiveVariant, "email")
-          );
+          setActiveVariant((prevActiveVariant) => removeFromArray(prevActiveVariant, 'email'));
           updateData();
         }
         setLoadingSubmit(false);
       });
 
-      deleteSubscribe(sessionData?.user?.accessToken, "phone").then((data) => {
+      deleteSubscribe(sessionData?.user?.accessToken, 'phone').then((data) => {
         if (data.data.success) {
-          setActiveVariant((prevActiveVariant) =>
-            removeFromArray(prevActiveVariant, "phone")
-          );
+          setActiveVariant((prevActiveVariant) => removeFromArray(prevActiveVariant, 'phone'));
           updateData();
         }
         setLoadingSubmit(false);
@@ -113,10 +98,10 @@ const ProfileMailing = () => {
   };
 
   return (
-    <section className={styles["profile-mailing"]}>
-      <div className={styles["profile-mailing__wrapper"]}>
-        <ProfileBlockTitle label={"Рассылка"} />
-        <div className={styles["profile-mailing__list"]}>
+    <section className={styles['profile-mailing']}>
+      <div className={styles['profile-mailing__wrapper']}>
+        <ProfileBlockTitle label={'Рассылка'} />
+        <div className={styles['profile-mailing__list']}>
           {ITEMS.map(({ id, label, value }) => (
             <Checkbox
               key={id}
