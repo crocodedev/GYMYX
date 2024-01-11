@@ -30,13 +30,8 @@
     position: absolute;
     z-index: 2;
     content: "";
-    background: linear-gradient(
-        180deg,
-        rgba(255, 255, 255, 0) 50%,
-        #294ae7 100%,
-        transparent 100%
-      ),
-      transparent -50px -66px/108.945% 106.684% no-repeat;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 15%, #294AE7 84.79%),
+    linear-gradient(0deg, #ffffff7a, #ffffff00);
 
     width: 100%;
     height: 100%;
