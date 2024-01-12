@@ -3,7 +3,7 @@
 import PageHeading from '@/Sections/Account/PageHeading';
 import NavigationTabs from '@/Sections/Account/NavigationTabs';
 import GidList from '@/Sections/Account/Gid/GidList';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Loading from '@/Components/Loading';
 import Container from '@/Components/Container';
 import { useSession } from 'next-auth/react';
@@ -30,8 +30,12 @@ const Gid = () => {
   const [renderedItems, setRenderedItems] = useState([]);
   const [gids, setGids] = useState([]);
   const [loading, setLoading] = useState(true);
+  const firstInit = useRef(false);
 
   useEffect(() => {
+    if(!sessionData?.user?.accessToken) return;
+    if(firstInit.current) return;
+    firstInit.current = true;
     setLoading(true);
     getGids(sessionData?.user?.accessToken).then(({ data }) => {
       if (data) {
