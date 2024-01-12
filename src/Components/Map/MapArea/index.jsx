@@ -3,7 +3,7 @@
 import { useRef, useState, useEffect } from 'react';
 import { YMaps, Map, Placemark } from '@pbe/react-yandex-maps';
 
-import { createSvgMarker, mapStyle, mapOptions, getCoords } from '../helpers';
+import { createSvgMarker, mapStyle, mapOptions, getCoords, createSvgMarkerCurPosition } from '../helpers';
 import styles from './MapArea.module.scss';
 
 const MapArea = ({ Placemarks, currentPlacemark, updateData }) => {
@@ -75,7 +75,15 @@ const MapArea = ({ Placemarks, currentPlacemark, updateData }) => {
           }}
         >
           {Placemarks?.map(({ id, coords }) => (
-            <Placemark key={id} geometry={getCoords(coords)} options={createSvgMarker(window.innerWidth)} />
+            <Placemark
+              key={id}
+              geometry={getCoords(coords)}
+              options={
+                id === 'curPosition'
+                  ? createSvgMarkerCurPosition(window.innerWidth)
+                  : createSvgMarker(window.innerWidth)
+              }
+            />
           ))}
         </Map>
 
