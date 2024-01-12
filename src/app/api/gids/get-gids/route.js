@@ -10,6 +10,7 @@ export async function POST(request) {
           "Content-Type": "application/json",
           Authorization: `Bearer ${requestData.token}`,
         },
+        next: {revalidate: 300}
       });
 
       if (!response.ok) {
