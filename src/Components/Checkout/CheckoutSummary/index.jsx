@@ -93,9 +93,10 @@ const CheckoutSummary = ({ items, gym }) => {
           fullSize={true}
           label={!loading ? 'Оплатить' : 'Ожидание'}
           icon={!loading ? 'arrow' : null}
-          disabled={!canSubmit|| loading}
+          disabled={!canSubmit || loading}
+          disabledShadow={true}
         />
-        <CheckoutConfirm handleChangeCanSubmit={()=>setCanSubmit(prev=>!prev)} isActive={canSubmit}/>
+        <CheckoutConfirm handleChangeCanSubmit={() => setCanSubmit((prev) => !prev)} isActive={canSubmit} />
         {error && <p className={styles['checkout-summary__summary-error']}>Произошла ошибка</p>}
       </div>
     </div>
