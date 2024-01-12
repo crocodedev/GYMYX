@@ -1,4 +1,4 @@
-@import "@/styles/mixins.scss";
+@import '@/styles/mixins.scss';
 
 .profile-field {
   position: relative;
@@ -49,6 +49,7 @@
     letter-spacing: -0.4px;
     background-color: transparent;
     border: 0;
+    font-family: '__Montserrat_cce811';
 
     @include media-breakpoint-down(lg) {
       font-size: 18px;

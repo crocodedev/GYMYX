@@ -4,7 +4,7 @@ $breakpoints-md: 768px;
 $breakpoints-lg: 992px;
 $breakpoints-xl: 1200px;
 $breakpoints-xxl: 1400px;
-$breakpoints-xxxl: 1700px;
+$breakpoints-xxxl: 1760px;
 
 $breakpoints: (
   xs: $breakpoints-xs,
@@ -40,14 +40,8 @@ $breakpoints: (
   }
 }
 
-@mixin media-breakpoint-between(
-  $lower,
-  $upper,
-  $grid-breakpoints: $breakpoints
-) {
-  @if map-has-key($grid-breakpoints, $lower) and
-    map-has-key($grid-breakpoints, $upper)
-  {
+@mixin media-breakpoint-between($lower, $upper, $grid-breakpoints: $breakpoints) {
+  @if map-has-key($grid-breakpoints, $lower) and map-has-key($grid-breakpoints, $upper) {
     $min: map-get($grid-breakpoints, $lower);
     $max: map-get($grid-breakpoints, $upper);
 
