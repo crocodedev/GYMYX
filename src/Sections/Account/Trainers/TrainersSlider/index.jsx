@@ -23,7 +23,10 @@ const TrainersSlider = () => {
   const sliderPcSettings = {
     spaceBetween: 25,
     slidesPerView: 2.2,
-    mousewheel: true,
+    mousewheel: {
+      thresholdDelta: 70,
+      forceToAxis: true, //added
+    },
     breakpoints: {
       0: {
         slidesPerView: 3,
