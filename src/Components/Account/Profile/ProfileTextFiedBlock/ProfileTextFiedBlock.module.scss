@@ -1,4 +1,4 @@
-@import "@/styles/mixins.scss";
+@import '@/styles/mixins.scss';
 
 .profile-textfied-block {
   position: relative;
@@ -56,6 +56,7 @@
     transform: rotate(135deg);
     border-radius: 50%;
     background: var(--blue-base, #294ae7);
+    box-shadow: 0px 0px 27px 30px rgb(22 23 26 / 8%);
 
     @include media-breakpoint-down(md) {
       bottom: 12px;
@@ -63,7 +64,6 @@
       width: 24px;
       height: 24px;
       padding: 5px;
-      box-shadow: 0px 0px 13.1px 0px rgba(22, 23, 26, 0.3);
     }
 
     @include media-breakpoint-between(md, xxl) {
@@ -72,9 +72,7 @@
       width: 60px;
       height: 60px;
       padding: 20px;
-      box-shadow: 0px 0px 27px 30px #16171a1f;
     }
-
 
     @include media-breakpoint-up(xxl) {
       bottom: 40px;
@@ -82,7 +80,6 @@
       width: 90px;
       height: 90px;
       padding: 20px;
-      box-shadow: 0px 0px 27px 30px rgba(22, 23, 26, 0.3);
     }
   }
 

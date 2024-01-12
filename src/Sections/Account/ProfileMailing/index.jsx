@@ -1,18 +1,10 @@
 'use client';
-
 import ProfileBlockTitle from '@/Components/Account/Profile/ProfileBlockTitle';
 import Checkbox from '@/Components/Checkbox';
 import { useEffect, useState } from 'react';
-
 import styles from './ProfileMailing.module.scss';
 import { changeSubscribe, deleteSubscribe } from './helpers';
 import { useSession } from 'next-auth/react';
-
-const ITEMS = [
-  { id: 1, label: 'E-mail', value: 'email' },
-  { id: 2, label: 'Sms', value: 'phone' },
-  { id: 3, label: 'Не получать рассылку', value: 'none' },
-];
 
 async function getUserData(token) {
   const response = await fetch('https://gymyx.cro.codes/api/users', {
@@ -20,9 +12,6 @@ async function getUserData(token) {
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
-    },
-    next: {
-      revalidate: 10,
     },
   });
 
@@ -34,16 +23,24 @@ async function getUserData(token) {
   return result?.data || null;
 }
 
-const ProfileMailing = () => {
+const ITEMS = [
+  { id: 1, label: 'E-mail', value: 'email' },
+  { id: 2, label: 'Sms', value: 'phone' },
+  { id: 3, label: 'Не получать рассылку', value: 'none' },
+];
+
+export const ProfileMailing = () => {
   const { data: sessionData } = useSession();
   const [activeVariant, setActiveVariant] = useState([]);
   const [loadingSubmit, setLoadingSubmit] = useState(false);
 
   useEffect(() => {
-    updateData();
-
+    if (!sessionData?.user?.accessToken) return;
     if (sessionData) {
-      setActiveVariant(sessionData?.user?.subscriptions);
+      setActiveVariant(sessionData.user.subscriptions);
+      setLoadingSubmit(false);
+    } else {
+      setLoadingSubmit(true);
     }
   }, [sessionData, sessionData]);
 
@@ -57,47 +54,55 @@ const ProfileMailing = () => {
     return arr.filter((item) => item !== itemToRemove);
   };
 
+  const deleteAndHandle = async (accessToken, target, variant) => {
+    try {
+      const data = await deleteSubscribe(accessToken, target);
+      if (data.data.success) {
+        setActiveVariant((prevActiveVariant) => removeFromArray(prevActiveVariant, variant));
+        updateData();
+      }
+    } catch (error) {
+      return console.error(`Error in ${variant} deletion API call:`, error);
+    }
+  };
+
   const toggleVariant = (value) => {
     if (loadingSubmit) return;
+
     setLoadingSubmit(true);
     setActiveVariant((prevActiveVariant) => [...prevActiveVariant, value]);
 
-    if (value != 'none') {
+    if (value !== 'none') {
       if (activeVariant.includes('none')) {
         setActiveVariant((prevActiveVariant) => removeFromArray(prevActiveVariant, 'none'));
       }
 
-      activeVariant.includes(value.toString())
-        ? deleteSubscribe(sessionData?.user?.accessToken, value).then((data) => {
+      if (activeVariant.includes(value.toString())) {
+        deleteSubscribe(sessionData?.user?.accessToken, value)
+          .then((data) => {
             if (data.data.success) {
               setActiveVariant((prevActiveVariant) => removeFromArray(prevActiveVariant, value));
               updateData();
             }
-            setLoadingSubmit(false);
           })
-        : changeSubscribe(sessionData?.user?.accessToken, value).then((data) => {
+          .catch((error) => console.error('Error in deletion API call:', error))
+          .finally(() => setLoadingSubmit(false));
+      } else {
+        changeSubscribe(sessionData?.user?.accessToken, value)
+          .then((data) => {
             if (data.data.success) {
               setActiveVariant((prevActiveVariant) => [...prevActiveVariant, value]);
               updateData();
             }
-            setLoadingSubmit(false);
-          });
+          })
+          .catch((error) => console.error('Error in subscription API call:', error))
+          .finally(() => setLoadingSubmit(false));
+      }
     } else {
-      deleteSubscribe(sessionData?.user?.accessToken, 'email').then((data) => {
-        if (data.data.success) {
-          setActiveVariant((prevActiveVariant) => removeFromArray(prevActiveVariant, 'email'));
-          updateData();
-        }
-        setLoadingSubmit(false);
-      });
-
-      deleteSubscribe(sessionData?.user?.accessToken, 'phone').then((data) => {
-        if (data.data.success) {
-          setActiveVariant((prevActiveVariant) => removeFromArray(prevActiveVariant, 'phone'));
-          updateData();
-        }
-        setLoadingSubmit(false);
-      });
+      Promise.all([
+        deleteAndHandle(sessionData?.user?.accessToken, 'email', 'email'),
+        deleteAndHandle(sessionData?.user?.accessToken, 'phone', 'phone'),
+      ]).finally(() => setLoadingSubmit(false));
     }
   };
 
@@ -112,6 +117,7 @@ const ProfileMailing = () => {
               value={value}
               isActive={activeVariant.includes(value)}
               toggleActive={() => toggleVariant(value)}
+              loading={loadingSubmit}
               label={label}
             />
           ))}
