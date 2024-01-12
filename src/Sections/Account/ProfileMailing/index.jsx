@@ -41,6 +41,10 @@ const ProfileMailing = () => {
 
   useEffect(() => {
     updateData();
+
+    if (sessionData) {
+      setActiveVariant(sessionData?.user?.subscriptions);
+    }
   }, [sessionData, sessionData]);
 
   const updateData = () => {

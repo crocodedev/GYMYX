@@ -1,18 +1,18 @@
-"use client";
+'use client';
 
-import PageHeading from "@/Sections/Account/PageHeading";
-import NavigationTabs from "@/Sections/Account/NavigationTabs";
-import GidList from "@/Sections/Account/Gid/GidList";
-import { useState, useEffect } from "react";
-import Loading from "@/Components/Loading";
-import Container from "@/Components/Container";
-import { useSession } from "next-auth/react";
+import PageHeading from '@/Sections/Account/PageHeading';
+import NavigationTabs from '@/Sections/Account/NavigationTabs';
+import GidList from '@/Sections/Account/Gid/GidList';
+import { useState, useEffect } from 'react';
+import Loading from '@/Components/Loading';
+import Container from '@/Components/Container';
+import { useSession } from 'next-auth/react';
 
 export const getGids = async (token) => {
-  const result = await fetch("/api/gids/get-gids", {
-    method: "POST",
+  const result = await fetch('/api/gids/get-gids', {
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({ token }),
   });
@@ -35,9 +35,7 @@ const Gid = () => {
     setLoading(true);
     getGids(sessionData?.user?.accessToken).then(({ data }) => {
       if (data) {
-        const sortedData = data
-          .slice()
-          .sort((a, b) => (b.isFavorited ? 1 : -1) - (a.isFavorited ? 1 : -1));
+        const sortedData = data.slice().sort((a, b) => (b.isFavorited ? 1 : -1) - (a.isFavorited ? 1 : -1));
         setGids(sortedData);
       }
       setLoading(false);
@@ -47,25 +45,21 @@ const Gid = () => {
   const updateData = (id = -1) => {
     if (id > -1) {
       const findedIndex = gids.findIndex((item) => item.id === id);
-      if (gids[findedIndex].isFavorited == false) {
-        const tempGids = [
-          ...gids.slice(0, findedIndex),
-          ...gids.slice(findedIndex + 1),
-        ];
-        tempGids.unshift(gids[findedIndex]);
-        setGids(tempGids);
-      } else {
-        const temp = [];
-        gids.forEach((item) => {
-          if (item.isFavorited) {
-            temp.unshift(item);
-          } else {
-            temp.push(item);
-          }
-        });
-        setGids(temp);
-      }
-      gids[findedIndex].isFavorited = !gids[findedIndex].isFavorited;
+      const tempGids = [...gids];
+
+      tempGids[findedIndex].isFavorited = !tempGids[findedIndex].isFavorited;
+
+      tempGids.sort((a, b) => {
+        if (a.isFavorited && !b.isFavorited) {
+          return -1;
+        } else if (!a.isFavorited && b.isFavorited) {
+          return 1;
+        } else {
+          return a.id - b.id;
+        }
+      });
+
+      setGids(tempGids);
     }
   };
 
@@ -105,23 +99,15 @@ const Gid = () => {
   if (loading) return <Loading full_screen={true} />;
   return (
     <div className="account-page-wrapper">
-      <PageHeading title={"Гид по тренажёрам"} />
+      <PageHeading title={'Гид по тренажёрам'} />
       {!!gids?.length ? (
         <>
-          <NavigationTabs
-            items={tags}
-            selectedTab={activeTag}
-            handleChangeTab={handleChangeTag}
-            itemIcon={null}
-          />
-          <GidList
-            items={!!renderedItems?.length ? renderedItems : gids}
-            updateData={updateData}
-          />
+          <NavigationTabs items={tags} selectedTab={activeTag} handleChangeTab={handleChangeTag} itemIcon={null} />
+          <GidList items={!!renderedItems?.length ? renderedItems : gids} updateData={updateData} />
         </>
       ) : (
         <Container>
-          <p style={{ color: "white" }}>{"Пока что здесь пусто :("}</p>
+          <p style={{ color: 'white' }}>{'Пока что здесь пусто :('}</p>
         </Container>
       )}
     </div>
