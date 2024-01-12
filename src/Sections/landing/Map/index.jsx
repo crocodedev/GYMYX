@@ -45,7 +45,6 @@ const Map = ({ alias, fields }) => {
 
       return prev;
     });
-    console.log(placemarks);
   };
 
   if (!placemarks.length) return;
