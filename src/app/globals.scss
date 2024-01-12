@@ -1,4 +1,4 @@
-@import "../styles/mixins.scss";
+@import '../styles/mixins.scss';
 
 * {
   box-sizing: border-box;
@@ -66,8 +66,9 @@ a {
 
 .booking-calendar__calendar,
 .training-calendar__calendar {
+  width: 100%;
   .p-datepicker-inline {
-    font-family: "Inter var";
+    font-family: 'Inter var';
     background: transparent;
     border: none;
 
@@ -219,10 +220,7 @@ a {
     border-radius: 17px;
   }
 
-  .p-datepicker:not(.p-disabled)
-    table
-    td
-    span:not(.p-highlight):not(.p-disabled):hover,
+  .p-datepicker:not(.p-disabled) table td span:not(.p-highlight):not(.p-disabled):hover,
   .p-datepicker table td.p-datepicker-today > span {
     background: var(--white, #ffffff36);
     color: var(--dark-grey, #37393d);
