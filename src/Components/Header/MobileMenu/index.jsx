@@ -7,7 +7,6 @@ import { useSession } from 'next-auth/react';
 import { useEffect } from 'react';
 
 const MobileMenu = ({ items, isShow, toggleVisibility }) => {
-  console.log(items);
   const { data: sessionData } = useSession();
 
   const router = useRouter();

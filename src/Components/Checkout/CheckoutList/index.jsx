@@ -13,7 +13,6 @@ const CheckoutList = ({ items }) => {
   const { data: sessionData } = useSession();
 
   const handleDeleteItem = (data) => {
-    console.log("asdasd",canDelete(items))
     if (canDelete(items)) {
       const { valueDate, valueTime } = data;
       const newVisitDates = sortVisitDates(visitDate, valueDate, valueTime);

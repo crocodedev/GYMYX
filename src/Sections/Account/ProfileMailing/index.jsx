@@ -7,20 +7,25 @@ import { changeSubscribe, deleteSubscribe } from './helpers';
 import { useSession } from 'next-auth/react';
 
 async function getUserData(token) {
-  const response = await fetch('https://gymyx.cro.codes/api/users', {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
-    },
-  });
+  try {
+    const response = await fetch('https://gymyx.cro.codes/api/users', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
-  if (!response.ok) {
-    return null;
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    const result = await response.json();
+    return result?.data || null;
+  } catch (error) {
+    console.error('Error in getUserData:', error);
+    throw error; // Re-throw the error to propagate it to the caller
   }
-
-  const result = await response.json();
-  return result?.data || null;
 }
 
 const ITEMS = [
@@ -36,17 +41,20 @@ export const ProfileMailing = () => {
 
   useEffect(() => {
     if (!sessionData?.user?.accessToken) return;
-    if (sessionData) {
-      setActiveVariant(sessionData.user.subscriptions);
+
+    setLoadingSubmit(true);
+
+    getUserData(sessionData.user.accessToken).then((data) => {
       setLoadingSubmit(false);
-    } else {
-      setLoadingSubmit(true);
-    }
-  }, [sessionData, sessionData]);
+      data.subscriptions.length > 0 ? setActiveVariant(data.subscriptions) : setActiveVariant(['none']);
+    });
+  }, [sessionData?.user?.accessToken]);
 
   const updateData = () => {
     if (sessionData) {
-      getUserData(sessionData?.user?.accessToken);
+      getUserData(sessionData?.user?.accessToken).then(() => {
+        setLoadingSubmit(false);
+      });
     }
   };
 
