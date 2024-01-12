@@ -1,21 +1,22 @@
-import { scroller } from "react-scroll";
-import Button from "@/Components/Button";
-import styles from "./MobileMenu.module.scss";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
-import { useEffect } from "react";
+import { scroller } from 'react-scroll';
+import Button from '@/Components/Button';
+import styles from './MobileMenu.module.scss';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
+import { useEffect } from 'react';
 
 const MobileMenu = ({ items, isShow, toggleVisibility }) => {
+  console.log(items);
   const { data: sessionData } = useSession();
 
   const router = useRouter();
   const handleClickMobileMenuItem = (target, link) => {
-    if (target !== "#") {
+    if (target !== '#') {
       scroller.scrollTo(target, {
         duration: 500,
         delay: 0,
-        smooth: "easeInOutQuart",
+        smooth: 'easeInOutQuart',
         offset: -70,
       });
     } else {
@@ -26,26 +27,21 @@ const MobileMenu = ({ items, isShow, toggleVisibility }) => {
   };
 
   return (
-    <div
-      className={`${styles["mobile-menu"]} ${isShow ? styles["active"] : ""}`}
-    >
-      <div className={styles["mobile-menu__wrapper"]}>
-        <div className={styles["mobile-menu__nav"]}>
+    <div className={`${styles['mobile-menu']} ${isShow ? styles['active'] : ''}`}>
+      <div className={styles['mobile-menu__wrapper']}>
+        <div className={styles['mobile-menu__nav']}>
           {items &&
             items.map((item) => {
-              const title =
-                item.find((field) => field.name === "title")?.value || "";
-              const handle =
-                item.find((field) => field.name === "handle_to")?.value || "";
+              const title = item.find((field) => field.name === 'title')?.value || '';
+              const handle = item.find((field) => field.name === 'handle_to')?.value || '';
 
-              const link =
-                item.find((field) => field.name === "link_to")?.value || "";
+              const link = item.find((field) => field.name === 'link_to')?.value || '';
 
               return (
                 <div
                   onClick={() => handleClickMobileMenuItem(handle, link)}
-                  key={`${handle !== "#" ? handle : link}-mobile`}
-                  className={styles["mobile-menu__nav-item"]}
+                  key={`${handle !== '#' ? handle : link}-mobile`}
+                  className={styles['mobile-menu__nav-item']}
                 >
                   {title}
                 </div>
@@ -53,16 +49,16 @@ const MobileMenu = ({ items, isShow, toggleVisibility }) => {
             })}
         </div>
         <div>
-          <Link href={"/account/login"}>
-            <Button variant="blue" size="l" label={"Зарегистрироваться"} />
+          <Link href={'/account/login'}>
+            <Button variant="blue" size="l" label={'Зарегистрироваться'} />
           </Link>
 
-          <div className={styles["mobile-menu__login"]}>
-            <span>У вас есть аккаунт?</span>{" "}
+          <div className={styles['mobile-menu__login']}>
+            <span>У вас есть аккаунт?</span>{' '}
             <Link href="/account/login">
               <u>Войти</u>
             </Link>
-            <span className={styles["mobile-menu__login-icon"]}>
+            <span className={styles['mobile-menu__login-icon']}>
               <img src="/icons/login.svg" alt="login icon" />
             </span>
           </div>

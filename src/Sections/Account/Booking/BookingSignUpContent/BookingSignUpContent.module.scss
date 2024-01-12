@@ -1,7 +1,12 @@
-@import "@/styles/mixins.scss";
+@import '@/styles/mixins.scss';
 
 .booking-signup-content {
   position: relative;
+
+  @include media-breakpoint-up(lg) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+  }
 
   &__wrapper {
     display: flex;
@@ -14,6 +19,7 @@
       @include media-breakpoint-up(lg) {
         margin-right: 40px;
         min-width: 720px;
+        width: 780px;
         max-width: 1214px;
       }
     }
