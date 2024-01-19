@@ -1,14 +1,13 @@
-import SectionTitle from "../../../Components/SectionTitle";
-import Container from "../../../Components/Container";
-import styles from "./Prices.module.scss";
-import PriceLabel from "../../../Components/Prices/PriceLabel";
-import PricesList from "../../../Components/Prices/PricesList";
+import SectionTitle from '../../../Components/SectionTitle';
+import Container from '../../../Components/Container';
+import styles from './Prices.module.scss';
+import PriceLabel from '../../../Components/Prices/PriceLabel';
+import PricesList from '../../../Components/Prices/PricesList';
 
 const Prices = ({ alias, fields }) => {
-  const title = fields.find((item) => item.name === "title")?.value || "";
-  const list = fields.find((item) => item.name === "list")?.value || [];
-  const first_training_session =
-    fields.find((item) => item.name === "first_training_session")?.value || 0;
+  const title = fields.find((item) => item.name === 'title')?.value || '';
+  const list = fields.find((item) => item.name === 'list')?.childrens || [];
+  const first_training_session = fields.find((item) => item.name === 'first_training_session')?.value || 0;
 
   const listItems = list.map((item) => {
     return { value: item[0].value };

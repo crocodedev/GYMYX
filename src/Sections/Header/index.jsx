@@ -17,9 +17,9 @@ const Header = ({ isLanding = false, data }) => {
   const pathname = usePathname();
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [userData, setUserData] = useState(null);
-  const fields = data?.section?.fields;
+  const fields = data?.fields;
   const logo = fields.find((field) => field.name === 'logo')?.value;
-  const menu = fields.find((field) => field.name === 'Menu')?.value;
+  const menu = fields.find((field) => field.name === 'Menu')?.childrens;
 
   const handleMobileMenuToggle = () => {
     setMobileMenuOpen(!isMobileMenuOpen);

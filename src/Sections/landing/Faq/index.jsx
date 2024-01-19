@@ -1,25 +1,26 @@
-"use client";
+'use client';
 
-import Container from "@/Components/Container";
-import FaqItem from "@/Components/Faq/FaqItem";
-import styles from "./Faq.module.scss";
-import { useEffect, useState } from "react";
-import Button from "@/Components/Button";
+import Container from '@/Components/Container';
+import FaqItem from '@/Components/Faq/FaqItem';
+import styles from './Faq.module.scss';
+import { useEffect, useState } from 'react';
+import Button from '@/Components/Button';
 
 const Faq = ({ alias, fields }) => {
   const [items, setItems] = useState([]);
   const [countShow, setCountShow] = useState(5);
-  const title = fields.find((item) => item.name === "title")?.value || "";
+  const title = fields.find((item) => item.name === 'title')?.value || '';
 
   const handleShowMore = () => {
     setCountShow((prev) => prev + 5);
   };
 
   useEffect(() => {
-    const list = fields.find((item) => item.name === "items")?.value;
+    const list = fields.find((item) => item.name === 'items')?.childrens;
+
     const items = list.map((item, index) => {
-      const title = item.find((field) => field.name === "title")?.value || "";
-      const text = item.find((field) => field.name === "text")?.value || "";
+      const title = item.find((field) => field.name === 'title')?.value || '';
+      const text = item.find((field) => field.name === 'text')?.value || '';
 
       return {
         id: index,
@@ -42,11 +43,7 @@ const Faq = ({ alias, fields }) => {
           </div>
           {countShow < items.length && (
             <div className={styles.faq__controls}>
-              <Button
-                onClick={handleShowMore}
-                label={"Показать ещё"}
-                variant="blue"
-              />
+              <Button onClick={handleShowMore} label={'Показать ещё'} variant="blue" />
             </div>
           )}
         </div>

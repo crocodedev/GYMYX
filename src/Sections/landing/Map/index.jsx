@@ -29,7 +29,7 @@ const Map = ({ alias, fields }) => {
   const [currentPlacemark, setCurrentPlacemark] = useState({});
 
   useEffect(() => {
-    const items = fields.find((item) => item.name === 'items')?.value || [];
+    const items = fields.find((item) => item.name === 'items')?.childrens || [];
     const placemarksTemp = preparePlacemarks(items);
     setPlacemarks(placemarksTemp);
     setCurrentPlacemark(placemarksTemp[0]);
