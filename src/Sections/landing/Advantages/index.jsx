@@ -15,7 +15,7 @@ const Advantages = ({ alias, fields }) => {
 
     return {
       id: index,
-      image: image?.value?.src || '',
+      image: image?.value || '',
       title: title?.value || '',
       text: subtitle?.value || '',
       alt: title?.value || '',

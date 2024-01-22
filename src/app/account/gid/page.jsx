@@ -33,8 +33,8 @@ const Gid = () => {
   const firstInit = useRef(false);
 
   useEffect(() => {
-    if(!sessionData?.user?.accessToken) return;
-    if(firstInit.current) return;
+    if (!sessionData?.user?.accessToken) return;
+    if (firstInit.current) return;
     firstInit.current = true;
     setLoading(true);
     getGids(sessionData?.user?.accessToken).then(({ data }) => {

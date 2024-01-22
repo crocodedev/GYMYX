@@ -88,14 +88,14 @@ const MapArea = ({ Placemarks, currentPlacemark, updateData }) => {
         </Map>
 
         <div className={styles['map-area__btns-zoom']}>
-          <button onClick={handleZoomIn} className={styles['map-area__btn-zoom']}>
+          <button onClick={handleZoomIn} className={styles['map-area__btn-zoom']} aria-label="Ближе">
             +
           </button>
-          <button onClick={handleZoomOut} className={styles['map-area__btn-zoom']}>
+          <button onClick={handleZoomOut} className={styles['map-area__btn-zoom']} aria-label="Дальше">
             -
           </button>
         </div>
-        <button onClick={handleGeolocation} className={styles['map-area__btn-geo']}>
+        <button onClick={handleGeolocation} className={styles['map-area__btn-geo']} aria-label="Геопозиция">
           <svg xmlns="http://www.w3.org/2000/svg" width="67" height="67" viewBox="0 0 67 67" fill="none">
             <circle cx="33.3776" cy="33.2838" r="33.2838" fill="#212428" />
             <path

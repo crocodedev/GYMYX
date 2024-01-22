@@ -20,7 +20,7 @@ const Footer = ({ data }) => {
           <div className={styles['footer__inner-wrapper']}>
             <div className={styles.footer__leftside}>
               <div className={styles.footer__logo}>
-                <Image src={logo.src} width={700} height={120} quality={100} alt="footer logo" />
+                <Image src={logo} width={700} height={120} quality={100} alt="footer logo" />
               </div>
               <div className={styles.footer__socials}>
                 {socials.map((item) => {
