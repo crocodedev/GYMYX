@@ -25,7 +25,7 @@ const Hero = ({ alias, fields }) => {
     <section id={alias} className={styles.hero}>
       <picture className={styles.hero__img}>
         <source media="(max-width: 768px)" srcSet={image_mobile?.value} />
-        <Image src={image?.value} width={1920} height={1080} quality={100} alt={title} />
+        <Image src={image?.value} width={1920} height={1080} quality={100} alt={title} loading="lazy" />
       </picture>
 
       <div className={styles['hero__content-wrapper']}>
