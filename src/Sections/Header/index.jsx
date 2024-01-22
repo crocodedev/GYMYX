@@ -17,9 +17,9 @@ const Header = ({ isLanding = false, data }) => {
   const pathname = usePathname();
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [userData, setUserData] = useState(null);
-  const fields = data?.section?.fields;
+  const fields = data?.fields;
   const logo = fields.find((field) => field.name === 'logo')?.value;
-  const menu = fields.find((field) => field.name === 'Menu')?.value;
+  const menu = fields.find((field) => field.name === 'Menu')?.childrens;
 
   const handleMobileMenuToggle = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
@@ -40,8 +40,8 @@ const Header = ({ isLanding = false, data }) => {
   return (
     <header className={`${styles.header} ${isLanding ? styles['is-landing'] : ''}`}>
       <div className={styles.header__wrapper}>
-        <Link href="/" className={styles.header__logo}>
-          <Image alt="" width={200} height={50} src={logo?.src || ''} />
+        <Link href="/" className={styles.header__logo} aria-label="Вернуться на главную">
+          <Image alt="logo" width={200} height={50} src={logo || ''} aria-label="Логотип" />
         </Link>
         <div className={styles.header__nav}>
           {menu.slice(0, 5).map((item) => {
@@ -50,7 +50,6 @@ const Header = ({ isLanding = false, data }) => {
             const handle = item.find((field) => field.name === 'handle_to')?.value || '';
 
             const link = item.find((field) => field.name === 'link_to')?.value || '';
-
             if (handle !== '#') {
               return (
                 <ScrollLink

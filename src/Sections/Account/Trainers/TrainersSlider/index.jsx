@@ -71,7 +71,7 @@ const TrainersSlider = () => {
     isMobile ? handleInit : setSliderSettings(sliderPcSettings);
 
     getTrainersData().then((dataTrainers) => {
-      setDataTrainers(dataTrainers.data.modules[0].section.fields[0]);
+      setDataTrainers(dataTrainers.data.modules[0].fields[0]);
       setLoading(false);
     });
   }, []);
@@ -98,11 +98,10 @@ const TrainersSlider = () => {
           onSlideChange={onChangeSlide}
           onSwiper={handleInit}
           a11y={false}
-          autoHeight
           mousewheel={true}
           {...sliderSettings}
         >
-          {dataTrainers.value.map((dataTrainers, index) => (
+          {dataTrainers.childrens.map((dataTrainers, index) => (
             <SwiperSlide className={styles['trainers-item']} key={dataTrainers[0].value}>
               <TrainersItem data={dataTrainers} key={index} />
             </SwiperSlide>
@@ -110,7 +109,7 @@ const TrainersSlider = () => {
         </Swiper>
       ) : (
         <div className={styles['trainers-slider__items']}>
-          {dataTrainers.value.map((dataTrainers, index) => (
+          {dataTrainers.childrens.map((dataTrainers, index) => (
             <TrainersItem key={index} className={styles['trainers-item']} data={dataTrainers} />
           ))}
         </div>

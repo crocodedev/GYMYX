@@ -1,36 +1,34 @@
-import { Montserrat } from "next/font/google"
-import "./../globals.scss"
+import { Montserrat } from 'next/font/google';
+import './../globals.scss';
 
-import { Providers } from "@/Components/Providers"
-const MontserratFont = Montserrat({ subsets: ["latin"] })
-import Header from "@/Sections/Header"
-import MobileBar from "@/Components/MobileBar"
+import { Providers } from '@/Components/Providers';
+const MontserratFont = Montserrat({ subsets: ['latin'] });
+import Header from '@/Sections/Header';
+import MobileBar from '@/Components/MobileBar';
 
 export const metadata = {
-  title: "GYMYX",
-  description: "GYMYX",
-  manifest: '/manifest.json'
-}
+  title: 'GYMYX',
+  description: 'GYMYX',
+  manifest: '/manifest.json',
+};
 
 async function getData() {
-  const res = await fetch("https://gymyx.cro.codes/api/pages/account", {
+  const res = await fetch('https://gymyx.cro.codes/api/pages/account', {
     next: {
       revalidate: 60,
     },
-  })
+  });
 
   if (!res.ok) {
-    throw new Error("Failed to fetch data")
+    throw new Error('Failed to fetch data');
   }
 
-  return res.json()
+  return res.json();
 }
 
 export default async function AccountLayout({ children }) {
-  const { data } = await getData()
-  const headerData = data.modules.find(
-    (item) => item.section.alias === "account_header"
-  )
+  const { data } = await getData();
+  const headerData = data.modules.find((item) => item.alias === 'account_header');
 
   return (
     <html lang="en">
@@ -42,5 +40,5 @@ export default async function AccountLayout({ children }) {
         </Providers>
       </body>
     </html>
-  )
+  );
 }

@@ -5,6 +5,7 @@ import styles from './TrainersItem.module.scss';
 import Button from '@/Components/Button';
 
 const TrainersItem = ({ data, className }) => {
+  console.log(data);
   const [showMore, setShowMore] = useState(false);
 
   const handleShow = () => {
@@ -18,7 +19,7 @@ const TrainersItem = ({ data, className }) => {
   return (
     <div className={className}>
       <div className={styles['trainers-item__img-wrapper']}>
-        <img src="/images/advantagesjpeg.jpeg" alt="" className={styles['trainers-item__img']} />
+        <img src={data[5].value} alt="" className={styles['trainers-item__img']} />
       </div>
       <div className={styles['trainers-item__text-wrapper']}>
         <div className={styles['trainers-item__text-inner']}>
