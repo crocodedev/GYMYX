@@ -13,7 +13,7 @@ const ChooseHealth = ({ alias, fields }) => {
       <Container size="XL">
         <picture className={styles['choose-health__image']}>
           <source media="(max-width: 992px)" srcSet={image_mobile} />
-          <Image src={image} alt="choose health image" width={1920} height={1080} quality={100} />
+          <Image src={image} alt="choose health image" width={1920} height={1080} quality={100} loading="lazy" />
         </picture>
       </Container>
     </section>
