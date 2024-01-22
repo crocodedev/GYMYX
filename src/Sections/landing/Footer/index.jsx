@@ -20,7 +20,7 @@ const Footer = ({ data }) => {
           <div className={styles['footer__inner-wrapper']}>
             <div className={styles.footer__leftside}>
               <div className={styles.footer__logo}>
-                <Image src={logo} width={700} height={120} quality={100} alt="footer logo" />
+                <Image src={logo} width={700} height={120} quality={100} alt="footer logo" loading="lazy" />
               </div>
               <div className={styles.footer__socials}>
                 {socials.map((item) => {
@@ -28,7 +28,7 @@ const Footer = ({ data }) => {
                   const image = item.find((field) => field.name === 'image')?.value?.src || '';
                   return (
                     <Link key={url} href={url} className={styles['footer__socials-item']}>
-                      <Image src={image} width={60} height={60} quality={100} alt="social logo" />
+                      <Image src={image} width={60} height={60} quality={100} alt="social logo" loading="lazy" />
                     </Link>
                   );
                 })}
