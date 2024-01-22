@@ -61,7 +61,14 @@ const Map = ({ alias, fields }) => {
               <p className={styles.map__subtitle}>{currentPlacemark?.subtitle}</p>
               <p className={styles.map__text}>{currentPlacemark?.address}</p>
             </div>
-            <Button className={styles.map__btn} size="l" variant="blue" label="Выбрать" icon="arrow" />
+            <Button
+              className={styles.map__btn}
+              size="l"
+              variant="blue"
+              label="Выбрать"
+              icon="arrow"
+              ariaLabel={'Выбрать зал'}
+            />
           </div>
         </div>
       </Container>

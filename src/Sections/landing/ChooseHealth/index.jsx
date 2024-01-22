@@ -7,7 +7,7 @@ import Image from 'next/image';
 const ChooseHealth = ({ alias, fields }) => {
   const image = fields.find((item) => item.name === 'image')?.value || '';
   const image_mobile = fields.find((item) => item.name === 'image_mobile')?.value || '';
-  console.log(fields);
+
   return (
     <section id={alias} className={styles['choose-health']}>
       <Container size="XL">
