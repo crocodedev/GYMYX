@@ -1,0 +1,31 @@
+@import '@/styles/mixins.scss';
+
+.studio {
+  @include media-breakpoint-down(md) {
+    padding: 40px 0;
+  }
+
+  @include media-breakpoint-up(md) {
+    padding: 80px 0;
+  }
+
+  &__title-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 70px;
+
+    & > :first-child {
+      margin-right: 30px;
+    }
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__iframe {
+    height: 800px;
+  }
+}
