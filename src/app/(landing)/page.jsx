@@ -6,6 +6,7 @@ import ChooseHealth from '@/Sections/landing/ChooseHealth';
 import Equipment from '@/Sections/landing/Equipment';
 import Map from '@/Sections/landing/Map';
 import Faq from '@/Sections/landing/Faq';
+import Studio from '@/Sections/landing/Studio';
 
 async function getData() {
   const res = await fetch('https://gymyx.cro.codes/api/pages/index', {
@@ -27,6 +28,7 @@ const SECTION_MAP = {
   advantages: (props) => <Advantages {...props} />,
   Prices: (props) => <Prices {...props} />,
   banner_photo: (props) => <ChooseHealth {...props} />,
+  studio: (props) => <Studio {...props} />,
   Equipment: (props) => <Equipment {...props} />,
   map: (props) => <Map {...props} />,
   faq: (props) => <Faq {...props} />,
