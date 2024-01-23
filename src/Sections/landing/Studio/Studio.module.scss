@@ -13,10 +13,26 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-bottom: 70px;
+
+    @include media-breakpoint-down(lg) {
+      padding-bottom: 25px;
+    }
+
+    @include media-breakpoint-between(lg, xxl) {
+      padding-bottom: 50px;
+    }
+
+    @include media-breakpoint-up(xxl) {
+      padding-bottom: 70px;
+    }
 
     & > :first-child {
-      margin-right: 30px;
+      @include media-breakpoint-down(lg) {
+        margin-right: 15px;
+      }
+      @include media-breakpoint-up(lg) {
+        margin-right: 30px;
+      }
     }
   }
 
@@ -26,6 +42,12 @@
   }
 
   &__iframe {
-    height: 800px;
+    @include media-breakpoint-down(xl) {
+      height: 520px;
+    }
+
+    @include media-breakpoint-up(xl) {
+      height: 800px;
+    }
   }
 }
