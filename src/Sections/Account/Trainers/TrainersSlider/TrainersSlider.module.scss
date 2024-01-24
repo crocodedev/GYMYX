@@ -55,13 +55,13 @@
     border-radius: 30px;
   }
 
-  @include media-breakpoint-between(lg, xxl) {
-    max-height: 650px;
-    min-height: 650px;
-    height: 650px;
+  @include media-breakpoint-between(lg, xxxl) {
+    max-height: 610px;
+    min-height: 610px;
+    height: 610px;
   }
 
-  @include media-breakpoint-up(xxl) {
+  @include media-breakpoint-up(xxxl) {
     max-height: 750px;
     min-height: 750px;
     height: 750px;

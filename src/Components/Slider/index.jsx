@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import { Swiper, SwiperSlide } from "swiper/react";
-import AdvantagesItem from "../Advantages/AdvantagesItem";
-import SectionTitle from "../SectionTitle";
-import SliderControls from "./SliderControls";
-import styles from "./Slider.module.scss";
-import "swiper/css";
-import { useRef, useState, useEffect, useLayoutEffect } from "react";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import AdvantagesItem from '../Advantages/AdvantagesItem';
+import SectionTitle from '../SectionTitle';
+import SliderControls from './SliderControls';
+import styles from './Slider.module.scss';
+import 'swiper/css';
+import { useRef, useState, useEffect, useLayoutEffect } from 'react';
 
-import { EffectCards } from "swiper/modules";
+import { EffectCards } from 'swiper/modules';
 
 const sliderMobileSettings = {
-  effect: "cards",
+  effect: 'cards',
   centeredSlides: true,
   loop: true,
 };
@@ -31,9 +31,14 @@ const sliderPcSettings = {
       slidesPerView: 3,
     },
 
-    1400: {
+    1440: {
+      spaceBetween: 30,
+      slidesPerView: 3.1,
+    },
+
+    1920: {
       spaceBetween: 40,
-      slidesPerView: 3,
+      slidesPerView: 3.1,
     },
   },
 };
@@ -62,7 +67,7 @@ const Slider = ({ title, items }) => {
   };
 
   useEffect(() => {
-    const isMobile = window.matchMedia("(max-width: 992px)").matches;
+    const isMobile = window.matchMedia('(max-width: 992px)').matches;
     setSliderSettings(isMobile ? sliderMobileSettings : sliderPcSettings);
   }, []);
 

@@ -1,4 +1,4 @@
-@import "@/styles/mixins.scss";
+@import '@/styles/mixins.scss';
 
 .title {
   color: var(--white, #fff);
@@ -25,12 +25,12 @@
     letter-spacing: -0.4px;
   }
 
-  @include media-breakpoint-between(xl, xxl) {
+  @include media-breakpoint-between(xl, xxxl) {
     font-size: 44px;
     letter-spacing: -0.5px;
   }
 
-  @include media-breakpoint-up(xxl) {
+  @include media-breakpoint-up(xxxl) {
     font-size: 66px;
     letter-spacing: -0.66px;
   }

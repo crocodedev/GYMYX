@@ -14,9 +14,10 @@ const Footer = ({ data }) => {
 
   return (
     <footer className={styles.footer}>
-      <div className={styles.footer__wrapper}>
-        <img className={styles.footer__bg} src="/images/footer_bg.png" alt="" />
-        <Container>
+      <Container size="xlf">
+        <div className={styles.footer__wrapper}>
+          <img className={styles.footer__bg} src="/images/footer_bg.png" alt="" />
+
           <div className={styles['footer__inner-wrapper']}>
             <div className={styles.footer__leftside}>
               <div className={styles.footer__logo}>
@@ -52,8 +53,8 @@ const Footer = ({ data }) => {
               </div>
             </div>
           </div>
-        </Container>
-      </div>
+        </div>
+      </Container>
     </footer>
   );
 };

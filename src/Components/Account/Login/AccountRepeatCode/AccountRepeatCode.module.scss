@@ -1,4 +1,4 @@
-@import "@/styles/mixins.scss";
+@import '@/styles/mixins.scss';
 
 .account-repeat-code {
   position: relative;
@@ -20,10 +20,14 @@
     }
 
     @include media-breakpoint-between(md, xl) {
-      font-size: 16px;
+      font-size: 18px;
     }
 
-    @include media-breakpoint-up(xl) {
+    @include media-breakpoint-between(xl, xxxl) {
+      font-size: 22px;
+    }
+
+    @include media-breakpoint-up(xxxl) {
       font-size: 26px;
     }
 

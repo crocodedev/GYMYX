@@ -1,4 +1,4 @@
-@import "@/styles/mixins.scss";
+@import '@/styles/mixins.scss';
 
 .profile-mailing {
   background: var(--white-transperent, rgba(255, 255, 255, 0.1));
@@ -15,12 +15,20 @@
     border-radius: 25px;
   }
 
-  @include media-breakpoint-up(xl) {
+  @include media-breakpoint-between(xl, xxxl) {
+    padding: 30px 30px 39px 30px;
+    border-radius: 22px;
+  }
+
+  @include media-breakpoint-up(xxxl) {
     padding: 40px 40px 52px 40px;
     border-radius: 30px;
   }
 
   &__wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 
   &__list {
@@ -37,7 +45,12 @@
       row-gap: 20px;
     }
 
-    @include media-breakpoint-up(xl) {
+    @include media-breakpoint-between(xl, xxxl) {
+      margin-top: 40px;
+      row-gap: 18px;
+    }
+
+    @include media-breakpoint-up(xxxl) {
       margin-top: 52px;
       row-gap: 24px;
     }

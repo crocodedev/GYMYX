@@ -1,4 +1,4 @@
-@import "@/styles/mixins.scss";
+@import '@/styles/mixins.scss';
 
 .prices-list-item {
   &__price-value {
@@ -40,11 +40,11 @@
       font-size: 50px;
     }
 
-    @include media-breakpoint-between(xl, xxl) {
-      font-size: 76px;
+    @include media-breakpoint-between(xl, xxxl) {
+      font-size: 75px;
     }
 
-    @include media-breakpoint-up(xxl) {
+    @include media-breakpoint-up(xxxl) {
       font-size: 100px;
     }
   }

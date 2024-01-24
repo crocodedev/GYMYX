@@ -1,4 +1,4 @@
-@import "@/styles/mixins.scss";
+@import '@/styles/mixins.scss';
 
 .equipment {
   position: relative;
@@ -28,7 +28,11 @@
       gap: 20px;
     }
 
-    @include media-breakpoint-up(xl) {
+    @include media-breakpoint-between(xl, xxxl) {
+      gap: 30px;
+    }
+
+    @include media-breakpoint-up(xxxl) {
       gap: 40px;
     }
 

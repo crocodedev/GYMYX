@@ -1,4 +1,4 @@
-@import "@/styles/mixins.scss";
+@import '@/styles/mixins.scss';
 
 .map {
   position: relative;
@@ -31,10 +31,18 @@
     }
 
     @include media-breakpoint-up(xl) {
-      padding: 58px;
-      gap: 68px;
       border-radius: 30px;
       grid-template-columns: 2fr 1fr;
+    }
+
+    @include media-breakpoint-between(xl, xxxl) {
+      padding: 45px;
+      gap: 45px;
+    }
+
+    @include media-breakpoint-up(xxxl) {
+      padding: 58px;
+      gap: 68px;
     }
   }
 

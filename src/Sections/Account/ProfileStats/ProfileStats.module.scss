@@ -1,4 +1,4 @@
-@import "@/styles/mixins.scss";
+@import '@/styles/mixins.scss';
 
 .profile-stats {
   &__wrapper {
@@ -10,7 +10,12 @@
       border-radius: 15px;
     }
 
-    @include media-breakpoint-up(lg) {
+    @include media-breakpoint-between(lg, xxxl) {
+      padding: 30px 30px 30px 22px;
+      border-radius: 22px;
+    }
+
+    @include media-breakpoint-up(xxxl) {
       padding: 40px 40px 40px 30px;
       border-radius: 30px;
     }
@@ -21,7 +26,11 @@
       margin-top: 20px;
     }
 
-    @include media-breakpoint-up(lg) {
+    @include media-breakpoint-between(lg, xxxl) {
+      margin-top: 30px;
+    }
+
+    @include media-breakpoint-up(xxxl) {
       margin-top: 40px;
     }
 
