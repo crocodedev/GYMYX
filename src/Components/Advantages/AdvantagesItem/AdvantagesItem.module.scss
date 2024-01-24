@@ -1,4 +1,4 @@
-@import "@/styles/mixins.scss";
+@import '@/styles/mixins.scss';
 
 .advantages-item {
   position: relative;
@@ -26,7 +26,7 @@
   }
 
   @include media-breakpoint-between(xxl, xxxl) {
-    height: 600px;
+    height: 610px;
   }
 
   @include media-breakpoint-up(xxxl) {
@@ -71,15 +71,10 @@
     }
 
     &::after {
-      content: "";
+      content: '';
       position: absolute;
       border-radius: inherit;
-      background: linear-gradient(
-          180deg,
-          rgba(255, 255, 255, 0) 50%,
-          #294ae7 100%,
-          transparent 100%
-        ),
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0) 50%, #294ae7 100%, transparent 100%),
         transparent -50px -66px/108.945% 106.684% no-repeat;
       top: 0;
       left: 0;

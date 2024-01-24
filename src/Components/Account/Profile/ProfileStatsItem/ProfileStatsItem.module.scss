@@ -1,4 +1,4 @@
-@import "@/styles/mixins.scss";
+@import '@/styles/mixins.scss';
 
 .profile-stats-item {
   position: relative;
@@ -34,7 +34,13 @@
       border-radius: 16px;
     }
 
-    @include media-breakpoint-up(xxl) {
+    @include media-breakpoint-between(xxl, xxxl) {
+      height: 293px;
+      width: 25px;
+      border-radius: 12px;
+    }
+
+    @include media-breakpoint-up(xxxl) {
       height: 394px;
       width: 34px;
       border-radius: 16px;
@@ -47,7 +53,7 @@
     }
 
     &::after {
-      content: "";
+      content: '';
       position: absolute;
       left: 0;
       bottom: 0;
@@ -92,7 +98,11 @@
       font-size: 22px;
     }
 
-    @include media-breakpoint-up(xxl) {
+    @include media-breakpoint-between(xxl, xxxl) {
+      font-size: 24px;
+    }
+
+    @include media-breakpoint-up(xxxl) {
       font-size: 30px;
     }
   }

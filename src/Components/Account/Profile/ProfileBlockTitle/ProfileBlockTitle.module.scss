@@ -1,4 +1,4 @@
-@import "@/styles/mixins.scss";
+@import '@/styles/mixins.scss';
 
 .profile-block-title {
   color: var(--white, #fff);
@@ -14,7 +14,11 @@
     font-size: 28px;
   }
 
-  @include media-breakpoint-up(xxl) {
+  @include media-breakpoint-between(xxl, xxxl) {
+    font-size: 30px;
+  }
+
+  @include media-breakpoint-up(xxxl) {
     font-size: 40px;
   }
 }
