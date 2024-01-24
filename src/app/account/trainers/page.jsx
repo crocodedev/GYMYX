@@ -1,15 +1,15 @@
-import { useSession } from "next-auth/react";
-import Loading from "@/Components/Loading";
-import Container from "@/Components/Container";
-import TrainersSlider from "@/Sections/Account/Trainers/TrainersSlider";
+import { useSession } from 'next-auth/react';
+import Loading from '@/Components/Loading';
+import Container from '@/Components/Container';
+import TrainersSlider from '@/Sections/Account/Trainers/TrainersSlider';
 
 export const getTrainersData = async () => {
-  const res = await fetch("https://gymyx.cro.codes/api/pages/trainers");
+  const res = await fetch('https://gymyx.cro.codes/api/pages/trainers', { cache: 'no-store' });
 
   const response = await res.json();
 
   if (!res.ok) {
-    throw new Error("Failed to fetch data");
+    throw new Error('Failed to fetch data');
   }
   return response;
 };

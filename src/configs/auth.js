@@ -1,4 +1,4 @@
-import CredentialsProvider from "next-auth/providers/credentials";
+import CredentialsProvider from 'next-auth/providers/credentials';
 
 export const authConfig = {
   providers: [
@@ -6,10 +6,11 @@ export const authConfig = {
       authorize: async (credentials) => {
         const { token } = credentials;
 
-        const response = await fetch("https://gymyx.cro.codes/api/users", {
-          method: "GET",
+        const response = await fetch('https://gymyx.cro.codes/api/users', {
+          method: 'GET',
+          cache: 'no-store',
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
           },
         });
@@ -30,16 +31,16 @@ export const authConfig = {
   ],
   secret: process.env.NEXTAUTH_SECRET,
   session: {
-    strategy: "jwt",
+    strategy: 'jwt',
     maxAge: 10 * 24 * 60 * 60,
   },
   pages: {
-    signOut: "/account/login",
-    signIn: "/account/login",
+    signOut: '/account/login',
+    signIn: '/account/login',
   },
   callbacks: {
     async jwt({ trigger, token, user, account, session }) {
-      if (trigger === "update") {
+      if (trigger === 'update') {
         return {
           ...token,
           ...session,

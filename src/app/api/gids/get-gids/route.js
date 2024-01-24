@@ -6,6 +6,7 @@ export async function POST(request) {
 
       const response = await fetch('https://gymyx.cro.codes/api/exercisers', {
         method: 'GET',
+        cache: 'no-store',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${requestData.token}`,

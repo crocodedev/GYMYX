@@ -14,6 +14,7 @@ export const metadata = {
 
 async function getData() {
   const res = await fetch('https://gymyx.cro.codes/api/pages/account', {
+    cache: 'no-store',
     next: {
       revalidate: 60,
     },

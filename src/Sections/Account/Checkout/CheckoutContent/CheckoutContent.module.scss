@@ -1,4 +1,4 @@
-@import "@/styles/mixins.scss";
+@import '@/styles/mixins.scss';
 
 .checkout-content {
   position: relative;
@@ -12,7 +12,7 @@
     }
 
     @include media-breakpoint-up(md) {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: calc(50% - 20px) calc(50% - 20px);
       gap: 40px;
     }
   }
