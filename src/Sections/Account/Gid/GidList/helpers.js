@@ -1,8 +1,9 @@
 export async function addFavoriteExerciser(token, exerciser) {
-  const result = await fetch("/api/gids/add-favorite", {
-    method: "POST",
+  const result = await fetch('/api/gids/add-favorite', {
+    method: 'POST',
+    cache: 'no-store',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({ token, exerciser }),
   });
@@ -14,10 +15,11 @@ export async function addFavoriteExerciser(token, exerciser) {
 }
 
 export async function deleteFavoriteExerciser(token, exerciser) {
-  const result = await fetch("/api/gids/delete-favorite", {
-    method: "POST",
+  const result = await fetch('/api/gids/delete-favorite', {
+    method: 'POST',
+    cache: 'no-store',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({ token, exerciser }),
   });
@@ -29,10 +31,11 @@ export async function deleteFavoriteExerciser(token, exerciser) {
 }
 
 export async function addWatchedExerciser(token, exerciser) {
-  const result = await fetch("/api/gids/add-watched", {
-    method: "POST",
+  const result = await fetch('/api/gids/add-watched', {
+    method: 'POST',
+    cache: 'no-store',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({ token, exerciser }),
   });

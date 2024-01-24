@@ -1,28 +1,26 @@
-"use client";
+'use client';
 
-import { useSession } from "next-auth/react";
-import { useEffect, useRef, useState } from "react";
+import { useSession } from 'next-auth/react';
+import { useEffect, useRef, useState } from 'react';
 
-import PageHeading from "@/Sections/Account/PageHeading";
-import NavigationTabs from "@/Sections/Account/NavigationTabs";
-import TrainingContent from "@/Sections/Account/Training/TrainingContent";
-import TrainingCalendar from "@/Sections/Account/Training/TrainingCalendar";
-import TrainingItems from "@/Sections/Account/Training/TrainingItems";
-import Loading from "@/Components/Loading";
-import { formatDate } from "@/Utils/helpers";
-import Modal from "@/Components/Modal";
-import Button from "@/Components/Button";
+import PageHeading from '@/Sections/Account/PageHeading';
+import NavigationTabs from '@/Sections/Account/NavigationTabs';
+import TrainingContent from '@/Sections/Account/Training/TrainingContent';
+import TrainingCalendar from '@/Sections/Account/Training/TrainingCalendar';
+import TrainingItems from '@/Sections/Account/Training/TrainingItems';
+import Loading from '@/Components/Loading';
+import { formatDate } from '@/Utils/helpers';
+import Modal from '@/Components/Modal';
+import Button from '@/Components/Button';
 
-import {
-  cancelBooking,
-  canDelete,
-} from "@/Sections/Account/ProfileTrainings/helpers";
+import { cancelBooking, canDelete } from '@/Sections/Account/ProfileTrainings/helpers';
 
 export const getTrainingData = async (token) => {
-  const result = await fetch("/api/booking/get-bookings", {
-    method: "POST",
+  const result = await fetch('/api/booking/get-bookings', {
+    method: 'POST',
+    cache: 'no-store',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({ token }),
   });
@@ -34,8 +32,8 @@ export const getTrainingData = async (token) => {
 };
 
 const TABS = [
-  { id: 0, title: "Предстоящие" },
-  { id: 1, title: "Архив" },
+  { id: 0, title: 'Предстоящие' },
+  { id: 1, title: 'Архив' },
 ];
 
 const concateDateTime = (date, time) => {
@@ -73,9 +71,7 @@ const Training = () => {
 
   const updateDate = () => {
     if (!sessionData?.user?.accessToken) return;
-    const result = sortedTrainingsDates.filter(
-      ({ date }) => date === selectedDate.date
-    );
+    const result = sortedTrainingsDates.filter(({ date }) => date === selectedDate.date);
 
     setLatestDataTrainings(result);
     getTrainingData(sessionData?.user?.accessToken).then(({ data = [] }) => {
@@ -85,9 +81,7 @@ const Training = () => {
   };
 
   const handleChangeSelectedDate = (value) => {
-    const selectedDateTemp = allTrainingsDates.filter(
-      ({ date }) => formatDate(date) === formatDate(value)
-    );
+    const selectedDateTemp = allTrainingsDates.filter(({ date }) => formatDate(date) === formatDate(value));
     if (!selectedDateTemp?.length) return;
 
     setSelectedDate(selectedDateTemp[0]);
@@ -97,14 +91,10 @@ const Training = () => {
     let returnedData = [];
     if (tab_id === 0) {
       //ПРЕДСТОЯЩИЕ
-      returnedData = data.filter(
-        ({ date, time }) => concateDateTime(date, time) >= new Date()
-      );
+      returnedData = data.filter(({ date, time }) => concateDateTime(date, time) >= new Date());
     } else {
       //АРХИВ
-      returnedData = data.filter(
-        ({ date, time }) => concateDateTime(date, time) < new Date()
-      );
+      returnedData = data.filter(({ date, time }) => concateDateTime(date, time) < new Date());
     }
 
     return returnedData;
@@ -143,35 +133,21 @@ const Training = () => {
   return (
     <>
       {showModal && (
-        <Modal
-          handleClose={handleShow}
-          text={"Вы точно хотите отменить тренировку?"}
-        >
+        <Modal handleClose={handleShow} text={'Вы точно хотите отменить тренировку?'}>
           <Button
             onClick={handleClickDelete}
             fullSize={true}
             size="l"
-            label={!loadingDelete ? "Да" : "Загрузка"}
+            label={!loadingDelete ? 'Да' : 'Загрузка'}
             variant="black"
             disabledShadow={true}
           />
-          <Button
-            onClick={handleShow}
-            fullSize={true}
-            size="l"
-            label="Нет"
-            variant="blue"
-            disabledShadow={true}
-          />
+          <Button onClick={handleShow} fullSize={true} size="l" label="Нет" variant="blue" disabledShadow={true} />
         </Modal>
       )}
       <div className="account-page-wrapper">
-        <PageHeading title={"Мои тренировки"} />
-        <NavigationTabs
-          items={TABS}
-          selectedTab={selectedTab}
-          handleChangeTab={handleChangeSelectedTab}
-        />
+        <PageHeading title={'Мои тренировки'} />
+        <NavigationTabs items={TABS} selectedTab={selectedTab} handleChangeTab={handleChangeSelectedTab} />
         <TrainingContent>
           <TrainingCalendar
             selectedDate={selectedDate}

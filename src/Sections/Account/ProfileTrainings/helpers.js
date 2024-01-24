@@ -1,8 +1,9 @@
 export const getTrainingData = async (token) => {
-  const result = await fetch("/api/booking/get-bookings", {
-    method: "POST",
+  const result = await fetch('/api/booking/get-bookings', {
+    method: 'POST',
+    cache: 'no-store',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({ token }),
   });
@@ -14,10 +15,11 @@ export const getTrainingData = async (token) => {
 };
 
 export async function cancelBooking(token, id) {
-  const result = await fetch("/api/booking/cancel-booking", {
-    method: "POST",
+  const result = await fetch('/api/booking/cancel-booking', {
+    method: 'POST',
+    cache: 'no-store',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({ token, id }),
   });

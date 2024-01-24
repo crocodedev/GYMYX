@@ -1,4 +1,4 @@
-@import "@/styles/mixins.scss";
+@import '@/styles/mixins.scss';
 
 .booking-variants-item {
   position: relative;
@@ -88,7 +88,12 @@
       letter-spacing: -0.24px;
     }
 
-    @include media-breakpoint-up(xxl) {
+    @include media-breakpoint-between(xxl, xxxl) {
+      font-size: 38px;
+      letter-spacing: -0.5px;
+    }
+
+    @include media-breakpoint-up(xxxl) {
       font-size: 50px;
       letter-spacing: -0.5px;
     }
