@@ -1,4 +1,4 @@
-@import "@/styles/mixins.scss";
+@import '@/styles/mixins.scss';
 
 .prices-list-timeline {
   &__time-line-item {
@@ -14,7 +14,7 @@
 
     &:first-of-type {
       &::before {
-        content: "";
+        content: '';
         position: absolute;
         bottom: 100%;
         left: 50%;
@@ -48,7 +48,7 @@
     }
 
     &::after {
-      content: "";
+      content: '';
       position: absolute;
       top: 0;
       left: 50%;

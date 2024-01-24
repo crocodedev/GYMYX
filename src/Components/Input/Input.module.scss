@@ -1,9 +1,8 @@
-@import "@/styles/mixins.scss";
+@import '@/styles/mixins.scss';
 
 .input {
   background: var(--white-transperent, rgba(255, 255, 255, 0.1));
   width: 100%;
- 
 
   @include media-breakpoint-down(lg) {
     padding: 11px 20px;
@@ -14,11 +13,15 @@
     border-radius: 50px;
   }
 
-  @include media-breakpoint-between(lg, xxl) {
+  @include media-breakpoint-between(lg, xl) {
     padding: 11px 40px;
   }
 
-  @include media-breakpoint-up(xxl) {
+  @include media-breakpoint-between(lg, xxxl) {
+    padding: 18px 30px;
+  }
+
+  @include media-breakpoint-up(xxxl) {
     padding: 18px 40px;
   }
 
@@ -30,7 +33,7 @@
     background: transparent;
     width: 100%;
     font-family: '__Montserrat_cce811';
-    
+
     &::placeholder {
       color: var(--white-transperent-2, rgba(255, 255, 255, 0.4));
     }
@@ -47,7 +50,11 @@
       font-size: 12px;
     }
 
-    @include media-breakpoint-up(lg) {
+    @include media-breakpoint-between(lg, xxxl) {
+      font-size: 20px;
+    }
+
+    @include media-breakpoint-up(xxxl) {
       font-size: 26px;
     }
   }

@@ -1,8 +1,9 @@
-@import "@/styles/mixins.scss";
+@import '@/styles/mixins.scss';
 
 .container,
 .containerM,
-.containerXL {
+.containerXL,
+.containerXLF {
   position: relative;
   width: 100%;
   z-index: 1;
@@ -38,8 +39,26 @@
     --spacing-container: 26px;
   }
 
-  @include media-breakpoint-up(xl) {
-    --spacing-container: 34px;
+  @include media-breakpoint-between(xl, xxxl) {
+    --spacing-container: 36px;
+  }
+
+  @include media-breakpoint-up(xxxl) {
+    --spacing-container: 28px;
+  }
+}
+
+.containerXLF {
+  @include media-breakpoint-down(xl) {
+    --spacing-container: 26px;
+  }
+
+  @include media-breakpoint-between(xl, xxxl) {
+    --spacing-container: 28px;
+  }
+
+  @include media-breakpoint-up(xxxl) {
+    --spacing-container: 24px;
   }
 }
 
@@ -92,6 +111,33 @@
 }
 
 .containerXL {
+  @include media-breakpoint-between(sm, md) {
+    max-width: $breakpoints-sm;
+  }
+
+  @include media-breakpoint-between(md, lg) {
+    max-width: $breakpoints-md;
+  }
+
+  @include media-breakpoint-between(lg, xl) {
+    max-width: $breakpoints-lg;
+  }
+
+  @include media-breakpoint-between(xl, xxl) {
+    max-width: $breakpoints-xl + 100;
+  }
+
+  @include media-breakpoint-between(xxl, xxxl) {
+    max-width: $breakpoints-xxl + 100;
+  }
+
+  @include media-breakpoint-up(xxxl) {
+    max-width: $breakpoints-xxxl + 100;
+    //1760
+  }
+}
+
+.containerXLF {
   @include media-breakpoint-between(sm, md) {
     max-width: $breakpoints-sm;
   }

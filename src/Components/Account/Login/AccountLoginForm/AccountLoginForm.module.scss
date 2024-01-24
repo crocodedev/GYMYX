@@ -1,7 +1,6 @@
-@import "@/styles/mixins.scss";
+@import '@/styles/mixins.scss';
 
 .account-login-form {
-  padding: 70px 40px 40px 40px;
   width: fit-content;
   width: 100%;
   overflow: auto;
@@ -13,6 +12,14 @@
     width: 100%;
     height: 100%;
     background: var(--black, #212428);
+  }
+
+  @include media-breakpoint-down(xxxl) {
+    padding: 50px 30px 30px 30px;
+  }
+
+  @include media-breakpoint-up(xxxl) {
+    padding: 70px 40px 40px 40px;
   }
 
   @include media-breakpoint-up(xl) {
@@ -33,7 +40,11 @@
       margin: 0 auto;
     }
 
-    @include media-breakpoint-up(xl) {
+    @include media-breakpoint-between(xl, xxxl) {
+      gap: 30px;
+    }
+
+    @include media-breakpoint-up(xxxl) {
       gap: 40px;
     }
   }
@@ -47,7 +58,12 @@
       height: 214.678px;
     }
 
-    @include media-breakpoint-up(xl) {
+    @include media-breakpoint-between(xl, xxl) {
+      width: 183px;
+      height: 177px;
+    }
+
+    @include media-breakpoint-up(xxxl) {
       width: 197px;
       height: 190px;
     }
@@ -68,12 +84,14 @@
       letter-spacing: -0.24px;
     }
 
-    @include media-breakpoint-up(xl) {
+    @include media-breakpoint-between(xl, xxxl) {
+      font-size: 38px;
+      letter-spacing: -0.01em;
+    }
+
+    @include media-breakpoint-up(xxxl) {
       font-size: 50px;
       letter-spacing: -0.5px;
     }
-  }
-
-  &__input {
   }
 }

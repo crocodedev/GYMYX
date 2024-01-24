@@ -16,7 +16,12 @@
     padding: 15px 25px;
   }
 
-  @include media-breakpoint-up(xxl) {
+  @include media-breakpoint-between(xxl, xxxl) {
+    padding: 20px 30px;
+    border-radius: 22px;
+  }
+
+  @include media-breakpoint-up(xxxl) {
     border-radius: 30px;
     padding: 20px 40px;
   }
@@ -31,12 +36,17 @@
       margin-bottom: 2px;
     }
 
-    @include media-breakpoint-between(lg, xxl) {
+    @include media-breakpoint-between(lg, xl) {
       font-size: 16px;
       margin-bottom: 4px;
     }
 
-    @include media-breakpoint-up(xxl) {
+    @include media-breakpoint-between(xl, xxxl) {
+      font-size: 20px;
+      margin-bottom: 6px;
+    }
+
+    @include media-breakpoint-up(xxxl) {
       font-size: 26px;
       margin-bottom: 6px;
     }
@@ -55,11 +65,15 @@
       font-size: 18px;
     }
 
-    @include media-breakpoint-between(lg, xxl) {
+    @include media-breakpoint-between(lg, xl) {
       font-size: 26px;
     }
 
-    @include media-breakpoint-up(xxl) {
+    @include media-breakpoint-between(xl, xxxl) {
+      font-size: 30px;
+    }
+
+    @include media-breakpoint-up(xxxl) {
       font-size: 40px;
     }
 

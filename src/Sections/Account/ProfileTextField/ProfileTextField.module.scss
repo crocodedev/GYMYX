@@ -1,4 +1,4 @@
-@import "@/styles/mixins.scss";
+@import '@/styles/mixins.scss';
 
 .profile-text-field {
   position: relative;
@@ -21,7 +21,13 @@
       border-radius: 30px;
     }
 
-    @include media-breakpoint-up(xl) {
+    @include media-breakpoint-between(xl, xxxl) {
+      padding: 30px;
+      gap: 30px;
+      border-radius: 22px;
+    }
+
+    @include media-breakpoint-up(xxxl) {
       padding: 40px;
       gap: 40px;
       border-radius: 55px;
