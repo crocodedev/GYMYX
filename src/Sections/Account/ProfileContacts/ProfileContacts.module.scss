@@ -118,6 +118,9 @@
     align-items: center;
 
     > div:not(:last-of-type) {
+      @include media-breakpoint-down(xl) {
+        margin-right: 16px;
+      }
       @include media-breakpoint-between(xl, xxxl) {
         margin-right: 22px;
       }
