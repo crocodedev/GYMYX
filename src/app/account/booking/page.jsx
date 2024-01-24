@@ -1,20 +1,21 @@
-"use client";
+'use client';
 
-import BookingHero from "@/Sections/Account/Booking/BookingHero";
-import BookingVariants from "@/Sections/Account/Booking/BookingVariants";
+import BookingHero from '@/Sections/Account/Booking/BookingHero';
+import BookingVariants from '@/Sections/Account/Booking/BookingVariants';
 
-import Modal from "@/Components/Modal";
-import Button from "@/Components/Button";
-import { useEffect, useState } from "react";
-import Loading from "@/Components/Loading";
-import { useDispatch } from "react-redux";
-import { updateBookingData } from "@/redux/bookingSlice";
+import Modal from '@/Components/Modal';
+import Button from '@/Components/Button';
+import { useEffect, useState } from 'react';
+import Loading from '@/Components/Loading';
+import { useDispatch } from 'react-redux';
+import { updateBookingData } from '@/redux/bookingSlice';
 
 const getGyms = async () => {
-  const result = await fetch("/api/booking/get-gyms", {
-    method: "POST",
+  const result = await fetch('/api/booking/get-gyms', {
+    cache: 'no-store',
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
   });
 
@@ -57,7 +58,7 @@ const Booking = () => {
             currentDate: 0,
             avaliableTimesCurrentDay: [],
             loading: false,
-          })
+          }),
         );
       }
       setLoading(false);
@@ -71,10 +72,7 @@ const Booking = () => {
   return (
     <>
       {showModal && (
-        <Modal
-          handleClose={handleChangeGym}
-          text={"Извините, пока у нас только один зал :("}
-        >
+        <Modal handleClose={handleChangeGym} text={'Извините, пока у нас только один зал :('}>
           <Button
             onClick={handleChangeGym}
             fullSize={true}

@@ -10,6 +10,7 @@ async function getUserData(token) {
   try {
     const response = await fetch('https://gymyx.cro.codes/api/users', {
       method: 'GET',
+      cache: 'no-store',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,

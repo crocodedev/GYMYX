@@ -10,6 +10,7 @@ import { useSession } from 'next-auth/react';
 
 export const getGids = async (token) => {
   const result = await fetch('/api/gids/get-gids', {
+    cache: 'no-store',
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

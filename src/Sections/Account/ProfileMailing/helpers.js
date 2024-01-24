@@ -1,8 +1,9 @@
 export async function changeSubscribe(token, subscribe) {
-  const result = await fetch("/api/profile/change-subscribe", {
-    method: "POST",
+  const result = await fetch('/api/profile/change-subscribe', {
+    method: 'POST',
+    cache: 'no-store',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({ token, subscribe }),
   });
@@ -14,10 +15,11 @@ export async function changeSubscribe(token, subscribe) {
 }
 
 export async function deleteSubscribe(token, subscribe) {
-  const result = await fetch("/api/profile/delete-subscribe", {
-    method: "POST",
+  const result = await fetch('/api/profile/delete-subscribe', {
+    method: 'POST',
+    cache: 'no-store',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({ token, subscribe }),
   });
