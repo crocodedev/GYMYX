@@ -62,7 +62,11 @@
       margin-top: 35px;
     }
 
-    @include media-breakpoint-up(xl) {
+    @include media-breakpoint-between(xl, xxxl) {
+      margin-top: 49px;
+    }
+
+    @include media-breakpoint-up(xxxl) {
       margin-top: 66px;
     }
   }
@@ -83,7 +87,12 @@
       margin-bottom: 32px;
     }
 
-    @include media-breakpoint-up(xl) {
+    @include media-breakpoint-between(xl, xxxl) {
+      font-size: 48px;
+      margin-bottom: 36px;
+    }
+
+    @include media-breakpoint-up(xxxl) {
       font-size: 66px;
       margin-bottom: 48px;
     }
@@ -105,7 +114,12 @@
       font-size: 24px;
     }
 
-    @include media-breakpoint-up(xl) {
+    @include media-breakpoint-between(xl, xxxl) {
+      margin-bottom: 21px;
+      font-size: 30px;
+    }
+
+    @include media-breakpoint-up(xxxl) {
       margin-bottom: 30px;
       font-size: 40px;
     }
@@ -126,7 +140,12 @@
       font-size: 18px;
     }
 
-    @include media-breakpoint-up(xl) {
+    @include media-breakpoint-between(xl, xxxl) {
+      font-size: 20px;
+      margin-bottom: 27px;
+    }
+
+    @include media-breakpoint-up(xxxl) {
       margin-bottom: 30px;
       font-size: 26px;
     }
