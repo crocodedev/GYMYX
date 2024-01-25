@@ -7,10 +7,23 @@
     position: fixed;
     bottom: 0;
     left: 0;
+    overflow: hidden;
     width: 100%;
     padding: 18px 0px;
     padding-bottom: 95px;
     z-index: 5;
+
+    &::after {
+      position: absolute;
+      content: '';
+      width: 10px;
+      height: 29px;
+      top: 16px;
+      right: -2px;
+      z-index: 1;
+      background-color: #37393d;
+      box-shadow: 0 0 10px 10px #37393d;
+    }
 
     > div {
       padding-right: 0;
@@ -31,6 +44,7 @@
       gap: 15px;
       white-space: nowrap;
       overflow: auto;
+      padding-right: 30px;
     }
 
     @include media-breakpoint-between(xl, xxl) {

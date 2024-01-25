@@ -1,13 +1,13 @@
-"use client"
+'use client';
 
-import Container from "@/Components/Container"
-import NavigationTab from "./NavigationTab"
-import styles from "./NavigationTabs.module.scss"
-import { Swiper, SwiperSlide } from "swiper/react"
-import "swiper/css"
+import Container from '@/Components/Container';
+import NavigationTab from './NavigationTab';
+import styles from './NavigationTabs.module.scss';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
 
 const sliderSettings = {
-  slidesPerView: "auto",
+  slidesPerView: 'auto',
   spaceBetween: 15,
 
   breakpoints: {
@@ -15,14 +15,14 @@ const sliderSettings = {
       spaceBetween: 30,
     },
   },
-}
+};
 
 const NavigationTabs = ({ items, itemIcon, selectedTab, handleChangeTab }) => {
   return (
-    <section className={styles["navigation-tabs"]}>
+    <section className={styles['navigation-tabs']}>
       <Container>
-        <div className={`${styles["navigation-tabs__list"]}`}>
-          <Swiper className={`swiper-container`} {...sliderSettings}>
+        <div className={`${styles['navigation-tabs__list']}`}>
+          <Swiper className={`${styles['swiper-tabs']} swiper-container`} {...sliderSettings}>
             {items.map(({ title }, index) => (
               <SwiperSlide key={index}>
                 <NavigationTab
@@ -37,10 +37,10 @@ const NavigationTabs = ({ items, itemIcon, selectedTab, handleChangeTab }) => {
           </Swiper>
         </div>
 
-        <div className={styles["navigation-tabs__btns"]}></div>
+        <div className={styles['navigation-tabs__btns']}></div>
       </Container>
     </section>
-  )
-}
+  );
+};
 
-export default NavigationTabs
+export default NavigationTabs;
