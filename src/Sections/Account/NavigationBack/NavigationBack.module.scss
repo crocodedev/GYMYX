@@ -1,4 +1,4 @@
-@import "@/styles/mixins.scss";
+@import '@/styles/mixins.scss';
 
 .navigation-back {
   &__btn {
@@ -12,7 +12,11 @@
       margin-bottom: 10px;
     }
 
-    @include media-breakpoint-up(lg) {
+    @include media-breakpoint-between(lg, xxxl) {
+      margin-bottom: 12px;
+    }
+
+    @include media-breakpoint-up(xxxl) {
       margin-bottom: 20px;
     }
   }
@@ -32,7 +36,13 @@
       margin-right: 5px;
     }
 
-    @include media-breakpoint-up(xl) {
+    @include media-breakpoint-between(xl, xxxl) {
+      width: 7px;
+      height: 13px;
+      margin-right: 4px;
+    }
+
+    @include media-breakpoint-up(xxxl) {
       width: 15px;
       height: 18px;
       margin-right: 10px;
@@ -54,11 +64,11 @@
       font-size: 12px;
     }
 
-    @include media-breakpoint-between(md, xl) {
+    @include media-breakpoint-between(md, xxxl) {
       font-size: 16px;
     }
 
-    @include media-breakpoint-up(xl) {
+    @include media-breakpoint-up(xxxl) {
       font-size: 22px;
     }
   }
