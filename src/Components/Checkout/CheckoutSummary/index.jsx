@@ -89,6 +89,7 @@ const CheckoutSummary = ({ items, gym }) => {
         </div>
         <Button
           onClick={handleSubmit}
+          size="l"
           variant="blue"
           fullSize={true}
           label={!loading ? 'Оплатить' : 'Ожидание'}
