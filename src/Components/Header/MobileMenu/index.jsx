@@ -1,9 +1,10 @@
 import { scroller } from 'react-scroll';
 import Button from '@/Components/Button';
 import styles from './MobileMenu.module.scss';
+
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import { useEffect } from 'react';
 
 const MobileMenu = ({ items, isShow, toggleVisibility }) => {
@@ -48,32 +49,18 @@ const MobileMenu = ({ items, isShow, toggleVisibility }) => {
             })}
         </div>
         <div>
-          <Link href={'/account/login'}>
-            <Button variant="blue" size="l" label={'Зарегистрироваться'} />
-          </Link>
-
-          <div className={styles['mobile-menu__login']}>
-            <span>У вас есть аккаунт?</span>{' '}
-            <Link href="/account/login">
-              <u>Войти</u>
-            </Link>
-            <span className={styles['mobile-menu__login-icon']}>
-              <img src="/icons/login.svg" alt="login icon" />
-            </span>
-          </div>
-
-          {/* {!sessionData ? (
+          {!sessionData ? (
             <>
-              <Link href={"/account/login"}>
-                <Button variant="blue" size="l" label={"Зарегистрироваться"} />
+              <Link href={'/account/login'}>
+                <Button variant="blue" size="l" label={'Зарегистрироваться'} />
               </Link>
 
-              <div className={styles["mobile-menu__login"]}>
-                <span>У вас есть аккаунт?</span>{" "}
+              <div className={styles['mobile-menu__login']}>
+                <span>У вас есть аккаунт?</span>{' '}
                 <Link href="/account/login">
                   <u>Войти</u>
                 </Link>
-                <span className={styles["mobile-menu__login-icon"]}>
+                <span className={styles['mobile-menu__login-icon']}>
                   <img src="/icons/login.svg" alt="login icon" />
                 </span>
               </div>
@@ -82,14 +69,14 @@ const MobileMenu = ({ items, isShow, toggleVisibility }) => {
             <Link href="/">
               <Button
                 size="l"
-                label={"Выйти"}
+                label={'Выйти'}
                 onClick={() => {
-                  signOut({ callbackUrl: "/account/login" });
-                  router.push("/");
+                  signOut({ callbackUrl: '/account/login' });
+                  router.push('/');
                 }}
               />
             </Link>
-          )} */}
+          )}
         </div>
       </div>
     </div>
