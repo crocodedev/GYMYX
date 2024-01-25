@@ -1,9 +1,8 @@
-@import "@/styles/mixins.scss";
+@import '@/styles/mixins.scss';
 
 .booking-sign-up-heading {
   position: relative;
   margin-bottom: 35px;
-
 
   &__wrapper {
     display: flex;
@@ -33,7 +32,12 @@
       letter-spacing: -0.5px;
     }
 
-    @include media-breakpoint-up(xxl) {
+    @include media-breakpoint-between(xxl, xxxl) {
+      font-size: 38px;
+      letter-spacing: -0.5px;
+    }
+
+    @include media-breakpoint-up(xxxl) {
       font-size: 50px;
       letter-spacing: -0.5px;
     }
