@@ -24,7 +24,11 @@
       margin-top: 40px;
     }
 
-    @include media-breakpoint-up(md) {
+    @include media-breakpoint-between(md, xxxl) {
+      margin-top: 120px;
+    }
+
+    @include media-breakpoint-up(xxxl) {
       margin-top: 112px;
     }
   }
@@ -44,19 +48,21 @@
 
     @include media-breakpoint-up(md) {
       letter-spacing: -0.66px;
-      margin-top: 32px;
     }
 
     @include media-breakpoint-between(md, xl) {
       font-size: 36px;
+      margin-top: 20px;
     }
 
     @include media-breakpoint-between(xl, xxxl) {
       font-size: 48px;
+      margin-top: 20px;
     }
 
     @include media-breakpoint-up(xxxl) {
       font-size: 66px;
+      margin-top: 32px;
     }
   }
 
@@ -93,9 +99,13 @@
       gap: 20px;
     }
 
-    @include media-breakpoint-up(md) {
+    @include media-breakpoint-between(md, xxxl) {
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    @include media-breakpoint-up(xxxl) {
       margin-top: 50px;
-      gap: 40px;
     }
   }
 }

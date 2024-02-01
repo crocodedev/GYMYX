@@ -1,4 +1,4 @@
-@import "@/styles/mixins.scss";
+@import '@/styles/mixins.scss';
 
 .border-label {
   border-radius: 41px;
@@ -23,7 +23,12 @@
       padding: 4px 15px;
     }
 
-    @include media-breakpoint-up(xl) {
+    @include media-breakpoint-between(xl, xxxl) {
+      font-size: 20px;
+      padding: 4px 25px 8px 25px;
+    }
+
+    @include media-breakpoint-up(xxxl) {
       font-size: 26px;
       padding: 8px 30px;
     }

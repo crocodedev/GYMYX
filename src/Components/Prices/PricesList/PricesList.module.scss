@@ -1,23 +1,26 @@
-@import "@/styles/mixins.scss";
+@import '@/styles/mixins.scss';
 
 .prices-list {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
 
   @include media-breakpoint-down(md) {
     margin-top: 30px;
+    grid-template-columns: repeat(3, 1fr);
   }
 
   @include media-breakpoint-between(sm, xl) {
     padding: 8%;
+    grid-template-columns: repeat(3, 1fr);
   }
 
   @include media-breakpoint-between(xl, xxxl) {
-    padding: 0 15%;
+    padding: 0 21%;
+    grid-template-columns: repeat(3, 1fr);
   }
 
   @include media-breakpoint-up(xxxl) {
     padding: 0 22%;
+    grid-template-columns: repeat(3, 1fr);
   }
 
   &__col {
@@ -30,11 +33,11 @@
         margin-top: 60px;
       }
 
-      @include media-breakpoint-between(xl, xxl) {
-        margin-top: 50px;
+      @include media-breakpoint-between(xl, xxxl) {
+        margin-top: 20px;
       }
 
-      @include media-breakpoint-up(xxl) {
+      @include media-breakpoint-up(xxxl) {
         margin-top: 15px;
       }
     }
@@ -48,7 +51,11 @@
         margin-top: 245px;
       }
 
-      @include media-breakpoint-up(xl) {
+      @include media-breakpoint-between(xl, xxxl) {
+        margin-top: 172px;
+      }
+
+      @include media-breakpoint-up(xxxl) {
         margin-top: 230px;
       }
     }
