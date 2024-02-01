@@ -75,12 +75,12 @@
       margin-top: 5px;
     }
 
-    @include media-breakpoint-between(xl, xxl) {
-      font-size: 22px;
+    @include media-breakpoint-between(xl, xxxl) {
+      font-size: 20px;
       margin-top: 10px;
     }
 
-    @include media-breakpoint-up(xxl) {
+    @include media-breakpoint-up(xxxl) {
       font-size: 26px;
       margin-top: 10px;
     }
