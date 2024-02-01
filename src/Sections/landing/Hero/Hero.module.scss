@@ -209,12 +209,12 @@
     }
 
     @include media-breakpoint-between(xl, xxxl) {
-      font-size: 50px;
+      font-size: 52px;
       line-height: 57px;
       letter-spacing: -0.01em;
     }
 
-    @include media-breakpoint-up(xl) {
+    @include media-breakpoint-up(xxxl) {
       font-size: 50px;
       letter-spacing: -0.5px;
     }
