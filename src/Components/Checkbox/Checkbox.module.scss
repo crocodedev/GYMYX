@@ -15,12 +15,12 @@
       min-height: 12px;
     }
 
-    @include media-breakpoint-between(md, xl) {
-      width: 18px;
-      height: 18px;
+    @include media-breakpoint-between(md, xxxl) {
+      width: 17px;
+      height: 17px;
     }
 
-    @include media-breakpoint-up(xl) {
+    @include media-breakpoint-up(xxxl) {
       width: 24px;
       height: 24px;
     }
@@ -42,12 +42,12 @@
       margin-left: 10px;
     }
 
-    @include media-breakpoint-between(md, xl) {
-      font-size: 18px;
+    @include media-breakpoint-between(md, xxxl) {
+      font-size: 20px;
       margin-left: 10px;
     }
 
-    @include media-breakpoint-up(xl) {
+    @include media-breakpoint-up(xxxl) {
       font-size: 26px;
       margin-left: 15px;
     }
@@ -72,12 +72,12 @@
         height: 12px;
       }
 
-      @include media-breakpoint-between(md, xl) {
-        width: 18px;
-        height: 18px;
+      @include media-breakpoint-between(md, xxxl) {
+        width: 17px;
+        height: 17px;
       }
 
-      @include media-breakpoint-up(xl) {
+      @include media-breakpoint-up(xxxl) {
         width: 24px;
         height: 24px;
       }

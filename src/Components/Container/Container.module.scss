@@ -105,7 +105,11 @@
     max-width: $breakpoints-xl;
   }
 
-  @include media-breakpoint-up(xxl) {
+  @include media-breakpoint-between(xxl, xxxl) {
+    max-width: 1070px;
+  }
+
+  @include media-breakpoint-up(xxxl) {
     max-width: 1374px;
   }
 }

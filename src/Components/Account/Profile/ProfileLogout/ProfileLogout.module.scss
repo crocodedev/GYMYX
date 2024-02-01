@@ -1,4 +1,4 @@
-@import "@/styles/mixins.scss";
+@import '@/styles/mixins.scss';
 
 .profile-logout {
   display: flex;
@@ -6,6 +6,7 @@
   border: none;
   background-color: transparent;
   cursor: pointer;
+  font-family: '__Montserrat_cce811';
 
   &__text {
     color: #fff;
@@ -15,11 +16,11 @@
       font-size: 12px;
     }
 
-    @include media-breakpoint-between(md, xxl) {
+    @include media-breakpoint-between(md, xxxl) {
       font-size: 16px;
     }
 
-    @include media-breakpoint-up(xxl) {
+    @include media-breakpoint-up(xxxl) {
       font-size: 22px;
     }
   }
@@ -33,13 +34,13 @@
       margin-left: 5px;
     }
 
-    @include media-breakpoint-between(md, xxl) {
+    @include media-breakpoint-between(md, xxxl) {
       width: 22px;
       height: 22px;
       margin-left: 10px;
     }
 
-    @include media-breakpoint-up(lg) {
+    @include media-breakpoint-up(xxxl) {
       width: 30px;
       height: 30px;
       margin-left: 10px;
