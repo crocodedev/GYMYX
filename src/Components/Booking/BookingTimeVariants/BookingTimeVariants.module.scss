@@ -1,4 +1,4 @@
-@import "@/styles/mixins.scss";
+@import '@/styles/mixins.scss';
 
 .booking-time-variants {
   position: relative;
@@ -22,7 +22,14 @@
     padding-bottom: 32px;
   }
 
-  @include media-breakpoint-up(xxl) {
+  @include media-breakpoint-between(xxl, xxxl) {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 25px;
+    padding-top: 30px;
+    padding-bottom: 35px;
+  }
+
+  @include media-breakpoint-up(xxxl) {
     grid-template-columns: repeat(6, 1fr);
     gap: 30px;
     padding-top: 35px;
