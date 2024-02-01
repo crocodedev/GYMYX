@@ -27,7 +27,6 @@
 
   @include media-breakpoint-up(md) {
     border-radius: 30px;
-    min-height: 227px;
   }
 
   @include media-breakpoint-between(md, xl) {
@@ -35,11 +34,13 @@
   }
 
   @include media-breakpoint-between(xl, xxxl) {
-    padding: 26px;
+    padding: 25px 30px;
+    min-height: 186px;
   }
 
   @include media-breakpoint-up(xxxl) {
     padding: 34px 38px;
+    min-height: 227px;
   }
 
   &:hover > p ~ div:last-child {
