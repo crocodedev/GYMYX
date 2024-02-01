@@ -16,10 +16,16 @@
     }
 
     > *:first-child {
-      @include media-breakpoint-up(lg) {
-        margin-right: 40px;
-        min-width: 720px;
+      @include media-breakpoint-between(lg, xxxl) {
+        margin-right: 30px;
+        min-width: 620px;
         max-width: 1214px;
+      }
+
+      @include media-breakpoint-up(xxxl) {
+        min-width: 780px;
+        max-width: 1214px;
+        margin-right: 40px;
       }
     }
   }

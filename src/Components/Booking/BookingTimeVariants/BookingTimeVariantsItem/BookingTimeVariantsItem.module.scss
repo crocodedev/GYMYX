@@ -1,4 +1,4 @@
-@import "@/styles/mixins.scss";
+@import '@/styles/mixins.scss';
 
 .booking-time-variants-item {
   color: var(--white, #fff);
@@ -36,7 +36,13 @@
     border-radius: 38px;
   }
 
-  @include media-breakpoint-up(xxl) {
+  @include media-breakpoint-between(xxl, xxxl) {
+    font-size: 28px;
+    padding: 4px 18px;
+    border-radius: 57px;
+  }
+
+  @include media-breakpoint-up(xxxl) {
     font-size: 38px;
     padding: 10px 24px;
     border-radius: 57px;

@@ -25,13 +25,7 @@ const NavigationTabs = ({ items, itemIcon, selectedTab, handleChangeTab }) => {
           <Swiper className={`${styles['swiper-tabs']} swiper-container`} {...sliderSettings}>
             {items.map(({ title }, index) => (
               <SwiperSlide key={index}>
-                <NavigationTab
-                  selectedTab={selectedTab}
-                  handleClick={handleChangeTab}
-                  title={title}
-                  index={index}
-                  icon={itemIcon}
-                />
+                <NavigationTab selectedTab={selectedTab} handleClick={handleChangeTab} title={title} index={index} />
               </SwiperSlide>
             ))}
           </Swiper>

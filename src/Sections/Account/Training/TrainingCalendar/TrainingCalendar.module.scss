@@ -1,4 +1,4 @@
-@import "@/styles/mixins.scss";
+@import '@/styles/mixins.scss';
 
 .training-calendar {
   background: var(--white-transperent, rgba(255, 255, 255, 0.1));
@@ -18,7 +18,11 @@
     padding: 25px 45px;
   }
 
-  @include media-breakpoint-up(xxl) {
+  @include media-breakpoint-between(xxl, xxxl) {
+    padding: 32px 72px 52px 72px;
+  }
+
+  @include media-breakpoint-up(xxxl) {
     padding: 40px 90px 59px 90px;
   }
 
