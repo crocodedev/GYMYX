@@ -1,4 +1,4 @@
-@import "@/styles/mixins.scss";
+@import '@/styles/mixins.scss';
 
 .modal {
   position: fixed;
@@ -51,7 +51,13 @@
       padding: 18px;
     }
 
-    @include media-breakpoint-up(xl) {
+    @include media-breakpoint-between(xl, xxxl) {
+      max-width: 432px;
+      padding: 30px;
+      border-radius: 22px;
+    }
+
+    @include media-breakpoint-up(xxxl) {
       padding: 40px 40px 46px 40px;
       max-width: 584px;
       border-radius: 30px;
@@ -79,7 +85,12 @@
       margin-bottom: 20px;
     }
 
-    @include media-breakpoint-up(xl) {
+    @include media-breakpoint-between(xl, xxxl) {
+      font-size: 30px;
+      margin-bottom: 18px;
+    }
+
+    @include media-breakpoint-up(xxxl) {
       font-size: 40px;
       margin-bottom: 26px;
     }
