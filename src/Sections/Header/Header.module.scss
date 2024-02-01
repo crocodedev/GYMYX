@@ -47,12 +47,12 @@
       height: 21.878px;
     }
 
-    @include media-breakpoint-between(xl, xxl) {
-      width: 160px;
-      height: 25px;
+    @include media-breakpoint-between(xl, xxxl) {
+      width: 149px;
+      height: 24px;
     }
 
-    @include media-breakpoint-up(xxl) {
+    @include media-breakpoint-up(xxxl) {
       width: 195.961px;
       height: 32px;
     }
@@ -93,7 +93,7 @@
 
     @include media-breakpoint-between(xxl, xxxl) {
       font-size: 16px;
-      padding: 28.5px 25px;
+      padding: 24.5px 33px;
     }
 
     @include media-breakpoint-up(xxxl) {
