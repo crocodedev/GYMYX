@@ -15,11 +15,11 @@
         margin-bottom: 285px;
       }
 
-      @include media-breakpoint-between(xl, xxl) {
-        margin-bottom: 250px;
+      @include media-breakpoint-between(xl, xxxl) {
+        margin-bottom: 195px;
       }
 
-      @include media-breakpoint-up(xxl) {
+      @include media-breakpoint-up(xxxl) {
         margin-bottom: 230px;
       }
     }
@@ -62,11 +62,11 @@
       font-size: 32px;
     }
 
-    @include media-breakpoint-between(xl, xxl) {
-      font-size: 44px;
+    @include media-breakpoint-between(xl, xxxl) {
+      font-size: 42px;
     }
 
-    @include media-breakpoint-up(xxl) {
+    @include media-breakpoint-up(xxxl) {
       font-size: 50px;
     }
   }
