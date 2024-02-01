@@ -52,7 +52,12 @@
       letter-spacing: -0.4px;
     }
 
-    @include media-breakpoint-up(xl) {
+    @include media-breakpoint-between(xl, xxxl) {
+      font-size: 30px;
+      letter-spacing: -0.4px;
+    }
+
+    @include media-breakpoint-up(xxxl) {
       font-size: 40px;
       letter-spacing: -0.4px;
     }
@@ -86,22 +91,31 @@
   &__text {
     color: var(--white, #fff);
     font-weight: 500;
-    margin-top: 28px;
+
     transition: 0.3s ease;
 
     @include media-breakpoint-down(md) {
       font-size: 12px;
       margin-bottom: 30px;
+      margin-top: 10px;
     }
 
     @include media-breakpoint-between(md, xl) {
       font-size: 18px;
       margin-bottom: 50px;
+      margin-top: 15px;
     }
 
-    @include media-breakpoint-up(xl) {
+    @include media-breakpoint-between(xl, xxxl) {
+      font-size: 24px;
+      margin-bottom: 60px;
+      margin-top: 19px;
+    }
+
+    @include media-breakpoint-up(xxxl) {
       font-size: 30px;
       margin-bottom: 80px;
+      margin-top: 28px;
     }
   }
 }

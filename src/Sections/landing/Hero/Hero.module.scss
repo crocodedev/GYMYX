@@ -88,7 +88,13 @@
       letter-spacing: -0.5px;
     }
 
-    @include media-breakpoint-up(xl) {
+    @include media-breakpoint-between(xl, xxxl) {
+      font-size: 38px;
+      line-height: 44px;
+      letter-spacing: -0.01em;
+    }
+
+    @include media-breakpoint-up(xxxl) {
       font-size: 50px;
       letter-spacing: -0.5px;
     }
@@ -96,12 +102,21 @@
 
   &__subtitle {
     color: var(--white, #fff);
-    font-size: 30px;
     font-weight: 500;
-    margin-bottom: 35px;
 
     @include media-breakpoint-down(md) {
       display: none;
+    }
+
+    @include media-breakpoint-between(md, xxxl) {
+      font-size: 24px;
+      line-height: 29px;
+      margin-bottom: 24px;
+    }
+
+    @include media-breakpoint-up(xxxl) {
+      font-size: 30px;
+      margin-bottom: 35px;
     }
   }
 
@@ -132,7 +147,13 @@
       margin-right: 20px;
     }
 
-    @include media-breakpoint-up(xl) {
+    @include media-breakpoint-between(xl, xxxl) {
+      font-size: 24px;
+      line-height: 29px;
+      margin-right: 30px;
+    }
+
+    @include media-breakpoint-up(xxxl) {
       font-size: 30px;
       margin-right: 40px;
     }
@@ -156,7 +177,14 @@
       margin-left: 20px;
     }
 
-    @include media-breakpoint-up(xl) {
+    @include media-breakpoint-between(xl, xxxl) {
+      font-size: 60px;
+      line-height: 61px;
+      letter-spacing: -0.01em;
+      margin-left: 20px;
+    }
+
+    @include media-breakpoint-up(xxxl) {
       font-size: 70px;
       line-height: 110%;
       letter-spacing: -0.7px;
@@ -177,6 +205,12 @@
     @include media-breakpoint-between(md, xl) {
       font-size: 30px;
       letter-spacing: -0.5px;
+    }
+
+    @include media-breakpoint-between(xl, xxxl) {
+      font-size: 52px;
+      line-height: 57px;
+      letter-spacing: -0.01em;
     }
 
     @include media-breakpoint-up(xl) {

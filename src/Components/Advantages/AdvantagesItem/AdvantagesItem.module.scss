@@ -103,12 +103,8 @@
       font-size: 28px;
     }
 
-    @include media-breakpoint-between(xl, xxl) {
+    @include media-breakpoint-between(xl, xxxl) {
       font-size: 38px;
-    }
-
-    @include media-breakpoint-between(xxl, xxxl) {
-      font-size: 42px;
     }
 
     @include media-breakpoint-up(xxxl) {
@@ -130,7 +126,7 @@
     }
 
     @include media-breakpoint-between(xl, xxxl) {
-      font-size: 22px;
+      font-size: 20px;
     }
 
     @include media-breakpoint-up(xxxl) {
