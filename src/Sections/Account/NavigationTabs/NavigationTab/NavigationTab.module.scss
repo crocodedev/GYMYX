@@ -14,7 +14,13 @@
     border-radius: 16.743px;
   }
 
-  @include media-breakpoint-up(xl) {
+  @include media-breakpoint-between(xl, xxxl) {
+    padding: 8px 20px;
+    font-size: 16px;
+    border-radius: 100px;
+  }
+
+  @include media-breakpoint-up(xxxl) {
     padding: 10px 24px;
     border-radius: 31px;
     font-size: 22px;

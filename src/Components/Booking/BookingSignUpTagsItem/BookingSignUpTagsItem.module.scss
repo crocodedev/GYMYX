@@ -1,4 +1,4 @@
-@import "@/styles/mixins.scss";
+@import '@/styles/mixins.scss';
 
 .booking-sign-up-tags-item {
   position: relative;
@@ -34,7 +34,13 @@
       padding-right: 4px;
     }
 
-    @include media-breakpoint-up(xl) {
+    @include media-breakpoint-between(xl, xxxl) {
+      font-size: 16px;
+      padding: 8px 20px;
+      padding-right: 4px;
+    }
+
+    @include media-breakpoint-up(xxxl) {
       font-size: 22px;
       padding: 10px 24px;
       padding-right: 8px;
@@ -52,7 +58,14 @@
       padding-left: 4px;
     }
 
-    @include media-breakpoint-up(xl) {
+    @include media-breakpoint-between(xl, xxxl) {
+      width: 12px;
+      height: 12px;
+      padding: 8px 20px;
+      padding-left: 4px;
+    }
+
+    @include media-breakpoint-up(xxxl) {
       width: 16px;
       height: 16px;
       padding: 10px 24px;
