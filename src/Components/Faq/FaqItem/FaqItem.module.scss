@@ -72,12 +72,12 @@
       height: 6px;
     }
 
-    @include media-breakpoint-between(md, xl) {
+    @include media-breakpoint-between(md, xxxl) {
       width: 20px;
       height: 10px;
     }
 
-    @include media-breakpoint-up(xl) {
+    @include media-breakpoint-up(xxxl) {
       width: 28px;
       height: 14px;
     }

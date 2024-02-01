@@ -40,7 +40,7 @@
   }
 
   @include media-breakpoint-between(xl, xxxl) {
-    --spacing-container: 36px;
+    --spacing-container: 56px;
   }
 
   @include media-breakpoint-up(xxxl) {

@@ -45,7 +45,7 @@ const Faq = ({ alias, fields }) => {
           </div>
           {countShow < items.length && (
             <div className={styles.faq__controls}>
-              <Button onClick={handleShowMore} label={'Показать ещё'} variant="blue" />
+              <Button onClick={handleShowMore} label={'Показать ещё'} variant="blue" size="sm" />
             </div>
           )}
         </div>
