@@ -179,7 +179,7 @@
     }
 
     @include media-breakpoint-between(xl, xxxl) {
-      font-size: 60px;
+      font-size: 52px;
       line-height: 61px;
       letter-spacing: -0.01em;
       margin-left: 20px;
@@ -209,7 +209,7 @@
     }
 
     @include media-breakpoint-between(xl, xxxl) {
-      font-size: 52px;
+      font-size: 38px;
       line-height: 57px;
       letter-spacing: -0.01em;
     }
