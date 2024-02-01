@@ -1,4 +1,4 @@
-@import "@/styles/mixins.scss";
+@import '@/styles/mixins.scss';
 
 .map-area {
   position: relative;
@@ -15,11 +15,18 @@
   }
 
   @include media-breakpoint-up(xl) {
-    height: 805px;
     border-radius: 20px;
   }
 
-  [class*="ground-pane"] {
+  @include media-breakpoint-between(xl, xxxl) {
+    height: 645px;
+  }
+
+  @include media-breakpoint-up(xxxl) {
+    height: 805px;
+  }
+
+  [class*='ground-pane'] {
     filter: grayscale(1);
   }
 

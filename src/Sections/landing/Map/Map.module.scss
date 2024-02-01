@@ -38,10 +38,12 @@
     @include media-breakpoint-between(xl, xxxl) {
       padding: 45px;
       gap: 45px;
+      grid-template-columns: 783px 400px;
     }
 
     @include media-breakpoint-up(xxxl) {
       padding: 58px;
+      grid-template-columns: 1044px 1fr;
       gap: 68px;
     }
   }

@@ -100,9 +100,6 @@
     color: white;
   }
 
-  &-size-s {
-  }
-
   &-size-m {
     @include media-breakpoint-down(md) {
       padding: 5px 12px;
@@ -117,6 +114,28 @@
     @include media-breakpoint-between(xxl, xxxl) {
       font-size: 16px;
       padding: 8px 20px;
+    }
+
+    @include media-breakpoint-up(xxxl) {
+      padding: 10px 24px 11px 24px;
+      font-size: 22px;
+    }
+  }
+
+  &-size-sm {
+    @include media-breakpoint-down(md) {
+      padding: 5px 12px;
+      font-size: 12px;
+    }
+
+    @include media-breakpoint-between(md, xxl) {
+      padding: 8px 18px;
+      font-size: 18px;
+    }
+
+    @include media-breakpoint-between(xxl, xxxl) {
+      font-size: 20px;
+      padding: 10px 20px;
     }
 
     @include media-breakpoint-up(xxxl) {
