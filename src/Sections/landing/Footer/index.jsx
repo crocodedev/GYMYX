@@ -17,7 +17,7 @@ const Footer = ({ data }) => {
     <footer className={styles.footer}>
       <Container size="xlf">
         <div className={styles.footer__wrapper}>
-          <img className={styles.footer__bg} src="/images/footer_bg.png" alt="" />
+          <img className={styles.footer__bg} src="/images/footer_bg.webp" alt="" />
 
           <div className={styles['footer__inner-wrapper']}>
             <div className={styles.footer__leftside}>

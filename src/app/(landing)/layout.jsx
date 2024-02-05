@@ -3,7 +3,9 @@ import './../globals.scss';
 
 import Header from '@/Sections/Header';
 import Footer from '@/Sections/landing/Footer';
+
 import { Providers } from '@/Components/Providers';
+import Head from 'next/head';
 
 const MontserratFont = Montserrat({ subsets: ['cyrillic-ext'] });
 
@@ -36,6 +38,9 @@ export default async function LandingLayout({ children, params }) {
 
   return (
     <html lang="en">
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0" />
+      </Head>
       <body className={MontserratFont.className}>
         <Providers>
           <Header isLanding={true} data={headerData} />
