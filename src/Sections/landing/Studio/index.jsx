@@ -16,7 +16,7 @@ const Studio = ({ alias, fields }) => {
       <Container size="XL">
         <div className={styles['studio__wrapper']}>
           <div className={styles['studio__title-wrapper']}>
-            <SectionTitle title={title}></SectionTitle>
+            <SectionTitle title={title} width="content"></SectionTitle>
             <BorderLabel label={'3d модель'}></BorderLabel>
           </div>
           <iframe src={model} frameborder="0" className={styles['studio__iframe']}></iframe>

@@ -2,11 +2,13 @@
 
 .studio {
   @include media-breakpoint-down(md) {
-    padding: 40px 0;
+    padding-top: 40px;
+    padding-bottom: 80px;
   }
 
   @include media-breakpoint-up(md) {
-    padding: 80px 0;
+    padding-top: 80px;
+    padding-bottom: 120px;
   }
 
   &__title-wrapper {
