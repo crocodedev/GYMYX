@@ -25,7 +25,7 @@ const TrainersItem = ({ data, className }) => {
           <p className={styles['trainers-item__name']}>{data[0].value}</p>
           <p className={styles['trainers-item__text']}>{data[1].value}</p>
         </div>
-        <Button size="m" label="Подробнее" fullSize={true} onClick={handleShow} disabledShadow={true}></Button>
+        <Button size="sl" label="Подробнее" fullSize={true} onClick={handleShow} disabledShadow={true}></Button>
       </div>
       <div
         className={showMore ? styles['trainers-item__more-wrapper--active'] : styles['trainers-item__more-wrapper']}
@@ -50,7 +50,7 @@ const TrainersItem = ({ data, className }) => {
             {data[4].value}
           </a>{' '}
           <a href={`https://t.me/${data[4].value.split(' ').join('')}`} target="_blank" onClick={(e) => handleClick(e)}>
-            <Button size="m" label="Написать в Telegram" fullSize={true} icon={'telegram'} />
+            <Button size="sl" label="Написать в Telegram" fullSize={true} icon={'telegram'} />
           </a>
         </div>
       </div>

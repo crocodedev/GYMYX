@@ -1,9 +1,9 @@
-import styles from "./TrainingItems.module.scss";
+import styles from './TrainingItems.module.scss';
 
-import { useState, useEffect } from "react";
-import BookingCard from "@/Components/Booking/BookingCard";
-import { useSelector, useDispatch } from "react-redux";
-import { updateBookingData, bookingSlice } from "@/redux/bookingSlice";
+import { useState, useEffect } from 'react';
+import BookingCard from '@/Components/Booking/BookingCard';
+import { useSelector, useDispatch } from 'react-redux';
+import { updateBookingData, bookingSlice } from '@/redux/bookingSlice';
 
 const TrainingItems = ({
   items = [],
@@ -23,20 +23,17 @@ const TrainingItems = ({
     if (selectedDate) {
       const filteredItems = items
         .filter((training) => training.date === selectedDate.date)
-        .sort(
-          (a, b) =>
-            new Date(`${a.date} ${a.time}`) - new Date(`${b.date} ${b.time}`)
-        )
+        .sort((a, b) => new Date(`${a.date} ${a.time}`) - new Date(`${b.date} ${b.time}`))
         .map((training) => training);
       setRenderingItems(filteredItems);
     } else {
-      setRenderingItems([]);
+      setRenderingItems(items);
     }
   }, [items, selectedDate]);
 
   return (
-    <div className={styles["training-items"]}>
-      <div className={styles["training-items__list"]}>
+    <div className={styles['training-items']}>
+      <div className={styles['training-items__list']}>
         {renderingItems.map(({ id, date, time, gym }) => {
           return (
             <BookingCard

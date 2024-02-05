@@ -35,7 +35,13 @@
       grid-template-columns: 2fr 1fr;
     }
 
-    @include media-breakpoint-between(xl, xxxl) {
+    @include media-breakpoint-between(xl, xxl) {
+      padding: 40px;
+      gap: 40px;
+      grid-template-columns: 683px 1fr;
+    }
+
+    @include media-breakpoint-between(xxl, xxxl) {
       padding: 45px;
       gap: 45px;
       grid-template-columns: 783px 400px;

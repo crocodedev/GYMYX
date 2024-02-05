@@ -193,7 +193,8 @@ a {
     font-style: normal;
     font-weight: 600;
     line-height: normal;
-    width: 100% !important;
+    width: calc(100% - 6px) !important;
+    margin: 2px 3px;
     text-align: center !important;
 
     @include media-breakpoint-down(xl) {
@@ -222,13 +223,34 @@ a {
   }
 
   .p-datepicker table td > span.p-highlight {
-    border-radius: 17px;
     background: var(--white, #fff) !important;
     color: var(--dark-grey, #37393d);
+
+    @include media-breakpoint-down(md) {
+      border-radius: 5px;
+    }
+
+    @include media-breakpoint-between(md, xl) {
+      border-radius: 12px;
+    }
+
+    @include media-breakpoint-up(xl) {
+      border-radius: 17px;
+    }
   }
 
   .p-datepicker table td > span {
-    border-radius: 17px;
+    @include media-breakpoint-down(md) {
+      border-radius: 5px;
+    }
+
+    @include media-breakpoint-between(md, xl) {
+      border-radius: 12px;
+    }
+
+    @include media-breakpoint-up(xl) {
+      border-radius: 17px;
+    }
   }
 
   .p-datepicker:not(.p-disabled) table td span:not(.p-highlight):not(.p-disabled):hover,

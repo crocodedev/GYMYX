@@ -89,10 +89,10 @@ const MapArea = ({ Placemarks, currentPlacemark, updateData }) => {
 
         <div className={styles['map-area__btns-zoom']}>
           <button onClick={handleZoomIn} className={styles['map-area__btn-zoom']} aria-label="Ближе">
-            +
+            <span className={styles['map-area__btn-plus']}></span>
           </button>
           <button onClick={handleZoomOut} className={styles['map-area__btn-zoom']} aria-label="Дальше">
-            -
+            <span className={styles['map-area__btn-minus']}></span>
           </button>
         </div>
         <button onClick={handleGeolocation} className={styles['map-area__btn-geo']} aria-label="Геопозиция">
