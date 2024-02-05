@@ -5,6 +5,7 @@ import { Providers } from '@/Components/Providers';
 const MontserratFont = Montserrat({ subsets: ['latin'] });
 import Header from '@/Sections/Header';
 import MobileBar from '@/Components/MobileBar';
+import Head from 'next/head';
 
 export const metadata = {
   title: 'GYMYX',
@@ -33,6 +34,9 @@ export default async function AccountLayout({ children }) {
 
   return (
     <html lang="en">
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0" />
+      </Head>
       <body className={MontserratFont.className}>
         <Providers>
           <Header isLanding={false} data={headerData} />
