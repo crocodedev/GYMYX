@@ -14,7 +14,11 @@
     display: grid;
     gap: 20px;
 
-    @include media-breakpoint-between(sm, lg) {
+    @include media-breakpoint-down(md) {
+      grid-template-columns: 1fr;
+    }
+
+    @include media-breakpoint-between(md, lg) {
       grid-template-columns: repeat(2, 1fr);
     }
   }

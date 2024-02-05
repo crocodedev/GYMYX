@@ -4,24 +4,22 @@ export async function POST(request) {
     try {
       const requestData = await request.json();
 
-      const response = await fetch('https://gymyx.cro.codes/api/users/auth/code', {
+      const response = await fetch(`https://gymyx.cro.codes/api/messages`, {
         method: 'POST',
+        cache: 'no-store',
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `Bearer ${requestData.token}`,
         },
-        body: JSON.stringify({ code: requestData.code }),
+        body: JSON.stringify({ text: requestData.text }),
       });
 
-      const result = await response.json();
-
       if (!response.ok) {
-        if (result?.message === 'Unauthorized') {
-          return Response.json({ error: 'Unauthorized' });
-        }
-        return Response.json({ error: 'Network response was not ok' });
+        throw new Error(`HTTP error! Status: ${response.status}`);
       }
 
-      return Response.json({ data: result?.data });
+      const data = await response.json();
+      return Response.json({ data });
     } catch (error) {
       return Response.json({ error: 'Error fetching data' });
     }

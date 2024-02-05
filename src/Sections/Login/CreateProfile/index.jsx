@@ -121,7 +121,7 @@ const CreateProfile = () => {
       redirect: 'follow',
     };
 
-    const result = await fetch('https://gymyx.cro.codes/api/users', requestOptions, { cache: 'no-store' });
+    const result = await fetch('https://gymyx.cro.codes/api/users', requestOptions);
 
     const response = await result.json();
     if (result.ok) {

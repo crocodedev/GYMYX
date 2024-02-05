@@ -59,13 +59,13 @@ const Training = () => {
 
   useEffect(() => {
     const dataTemp = getDataForPeriod(selectedTab, allTrainingsDates);
-    let targetDate = null;
-    if (!!latestDataTrainings.length && latestDataTrainings.length > 1) {
-      targetDate = latestDataTrainings[0];
-    } else {
-      targetDate = dataTemp[0];
-    }
-    setSelectedDate(targetDate);
+    // let targetDate = null;
+    // if (!!latestDataTrainings.length && latestDataTrainings.length > 1) {
+    //   targetDate = latestDataTrainings[0];
+    // } else {
+    //   targetDate = dataTemp[0];
+    // }
+    setSelectedDate(null);
     setSortedTrainingsDates(dataTemp || []);
   }, [selectedTab, allTrainingsDates]);
 
@@ -82,9 +82,14 @@ const Training = () => {
 
   const handleChangeSelectedDate = (value) => {
     const selectedDateTemp = allTrainingsDates.filter(({ date }) => formatDate(date) === formatDate(value));
+
     if (!selectedDateTemp?.length) return;
 
-    setSelectedDate(selectedDateTemp[0]);
+    if (selectedDateTemp[0].date === (selectedDate && selectedDate.date)) {
+      setSelectedDate(null);
+    } else {
+      setSelectedDate(selectedDateTemp[0]);
+    }
   };
 
   const getDataForPeriod = (tab_id, data) => {
@@ -127,6 +132,8 @@ const Training = () => {
       });
     }
   };
+
+  console.log(sortedTrainingsDates);
 
   if (loading) return <Loading full_screen={true} />;
 
