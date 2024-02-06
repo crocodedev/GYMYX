@@ -12,7 +12,6 @@ const Footer = ({ data }) => {
   const nav = fields.find((field) => field.name === 'nav')?.childrens || [];
   const phone_number = fields.find((field) => field.name === 'phone_number')?.value || '';
 
-  console.log(data);
   return (
     <footer className={styles.footer}>
       <Container size="xlf">

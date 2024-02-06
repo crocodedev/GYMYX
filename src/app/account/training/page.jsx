@@ -59,12 +59,6 @@ const Training = () => {
 
   useEffect(() => {
     const dataTemp = getDataForPeriod(selectedTab, allTrainingsDates);
-    // let targetDate = null;
-    // if (!!latestDataTrainings.length && latestDataTrainings.length > 1) {
-    //   targetDate = latestDataTrainings[0];
-    // } else {
-    //   targetDate = dataTemp[0];
-    // }
     setSelectedDate(null);
     setSortedTrainingsDates(dataTemp || []);
   }, [selectedTab, allTrainingsDates]);
@@ -132,8 +126,6 @@ const Training = () => {
       });
     }
   };
-
-  console.log(sortedTrainingsDates);
 
   if (loading) return <Loading full_screen={true} />;
 

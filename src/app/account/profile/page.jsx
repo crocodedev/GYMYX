@@ -11,6 +11,9 @@ import ProfileTextField from '@/Sections/Account/ProfileTextField';
 
 import { useSession } from 'next-auth/react';
 import { useEffect, useRef } from 'react';
+import { setFirstOpenSite } from '@/redux/firstOpen';
+import storeRedirect from '@/redux/storeRedirect';
+import { useDispatch } from 'react-redux';
 
 async function getUserData(token) {
   const response = await fetch('https://gymyx.cro.codes/api/users', {
@@ -36,6 +39,7 @@ async function getUserData(token) {
 const Profile = () => {
   const isFirstUpdate = useRef(true);
   const { data: sessionData, update } = useSession();
+
   useEffect(() => {
     if (sessionData && isFirstUpdate.current) {
       isFirstUpdate.current = false;
@@ -44,6 +48,8 @@ const Profile = () => {
           update(data);
         }
       });
+
+      storeRedirect.dispatch(setFirstOpenSite(false));
     }
   }, [sessionData]);
 

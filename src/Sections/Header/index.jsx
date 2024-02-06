@@ -8,15 +8,21 @@ import Button from '@/Components/Button';
 import MobileMenu from '@/Components/Header/MobileMenu';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
 
+import { usePathname } from 'next/navigation';
 import { getFioShort } from '@/Utils/helpers';
+import { useRouter } from 'next/navigation';
+import { setFirstOpenSite } from '@/redux/firstOpen';
+import storeRedirect from '@/redux/storeRedirect';
 
 const Header = ({ isLanding = false, data }) => {
   const sesstion = useSession();
+  const router = useRouter();
   const pathname = usePathname();
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [userData, setUserData] = useState(null);
+  let firstOpenSiteState = storeRedirect.getState().firstOpen.firstOpenSite;
+
   const fields = data?.fields;
   const logo = fields.find((field) => field.name === 'logo')?.value;
   const menu = fields.find((field) => field.name === 'Menu')?.childrens;
@@ -32,6 +38,13 @@ const Header = ({ isLanding = false, data }) => {
         fio: getFioShort(sesstion?.data?.user?.full_name),
         image: sesstion?.data?.user?.image,
       });
+
+      if (storeRedirect.getState().firstOpen.firstOpenSite === true) {
+        storeRedirect.dispatch(setFirstOpenSite(false));
+        if (storeRedirect.getState().firstOpen.firstOpenSite === false) {
+          router.push('/account/profile');
+        }
+      }
     }
   }, [sesstion]);
 
