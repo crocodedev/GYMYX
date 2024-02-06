@@ -16,10 +16,6 @@
     min-height: 58px;
   }
 
-  @include media-breakpoint-between(sm, md) {
-    min-height: 85px;
-  }
-
   @include media-breakpoint-down(md) {
     border-radius: 15px;
     padding: 13px 15px;
@@ -27,6 +23,10 @@
 
   @include media-breakpoint-up(md) {
     border-radius: 30px;
+  }
+
+  @include media-breakpoint-between(sm, xl) {
+    min-height: 136px;
   }
 
   @include media-breakpoint-between(md, xl) {

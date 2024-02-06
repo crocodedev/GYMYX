@@ -44,12 +44,16 @@
   }
 
   &__iframe {
-    @include media-breakpoint-down(xl) {
+    @include media-breakpoint-down(sm) {
+      height: 460px;
+    }
+
+    @include media-breakpoint-between(sm, xl) {
       height: 520px;
     }
 
     @include media-breakpoint-up(xl) {
-      height: 800px;
+      height: 700px;
     }
   }
 }
