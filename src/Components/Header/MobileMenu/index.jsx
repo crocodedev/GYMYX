@@ -66,16 +66,30 @@ const MobileMenu = ({ items, isShow, toggleVisibility }) => {
               </div>
             </>
           ) : (
-            <Link href="/">
-              <Button
-                size="l"
-                label={'Выйти'}
-                onClick={() => {
-                  signOut({ callbackUrl: '/account/login' });
-                  router.push('/');
-                }}
-              />
-            </Link>
+            <>
+              <div className={styles['mobile-menu__login-btns']}>
+                <Link href="/account/profile">
+                  <Button
+                    size="l"
+                    variant="blue"
+                    label={'Перейти в профиль'}
+                    onClick={() => {
+                      router.push('/account/profile');
+                    }}
+                  />
+                </Link>
+                <Link href="/">
+                  <Button
+                    size="l"
+                    label={'Выйти'}
+                    onClick={() => {
+                      signOut({ callbackUrl: '/account/login' });
+                      router.push('/');
+                    }}
+                  />
+                </Link>
+              </div>
+            </>
           )}
         </div>
       </div>

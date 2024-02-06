@@ -7,7 +7,6 @@ import Container from '@/Components/Container';
 import SectionTitle from '@/Components/SectionTitle';
 
 const Studio = ({ alias, fields }) => {
-  console.log(fields);
   const title = fields.find((item) => item.name === 'title')?.value;
   const model = fields.find((item) => item.name === '3dmodel')?.value;
 
