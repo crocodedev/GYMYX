@@ -73,6 +73,18 @@
     background: var(--blue-base, #294ae7);
     box-shadow: 0px 0px 27px 30px rgb(22 23 26 / 8%);
 
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: #5b74e9;
+      transition: 0.3s ease;
+    }
+
+    &:active {
+      background: #8e9eed;
+      transition: 0.3s ease;
+    }
+
     @include media-breakpoint-down(md) {
       bottom: 12px;
       right: 12px;

@@ -7,6 +7,7 @@
   display: flex;
   align-items: center;
   width: fit-content;
+  transition: 0.3s ease;
 
   @include media-breakpoint-down(xl) {
     font-size: 12px;
@@ -42,6 +43,16 @@
     @include media-breakpoint-up(xl) {
       margin-right: 30px;
     }
+  }
+
+  &:hover {
+    background: #ffffffbf;
+    transition: 0.3s ease;
+  }
+
+  &:active {
+    background: #8f8f8f;
+    transition: 0.3s ease;
   }
 
   &__icon {

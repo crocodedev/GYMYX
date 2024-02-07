@@ -1,4 +1,4 @@
-@import "@/styles/mixins.scss";
+@import '@/styles/mixins.scss';
 
 .profile-edit-form {
   position: relative;
@@ -66,6 +66,7 @@
     display: flex;
     border-radius: 50%;
     overflow: hidden;
+    position: relative;
     cursor: pointer;
 
     @include media-breakpoint-down(md) {
@@ -93,6 +94,38 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+    }
+  }
+
+  &__avatar:hover &__avatar-edit {
+    opacity: 1;
+  }
+
+  &__avatar-edit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #00000087;
+    z-index: 1;
+    transition: 0.3s ease;
+  }
+
+  &__avatar-edit &__edit-icon {
+    @include media-breakpoint-down(lg) {
+      width: 20px;
+      height: 20px;
+    }
+
+    @include media-breakpoint-up(lg) {
+      width: 30px;
+      height: 30px;
     }
   }
 

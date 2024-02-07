@@ -112,12 +112,12 @@ a {
       gap: 14px;
     }
 
-    @include media-breakpoint-between(xl, xxl) {
+    @include media-breakpoint-between(xl, xxxl) {
       margin-bottom: 28px;
       gap: 20px;
     }
 
-    @include media-breakpoint-up(xxl) {
+    @include media-breakpoint-up(xxxl) {
       margin-bottom: 50px;
       gap: 30px;
     }
@@ -126,9 +126,6 @@ a {
   .p-datepicker-prev,
   .p-datepicker-next {
     color: white;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
 
     @include media-breakpoint-down(xl) {
       width: 15px;
@@ -148,14 +145,6 @@ a {
       width: 100%;
       height: 100%;
     }
-  }
-
-  .p-datepicker-prev {
-    left: 20%;
-  }
-
-  .p-datepicker-next {
-    right: 20%;
   }
 
   .p-datepicker-title {
@@ -280,6 +269,10 @@ a {
     }
   }
 
+  .p-datepicker table th {
+    padding-bottom: 10px;
+  }
+
   .p-datepicker-title {
     display: flex;
 
@@ -317,5 +310,9 @@ a {
   .p-datepicker .p-yearpicker .p-yearpicker-year.p-highlight {
     background: transparent;
     color: var(--white, #fff);
+  }
+
+  .tableheader {
+    background-color: red !important;
   }
 }

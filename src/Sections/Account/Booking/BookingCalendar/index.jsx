@@ -1,148 +1,125 @@
-"use client"
+'use client';
 
-import styles from "./BookingCalendar.module.scss"
-import { Calendar } from "primereact/calendar"
-import { addLocale } from "primereact/api"
-import "primereact/resources/themes/lara-light-cyan/theme.css"
-import { useState, useEffect, useTransition } from "react"
-import Button from "@/Components/Button"
-import { updateBookingData } from "@/redux/bookingSlice"
-import { useRouter } from "next/navigation"
-import { useDispatch, useSelector } from "react-redux"
-import Loading from "@/Components/Loading"
-import { compareDates, takeAvailableDatesTwoMonth } from "./helpers"
+import styles from './BookingCalendar.module.scss';
+import { Calendar } from 'primereact/calendar';
+import { addLocale } from 'primereact/api';
+import 'primereact/resources/themes/lara-light-cyan/theme.css';
+import { useState, useEffect, useTransition } from 'react';
+import Button from '@/Components/Button';
+import { updateBookingData } from '@/redux/bookingSlice';
+import { useRouter } from 'next/navigation';
+import { useDispatch, useSelector } from 'react-redux';
+import Loading from '@/Components/Loading';
+import { compareDates, takeAvailableDatesTwoMonth } from './helpers';
 
-addLocale("ru", {
+addLocale('ru', {
   firstDayOfWeek: 1,
   showMonthAfterYear: true,
-  dayNames: [
-    "воскресенье",
-    "понедельник",
-    "вторник",
-    "среда",
-    "четверг",
-    "пятница",
-    "суббота",
-  ],
-  dayNamesShort: ["вс", "пн", "вт", "ср", "чт", "пт", "сб"],
-  dayNamesMin: ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"],
+  dayNames: ['воскресенье', 'понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота'],
+  dayNamesShort: ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'],
+  dayNamesMin: ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'],
   monthNames: [
-    "январь",
-    "февраль",
-    "март",
-    "апрель",
-    "май",
-    "июнь",
-    "июль",
-    "август",
-    "сентябрь",
-    "октябрь",
-    "ноябрь",
-    "декабрь",
+    'январь',
+    'февраль',
+    'март',
+    'апрель',
+    'май',
+    'июнь',
+    'июль',
+    'август',
+    'сентябрь',
+    'октябрь',
+    'ноябрь',
+    'декабрь',
   ],
-  monthNamesShort: [
-    "янв",
-    "фев",
-    "мар",
-    "апр",
-    "май",
-    "июн",
-    "июл",
-    "авг",
-    "сен",
-    "окт",
-    "ноя",
-    "дек",
-  ],
-  today: "Сегодня",
-  clear: "Очистить",
-})
+  monthNamesShort: ['янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'],
+  today: 'Сегодня',
+  clear: 'Очистить',
+});
 
 const BookingCalendar = () => {
-  const [loading, setLoading] = useState(true)
-  const { gym, visitDate, variant } = useSelector((state) => state.booking)
-  const dispatch = useDispatch()
-  const [dates, setDates] = useState([])
-  const router = useRouter()
-  const [availableDates, setAvailableDates] = useState([])
+  const [loading, setLoading] = useState(true);
+  const { gym, visitDate, variant } = useSelector((state) => state.booking);
+  const dispatch = useDispatch();
+  const [dates, setDates] = useState([]);
+  const router = useRouter();
+  const [availableDates, setAvailableDates] = useState([]);
 
   const handleSubmit = (url) => {
     dispatch(
       updateBookingData({
         visitDate: [...dates]?.sort(compareDates),
         currentDate: 0,
-      })
-    )
-    router.push(url)
-  }
+      }),
+    );
+    router.push(url);
+  };
 
   const handleAddDate = (e) => {
-    const value = e.value
+    const value = e.value;
 
     const getTime = (valueToFind) => {
       try {
-        return dates.filter(
-          ({ value }) => value.toString() == valueToFind.toString()
-        )[0]
+        return dates.filter(({ value }) => value.toString() == valueToFind.toString())[0];
       } catch {
-        return false
+        return false;
       }
-    }
+    };
 
     const newDates = value.map((valueItem) => {
-      const time = getTime(valueItem)
+      const time = getTime(valueItem);
       return {
         value: valueItem,
         time: time?.time || [],
-      }
-    })
+      };
+    });
 
-    setDates(newDates)
-  }
+    setDates(newDates);
+  };
 
   useEffect(() => {
-    setLoading(true)
+    setLoading(true);
     if (!!visitDate?.length) {
-      setDates(visitDate)
+      setDates(visitDate);
     }
 
     takeAvailableDatesTwoMonth(gym.id).then((data) => {
-      setAvailableDates(data)
-      setLoading(false)
-    })
-  }, [gym])
+      setAvailableDates(data);
+      setLoading(false);
+    });
+  }, [gym]);
 
   if (loading) {
-    return <Loading />
+    return <Loading />;
   }
 
   return (
-    <div className={styles["booking-calendar"]}>
+    <div className={styles['booking-calendar']}>
       <div>
         <Calendar
           minDate={new Date()}
-          className={`${styles["booking-calendar__calendar"]} booking-calendar__calendar`}
+          className={`${styles['booking-calendar__calendar']} booking-calendar__calendar`}
           value={dates?.map(({ value }) => new Date(value))}
           onChange={handleAddDate}
           inline
           locale="ru"
           selectionMode="multiple"
-          maxDateCount={variant === "single" ? 1 : null}
+          maxDateCount={variant === 'single' ? 1 : null}
           maxDate={new Date(new Date().getTime() + 14 * 24 * 60 * 60 * 1000)}
           enabledDates={availableDates}
         />
         <Button
-          onClick={() => handleSubmit("/account/booking/sign-up/choose-time")}
+          onClick={() => handleSubmit('/account/booking/sign-up/choose-time')}
           disabled={!dates.length}
           fullSize={true}
           variant="blue"
           size="l"
-          label={!loading ? "Далее" : "Загрузка"}
+          label={!loading ? 'Далее' : 'Загрузка'}
           icon="arrow"
         />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default BookingCalendar
+export default BookingCalendar;

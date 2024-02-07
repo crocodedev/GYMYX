@@ -33,6 +33,7 @@
   &__btns {
     display: flex;
     align-items: center;
+    gap: 5px;
   }
 
   &__btn {
@@ -45,13 +46,13 @@
     padding: 10px;
     cursor: pointer;
 
-    @include media-breakpoint-between(lg, xxl) {
-      width: 45px;
-      height: 35px;
+    @include media-breakpoint-between(lg, xxxl) {
+      width: 35px;
+      height: 33px;
       padding: 5px;
     }
 
-    @include media-breakpoint-up(xxl) {
+    @include media-breakpoint-up(xxxl) {
       width: 60px;
       height: 50px;
       padding: 10px;

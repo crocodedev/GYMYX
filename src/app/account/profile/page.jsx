@@ -48,8 +48,6 @@ const Profile = () => {
           update(data);
         }
       });
-
-      storeRedirect.dispatch(setFirstOpenSite(false));
     }
   }, [sessionData]);
 

@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import styles from './TrainersItem.module.scss';
 import Button from '@/Components/Button';
+import Image from 'next/image';
 
 const TrainersItem = ({ data, className }) => {
   const [showMore, setShowMore] = useState(false);
@@ -15,10 +16,12 @@ const TrainersItem = ({ data, className }) => {
     event.stopPropagation();
   };
 
+  const formattedPhoneNumber = data[4].value.replace(/^(\+\d)(\d{3})(\d{3})(\d{2})(\d{2})$/, '$1 $2 $3 $4 $5');
+
   return (
     <div className={className}>
       <div className={styles['trainers-item__img-wrapper']}>
-        <img src={data[5].value} alt="" className={styles['trainers-item__img']} />
+        <img src={data[5].value} alt={data[1].value} className={styles['trainers-item__img']} />
       </div>
       <div className={styles['trainers-item__text-wrapper']}>
         <div className={styles['trainers-item__text-inner']}>
@@ -47,7 +50,7 @@ const TrainersItem = ({ data, className }) => {
             target="_blank"
             onClick={(e) => handleClick(e)}
           >
-            {data[4].value}
+            {formattedPhoneNumber}
           </a>{' '}
           <a href={`https://t.me/${data[4].value.split(' ').join('')}`} target="_blank" onClick={(e) => handleClick(e)}>
             <Button size="sl" label="Написать в Telegram" fullSize={true} icon={'telegram'} />
