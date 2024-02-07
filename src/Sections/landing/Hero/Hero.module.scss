@@ -6,6 +6,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  background: linear-gradient(107.59deg, #294ae7 0%, #0d2dc8 100%);
 
   @include media-breakpoint-down(lg) {
     &::after {
@@ -21,11 +22,11 @@
 
   &__img {
     position: absolute;
-    top: 0;
+    top: 68px;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1;
+    z-index: 1;
 
     img {
       width: 100%;

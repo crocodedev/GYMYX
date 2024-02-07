@@ -6,7 +6,6 @@ import Footer from '@/Sections/landing/Footer';
 
 import { Providers } from '@/Components/Providers';
 import Head from 'next/head';
-
 const MontserratFont = Montserrat({ subsets: ['cyrillic-ext'] });
 
 export const metadata = {
@@ -32,7 +31,6 @@ async function getData() {
 
 export default async function LandingLayout({ children, params }) {
   const { data } = await getData();
-
   const headerData = data.modules.find((item) => item.alias === 'header');
   const footerData = data.modules.find((item) => item.alias === 'footer');
 

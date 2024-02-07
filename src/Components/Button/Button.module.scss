@@ -5,12 +5,13 @@
   font-weight: 600;
   width: fit-content;
   cursor: pointer;
-  background: var(--white, #fff);
+  background: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
   border: none;
   font-family: inherit;
+  transition: all 0.3s ease;
 
   &.full-size {
     width: 100%;
@@ -35,7 +36,7 @@
   @include media-breakpoint-up(xxl) {
     padding: 10px 24px 11px 24px;
     font-size: 22px;
-    box-shadow: 0px 0px 27px 30px rgba(22, 23, 26, 0.3);
+    box-shadow: 0px 0px 50px 30px #16171a1f;
     border-radius: 31px;
   }
 
@@ -67,37 +68,48 @@
   }
 
   &-blue {
-    // background: var(
-    //   --blue-base-gradient,
-    //   linear-gradient(90deg, #294ae7 100%, #0d2dc8 100%)
-    // );
     background: #294ae7;
     color: white;
     transition: all 0.3s ease;
 
     &:hover {
-      // background: var(
-      //   --blue-base-gradient,
-      //   linear-gradient(90deg, #5b74e9 100%, #4860d4 100%)
-      // );
       background: #5b74e9;
       transition: 0.3s ease;
     }
 
     &:active {
-      // background: var(
-      //   --blue-base-gradient,
-      //   linear-gradient(90deg, #8e9eed 100%, #8191df 100%)
-      // );
       background: #8e9eed;
       transition: 0.3s ease;
     }
   }
 
   &-black {
-    background: var(--black-gradient, linear-gradient(90deg, #353a40 0%, #212428 99.9%));
-    box-shadow: 0px 0px 50px 30px rgba(22, 23, 26, 0.3);
+    background: linear-gradient(90deg, #353a40 0%, #212428 99.9%);
     color: white;
+    // transition: all 0.3s ease;
+
+    // &:hover {
+    //   background: linear-gradient(90deg, #20426c 0%, #212428 99.9%);
+
+    //   transition: 0.3s ease;
+    // }
+
+    // &:active {
+    //   background: #3d434a;
+    //   transition: 0.3s ease;
+    // }
+  }
+
+  &:not(.button-blue):not(.button-black) {
+    &:hover {
+      background: #ffffffbf;
+      transition: 0.3s ease;
+    }
+
+    &:active {
+      background: #8f8f8f;
+      transition: 0.3s ease;
+    }
   }
 
   &-size-m {
