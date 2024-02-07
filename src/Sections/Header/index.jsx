@@ -39,12 +39,12 @@ const Header = ({ isLanding = false, data }) => {
         image: sesstion?.data?.user?.image,
       });
 
-      if (storeRedirect.getState().firstOpen.firstOpenSite === true) {
-        storeRedirect.dispatch(setFirstOpenSite(false));
-        if (storeRedirect.getState().firstOpen.firstOpenSite === false) {
-          router.push('/account/profile');
-        }
-      }
+      // if (storeRedirect.getState().firstOpen.firstOpenSite === true) {
+      //   storeRedirect.dispatch(setFirstOpenSite(false));
+      //   if (storeRedirect.getState().firstOpen.firstOpenSite === false) {
+      //     router.push('/account/profile');
+      //   }
+      // }
     }
   }, [sesstion]);
 
