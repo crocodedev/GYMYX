@@ -1,12 +1,20 @@
+'use client';
+
 import Hero from '@/Sections/landing/Hero';
 import AboutUs from '@/Sections/landing/AboutUs';
 import Advantages from '@/Sections/landing/Advantages';
 import Prices from '@/Sections/landing/Prices';
 import ChooseHealth from '@/Sections/landing/ChooseHealth';
+
 import Equipment from '@/Sections/landing/Equipment';
 import Map from '@/Sections/landing/Map';
 import Faq from '@/Sections/landing/Faq';
 import Studio from '@/Sections/landing/Studio';
+import { useSession } from 'next-auth/react';
+import { useEffect, useState } from 'react';
+
+import Loading from '@/Components/Loading';
+import { useRouter } from 'next/navigation';
 
 async function getData() {
   const res = await fetch('https://gymyx.cro.codes/api/pages/index', {
@@ -35,17 +43,58 @@ const SECTION_MAP = {
   faq: (props) => <Faq {...props} />,
 };
 
-export default async function Home() {
-  const { data } = await getData();
+const fetchData = async () => {
+  const data = await getData();
+  if (data) {
+    return data.data.modules;
+  }
+};
 
-  const sections = data.modules.map((section) => section);
+export default function Home() {
+  const sesstion = useSession();
+  const router = useRouter();
+  const [isLoad, setIsLoad] = useState(true);
+  const urlParams = new URLSearchParams(window.location.search);
+  const [sections, setSections] = useState([]);
+  const [isDataFetched, setIsDataFetched] = useState(false);
 
-  const SECTIONS_RENDER = sections.map(({ name, alias, fields }) => {
-    if (alias != 'header' && alias != 'footer') {
-      const SectionComponent = SECTION_MAP[alias];
-      return <SectionComponent key={alias} alias={alias} fields={fields} />;
-    }
-  });
+  useEffect(() => {
+    const fetchDataAndSetSections = async () => {
+      if (sesstion?.status === 'authenticated' && sesstion?.data?.user?.full_name) {
+        if (urlParams.size !== 0) {
+          for (const [key, value] of urlParams) {
+            if (value !== 'false') {
+              setIsLoad(true);
+              router.push('/account/profile');
+            }
+          }
+        } else {
+          setIsLoad(true);
+          router.push('/account/profile');
+        }
+      } else {
+        if (!isDataFetched) {
+          const fetchedSections = await fetchData();
+          setSections(fetchedSections);
+          setIsLoad(false);
+          setIsDataFetched(true);
+        }
+      }
+    };
 
-  return <>{SECTIONS_RENDER}</>;
+    fetchDataAndSetSections();
+  }, [sesstion, router, urlParams]);
+
+  if (isLoad) {
+    return <Loading full_screen={true} background={true} />;
+  }
+
+  return !isLoad
+    ? sections.map(({ alias, fields }) => {
+        if (alias !== 'header' && alias !== 'footer') {
+          const SectionComponent = SECTION_MAP[alias];
+          return <SectionComponent key={alias} alias={alias} fields={fields} />;
+        }
+      })
+    : null;
 }

@@ -2,6 +2,7 @@
 
 import { Link as ScrollLink } from 'react-scroll';
 import { useState, useEffect } from 'react';
+
 import styles from './Header.module.scss';
 import Link from 'next/link';
 import Button from '@/Components/Button';
@@ -12,16 +13,13 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { getFioShort } from '@/Utils/helpers';
 import { useRouter } from 'next/navigation';
-import { setFirstOpenSite } from '@/redux/firstOpen';
-import storeRedirect from '@/redux/storeRedirect';
+import Loading from '@/Components/Loading';
 
 const Header = ({ isLanding = false, data }) => {
   const sesstion = useSession();
-  const router = useRouter();
   const pathname = usePathname();
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [userData, setUserData] = useState(null);
-  let firstOpenSiteState = storeRedirect.getState().firstOpen.firstOpenSite;
 
   const fields = data?.fields;
   const logo = fields.find((field) => field.name === 'logo')?.value;
@@ -38,13 +36,6 @@ const Header = ({ isLanding = false, data }) => {
         fio: getFioShort(sesstion?.data?.user?.full_name),
         image: sesstion?.data?.user?.image,
       });
-
-      // if (storeRedirect.getState().firstOpen.firstOpenSite === true) {
-      //   storeRedirect.dispatch(setFirstOpenSite(false));
-      //   if (storeRedirect.getState().firstOpen.firstOpenSite === false) {
-      //     router.push('/account/profile');
-      //   }
-      // }
     }
   }, [sesstion]);
 
@@ -53,7 +44,7 @@ const Header = ({ isLanding = false, data }) => {
   return (
     <header className={`${styles.header} ${isLanding ? styles['is-landing'] : ''}`}>
       <div className={styles.header__wrapper}>
-        <Link href="/" className={styles.header__logo} aria-label="Вернуться на главную">
+        <Link href="/?redirect=false" className={styles.header__logo} aria-label="Вернуться на главную">
           <Image alt="logo" width={200} height={50} src={logo || ''} aria-label="Логотип" loading="lazy" />
         </Link>
         <div className={styles.header__nav}>

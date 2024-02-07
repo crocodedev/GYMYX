@@ -219,6 +219,9 @@ const ProfileEditForm = () => {
             <label className={styles['profile-edit-form__avatar']}>
               <input onChange={handleUploadFile} type="file" accept=".jpg, .jpeg, .png, .pdf, .webp" />
               <img ref={imagePreviewRef} src={data.image.preview || '/icons/avatar.svg'} alt="profile image" />
+              <span className={styles['profile-edit-form__avatar-edit']}>
+                <img src="/icons/edit.svg" alt="edit" className={styles['profile-edit-form__edit-icon']} />
+              </span>
             </label>
             <div className={styles['profile-edit-form__data-col']}>
               <ProfileField prefix="Имя" name={'name'} value={data.name.value} onInput={handleChangeInput} />

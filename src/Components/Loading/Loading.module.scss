@@ -1,4 +1,4 @@
-@import "@/styles/mixins.scss";
+@import '@/styles/mixins.scss';
 
 .loading {
   width: 100%;
@@ -6,6 +6,8 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  position: relative;
+  z-index: 100;
 
   @include media-breakpoint-down(lg) {
     gap: 10px;
@@ -17,6 +19,11 @@
 
   &.full-screen {
     min-height: 100vh;
+    position: fixed;
+  }
+
+  &.background {
+    background-color: var(--black, #212428);
   }
 
   &__img-wrapper {

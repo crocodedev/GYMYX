@@ -164,21 +164,25 @@
     @include media-breakpoint-down(lg) {
       font-size: 16px;
       letter-spacing: -0.16px;
+      margin-bottom: 10px;
     }
 
     @include media-breakpoint-between(lg, xxl) {
       font-size: 28px;
       letter-spacing: -0.4px;
+      margin-bottom: 12.5px;
     }
 
     @include media-breakpoint-between(xxl, xxxl) {
       font-size: 30px;
       letter-spacing: -0.4px;
+      margin-bottom: 15px;
     }
 
     @include media-breakpoint-up(xxxl) {
       font-size: 40px;
       letter-spacing: -0.4px;
+      margin-bottom: 20px;
     }
   }
 
