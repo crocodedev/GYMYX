@@ -1,6 +1,6 @@
 import styles from './Loading.module.scss';
 
-const Loading = ({ full_screen, background = false }) => {
+const Loading = ({ full_screen, background }) => {
   return (
     <div
       className={`${styles.loading} ${full_screen ? styles['full-screen'] : ''} ${
