@@ -59,15 +59,29 @@ const Training = () => {
 
   useEffect(() => {
     const dataTemp = getDataForPeriod(selectedTab, allTrainingsDates);
-    setSortedTrainingsDates(dataTemp || []);
+
+    setSortedTrainingsDates(
+      dataTemp.sort((a, b) => {
+        const dateA = new Date(a.date);
+        const dateB = new Date(b.date);
+        if (dateA.getTime() !== dateB.getTime()) {
+          return dateA - dateB;
+        } else {
+          const timeA = new Date(`1970-01-01T${a.time}`);
+          const timeB = new Date(`1970-01-01T${b.time}`);
+          return timeA - timeB;
+        }
+      }) || [],
+    );
   }, [selectedTab, allTrainingsDates]);
 
   const updateDate = () => {
     if (!sessionData?.user?.accessToken) return;
+    let result;
 
-    const result = selectedDate
-      ? sortedTrainingsDates.filter(({ date }) => date === selectedDate.date)
-      : sortedTrainingsDates;
+    if (selectedDate) {
+      result = sortedTrainingsDates.filter(({ date }) => date === selectedDate.date);
+    }
 
     setLatestDataTrainings(result);
     getTrainingData(sessionData?.user?.accessToken).then(({ data = [] }) => {
