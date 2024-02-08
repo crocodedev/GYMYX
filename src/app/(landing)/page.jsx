@@ -56,7 +56,6 @@ export default function Home() {
   const [isLoad, setIsLoad] = useState(true);
   const [sections, setSections] = useState([]);
   const [isDataFetched, setIsDataFetched] = useState(false);
-
   const searchParams = useSearchParams();
 
   useEffect(() => {
@@ -69,14 +68,16 @@ export default function Home() {
         if (!isDataFetched) {
           const fetchedSections = await fetchData();
           setSections(fetchedSections);
-          setIsLoad(false);
+          setTimeout(() => {
+            setIsLoad(false);
+          }, 1000);
           setIsDataFetched(true);
         }
       }
     };
 
     fetchDataAndSetSections();
-  }, [sesstion, router, searchParams]);
+  }, [sesstion, router]);
 
   if (isLoad) {
     return <Loading full_screen={true} background={true} />;
