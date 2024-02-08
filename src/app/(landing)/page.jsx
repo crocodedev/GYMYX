@@ -54,7 +54,6 @@ export default function Home() {
   const sesstion = useSession();
   const router = useRouter();
   const [isLoad, setIsLoad] = useState(true);
-  const urlParams = new URLSearchParams(window.location.search);
   const [sections, setSections] = useState([]);
   const [isDataFetched, setIsDataFetched] = useState(false);
 
