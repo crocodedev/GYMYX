@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import Container from "@/Components/Container";
-import styles from "./ProfileTrainings.module.scss";
-import { useSession } from "next-auth/react";
+import Container from '@/Components/Container';
+import styles from './ProfileTrainings.module.scss';
+import { useSession } from 'next-auth/react';
 
-import { canDelete, cancelBooking, getTrainingData } from "./helpers";
+import { canDelete, cancelBooking, getTrainingData } from './helpers';
 
-import { useState, useEffect } from "react";
-import Loading from "@/Components/Loading";
-import { formatDate, formatTime } from "@/Utils/helpers";
-import Modal from "@/Components/Modal";
-import Button from "@/Components/Button";
+import { useState, useEffect } from 'react';
+import Loading from '@/Components/Loading';
+import { formatDate, formatTime } from '@/Utils/helpers';
+import Modal from '@/Components/Modal';
+import Button from '@/Components/Button';
 
 const ProfileTrainings = () => {
   const { data: sessionData } = useSession();
@@ -82,63 +82,42 @@ const ProfileTrainings = () => {
     handleDeleteItem(curIdItem);
   };
 
-  if (loading) return <Loading full_screen={true} />;
+  if (loading) return <Loading full_screen={true} background={true} />;
   if (!closestTraining) return;
 
   return (
     <>
       {showModal && (
-        <Modal
-          handleClose={handleShow}
-          text={"Вы точно хотите отменить тренировку?"}
-        >
+        <Modal handleClose={handleShow} text={'Вы точно хотите отменить тренировку?'}>
           <Button
             fullSize={true}
             size="l"
-            label={!loadingDelete ? "Да" : "Загрузка"}
+            label={!loadingDelete ? 'Да' : 'Загрузка'}
             variant="blue"
             onClick={handleClickDelete}
             disabledShadow={true}
           />
-          <Button
-            fullSize={true}
-            size="l"
-            label="Нет"
-            variant="black"
-            onClick={handleShow}
-            disabledShadow={true}
-          />
+          <Button fullSize={true} size="l" label="Нет" variant="black" onClick={handleShow} disabledShadow={true} />
         </Modal>
       )}
 
-      <section className={styles["profile-trainings"]}>
+      <section className={styles['profile-trainings']}>
         <Container size="M">
-          <div className={styles["profile-trainings__wrapper"]}>
-            <div className={styles["profile-trainings__object"]}>
+          <div className={styles['profile-trainings__wrapper']}>
+            <div className={styles['profile-trainings__object']}>
               <img src="/icons/icon.svg" />
             </div>
-            <div
-              className={styles["profile-trainings__btn"]}
-              onClick={() => handleClickItem(closestTraining?.id)}
-            >
+            <div className={styles['profile-trainings__btn']} onClick={() => handleClickItem(closestTraining?.id)}>
               <img src="/icons/cross.svg" alt="" />
             </div>
-            <div className={styles["profile-trainings__content"]}>
-              <div className={styles["profile-trainings__date"]}>
-                <p className={styles["profile-trainings__date-value"]}>
-                  {formatDate(closestTraining.date)}
-                </p>
-                <div className={styles["profile-trainings__date-time"]}>
-                  {formatTime(closestTraining.time)}
-                </div>
+            <div className={styles['profile-trainings__content']}>
+              <div className={styles['profile-trainings__date']}>
+                <p className={styles['profile-trainings__date-value']}>{formatDate(closestTraining.date)}</p>
+                <div className={styles['profile-trainings__date-time']}>{formatTime(closestTraining.time)}</div>
               </div>
-              <div className={styles["profile-trainings__col"]}>
-                <p className={styles["profile-trainings__title"]}>
-                  {closestTraining?.gym?.name || ""}
-                </p>
-                <p className={styles["profile-trainings__text"]}>
-                  {closestTraining?.gym?.address || ""}
-                </p>
+              <div className={styles['profile-trainings__col']}>
+                <p className={styles['profile-trainings__title']}>{closestTraining?.gym?.name || ''}</p>
+                <p className={styles['profile-trainings__text']}>{closestTraining?.gym?.address || ''}</p>
               </div>
             </div>
           </div>

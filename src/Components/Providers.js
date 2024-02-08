@@ -13,7 +13,7 @@ export const Providers = ({ children }) => {
 
   return (
     <ReduxProvider store={store}>
-      <PersistGate loading={<Loading full_screen={true} />} persistor={persistor}>
+      <PersistGate loading={<Loading full_screen={true} background={true} />} persistor={persistor}>
         <SessionProvider>{children}</SessionProvider>
       </PersistGate>
     </ReduxProvider>
