@@ -59,13 +59,15 @@ const Training = () => {
 
   useEffect(() => {
     const dataTemp = getDataForPeriod(selectedTab, allTrainingsDates);
-    setSelectedDate(null);
     setSortedTrainingsDates(dataTemp || []);
   }, [selectedTab, allTrainingsDates]);
 
   const updateDate = () => {
     if (!sessionData?.user?.accessToken) return;
-    const result = sortedTrainingsDates.filter(({ date }) => date === selectedDate.date);
+
+    const result = selectedDate
+      ? sortedTrainingsDates.filter(({ date }) => date === selectedDate.date)
+      : sortedTrainingsDates;
 
     setLatestDataTrainings(result);
     getTrainingData(sessionData?.user?.accessToken).then(({ data = [] }) => {
