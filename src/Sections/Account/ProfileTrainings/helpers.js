@@ -1,7 +1,6 @@
 export const getTrainingData = async (token) => {
   const result = await fetch('/api/booking/get-bookings', {
     method: 'POST',
-    cache: 'no-store',
     headers: {
       'Content-Type': 'application/json',
     },
