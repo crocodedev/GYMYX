@@ -14,7 +14,7 @@ import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 
 import Loading from '@/Components/Loading';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 async function getData() {
   const res = await fetch('https://gymyx.cro.codes/api/pages/index', {
@@ -58,18 +58,12 @@ export default function Home() {
   const [sections, setSections] = useState([]);
   const [isDataFetched, setIsDataFetched] = useState(false);
 
+  const searchParams = useSearchParams();
+
   useEffect(() => {
     const fetchDataAndSetSections = async () => {
       if (sesstion?.status === 'authenticated' && sesstion?.data?.user?.full_name) {
-        if (urlParams.size !== 0) {
-          for (const [key, value] of urlParams) {
-            if (value !== 'false') {
-              setIsLoad(true);
-              router.push('/account/profile');
-            }
-          }
-        } else {
-          setIsLoad(true);
+        if (searchParams.get('redirect') !== 'false') {
           router.push('/account/profile');
         }
       } else {

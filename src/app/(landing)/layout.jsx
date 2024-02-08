@@ -14,6 +14,14 @@ export const metadata = {
   manifest: '/manifest.json',
 };
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: 0,
+  // viewport: 'width=device-width, initial-scale=0, maximum-scale=1.0,user-scalable=0',
+};
+
 async function getData() {
   const res = await fetch('https://gymyx.cro.codes/api/pages/index', {
     cache: 'no-store',
@@ -36,9 +44,9 @@ export default async function LandingLayout({ children, params }) {
 
   return (
     <html lang="en">
-      <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0" />
-      </Head>
+      {/* <Head>
+        <meta name="viewport" content="" />
+      </Head> */}
       <body className={MontserratFont.className}>
         <Providers>
           <Header isLanding={true} data={headerData} />
