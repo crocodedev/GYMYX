@@ -76,7 +76,7 @@ export default function Home() {
     };
 
     fetchDataAndSetSections();
-  }, [sesstion, router, urlParams]);
+  }, [sesstion, router, searchParams]);
 
   if (isLoad) {
     return <Loading full_screen={true} background={true} />;
