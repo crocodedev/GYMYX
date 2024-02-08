@@ -13,6 +13,13 @@ export const metadata = {
   manifest: '/manifest.json',
 };
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: 0,
+};
+
 async function getData() {
   const res = await fetch('https://gymyx.cro.codes/api/pages/account', {
     cache: 'no-store',

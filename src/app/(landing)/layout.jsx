@@ -19,7 +19,6 @@ export const viewport = {
   initialScale: 1,
   maximumScale: 1,
   userScalable: 0,
-  // viewport: 'width=device-width, initial-scale=0, maximum-scale=1.0,user-scalable=0',
 };
 
 async function getData() {
