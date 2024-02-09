@@ -68,10 +68,12 @@ export default function Home() {
         if (!isDataFetched) {
           const fetchedSections = await fetchData();
           setSections(fetchedSections);
-          setTimeout(() => {
-            setIsLoad(false);
-          }, 1000);
-          setIsDataFetched(true);
+          if (sections) {
+            setTimeout(() => {
+              setIsLoad(false);
+            }, 1000);
+            setIsDataFetched(true);
+          }
         }
       }
     };

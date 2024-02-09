@@ -104,7 +104,7 @@ const Gid = () => {
   if (loading) return <Loading full_screen={true} />;
   return (
     <div className="account-page-wrapper">
-      <PageHeading title={'Гид по тренажёрам'} />
+      <PageHeading title={'Онлайн гид'} />
       {!!gids?.length ? (
         <>
           <NavigationTabs items={tags} selectedTab={activeTag} handleChangeTab={handleChangeTag} itemIcon={null} />
