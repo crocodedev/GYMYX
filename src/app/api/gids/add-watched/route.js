@@ -4,7 +4,7 @@ export async function POST(request) {
     try {
       const requestData = await request.json();
 
-      const response = await fetch(`https://gymyx.cro.codes/api/exercisers/view/${requestData.exerciser}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/exercisers/view/${requestData.exerciser}`, {
         method: 'POST',
         cache: 'no-store',
         headers: {

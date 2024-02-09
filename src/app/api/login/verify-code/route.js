@@ -4,7 +4,7 @@ export async function POST(request) {
     try {
       const requestData = await request.json();
 
-      const response = await fetch('https://gymyx.cro.codes/api/users/auth/code', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/auth/code`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

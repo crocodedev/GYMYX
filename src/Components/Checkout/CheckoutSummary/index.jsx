@@ -53,7 +53,7 @@ const CheckoutSummary = ({ items, gym }) => {
       if (data?.payment_link) {
         router.push(data?.payment_link);
       } else if (data?.status) {
-        router.push('/account/training');
+        router.push('/lk/training');
       } else {
         setError(true);
       }

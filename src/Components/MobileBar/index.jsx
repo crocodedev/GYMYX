@@ -10,24 +10,24 @@ import { useEffect, useState } from 'react';
 const MENU = [
   {
     title: 'Тренировки',
-    link: '/account/training',
+    link: '/lk/workouts',
     icon: '/icons/mobile-bar/trainings.svg',
   },
   {
     title: 'Бронь',
-    link: '/account/booking',
-    sublink: '/account/checkout',
+    link: '/lk/booking',
+    sublink: '/lk/checkout',
     icon: '/icons/mobile-bar/booking.svg',
   },
   {
     title: 'Профиль',
-    link: '/account/profile',
+    link: '/lk/profile',
     icon: '/icons/mobile-bar/profile.svg',
   },
-  { title: 'Гид', link: '/account/gid', icon: '/icons/mobile-bar/gid.svg' },
+  { title: 'Гид', link: '/lk/guide', icon: '/icons/mobile-bar/gid.svg' },
   {
     title: 'Тренеры',
-    link: '/account/trainers',
+    link: '/lk/trainers',
     icon: '/icons/mobile-bar/trainers.svg',
   },
 ];
@@ -53,6 +53,13 @@ const MobileBar = ({ headerData }) => {
           newMenu.push(menuItem);
         }
       });
+
+      // Добавляем элементы "Профиль" вторым в newMenu
+      const profileMenuItem = MENU.find((item) => item.title === 'Профиль');
+      if (profileMenuItem) {
+        newMenu.splice(2, 0, profileMenuItem);
+      }
+
       setMenuSorted(newMenu);
     }
   }, [menuNew, MENU]);

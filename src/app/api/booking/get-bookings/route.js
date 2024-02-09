@@ -4,7 +4,7 @@ export async function POST(request) {
     const requestData = await request.json();
 
     try {
-      const response = await fetch(`https://gymyx.cro.codes/api/bookings`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/bookings`, {
         method: 'GET',
         cache: 'no-store',
         headers: {

@@ -51,13 +51,13 @@ const MobileMenu = ({ items, isShow, toggleVisibility }) => {
         <div>
           {!sessionData ? (
             <>
-              <Link href={'/account/login'}>
+              <Link href={'/lk/login'}>
                 <Button variant="blue" size="l" label={'Зарегистрироваться'} />
               </Link>
 
               <div className={styles['mobile-menu__login']}>
                 <span>У вас есть аккаунт?</span>{' '}
-                <Link href="/account/login">
+                <Link href="/lk/login">
                   <u>Войти</u>
                 </Link>
                 <span className={styles['mobile-menu__login-icon']}>
@@ -66,12 +66,12 @@ const MobileMenu = ({ items, isShow, toggleVisibility }) => {
               </div>
             </>
           ) : (
-            <Link href="/account/profile">
+            <Link href="/lk/profile">
               <Button
                 size="l"
                 label={'Перейти в профиль'}
                 onClick={() => {
-                  router.push('/account/profile');
+                  router.push('/lk/profile');
                 }}
               />
             </Link>

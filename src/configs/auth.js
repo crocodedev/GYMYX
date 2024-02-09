@@ -6,7 +6,7 @@ export const authConfig = {
       authorize: async (credentials) => {
         const { token } = credentials;
 
-        const response = await fetch('https://gymyx.cro.codes/api/users', {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users`, {
           method: 'GET',
           cache: 'no-store',
           headers: {
@@ -35,8 +35,8 @@ export const authConfig = {
     maxAge: 10 * 24 * 60 * 60,
   },
   pages: {
-    signOut: '/account/login',
-    signIn: '/account/login',
+    signOut: '/lk/login',
+    signIn: '/lk/login',
   },
   callbacks: {
     async jwt({ trigger, token, user, account, session }) {

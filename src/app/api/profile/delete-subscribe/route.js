@@ -4,7 +4,7 @@ export async function POST(request) {
     try {
       const requestData = await request.json();
 
-      const response = await fetch(`https://gymyx.cro.codes/api/subscribes`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/subscribes`, {
         method: 'DELETE',
         cache: 'no-store',
         headers: {

@@ -1,11 +1,10 @@
-// https://gymyx.cro.codes/api/exercisers/favorite/{exerciser}
 export const dynamic = 'force-dynamic'; // defaults to force-static
 export async function POST(request) {
   if (request.method === 'POST') {
     try {
       const requestData = await request.json();
 
-      const response = await fetch(`https://gymyx.cro.codes/api/exercisers/favorite/${requestData.exerciser}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/exercisers/favorite/${requestData.exerciser}`, {
         method: 'DELETE',
         cache: 'no-store',
         headers: {
