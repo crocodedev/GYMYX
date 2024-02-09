@@ -41,11 +41,11 @@ const Hero = ({ alias, fields }) => {
                 </span>
               </p>
               {isMobile ? (
-                <Link href={'/account/login'}>
+                <Link href={'/lk/login'}>
                   <Button size="l" variant="blue" label={'Записаться'} />
                 </Link>
               ) : (
-                <Link href={'/account/login'}>
+                <Link href={'/lk/login'}>
                   <Button size="l" variant="black" label={'Записаться'} />
                 </Link>
               )}

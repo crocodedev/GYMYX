@@ -82,34 +82,31 @@ const Header = ({ isLanding = false, data }) => {
         </div>
         <div className={styles.header__controls}>
           {isLanding && (
-            <Link href={'/account/login'}>
+            <Link href={'/lk/login'}>
               <Button label={'Записаться'} />
             </Link>
           )}
           {!isLanding && (
             <>
               {!userData?.isLogined && (
-                <Link href="/account/login" className={styles['header__controls-account-text']}>
+                <Link href="/lk/login" className={styles['header__controls-account-text']}>
                   Войти
                 </Link>
               )}
               {userData?.isLogined && (
-                <Link href={'/account/profile'}>
+                <Link href={'/lk/profile'}>
                   <p className={styles['header__controls-account-text']}>{userData?.fio}</p>
                 </Link>
               )}
             </>
           )}
           {isLanding && (
-            <Link
-              href={userData ? '/account/profile' : '/account/login'}
-              className={styles['header__controls-account']}
-            >
+            <Link href={userData ? '/lk/profile' : '/lk/login'} className={styles['header__controls-account']}>
               <img src="/icons/account.svg" alt="account icon" />
             </Link>
           )}
           {!isLanding && (
-            <Link href={'/account/profile'} className={styles['header__controls-account']}>
+            <Link href={'/lk/profile'} className={styles['header__controls-account']}>
               <img src={userData?.image || '/icons/avatar.svg'} alt="account icon" />
             </Link>
           )}

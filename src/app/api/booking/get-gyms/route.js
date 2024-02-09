@@ -2,7 +2,7 @@ export const dynamic = 'force-dynamic'; // defaults to force-static
 export async function POST(request) {
   if (request.method === 'POST') {
     try {
-      const response = await fetch('https://gymyx.cro.codes/api/gyms', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/gyms`, {
         method: 'GET',
         cache: 'no-store',
         headers: {

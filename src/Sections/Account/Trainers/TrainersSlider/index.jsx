@@ -11,7 +11,7 @@ import { useState, useEffect } from 'react';
 import SliderControls from '@/Components/Slider/SliderControls';
 import SectionTitle from '@/Components/SectionTitle';
 import TrainersItem from '../TrainersItem';
-import { getTrainersData } from '@/app/account/trainers/page';
+import { getTrainersData } from '@/app/lk/trainers/page';
 
 const TrainersSlider = () => {
   const [dataTrainers, setDataTrainers] = useState();

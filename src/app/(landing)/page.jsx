@@ -17,7 +17,7 @@ import Loading from '@/Components/Loading';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 async function getData() {
-  const res = await fetch('https://gymyx.cro.codes/api/pages/index', {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pages/index`, {
     cache: 'no-store',
     next: {
       revalidate: 60,
@@ -62,7 +62,7 @@ export default function Home() {
     const fetchDataAndSetSections = async () => {
       if (sesstion?.status === 'authenticated' && sesstion?.data?.user?.full_name) {
         if (searchParams.get('redirect') !== 'false') {
-          router.push('/account/profile');
+          router.push('/lk/profile');
         }
       } else {
         if (!isDataFetched) {

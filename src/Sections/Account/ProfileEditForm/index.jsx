@@ -189,7 +189,7 @@ const ProfileEditForm = () => {
       redirect: 'follow',
     };
 
-    const result = await fetch('https://gymyx.cro.codes/api/users', requestOptions, { cache: 'no-store' });
+    const result = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users`, requestOptions, { cache: 'no-store' });
     const response = await result.json();
 
     if (!result.ok) {

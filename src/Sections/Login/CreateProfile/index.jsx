@@ -121,12 +121,12 @@ const CreateProfile = () => {
       redirect: 'follow',
     };
 
-    const result = await fetch('https://gymyx.cro.codes/api/users', requestOptions);
+    const result = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users`, requestOptions);
 
     const response = await result.json();
     if (result.ok) {
       updateSession(response.data);
-      router.push('/account/profile');
+      router.push('/lk/profile');
     } else {
       setIsErrorSubmit(response.error);
     }
