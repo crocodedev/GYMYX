@@ -9,7 +9,7 @@ export async function POST(request) {
         lines: requestData.lines,
       };
 
-      const response = await fetch('https://gymyx.cro.codes/api/bookings', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/bookings`, {
         method: 'POST',
         cache: 'no-store',
         headers: {

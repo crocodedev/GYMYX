@@ -33,7 +33,7 @@ const nextConfig = {
         ],
       },
       {
-        source: '/account',
+        source: '/lk',
         headers: [
           {
             key: 'Cache-Control',
@@ -42,7 +42,7 @@ const nextConfig = {
         ],
       },
       {
-        source: '/account/login',
+        source: '/lk/login',
         headers: [
           {
             key: 'Cache-Control',
@@ -51,7 +51,7 @@ const nextConfig = {
         ],
       },
       {
-        source: '/account/profile',
+        source: '/lk/profile',
         headers: [
           {
             key: 'Cache-Control',
@@ -60,7 +60,7 @@ const nextConfig = {
         ],
       },
       {
-        source: '/account/gid',
+        source: '/lk/guide',
         headers: [
           {
             key: 'Cache-Control',
@@ -69,7 +69,7 @@ const nextConfig = {
         ],
       },
       {
-        source: '/account/trainers',
+        source: '/lk/trainers',
         headers: [
           {
             key: 'Cache-Control',
@@ -78,7 +78,7 @@ const nextConfig = {
         ],
       },
       {
-        source: '/account/training',
+        source: '/lk/workouts',
         headers: [
           {
             key: 'Cache-Control',
@@ -87,7 +87,7 @@ const nextConfig = {
         ],
       },
       {
-        source: '/account/booking',
+        source: '/lk/booking',
         headers: [
           {
             key: 'Cache-Control',
@@ -96,7 +96,7 @@ const nextConfig = {
         ],
       },
       {
-        source: '/account/booking/sign-up',
+        source: '/lk/booking/sign-up',
         headers: [
           {
             key: 'Cache-Control',
@@ -105,7 +105,7 @@ const nextConfig = {
         ],
       },
       {
-        source: '/account/booking/sign-up/choose-time',
+        source: '/lk/booking/sign-up/choose-time',
         headers: [
           {
             key: 'Cache-Control',
@@ -114,7 +114,7 @@ const nextConfig = {
         ],
       },
       {
-        source: '/account/checkout',
+        source: '/lk/checkout',
         headers: [
           {
             key: 'Cache-Control',

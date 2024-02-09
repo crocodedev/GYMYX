@@ -5,7 +5,7 @@ export async function POST(request) {
 
     try {
       const response = await fetch(
-        `https://gymyx.cro.codes/api/gyms/${requestData.gym}/${requestData.year}/${requestData.month}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/gyms/${requestData.gym}/${requestData.year}/${requestData.month}`,
         {
           method: 'GET',
           cache: 'no-store',

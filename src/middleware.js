@@ -1,11 +1,12 @@
-export { default } from "next-auth/middleware"
+export { default } from 'next-auth/middleware';
 
 export const config = {
   matcher: [
-    "/account/booking/:path*",
-    "/account/checkout/:path*",
-    "/account/profile/:path*",
-    "/account/gid/:path*",
-    "/account/training/:path*",
+    '/lk/booking/:path*',
+    '/lk/checkout/:path*',
+    '/lk/profile/:path*',
+    '/lk/guide/:path*',
+    '/lk/workouts/:path*',
+    '/lk/trainers/:path*',
   ],
-}
+};

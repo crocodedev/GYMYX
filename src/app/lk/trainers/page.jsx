@@ -4,7 +4,7 @@ import Container from '@/Components/Container';
 import TrainersSlider from '@/Sections/Account/Trainers/TrainersSlider';
 
 export const getTrainersData = async () => {
-  const res = await fetch('https://gymyx.cro.codes/api/pages/trainers', { cache: 'no-store' });
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pages/trainers`, { cache: 'no-store' });
 
   const response = await res.json();
 

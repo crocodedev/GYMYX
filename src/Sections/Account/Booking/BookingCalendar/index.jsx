@@ -109,7 +109,7 @@ const BookingCalendar = () => {
           enabledDates={availableDates}
         />
         <Button
-          onClick={() => handleSubmit('/account/booking/sign-up/choose-time')}
+          onClick={() => handleSubmit('/lk/booking/sign-up/choose-time')}
           disabled={!dates.length}
           fullSize={true}
           variant="blue"

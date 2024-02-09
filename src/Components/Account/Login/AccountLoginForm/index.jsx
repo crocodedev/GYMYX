@@ -34,9 +34,9 @@ const AccountLoginForm = ({ handleToogleModal }) => {
     if (session.status === 'authenticated') {
       let url = '';
       if (session?.data?.user?.full_name) {
-        url = '/account/profile';
+        url = '/lk/profile';
       } else {
-        url = '/account/login/create-profile';
+        url = '/lk/login/create-profile';
       }
       router.push(url);
     }

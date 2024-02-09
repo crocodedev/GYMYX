@@ -13,7 +13,7 @@ import { useSession } from 'next-auth/react';
 import { useEffect, useRef } from 'react';
 
 async function getUserData(token) {
-  const response = await fetch('https://gymyx.cro.codes/api/users', {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users`, {
     method: 'GET',
     cache: 'no-store',
     headers: {
