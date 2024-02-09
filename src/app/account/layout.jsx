@@ -38,7 +38,6 @@ async function getData() {
 export default async function AccountLayout({ children }) {
   const { data } = await getData();
   const headerData = data.modules.find((item) => item.alias === 'account_header');
-
   return (
     <html lang="en">
       <Head>
@@ -47,7 +46,7 @@ export default async function AccountLayout({ children }) {
       <body className={MontserratFont.className}>
         <Providers>
           <Header isLanding={false} data={headerData} />
-          <MobileBar />
+          <MobileBar headerData={headerData} />
           <main className="main account">{children}</main>
         </Providers>
       </body>

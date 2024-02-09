@@ -1,4 +1,4 @@
-@import "@/styles/mixins.scss";
+@import '@/styles/mixins.scss';
 
 .booking-hero {
   position: relative;
@@ -7,21 +7,12 @@
     position: relative;
     overflow: hidden;
 
-    background: linear-gradient(
-        270deg,
-        rgba(255, 255, 255, 0) 11.37%,
-        #294ae7 92.21%
-      ),
-      transparent no-repeat;
+    background: linear-gradient(270deg, rgba(255, 255, 255, 0) 11.37%, #294ae7 92.21%), transparent no-repeat;
 
     @include media-breakpoint-down(lg) {
       padding: 18px;
       border-radius: 15px;
     }
-
- 
-
- 
 
     @include media-breakpoint-between(lg, xxl) {
       padding: 25px;
@@ -62,11 +53,22 @@
       font-size: 16px;
       letter-spacing: -0.16px;
       margin-top: 30px;
+    }
+
+    @include media-breakpoint-down(xs) {
       max-width: 260px;
     }
 
-    @include media-breakpoint-up(lg) {
-      max-width: 521px;
+    @include media-breakpoint-between(sm, md) {
+      max-width: 65%;
+    }
+
+    @include media-breakpoint-between(md, lg) {
+      max-width: 57%;
+    }
+
+    @include media-breakpoint-between(lg, xl) {
+      max-width: 65%;
     }
 
     @include media-breakpoint-between(lg, xxl) {
@@ -75,10 +77,22 @@
       letter-spacing: -0.4px;
     }
 
+    @include media-breakpoint-between(xl, xxl) {
+      max-width: 55%;
+    }
+
     @include media-breakpoint-up(xxl) {
       margin-top: 75px;
       font-size: 40px;
       letter-spacing: -0.4px;
+    }
+
+    @include media-breakpoint-between(xxl, xxxl) {
+      max-width: 65%;
+    }
+
+    @include media-breakpoint-up(xxxl) {
+      max-width: 50%;
     }
   }
 

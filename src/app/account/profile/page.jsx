@@ -11,9 +11,6 @@ import ProfileTextField from '@/Sections/Account/ProfileTextField';
 
 import { useSession } from 'next-auth/react';
 import { useEffect, useRef } from 'react';
-import { setFirstOpenSite } from '@/redux/firstOpen';
-import storeRedirect from '@/redux/storeRedirect';
-import { useDispatch } from 'react-redux';
 
 async function getUserData(token) {
   const response = await fetch('https://gymyx.cro.codes/api/users', {
