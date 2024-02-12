@@ -55,7 +55,27 @@
       row-gap: 24px;
     }
 
-    > div:not(:last-child) {
+    > div:nth-child(1) {
+      @include media-breakpoint-down(md) {
+        margin-right: 13px;
+      }
+
+      @include media-breakpoint-up(md) {
+        margin-right: 44px;
+      }
+    }
+
+    > div:nth-child(2) {
+      @include media-breakpoint-down(md) {
+        margin-right: 0;
+      }
+
+      @include media-breakpoint-up(md) {
+        margin-right: 44px;
+      }
+    }
+
+    > div:nth-child(3) {
       @include media-breakpoint-down(md) {
         margin-right: 13px;
       }
