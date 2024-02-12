@@ -6,7 +6,7 @@ import SectionTitle from '../SectionTitle';
 import SliderControls from './SliderControls';
 import styles from './Slider.module.scss';
 import 'swiper/css';
-import { useRef, useState, useEffect, useLayoutEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 import { EffectCards } from 'swiper/modules';
 

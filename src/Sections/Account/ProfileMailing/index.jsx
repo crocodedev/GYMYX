@@ -25,17 +25,23 @@ async function getUserData(token) {
     return result?.data || null;
   } catch (error) {
     console.error('Error in getUserData:', error);
-    throw error; // Re-throw the error to propagate it to the caller
+    throw error;
   }
 }
 
-const ITEMS = [
-  { id: 1, label: 'E-mail', value: 'email' },
-  { id: 2, label: 'Sms', value: 'phone' },
-  { id: 3, label: 'Не получать рассылку', value: 'none' },
-];
-
 export const ProfileMailing = () => {
+  const pcItems = [
+    { id: 1, label: 'E-mail', value: 'email' },
+    { id: 2, label: 'Sms', value: 'phone' },
+    { id: 3, label: 'Не получать рассылку', value: 'none' },
+  ];
+
+  const mobileItems = [
+    { id: 1, label: 'E-mail', value: 'email' },
+    { id: 2, label: 'Sms', value: 'phone' },
+    { id: 3, label: 'Не получать', value: 'none' },
+  ];
+
   const { data: sessionData } = useSession();
   const [activeVariant, setActiveVariant] = useState([]);
   const [loadingSubmit, setLoadingSubmit] = useState(false);
@@ -50,6 +56,13 @@ export const ProfileMailing = () => {
       data.subscriptions.length > 0 ? setActiveVariant(data.subscriptions) : setActiveVariant(['none']);
     });
   }, [sessionData?.user?.accessToken]);
+
+  const [ITEMS, setItems] = useState([]);
+
+  useEffect(() => {
+    const isMobile = window.matchMedia('(max-width: 992px)').matches;
+    setItems(isMobile ? mobileItems : pcItems);
+  }, []);
 
   const updateData = () => {
     if (sessionData) {

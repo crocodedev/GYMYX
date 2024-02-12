@@ -1,6 +1,12 @@
-import LoginAuth from "@/Sections/Account/LoginAuth"
-const Login = () => {
-  return <LoginAuth />
-}
+import LoginAuth from '@/Sections/Account/LoginAuth';
+export const metadata = {
+  title: 'Авторизация | GYMYX',
+  description: 'Авторизация | GYMYX',
+  manifest: '/manifest.json',
+};
 
-export default Login
+const Login = () => {
+  return <LoginAuth />;
+};
+
+export default Login;
