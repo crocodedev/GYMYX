@@ -37,7 +37,6 @@ const nextConfig = {
         headers: [
           {
             key: 'Cache-Control',
-            value: 'no-store',
           },
         ],
       },
@@ -46,7 +45,6 @@ const nextConfig = {
         headers: [
           {
             key: 'Cache-Control',
-            value: 'no-store',
           },
         ],
       },
@@ -55,7 +53,6 @@ const nextConfig = {
         headers: [
           {
             key: 'Cache-Control',
-            value: 'no-store',
           },
         ],
       },
@@ -100,7 +97,6 @@ const nextConfig = {
         headers: [
           {
             key: 'Cache-Control',
-            value: 'no-store',
           },
         ],
       },
