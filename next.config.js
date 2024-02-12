@@ -32,33 +32,7 @@ const nextConfig = {
           },
         ],
       },
-      {
-        source: '/lk',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'no-store',
-          },
-        ],
-      },
-      {
-        source: '/lk/login',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'no-store',
-          },
-        ],
-      },
-      {
-        source: '/lk/profile',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'no-store',
-          },
-        ],
-      },
+
       {
         source: '/lk/guide',
         headers: [
@@ -95,15 +69,7 @@ const nextConfig = {
           },
         ],
       },
-      {
-        source: '/lk/booking/sign-up',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'no-store',
-          },
-        ],
-      },
+
       {
         source: '/lk/booking/sign-up/choose-time',
         headers: [
