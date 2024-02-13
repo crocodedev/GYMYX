@@ -20,7 +20,6 @@ export const takeAvailableDatesTwoMonth = async (gym_id) => {
 
   const fetchCurrentMonthDates = getAvailableDates(gym_id, currentMonth, currentYear);
   const fetchNextMonthDates = getAvailableDates(gym_id, currentMonth + 1, currentYear);
-
   return Promise.all([fetchCurrentMonthDates, fetchNextMonthDates])
     .then(([currentMonthData, nextMonthData]) => {
       const combinedDates = [...currentMonthData?.data, ...nextMonthData?.data];

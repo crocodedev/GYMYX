@@ -46,7 +46,7 @@ const TrainersItem = ({ data, className }) => {
         <div className={styles['trainers-item__more-contact']}>
           <a
             className={styles['trainers-item__phone']}
-            href={`https://t.me/${data[4].value.split(' ').join('')}`}
+            href={`tel:${data[4].value.split(' ').join('')}`}
             target="_blank"
             onClick={(e) => handleClick(e)}
           >

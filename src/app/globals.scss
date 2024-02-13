@@ -275,6 +275,7 @@ a {
 
   .p-datepicker-title {
     display: flex;
+    pointer-events: none;
 
     @include media-breakpoint-down(lg) {
       gap: 5px;

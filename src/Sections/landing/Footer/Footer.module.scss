@@ -176,6 +176,7 @@
     color: var(--white, #fff);
     font-weight: 600;
     line-height: 102%;
+    text-decoration: none;
 
     @include media-breakpoint-down(md) {
       letter-spacing: -0.321px;

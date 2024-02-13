@@ -1,6 +1,6 @@
-import { useSession } from "next-auth/react";
-import { useEffect, useState } from "react";
-import styles from "./ProfileInfo.module.scss";
+import { useSession } from 'next-auth/react';
+import { useEffect, useState } from 'react';
+import styles from './ProfileInfo.module.scss';
 
 const ProfileInfo = () => {
   const session = useSession();
@@ -8,34 +8,31 @@ const ProfileInfo = () => {
 
   useEffect(() => {
     setUserData({
-      name: session?.data?.user?.full_name?.split(" ")[0] || "",
-      lastname: session?.data?.user?.full_name?.split(" ")[1] || "",
-      image: session?.data?.user?.image || "",
+      name: session?.data?.user?.full_name?.split(' ')[0] || '',
+      lastname: session?.data?.user?.full_name?.split(' ')[1] || '',
+      image: session?.data?.user?.image || '',
       enter_code: session?.data?.user?.enter_code || null,
       is_active_enter_code: session?.data?.user?.is_active_enter_code || null,
     });
   }, [session]);
 
+  console.log(userData);
   return (
-    <div className={styles["profile-info"]}>
-      <div className={styles["profile-info__avatar"]}>
-        <img
-          className={styles["profile-info__img"]}
-          src={userData.image || "/icons/avatar.svg"}
-          alt="image profile"
-        />
+    <div className={styles['profile-info']}>
+      <div className={styles['profile-info__avatar']}>
+        <img className={styles['profile-info__img']} src={userData.image || '/icons/avatar.svg'} alt="image profile" />
       </div>
-      <div className={styles["profile-info__content"]}>
-        <p className={styles["profile-info__title"]}>
+      <div className={styles['profile-info__content']}>
+        <p className={styles['profile-info__title']}>
           <span>{userData.name}</span>
           <span>{userData.lastname}</span>
         </p>
         {userData.enter_code && (
-          <div className={`${styles["profile-info__code"]}`}>
-            <p className={styles["profile-info__code-text"]}>код доступа</p>
+          <div className={`${styles['profile-info__code']}`}>
+            <p className={styles['profile-info__code-text']}>код доступа</p>
             <p
-              className={`${styles["profile-info__code-value"]} ${
-                userData?.is_active_enter_code ? styles["active"] : ""
+              className={`${styles['profile-info__code-value']} ${
+                userData?.is_active_enter_code ? styles['active'] : ''
               }`}
             >
               {userData.enter_code}

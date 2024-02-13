@@ -39,7 +39,9 @@ const Footer = ({ data }) => {
               </div>
             </div>
             <div className={styles.footer__info}>
-              <p className={styles['footer__info-tel']}>{phone_number}</p>
+              <a href={`tel:${phone_number}`} className={styles['footer__info-tel']}>
+                {phone_number}
+              </a>
               <div className={styles['footer__info-links']}>
                 {nav.map((item) => {
                   const title = item.find((field) => field.name === 'title')?.value || '';
