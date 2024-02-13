@@ -59,6 +59,7 @@ const Header = ({ isLanding = false, data }) => {
                 <ScrollLink
                   key={handle}
                   to={handle}
+                  href={link}
                   smooth={true}
                   offset={-65}
                   duration={500}
