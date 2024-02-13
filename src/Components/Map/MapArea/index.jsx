@@ -14,7 +14,7 @@ const MapArea = ({ Placemarks, currentPlacemark, updateData }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowMap(true);
-    }, 3000);
+    }, 2000);
 
     return () => clearTimeout(timer);
   }, []);

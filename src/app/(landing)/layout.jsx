@@ -3,6 +3,7 @@ import './../globals.scss';
 
 import Header from '@/Sections/Header';
 import Footer from '@/Sections/landing/Footer';
+import Head from 'next/head';
 
 import { Providers } from '@/Components/Providers';
 const MontserratFont = Montserrat({ subsets: ['cyrillic-ext'] });
@@ -51,6 +52,9 @@ export default async function LandingLayout({ children, params }) {
 
   return (
     <html lang="en">
+      <Head>
+        <link rel="dns-prefetch" href="https://gymyx.ru" />
+      </Head>
       <body className={MontserratFont.className}>
         <Providers>
           <Header isLanding={true} data={headerData} />
