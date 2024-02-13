@@ -33,7 +33,7 @@ function formatDate(date) {
   const originalDate = new Date(date);
 
   const year = originalDate.getFullYear();
-  const month = originalDate.getMonth() + 1; // Месяцы в JavaScript начинаются с 0
+  const month = originalDate.getMonth() + 1;
   const day = originalDate.getDate();
 
   const formattedDate = `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;

@@ -11,6 +11,15 @@ export const metadata = {
   title: 'GYMYX',
   description: 'GYMYX',
   manifest: '/manifest.json',
+  icons: {
+    apple: [{ url: '/icon-192x192.png' }, { url: '/icon-192x192.png', sizes: '192x192', type: 'image/png' }],
+    other: [
+      {
+        rel: 'icon-192x192.png',
+        url: '/icon-192x192.png',
+      },
+    ],
+  },
 };
 
 export const viewport = {

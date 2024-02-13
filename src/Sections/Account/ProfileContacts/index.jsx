@@ -19,7 +19,9 @@ const ProfileContacts = () => {
         <div className={styles['profile-contacts__elements']}>
           <div className={styles['profile-contacts__element']}>
             <p className={styles['profile-contacts__element-label']}>Телефон</p>
-            <p className={styles['profile-contacts__element-text']}>+7 (901) 424 00 24</p>
+            <a href="tel:+79014240024" className={styles['profile-contacts__element-text']}>
+              +7 (901) 424 00 24
+            </a>
           </div>
           <div className={styles['profile-contacts__element']}>
             <p className={styles['profile-contacts__element-label']}>Соцсети</p>

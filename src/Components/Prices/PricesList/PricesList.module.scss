@@ -27,6 +27,7 @@
     &:first-of-type {
       @include media-breakpoint-down(md) {
         margin-top: 25px;
+        max-width: 107px;
       }
 
       @include media-breakpoint-between(md, xl) {
@@ -45,6 +46,7 @@
     &:last-of-type {
       @include media-breakpoint-down(md) {
         margin-top: 120px;
+        max-width: 107px;
       }
 
       @include media-breakpoint-between(md, xl) {

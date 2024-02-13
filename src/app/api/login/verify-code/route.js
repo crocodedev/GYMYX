@@ -9,7 +9,7 @@ export async function POST(request) {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ code: requestData.code }),
+        body: JSON.stringify({ phone: requestData.phone, code: requestData.code }),
       });
 
       const result = await response.json();
