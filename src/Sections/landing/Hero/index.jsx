@@ -6,9 +6,12 @@ import Button from '@/Components/Button';
 import Container from '@/Components/Container';
 import styles from './Hero.module.scss';
 import Link from 'next/link';
+
 import { useEffect, useState } from 'react';
+import { useSession } from 'next-auth/react';
 
 const Hero = ({ alias, fields }) => {
+  const sesstion = useSession();
   const image = fields.find((item) => item.name === 'image');
   const image_mobile = fields.find((item) => item.name === 'image_mobile');
   const title = fields.find((item) => item.name === 'title');
@@ -23,10 +26,12 @@ const Hero = ({ alias, fields }) => {
 
   return (
     <section id={alias} className={styles.hero}>
-      <picture className={styles.hero__img}>
-        <source media="(max-width: 768px)" srcSet={image_mobile?.value} />
-        <Image src={image?.value} width={1920} height={1080} quality={100} alt={title} loading="lazy" />
-      </picture>
+      {sesstion ? (
+        <picture className={styles.hero__img}>
+          <source media="(max-width: 768px)" srcSet={image_mobile?.value} />
+          <Image src={image?.value} width={1920} height={1080} quality={100} alt={title} loading="lazy" />
+        </picture>
+      ) : null}
 
       <div className={styles['hero__content-wrapper']}>
         <Container size="XL">
