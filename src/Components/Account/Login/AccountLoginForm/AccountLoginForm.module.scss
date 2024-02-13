@@ -6,6 +6,9 @@
   overflow: auto;
 
   @include media-breakpoint-down(xl) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: fixed;
     top: 0;
     left: 0;
@@ -20,13 +23,20 @@
 
   @include media-breakpoint-up(xxxl) {
     padding: 70px 40px 40px 40px;
+    max-width: 656px;
+    border-radius: 30px;
+    box-shadow: 0px 0px 21px 0px rgba(22, 23, 26, 0.6);
   }
 
   @include media-breakpoint-up(xl) {
-    max-width: 656px;
-    border-radius: 30px;
     background: #484848;
-    box-shadow: 0px 0px 21px 0px rgba(22, 23, 26, 0.6);
+  }
+
+  @include media-breakpoint-between(xl, xxxl) {
+    max-width: 532px;
+    padding: 51px 30px 30px 30px;
+    border-radius: 22px;
+    box-shadow: 0px 0px 15.75px 0px #16171a99;
   }
 
   &__wrapper {

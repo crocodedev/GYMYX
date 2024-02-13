@@ -108,7 +108,7 @@ const AccountLoginForm = ({ handleToogleModal }) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ code: data.code }),
+      body: JSON.stringify({ phone: data.phone.value, code: data.code }),
     });
 
     const response = await result.json();
