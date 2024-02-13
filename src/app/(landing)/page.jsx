@@ -58,6 +58,8 @@ export default function Home() {
   const [isDataFetched, setIsDataFetched] = useState(false);
   const searchParams = useSearchParams();
 
+  console.log(sesstion);
+
   useEffect(() => {
     const fetchDataAndSetSections = async () => {
       if (sesstion?.status === 'authenticated' && sesstion?.data?.user?.full_name) {
