@@ -8,7 +8,16 @@ import styles from './MapArea.module.scss';
 
 const MapArea = ({ Placemarks, currentPlacemark, updateData }) => {
   const mapRef = useRef(null);
+  const [showMap, setShowMap] = useState(false);
   const [innerWidth, setInnerWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowMap(true);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleResize = () => {
     setInnerWidth((prevWidth) => {
@@ -59,7 +68,7 @@ const MapArea = ({ Placemarks, currentPlacemark, updateData }) => {
     };
   }, []);
 
-  return (
+  return showMap ? (
     <div className={styles['map-area']}>
       <YMaps>
         <Map
@@ -106,7 +115,7 @@ const MapArea = ({ Placemarks, currentPlacemark, updateData }) => {
         </button>
       </YMaps>
     </div>
-  );
+  ) : null;
 };
 
 export default MapArea;
