@@ -24,11 +24,15 @@ const Hero = ({ alias, fields }) => {
 
   const setImages = () => {
     if (image) {
-      setImagePath(image.value);
+      setTimeout(() => {
+        setImagePath(image.value);
+      }, 500);
     }
 
     if (image_mobile) {
-      setImagePathMobile(image_mobile.value);
+      setTimeout(() => {
+        setImagePathMobile(image_mobile.value);
+      }, 500);
     }
   };
 
