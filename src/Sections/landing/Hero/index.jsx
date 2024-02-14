@@ -22,9 +22,7 @@ const Hero = ({ alias, fields }) => {
   const [imgPath, setImagePath] = useState('/images/hero_11.webp');
   const [imgPathMobile, setImagePathMobile] = useState('/images/first_screen_m.png');
 
-  useEffect(() => {
-    window.matchMedia('(max-width: 992px)').matches ? setMobile(true) : setMobile(false);
-
+  const setImages = () => {
     if (image) {
       setImagePath(image.value);
     }
@@ -32,17 +30,26 @@ const Hero = ({ alias, fields }) => {
     if (image_mobile) {
       setImagePathMobile(image_mobile.value);
     }
-  }, []);
+  };
+
+  useEffect(() => {
+    window.matchMedia('(max-width: 992px)').matches ? setMobile(true) : setMobile(false);
+
+    setImages();
+
+    window.addEventListener('load', setImages);
+
+    return () => {
+      window.removeEventListener('load', setImages);
+    };
+  }, [image, image_mobile]);
 
   return (
     <section id={alias} className={styles.hero}>
-      {imgPath && imgPathMobile ? (
-        <picture className={styles.hero__img}>
-          <source media="(max-width: 768px)" srcSet={`${imgPathMobile}?w=390&h=780`} />
-          <img src={imgPath} alt={title.value} />
-        </picture>
-      ) : null}
-
+      <picture className={styles.hero__img}>
+        <source media="(max-width: 768px)" srcSet={`${imgPathMobile}?w=390&h=780`} />
+        <img src={imgPath} alt={title.value} />
+      </picture>
       <div className={styles['hero__content-wrapper']}>
         <Container size="XL">
           <div className={styles.hero__content}>
