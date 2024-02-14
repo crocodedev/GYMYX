@@ -12,8 +12,6 @@ import Image from 'next/image';
 
 import { usePathname } from 'next/navigation';
 import { getFioShort } from '@/Utils/helpers';
-import { useRouter } from 'next/navigation';
-import Loading from '@/Components/Loading';
 
 const Header = ({ isLanding = false, data }) => {
   const sesstion = useSession();
@@ -42,85 +40,112 @@ const Header = ({ isLanding = false, data }) => {
   if (!fields) return null;
 
   return (
-    <header className={`${styles.header} ${isLanding ? styles['is-landing'] : ''}`}>
-      <div className={styles.header__wrapper}>
-        <Link href="/?redirect=false" className={styles.header__logo} aria-label="Вернуться на главную">
-          <Image alt="logo" width={200} height={50} src={logo || ''} aria-label="Логотип" loading="lazy" />
-        </Link>
-        <div className={styles.header__nav}>
-          {menu.slice(0, 5).map((item) => {
-            const title = item.find((field) => field.name === 'title')?.value || '';
+    <>
+      <script type="text/javascript">
+        {`
+      (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+      m[i].l=1*new Date();
+      for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+      k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+      (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
 
-            const handle = item.find((field) => field.name === 'handle_to')?.value || '';
+      ym(96462782, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true
+      });
+      `}
+      </script>
+      <noscript>
+        <div>
+          <img src="https://mc.yandex.ru/watch/96462782" style={{ position: 'absolute', left: '-9999px' }} alt="" />
+        </div>
+      </noscript>
+      <noscript>
+        <div>
+          <img src="https://mc.yandex.ru/watch/96462782" style="position:absolute; left:-9999px;" alt="" />
+        </div>
+      </noscript>
+      <header className={`${styles.header} ${isLanding ? styles['is-landing'] : ''}`}>
+        <div className={styles.header__wrapper}>
+          <Link href="/?redirect=false" className={styles.header__logo} aria-label="Вернуться на главную">
+            <Image alt="logo" width={200} height={50} src={logo || ''} aria-label="Логотип" loading="lazy" />
+          </Link>
+          <div className={styles.header__nav}>
+            {menu.slice(0, 5).map((item) => {
+              const title = item.find((field) => field.name === 'title')?.value || '';
 
-            const link = item.find((field) => field.name === 'link_to')?.value || '';
-            if (handle !== '#') {
+              const handle = item.find((field) => field.name === 'handle_to')?.value || '';
+
+              const link = item.find((field) => field.name === 'link_to')?.value || '';
+              if (handle !== '#') {
+                return (
+                  <ScrollLink
+                    key={handle}
+                    to={handle}
+                    href={link}
+                    smooth={true}
+                    offset={-65}
+                    duration={500}
+                    className={styles['header__nav-item']}
+                  >
+                    {title}
+                  </ScrollLink>
+                );
+              }
               return (
-                <ScrollLink
-                  key={handle}
-                  to={handle}
+                <Link
+                  key={link}
                   href={link}
-                  smooth={true}
-                  offset={-65}
-                  duration={500}
-                  className={styles['header__nav-item']}
+                  passHref
+                  className={`${styles['header__nav-item']} ${pathname.includes(link) ? styles['active'] : ''}`}
                 >
                   {title}
-                </ScrollLink>
+                </Link>
               );
-            }
-            return (
-              <Link
-                key={link}
-                href={link}
-                passHref
-                className={`${styles['header__nav-item']} ${pathname.includes(link) ? styles['active'] : ''}`}
-              >
-                {title}
+            })}
+          </div>
+          <div className={styles.header__controls}>
+            {isLanding && (
+              <Link href={'/lk/login'}>
+                <Button label={'Записаться'} />
               </Link>
-            );
-          })}
+            )}
+            {!isLanding && (
+              <>
+                {!userData?.isLogined && (
+                  <Link href="/lk/login" className={styles['header__controls-account-text']}>
+                    Войти
+                  </Link>
+                )}
+                {userData?.isLogined && (
+                  <Link href={'/lk/profile'}>
+                    <p className={styles['header__controls-account-text']}>{userData?.fio}</p>
+                  </Link>
+                )}
+              </>
+            )}
+            {isLanding && (
+              <Link href={userData ? '/lk/profile' : '/lk/login'} className={styles['header__controls-account']}>
+                <img src="/icons/account.svg" alt="account icon" />
+              </Link>
+            )}
+            {!isLanding && (
+              <Link href={'/lk/profile'} className={styles['header__controls-account']}>
+                <img src={userData?.image || '/icons/avatar.svg'} alt="account icon" />
+              </Link>
+            )}
+          </div>
+          <div
+            onClick={handleMobileMenuToggle}
+            className={`${styles['header__burger-btn']} ${isMobileMenuOpen ? styles['active'] : ''}`}
+          >
+            <span></span>
+          </div>
         </div>
-        <div className={styles.header__controls}>
-          {isLanding && (
-            <Link href={'/lk/login'}>
-              <Button label={'Записаться'} />
-            </Link>
-          )}
-          {!isLanding && (
-            <>
-              {!userData?.isLogined && (
-                <Link href="/lk/login" className={styles['header__controls-account-text']}>
-                  Войти
-                </Link>
-              )}
-              {userData?.isLogined && (
-                <Link href={'/lk/profile'}>
-                  <p className={styles['header__controls-account-text']}>{userData?.fio}</p>
-                </Link>
-              )}
-            </>
-          )}
-          {isLanding && (
-            <Link href={userData ? '/lk/profile' : '/lk/login'} className={styles['header__controls-account']}>
-              <img src="/icons/account.svg" alt="account icon" />
-            </Link>
-          )}
-          {!isLanding && (
-            <Link href={'/lk/profile'} className={styles['header__controls-account']}>
-              <img src={userData?.image || '/icons/avatar.svg'} alt="account icon" />
-            </Link>
-          )}
-        </div>
-        <div
-          onClick={handleMobileMenuToggle}
-          className={`${styles['header__burger-btn']} ${isMobileMenuOpen ? styles['active'] : ''}`}
-        >
-          <span></span>
-        </div>
-      </div>
-      <MobileMenu toggleVisibility={handleMobileMenuToggle} items={menu} isShow={isMobileMenuOpen} />
-    </header>
+        <MobileMenu toggleVisibility={handleMobileMenuToggle} items={menu} isShow={isMobileMenuOpen} />
+      </header>
+    </>
   );
 };
 

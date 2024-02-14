@@ -26,12 +26,14 @@ const Hero = ({ alias, fields }) => {
 
   return (
     <section id={alias} className={styles.hero}>
-      {sesstion ? (
-        <picture className={styles.hero__img}>
-          <source media="(max-width: 768px)" srcSet={`${image_mobile?.value}?w=390&h=780`} />
+      <picture className={styles.hero__img}>
+        <source media="(max-width: 768px)" srcSet={`${image_mobile?.value}?w=390&h=780`} />
+        {isMobile ? (
+          <Image src={image?.value} width={390} height={780} quality={100} alt={title} loading="lazy" />
+        ) : (
           <Image src={image?.value} width={1920} height={1080} quality={100} alt={title} loading="lazy" />
-        </picture>
-      ) : null}
+        )}
+      </picture>
 
       <div className={styles['hero__content-wrapper']}>
         <Container size="XL">
