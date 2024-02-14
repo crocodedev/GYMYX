@@ -28,7 +28,7 @@ const Hero = ({ alias, fields }) => {
     <section id={alias} className={styles.hero}>
       {sesstion ? (
         <picture className={styles.hero__img}>
-          <source media="(max-width: 768px)" srcSet={image_mobile?.value} />
+          <source media="(max-width: 768px)" srcSet={`${image_mobile?.value}?w=390&h=780`} />
           <Image src={image?.value} width={1920} height={1080} quality={100} alt={title} loading="lazy" />
         </picture>
       ) : null}
