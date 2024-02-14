@@ -7,6 +7,7 @@ import Container from '@/Components/Container';
 import Select from '@/Components/Select';
 import styles from './Map.module.scss';
 import MapArea from '@/Components/Map/MapArea';
+import Link from 'next/link';
 
 const preparePlacemarks = (items) => {
   return items.map((item, index) => {
@@ -61,14 +62,16 @@ const Map = ({ alias, fields }) => {
               <p className={styles.map__subtitle}>{currentPlacemark?.subtitle}</p>
               <p className={styles.map__text}>{currentPlacemark?.address}</p>
             </div>
-            <Button
-              className={styles.map__btn}
-              size="l"
-              variant="blue"
-              label="Выбрать"
-              icon="arrow"
-              ariaLabel={'Выбрать зал'}
-            />
+            <Link href={'/lk/booking'}>
+              <Button
+                className={styles.map__btn}
+                size="l"
+                variant="blue"
+                label="Выбрать"
+                icon="arrow"
+                ariaLabel={'Выбрать зал'}
+              />
+            </Link>
           </div>
         </div>
       </Container>
