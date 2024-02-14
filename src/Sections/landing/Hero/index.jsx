@@ -33,22 +33,31 @@ const Hero = ({ alias, fields }) => {
   };
 
   useEffect(() => {
-    window.matchMedia('(max-width: 992px)').matches ? setMobile(true) : setMobile(false);
-
     setImages();
+  }, []);
 
-    window.addEventListener('load', setImages);
-
-    return () => {
-      window.removeEventListener('load', setImages);
+  useEffect(() => {
+    // Function to update mobile state based on window width
+    const handleResize = () => {
+      setMobile(window.matchMedia('(max-width: 992px)').matches);
     };
-  }, [image, image_mobile]);
+
+    // Initial check for window width
+    handleResize();
+
+    // Add event listener for window resize
+    window.addEventListener('resize', handleResize);
+
+    // Cleanup function to remove event listener
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
     <section id={alias} className={styles.hero}>
       <picture className={styles.hero__img}>
-        <source media="(max-width: 768px)" srcSet={`${imgPathMobile}?w=390&h=780`} />
-        <img src={imgPath} alt={title.value} />
+        {isMobile ? <img src={imgPathMobile} alt={title.value} /> : <img src={imgPath} alt={title.value} />}
       </picture>
       <div className={styles['hero__content-wrapper']}>
         <Container size="XL">
