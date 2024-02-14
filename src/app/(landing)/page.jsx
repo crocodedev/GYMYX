@@ -53,12 +53,10 @@ const fetchData = async () => {
 export default function Home() {
   const sesstion = useSession();
   const router = useRouter();
-  const [isLoad, setIsLoad] = useState(true);
+  const [isLoad, setIsLoad] = useState(false);
   const [sections, setSections] = useState([]);
   const [isDataFetched, setIsDataFetched] = useState(false);
   const searchParams = useSearchParams();
-
-  console.log(sesstion);
 
   useEffect(() => {
     const fetchDataAndSetSections = async () => {

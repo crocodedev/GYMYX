@@ -29,9 +29,9 @@ const Hero = ({ alias, fields }) => {
       <picture className={styles.hero__img}>
         <source media="(max-width: 768px)" srcSet={`${image_mobile?.value}?w=390&h=780`} />
         {isMobile ? (
-          <Image src={image?.value} width={390} height={780} quality={100} alt={title} loading="lazy" />
+          <Image src={image?.value} width={390} height={780} quality={100} alt={title} />
         ) : (
-          <Image src={image?.value} width={1920} height={1080} quality={100} alt={title} loading="lazy" />
+          <Image src={image?.value} width={1920} height={1080} quality={100} alt={title} />
         )}
       </picture>
 
