@@ -69,9 +69,7 @@ export default function Home() {
           const fetchedSections = await fetchData();
           setSections(fetchedSections);
           if (sections) {
-            setTimeout(() => {
-              setIsLoad(false);
-            }, 1000);
+            setIsLoad(false);
             setIsDataFetched(true);
           }
         }

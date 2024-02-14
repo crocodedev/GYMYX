@@ -41,18 +41,14 @@ const Hero = ({ alias, fields }) => {
   }, []);
 
   useEffect(() => {
-    // Function to update mobile state based on window width
     const handleResize = () => {
       setMobile(window.matchMedia('(max-width: 992px)').matches);
     };
 
-    // Initial check for window width
     handleResize();
 
-    // Add event listener for window resize
     window.addEventListener('resize', handleResize);
 
-    // Cleanup function to remove event listener
     return () => {
       window.removeEventListener('resize', handleResize);
     };
