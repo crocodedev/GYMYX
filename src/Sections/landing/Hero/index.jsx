@@ -19,15 +19,26 @@ const Hero = ({ alias, fields }) => {
   const price = fields.find((item) => item.name === 'price');
   const [isMobile, setMobile] = useState(false);
 
+  const [imgPath, setImagePath] = useState('/images/hero_11.webp');
+  const [imgPathMobile, setImagePathMobile] = useState('/images/first_screen_m.png');
+
   useEffect(() => {
     window.matchMedia('(max-width: 992px)').matches ? setMobile(true) : setMobile(false);
+
+    if (image) {
+      setImagePath(image.value);
+    }
+
+    if (image_mobile) {
+      setImagePathMobile(image_mobile.value);
+    }
   }, []);
 
   return (
     <section id={alias} className={styles.hero}>
       <picture className={styles.hero__img}>
-        <source media="(max-width: 768px)" srcSet={`${image_mobile?.value}?w=390&h=780`} preload="auto" />
-        <img src={image?.value} alt={title.value} preload="auto" />
+        <source media="(max-width: 768px)" srcSet={`${imgPathMobile}?w=390&h=780`} />
+        <img src={imgPath} alt={title.value} />
       </picture>
 
       <div className={styles['hero__content-wrapper']}>
