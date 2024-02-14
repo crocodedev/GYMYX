@@ -13,6 +13,7 @@ const Input = memo(({ refElement, type = '', maxLength, onChange, placeholder })
           mask="+7 (999) 999-99-99"
           maskChar="_"
           placeholder={placeholder}
+          autocomplete="off"
         />
       </div>
     );
@@ -27,6 +28,7 @@ const Input = memo(({ refElement, type = '', maxLength, onChange, placeholder })
           maskChar=""
           placeholder={placeholder}
           alwaysShowMask={true}
+          autocomplete="off"
         />
       </div>
     );
@@ -40,6 +42,7 @@ const Input = memo(({ refElement, type = '', maxLength, onChange, placeholder })
           onChange={onChange}
           className={styles.input__field}
           placeholder={placeholder}
+          autocomplete="off"
         />
       </div>
     );
