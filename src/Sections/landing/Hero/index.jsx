@@ -36,10 +36,12 @@ const Hero = ({ alias, fields }) => {
 
   return (
     <section id={alias} className={styles.hero}>
-      <picture className={styles.hero__img}>
-        <source media="(max-width: 768px)" srcSet={`${imgPathMobile}?w=390&h=780`} />
-        <img src={imgPath} alt={title.value} />
-      </picture>
+      {imgPath && imgPathMobile ? (
+        <picture className={styles.hero__img}>
+          <source media="(max-width: 768px)" srcSet={`${imgPathMobile}?w=390&h=780`} />
+          <img src={imgPath} alt={title.value} />
+        </picture>
+      ) : null}
 
       <div className={styles['hero__content-wrapper']}>
         <Container size="XL">
