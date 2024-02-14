@@ -17,7 +17,6 @@ const Hero = ({ alias, fields }) => {
   const title = fields.find((item) => item.name === 'title');
   const subtitle = fields.find((item) => item.name === 'subtitle');
   const price = fields.find((item) => item.name === 'price');
-
   const [isMobile, setMobile] = useState(false);
 
   useEffect(() => {
@@ -28,11 +27,7 @@ const Hero = ({ alias, fields }) => {
     <section id={alias} className={styles.hero}>
       <picture className={styles.hero__img}>
         <source media="(max-width: 768px)" srcSet={`${image_mobile?.value}?w=390&h=780`} />
-        {isMobile ? (
-          <Image src={image?.value} width={390} height={780} quality={100} alt={title} />
-        ) : (
-          <Image src={image?.value} width={1920} height={1080} quality={100} alt={title} />
-        )}
+        {isMobile ? <img src={image?.value} alt={title.value} /> : <img src={image?.value} alt={title.value} />}
       </picture>
 
       <div className={styles['hero__content-wrapper']}>
