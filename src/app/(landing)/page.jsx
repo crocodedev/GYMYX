@@ -85,12 +85,10 @@ export default function Home() {
     return <Loading full_screen={true} background={true} />;
   }
 
-  return !isLoad
-    ? sections.map(({ alias, fields }) => {
-        if (alias !== 'header' && alias !== 'footer') {
-          const SectionComponent = SECTION_MAP[alias];
-          return <SectionComponent key={alias} alias={alias} fields={fields} />;
-        }
-      })
-    : null;
+  return sections.map(({ alias, fields }) => {
+    if (alias !== 'header' && alias !== 'footer') {
+      const SectionComponent = SECTION_MAP[alias];
+      return <SectionComponent key={alias} alias={alias} fields={fields} />;
+    }
+  });
 }
