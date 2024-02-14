@@ -53,7 +53,7 @@ const fetchData = async () => {
 export default function Home() {
   const sesstion = useSession();
   const router = useRouter();
-  const [isLoad, setIsLoad] = useState(false);
+  const [isLoad, setIsLoad] = useState(true);
   const [sections, setSections] = useState([]);
   const [isDataFetched, setIsDataFetched] = useState(false);
   const searchParams = useSearchParams();
