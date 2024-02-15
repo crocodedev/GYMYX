@@ -1,4 +1,4 @@
-'use client';
+// 'use client';
 
 import Hero from '@/Sections/landing/Hero';
 import AboutUs from '@/Sections/landing/AboutUs';
@@ -10,15 +10,15 @@ import Equipment from '@/Sections/landing/Equipment';
 import Map from '@/Sections/landing/Map';
 import Faq from '@/Sections/landing/Faq';
 import Studio from '@/Sections/landing/Studio';
-import { useSession } from 'next-auth/react';
-import { useEffect, useState } from 'react';
 
+import { headers } from 'next/headers';
 import Loading from '@/Components/Loading';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { redirect, useRouter, useSearchParams } from 'next/navigation';
+import { authConfig } from '@/configs/auth';
+import { getServerSession } from 'next-auth';
 
 async function getData() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pages/index`, {
-    cache: 'no-store',
     next: {
       revalidate: 60,
     },
@@ -43,51 +43,42 @@ const SECTION_MAP = {
   faq: (props) => <Faq {...props} />,
 };
 
-const fetchData = async () => {
-  const data = await getData();
-  if (data) {
-    return data.data.modules;
-  }
-};
+export default async function Home() {
+  const session = await getServerSession(authConfig);
+  if (session && session?.user.email) {
+    console.log(session.user.email);
 
-export default function Home() {
-  const sesstion = useSession();
-  const router = useRouter();
-  const [isLoad, setIsLoad] = useState(true);
-  const [sections, setSections] = useState([]);
-  const [isDataFetched, setIsDataFetched] = useState(false);
-  const searchParams = useSearchParams();
-
-  useEffect(() => {
-    console.log(sesstion);
-    const fetchDataAndSetSections = async () => {
-      if (sesstion?.status === 'authenticated' && sesstion?.data?.user?.full_name) {
-        if (searchParams.get('redirect') !== 'false') {
-          router.push('/lk/profile');
-        }
-      } else {
-        if (!isDataFetched) {
-          const fetchedSections = await fetchData();
-          setSections(fetchedSections);
-          if (sections) {
-            setIsLoad(false);
-            setIsDataFetched(true);
-          }
-        }
-      }
-    };
-
-    fetchDataAndSetSections();
-  }, [sesstion, router]);
-
-  if (isLoad) {
-    return <Loading full_screen={true} background={true} />;
+    // redirect('/lk/profile');
   }
 
-  return sections.map(({ alias, fields }) => {
-    if (alias !== 'header' && alias !== 'footer') {
+  // useEffect(() => {
+  //   const fetchDataAndSetSections = async () => {
+  //     if (sesstion?.status === 'authenticated' && sesstion?.data?.user?.full_name) {
+  //       if (searchParams.get('redirect') !== 'false') {
+  //         router.push('/lk/profile');
+  //       }
+  //     } else {
+  //       if (!isDataFetched) {
+  //         const fetchedSections = await fetchData();
+  //         setSections(fetchedSections);
+  //         if (sections) {
+  //           setIsLoad(false);
+  //           setIsDataFetched(true);
+  //         }
+  //       }
+  //     }
+  //   };
+
+  const { data } = await getData();
+
+  const sections = data.modules.map((section) => section);
+
+  const SECTIONS_RENDER = sections.map(({ name, alias, fields }) => {
+    if (alias != 'header' && alias != 'footer') {
       const SectionComponent = SECTION_MAP[alias];
       return <SectionComponent key={alias} alias={alias} fields={fields} />;
     }
   });
+
+  return <>{SECTIONS_RENDER}</>;
 }
