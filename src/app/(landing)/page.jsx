@@ -18,6 +18,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 
 async function getData() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pages/index`, {
+    cache: 'no-store',
     next: {
       revalidate: 60,
     },
@@ -42,43 +43,50 @@ const SECTION_MAP = {
   faq: (props) => <Faq {...props} />,
 };
 
+const fetchData = async () => {
+  const data = await getData();
+  if (data) {
+    return data.data.modules;
+  }
+};
+
 export default function Home() {
   const sesstion = useSession();
   const router = useRouter();
   const [isLoad, setIsLoad] = useState(true);
   const [sections, setSections] = useState([]);
-  const [isVisible, setIsVisible] = useState(false);
+  const [isDataFetched, setIsDataFetched] = useState(false);
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    getData().then((data) => {
-      if (data) {
-        setSections(data.data.modules);
+    const fetchDataAndSetSections = async () => {
+      if (sesstion?.status === 'authenticated' && sesstion?.data?.user?.full_name) {
+        if (searchParams.get('redirect') !== 'false') {
+          router.push('/lk/profile');
+        }
+      } else {
+        if (!isDataFetched) {
+          const fetchedSections = await fetchData();
+          setSections(fetchedSections);
+          if (sections) {
+            setIsLoad(false);
+            setIsDataFetched(true);
+          }
+        }
       }
-    });
+    };
 
-    if (sesstion?.status === 'authenticated' && sesstion?.data?.user?.full_name) {
-      if (searchParams.get('redirect') !== 'false') {
-        setIsVisible(false);
-        router.push('/lk/profile');
-      }
-    } else {
-      setIsLoad(false);
-      setIsVisible(true);
-    }
+    fetchDataAndSetSections();
   }, [sesstion, router]);
 
-  console.log(isVisible);
   if (isLoad) {
     return <Loading full_screen={true} background={true} />;
   }
 
-  return isVisible
-    ? sections.map(({ alias, fields }) => {
-        if (alias !== 'header' && alias !== 'footer') {
-          const SectionComponent = SECTION_MAP[alias];
-          return <SectionComponent key={alias} alias={alias} fields={fields} />;
-        }
-      })
-    : null;
+  return sections.map(({ alias, fields }) => {
+    if (alias !== 'header' && alias !== 'footer') {
+      const SectionComponent = SECTION_MAP[alias];
+      return <SectionComponent key={alias} alias={alias} fields={fields} />;
+    }
+  });
 }
