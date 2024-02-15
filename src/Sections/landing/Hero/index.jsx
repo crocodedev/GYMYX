@@ -1,7 +1,5 @@
 'use client';
 
-import Image from 'next/image';
-
 import Button from '@/Components/Button';
 import Container from '@/Components/Container';
 import styles from './Hero.module.scss';
