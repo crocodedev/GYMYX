@@ -6,6 +6,8 @@ import Footer from '@/Sections/landing/Footer';
 import Head from 'next/head';
 
 import { Providers } from '@/Components/Providers';
+import Metrika from '@/Components/Metrika';
+import { Suspense } from 'react';
 const MontserratFont = Montserrat({ subsets: ['cyrillic-ext'] });
 
 export const metadata = {
@@ -51,40 +53,9 @@ export default async function LandingLayout({ children, params }) {
 
   return (
     <html lang="en">
-      <Head>
-        <link rel="dns-prefetch" href="https://gymyx.ru" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-          rel="stylesheet"
-        />
-        <script type="text/javascript">
-          {`
-      (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-      m[i].l=1*new Date();
-      for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-      k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-      (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-
-      ym(96462782, "init", {
-        clickmap:true,
-        trackLinks:true,
-        accurateTrackBounce:true
-      });
-      `}
-        </script>
-        <noscript>
-          <div>
-            <img src="https://mc.yandex.ru/watch/96462782" style={{ position: 'absolute', left: '-9999px' }} alt="" />
-          </div>
-        </noscript>
-        <noscript>
-          <div>
-            <img src="https://mc.yandex.ru/watch/96462782" style="position:absolute; left:-9999px;" alt="" />
-          </div>
-        </noscript>
-      </Head>
+      <Suspense>
+        <Metrika />
+      </Suspense>
       <body className={MontserratFont.className}>
         <Providers>
           <Header isLanding={true} data={headerData} />
