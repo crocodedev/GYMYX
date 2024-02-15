@@ -11,12 +11,6 @@ import Map from '@/Sections/landing/Map';
 import Faq from '@/Sections/landing/Faq';
 import Studio from '@/Sections/landing/Studio';
 
-import { headers } from 'next/headers';
-import Loading from '@/Components/Loading';
-import { redirect, useRouter, useSearchParams } from 'next/navigation';
-import { authConfig } from '@/configs/auth';
-import { getServerSession } from 'next-auth';
-
 async function getData() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pages/index`, {
     next: {
@@ -44,31 +38,6 @@ const SECTION_MAP = {
 };
 
 export default async function Home() {
-  const session = await getServerSession(authConfig);
-  if (session && session?.user.email) {
-    console.log(session.user.email);
-
-    // redirect('/lk/profile');
-  }
-
-  // useEffect(() => {
-  //   const fetchDataAndSetSections = async () => {
-  //     if (sesstion?.status === 'authenticated' && sesstion?.data?.user?.full_name) {
-  //       if (searchParams.get('redirect') !== 'false') {
-  //         router.push('/lk/profile');
-  //       }
-  //     } else {
-  //       if (!isDataFetched) {
-  //         const fetchedSections = await fetchData();
-  //         setSections(fetchedSections);
-  //         if (sections) {
-  //           setIsLoad(false);
-  //           setIsDataFetched(true);
-  //         }
-  //       }
-  //     }
-  //   };
-
   const { data } = await getData();
 
   const sections = data.modules.map((section) => section);
