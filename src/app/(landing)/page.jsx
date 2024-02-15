@@ -59,6 +59,7 @@ export default function Home() {
   const searchParams = useSearchParams();
 
   useEffect(() => {
+    console.log(sesstion);
     const fetchDataAndSetSections = async () => {
       if (sesstion?.status === 'authenticated' && sesstion?.data?.user?.full_name) {
         if (searchParams.get('redirect') !== 'false') {
