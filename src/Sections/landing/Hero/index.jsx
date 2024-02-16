@@ -9,7 +9,6 @@ import { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 
 const Hero = ({ alias, fields }) => {
-  const sesstion = useSession();
   const image = fields.find((item) => item.name === 'image');
   const image_mobile = fields.find((item) => item.name === 'image_mobile');
   const title = fields.find((item) => item.name === 'title');
