@@ -43,7 +43,7 @@ const Header = ({ isLanding = false, data }) => {
     <header className={`${styles.header} ${isLanding ? styles['is-landing'] : ''}`}>
       <div className={styles.header__wrapper}>
         <Link href="/?redirect=false" className={styles.header__logo} aria-label="Вернуться на главную">
-          <Image alt="logo" width={200} height={50} src={logo || ''} aria-label="Логотип" loading="lazy" />
+          <Image alt="logo" width={200} height={50} src={logo || ''} aria-label="Логотип" />
         </Link>
         <div className={styles.header__nav}>
           {menu.slice(0, 5).map((item) => {

@@ -1,5 +1,3 @@
-// 'use client';
-
 import Hero from '@/Sections/landing/Hero';
 import AboutUs from '@/Sections/landing/AboutUs';
 import Advantages from '@/Sections/landing/Advantages';
@@ -10,9 +8,6 @@ import Equipment from '@/Sections/landing/Equipment';
 import Map from '@/Sections/landing/Map';
 import Faq from '@/Sections/landing/Faq';
 import Studio from '@/Sections/landing/Studio';
-
-import { headers } from 'next/headers';
-import Loading from '@/Components/Loading';
 
 async function getData() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pages/index`, {
@@ -41,36 +36,6 @@ const SECTION_MAP = {
 };
 
 export default async function Home() {
-  // const session = await getServerSession(authConfig);
-  // let render = true;
-  // if (session && session?.user.email) {
-  //   console.log(session.user.email);
-
-  //   render = false;
-  //   redirect('/lk/profile');
-  // }
-
-  // if (!render) return;
-
-  // useEffect(() => {
-  //   const fetchDataAndSetSections = async () => {
-  //     if (session?.status === 'authenticated' && session?.data?.user?.full_name) {
-  //       if (searchParams.get('redirect') !== 'false') {
-  //         router.push('/lk/profile');
-  //       }
-  //     } else {
-  //       if (!isDataFetched) {
-  //         const fetchedSections = await fetchData();
-  //         setSections(fetchedSections);
-  //         if (sections) {
-  //           setIsLoad(false);
-  //           setIsDataFetched(true);
-  //         }
-  //       }
-  //     }
-  //   };
-  // }, []);
-
   const { data } = await getData();
 
   const sections = data.modules.map((section) => section);
