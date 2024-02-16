@@ -6,7 +6,7 @@ import Container from '@/Components/Container';
 
 import { useState, useEffect } from 'react';
 import styles from './ProfileStats.module.scss';
-import { sliderSettings, mounths } from './helpers';
+import { sliderSettings } from './helpers';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { useSession } from 'next-auth/react';

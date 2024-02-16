@@ -1,6 +1,6 @@
 import { sendMessage } from '@/Sections/Account/ProfileTextField/helpers';
 import styles from './ProfileTextFiedBlock.module.scss';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { useSession } from 'next-auth/react';
 
 const ProfileTextFiedBlock = () => {
