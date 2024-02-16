@@ -23,8 +23,11 @@ const Hero = ({ alias, fields }) => {
   return (
     <section id={alias} className={styles.hero}>
       <picture className={styles.hero__img}>
-        <source media="(max-width: 768px)" srcSet={`${image_mobile?.value}?w=400&h=800`} preload="auto" />
-        <img src={`${image?.value}?w=1920&h=1080`} alt={title.value} preload="auto" />
+        <source
+          media="(max-width: 768px)"
+          srcSet="https://gymyx.cro.codes/image/juREVOUzbUXh40OxviCsrlidLh6qhgaOmOqUhAXc.png?w=400&h=800"
+        />
+        <img src={`${image?.value}`} alt={title.value} preload="auto" />
       </picture>
       <div className={styles['hero__content-wrapper']}>
         <Container size="XL">
