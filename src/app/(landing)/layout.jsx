@@ -11,7 +11,7 @@ import { Suspense } from 'react';
 const MontserratFont = Montserrat({ subsets: ['cyrillic-ext'] });
 
 import { authConfig } from '@/configs/auth';
-import { redirect, useRouter, useSearchParams } from 'next/navigation';
+import { redirect } from 'next/navigation';
 import { getServerSession } from 'next-auth';
 
 export const metadata = {
@@ -60,15 +60,13 @@ export default async function LandingLayout({ children }) {
   }
 
   const headerData = data.modules.find((item) => item.alias === 'header');
+  const heroData = data.modules.find((item) => item.alias === 'banner');
   const footerData = data.modules.find((item) => item.alias === 'footer');
 
   return (
     <html lang="en">
-      <link
-        rel="preload"
-        href="https://gymyx.cro.codes/image/juREVOUzbUXh40OxviCsrlidLh6qhgaOmOqUhAXc.png?w=400&h=800"
-        as="image"
-      />
+      <link rel="preload" href={`${heroData.fields[0].value}?w=400&h=800`} as="image" />
+      <link rel="preload" href={`${heroData.fields[1].value}?w=1920&h=1080`} as="image" />
       <Suspense>
         <Metrika />
       </Suspense>
