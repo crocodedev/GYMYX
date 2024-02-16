@@ -11,12 +11,18 @@ const MapArea = ({ Placemarks, currentPlacemark, updateData }) => {
   const [showMap, setShowMap] = useState(false);
   const [innerWidth, setInnerWidth] = useState(window.innerWidth);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowMap(true);
-    }, 2000);
+  const showMapFc = () => {
+    if (window.scrollY >= document.querySelector('#map').getBoundingClientRect().top) {
+      if (showMap === false) {
+        setShowMap(true);
+      }
+    }
+  };
 
-    return () => clearTimeout(timer);
+  useEffect(() => {
+    window.addEventListener('scroll', showMapFc);
+
+    return () => window.removeEventListener('scroll', showMapFc);
   }, []);
 
   const handleResize = () => {
@@ -24,6 +30,7 @@ const MapArea = ({ Placemarks, currentPlacemark, updateData }) => {
       return window.innerWidth;
     });
   };
+
   const handleZoomIn = () => {
     const map = mapRef.current;
     if (map) {
