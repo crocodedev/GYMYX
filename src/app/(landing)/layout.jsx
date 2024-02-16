@@ -10,6 +10,10 @@ import Metrika from '@/Components/Metrika';
 import { Suspense } from 'react';
 const MontserratFont = Montserrat({ subsets: ['cyrillic-ext'] });
 
+import { authConfig } from '@/configs/auth';
+import { redirect, useRouter, useSearchParams } from 'next/navigation';
+import { getServerSession } from 'next-auth';
+
 export const metadata = {
   title: 'GYMYX',
   description: 'GYMYX',
@@ -46,13 +50,25 @@ async function getData() {
   return res.json();
 }
 
-export default async function LandingLayout({ children, params }) {
+export default async function LandingLayout({ children }) {
   const { data } = await getData();
+  const session = await getServerSession(authConfig);
+  const redirectBlock = !children?.props?.childPropSegment?.includes('redirect');
+
+  if (session && session?.user.email && redirectBlock) {
+    redirect('/lk/profile');
+  }
+
   const headerData = data.modules.find((item) => item.alias === 'header');
   const footerData = data.modules.find((item) => item.alias === 'footer');
 
   return (
     <html lang="en">
+      <link
+        rel="preload"
+        href="https://gymyx.cro.codes/image/juREVOUzbUXh40OxviCsrlidLh6qhgaOmOqUhAXc.png?w=400&h=800"
+        as="image"
+      />
       <Suspense>
         <Metrika />
       </Suspense>
