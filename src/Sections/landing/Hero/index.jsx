@@ -16,45 +16,15 @@ const Hero = ({ alias, fields }) => {
   const price = fields.find((item) => item.name === 'price');
   const [isMobile, setMobile] = useState(false);
 
-  const [imgPath, setImagePath] = useState('/images/hero_11.webp');
-  const [imgPathMobile, setImagePathMobile] = useState('/images/first_screen_m.png');
-
-  const setImages = () => {
-    if (image) {
-      setTimeout(() => {
-        setImagePath(image.value);
-      }, 500);
-    }
-
-    if (image_mobile) {
-      setTimeout(() => {
-        setImagePathMobile(image_mobile.value);
-      }, 500);
-    }
-  };
-
   useEffect(() => {
-    setImages();
-  }, []);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setMobile(window.matchMedia('(max-width: 992px)').matches);
-    };
-
-    handleResize();
-
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
+    setMobile(window.matchMedia('(max-width: 992px)').matches);
   }, []);
 
   return (
     <section id={alias} className={styles.hero}>
       <picture className={styles.hero__img}>
-        {isMobile ? <img src={imgPathMobile} alt={title.value} /> : <img src={imgPath} alt={title.value} />}
+        <source media="(max-width: 768px)" srcSet={`${image_mobile?.value}?w=390&h=780`} preload="auto" />
+        <img src={image?.value} alt={title.value} preload="auto" />
       </picture>
       <div className={styles['hero__content-wrapper']}>
         <Container size="XL">
