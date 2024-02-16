@@ -66,11 +66,7 @@ export default async function LandingLayout({ children }) {
 
   return (
     <html lang="en">
-      <link
-        rel="preload"
-        href="https://gymyx.cro.codes/image/juREVOUzbUXh40OxviCsrlidLh6qhgaOmOqUhAXc.png?w=400&h=800"
-        as="image"
-      />
+      <link rel="preload" href={`${heroData.fields[0].value}?w=390&h=780`} as="image" />
       <Suspense>
         <Metrika />
       </Suspense>
