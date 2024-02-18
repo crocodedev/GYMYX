@@ -4,7 +4,7 @@ import styles from './BookingCalendar.module.scss';
 import { Calendar } from 'primereact/calendar';
 import { addLocale } from 'primereact/api';
 import 'primereact/resources/themes/lara-light-cyan/theme.css';
-import { useState, useEffect, useTransition } from 'react';
+import { useState, useEffect } from 'react';
 import Button from '@/Components/Button';
 import { updateBookingData } from '@/redux/bookingSlice';
 import { useRouter } from 'next/navigation';

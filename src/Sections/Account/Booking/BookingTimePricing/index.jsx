@@ -3,12 +3,10 @@
 import BookingTimePricingLine from '@/Components/Booking/BookingTimePricingLine';
 import BookingTimeVariants from '@/Components/Booking/BookingTimeVariants';
 import Button from '@/Components/Button';
-import Container from '@/Components/Container';
 import styles from './BookingTimePricing.module.scss';
 import { useEffect, useState } from 'react';
-import { updateBookingData, updateBookingVisitDate } from '@/redux/bookingSlice';
+import { updateBookingVisitDate } from '@/redux/bookingSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { checkData, prepareVisitDateWithTime } from './helpers';
 

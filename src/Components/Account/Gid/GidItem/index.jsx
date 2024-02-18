@@ -1,8 +1,6 @@
-import { addFavoriteExerciser } from "@/Sections/Account/Gid/GidList/helpers";
-import GidInfo from "./GidInfo";
-import styles from "./GidItem.module.scss";
-import GidItemContent from "./GidItemContent";
-import { useSession } from "next-auth/react";
+import GidInfo from './GidInfo';
+import styles from './GidItem.module.scss';
+import GidItemContent from './GidItemContent';
 
 const GidItem = (props) => {
   const {
@@ -19,8 +17,8 @@ const GidItem = (props) => {
   } = props;
 
   return (
-    <div className={styles["gid-item"]}>
-      <div className={styles["gid-item__wrapper"]}>
+    <div className={styles['gid-item']}>
+      <div className={styles['gid-item__wrapper']}>
         <GidItemContent
           link={link}
           duration={duration}

@@ -17,7 +17,7 @@ const sliderSettings = {
   },
 };
 
-const NavigationTabs = ({ items, itemIcon, selectedTab, handleChangeTab }) => {
+const NavigationTabs = ({ items, selectedTab, handleChangeTab }) => {
   return (
     <section className={styles['navigation-tabs']}>
       <Container>

@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import styles from './TrainersItem.module.scss';
 import Button from '@/Components/Button';
-import Image from 'next/image';
 
 const TrainersItem = ({ data, className }) => {
   const [showMore, setShowMore] = useState(false);
