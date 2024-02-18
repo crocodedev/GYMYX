@@ -1,9 +1,7 @@
 'use client';
 
-import Container from '@/Components/Container';
 import styles from './TrainersSlider.module.scss';
 import Loading from '@/Components/Loading';
-import { useSession } from 'next-auth/react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { useState, useEffect } from 'react';
@@ -25,7 +23,7 @@ const TrainersSlider = () => {
     slidesPerView: 2.2,
     mousewheel: {
       thresholdDelta: 70,
-      forceToAxis: true, //added
+      forceToAxis: true,
     },
     breakpoints: {
       0: {

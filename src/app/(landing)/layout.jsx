@@ -3,7 +3,6 @@ import './../globals.scss';
 
 import Header from '@/Sections/Header';
 import Footer from '@/Sections/landing/Footer';
-import Head from 'next/head';
 
 import { Providers } from '@/Components/Providers';
 import Metrika from '@/Components/Metrika';
