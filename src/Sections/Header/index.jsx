@@ -39,7 +39,7 @@ const Header = ({ isLanding = false, data }) => {
 
   if (!fields) return null;
 
-  return (
+  return fields ? (
     <header className={`${styles.header} ${isLanding ? styles['is-landing'] : ''}`}>
       <div className={styles.header__wrapper}>
         <Link href="/?redirect=false" className={styles.header__logo} aria-label="Вернуться на главную">
@@ -119,7 +119,7 @@ const Header = ({ isLanding = false, data }) => {
       </div>
       <MobileMenu toggleVisibility={handleMobileMenuToggle} items={menu} isShow={isMobileMenuOpen} />
     </header>
-  );
+  ) : null;
 };
 
 export default Header;
