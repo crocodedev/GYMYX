@@ -6,7 +6,6 @@ const MontserratFont = Montserrat({ subsets: ['latin'] });
 import Header from '@/Sections/Header';
 import MobileBar from '@/Components/MobileBar';
 import Metrika from '@/Components/Metrika';
-import { Suspense } from 'react';
 
 export const viewport = {
   width: 'device-width',
@@ -41,9 +40,7 @@ export default async function AccountLayout({ children }) {
   const headerData = data.modules.find((item) => item.alias === 'account_header');
   return (
     <html lang="en">
-      <Suspense>
-        <Metrika />
-      </Suspense>
+      <Metrika />
       <body className={MontserratFont.className}>
         <Providers>
           <Header isLanding={false} data={headerData} />

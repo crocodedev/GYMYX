@@ -6,7 +6,6 @@ import Footer from '@/Sections/landing/Footer';
 
 import { Providers } from '@/Components/Providers';
 import Metrika from '@/Components/Metrika';
-import { Suspense } from 'react';
 const MontserratFont = Montserrat({ subsets: ['cyrillic-ext'] });
 
 import { authConfig } from '@/configs/auth';
@@ -66,9 +65,7 @@ export default async function LandingLayout({ children }) {
   return (
     <html lang="en">
       <link rel="preload" href={`${heroData.fields[0].value}?w=390&h=780`} as="image" />
-      <Suspense>
-        <Metrika />
-      </Suspense>
+      <Metrika />
       <body className={MontserratFont.className}>
         <Providers>
           <Header isLanding={true} data={headerData} />

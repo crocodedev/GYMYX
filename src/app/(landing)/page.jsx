@@ -40,12 +40,14 @@ export default async function Home() {
 
   const sections = data.modules.map((section) => section);
 
-  const SECTIONS_RENDER = sections.map(({ name, alias, fields }) => {
-    if (alias != 'header' && alias != 'footer') {
-      const SectionComponent = SECTION_MAP[alias];
-      return <SectionComponent key={alias} alias={alias} fields={fields} />;
-    }
-  });
+  const SECTIONS_RENDER = sections
+    ? sections.map(({ name, alias, fields }) => {
+        if (alias != 'header' && alias != 'footer') {
+          const SectionComponent = SECTION_MAP[alias];
+          return <SectionComponent key={alias} alias={alias} fields={fields} />;
+        }
+      })
+    : null;
 
   return <>{SECTIONS_RENDER}</>;
 }

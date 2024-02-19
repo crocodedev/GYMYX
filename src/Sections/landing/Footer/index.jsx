@@ -12,7 +12,7 @@ const Footer = ({ data }) => {
   const nav = fields.find((field) => field.name === 'nav')?.childrens || [];
   const phone_number = fields.find((field) => field.name === 'phone_number')?.value || '';
 
-  return (
+  return fields ? (
     <footer className={styles.footer}>
       <Container size="xlf">
         <div className={styles.footer__wrapper}>
@@ -58,7 +58,7 @@ const Footer = ({ data }) => {
         </div>
       </Container>
     </footer>
-  );
+  ) : null;
 };
 
 export default Footer;
