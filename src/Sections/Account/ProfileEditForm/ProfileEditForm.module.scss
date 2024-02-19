@@ -97,15 +97,11 @@
     }
   }
 
-  &__avatar:hover &__avatar-edit {
-    opacity: 1;
-  }
-
   &__avatar-edit {
     display: flex;
     align-items: center;
     justify-content: center;
-    opacity: 0;
+    opacity: 1;
     position: absolute;
     content: '';
     top: 0;
