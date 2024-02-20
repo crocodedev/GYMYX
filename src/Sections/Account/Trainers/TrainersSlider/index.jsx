@@ -16,15 +16,15 @@ const TrainersSlider = () => {
   const [slider, setSlider] = useState();
   const [activeIndexSlide, setIndexActiveSlide] = useState(1);
   const [sliderSettings, setSliderSettings] = useState(null);
+  const [endSlider, setEndSlider] = useState(false);
+  const [startSlider, setStartSlider] = useState(true);
   const [loading, setLoading] = useState(true);
 
   const sliderPcSettings = {
     spaceBetween: 25,
     slidesPerView: 2.2,
-    mousewheel: {
-      thresholdDelta: 70,
-      forceToAxis: true,
-    },
+    freeMode: true,
+    cssMode: true,
     breakpoints: {
       0: {
         slidesPerView: 3,
@@ -58,6 +58,8 @@ const TrainersSlider = () => {
 
   const onChangeSlide = (e) => {
     setIndexActiveSlide(e.activeIndex + 1);
+    e.activeIndex > 0 ? setStartSlider(false) : setStartSlider(true);
+    e.activeIndex === e.slides.length - 2 ? setEndSlider(true) : setEndSlider(false);
   };
 
   const handleInit = (e) => {
@@ -92,7 +94,9 @@ const TrainersSlider = () => {
 
       {sliderSettings ? (
         <Swiper
-          className={`swiper-container ${styles.slider}`}
+          className={`swiper-container ${endSlider ? styles.slider__end : styles.slider} ${
+            startSlider ? styles.slider__start__end : styles.slider__start
+          }`}
           onSlideChange={onChangeSlide}
           onSwiper={handleInit}
           a11y={false}

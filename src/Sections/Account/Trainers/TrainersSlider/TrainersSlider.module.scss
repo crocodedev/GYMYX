@@ -66,21 +66,68 @@
   }
 
   @include media-breakpoint-up(xxxl) {
-    max-height: 750px;
-    min-height: 750px;
-    height: 750px;
+    max-height: 760px;
+    min-height: 760px;
+    height: 760px;
   }
 }
 
 .slider {
   &::after {
+    transition: 0.2s ease;
     content: '';
     top: 0;
     position: absolute;
-    right: -5px;
+    right: 0px;
+    width: 60px;
+    height: 100%;
+    opacity: 1;
+    z-index: 10;
+    background: linear-gradient(90deg, transparent 49%, #212428 100%);
+  }
+}
+
+.slider__start {
+  &::before {
+    transition: 0.2s ease;
+    content: '';
+    top: 0px;
+    background: linear-gradient(90deg, #212428 49%, transparent 100%);
+    width: 30px;
+    opacity: 1;
+    position: absolute;
+    left: 0px;
     height: 100%;
     z-index: 10;
-    background-color: #212428;
-    box-shadow: 0px 0px 52px 55px #212428;
+  }
+}
+
+.slider__start__end {
+  &::before {
+    transition: 0.2s ease;
+    content: '';
+    top: 0px;
+    background: linear-gradient(90deg, #212428 49%, transparent 100%);
+    width: 30px;
+    opacity: 0;
+    position: absolute;
+    left: 0px;
+    height: 100%;
+    z-index: 10;
+  }
+}
+
+.slider__end {
+  &::after {
+    transition: 0.2s ease;
+    content: '';
+    top: 0;
+    position: absolute;
+    right: 0px;
+    width: 60px;
+    height: 100%;
+    opacity: 0;
+    z-index: 10;
+    background: linear-gradient(90deg, transparent 49%, #212428 100%);
   }
 }

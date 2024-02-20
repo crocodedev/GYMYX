@@ -19,6 +19,8 @@ const sliderMobileSettings = {
 const sliderPcSettings = {
   spaceBetween: 25,
   slidesPerView: 2.2,
+  freeMode: true,
+  cssMode: true,
 
   breakpoints: {
     992: {
