@@ -16,7 +16,6 @@ const ProfileInfo = () => {
     });
   }, [session]);
 
-  console.log(userData);
   return (
     <div className={styles['profile-info']}>
       <div className={styles['profile-info__avatar']}>
