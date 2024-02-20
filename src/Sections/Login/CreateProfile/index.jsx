@@ -7,6 +7,7 @@ import Container from '@/Components/Container';
 import ProfileField from '@/Components/Account/Profile/ProfileField';
 import Button from '@/Components/Button';
 import { useEffect, useRef, useState } from 'react';
+import heic2any from 'heic2any';
 
 const validateField = (value, fieldType) => {
   if (fieldType === 'text') {
@@ -70,8 +71,55 @@ const CreateProfile = () => {
 
   const handleUploadFile = (e) => {
     const file = e?.target?.files[0];
-
+    const fileExt = file.name.substr(file.name.lastIndexOf('.') + 1);
     if (!file) return;
+
+    if (fileExt.toLowerCase() == 'heic') {
+      heic2any({
+        blob: file,
+        toType: 'image/jpeg',
+      }).then(function (resultBlob) {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = 200;
+        canvas.height = 200;
+
+        const image = new Image();
+        image.onload = function () {
+          ctx.drawImage(image, 0, 0, 200, 200);
+
+          const dataUrl = canvas.toDataURL('image/jpeg');
+
+          imagePreviewRef.current.src = dataUrl;
+
+          fetch(dataUrl)
+            .then((res) => res.blob())
+            .then((blob) => {
+              setData((prev) => ({
+                ...prev,
+                image: {
+                  ...prev.image,
+                  value: blob,
+                  isValid: true,
+                },
+              }));
+            });
+
+          const inputFile = e.target.files;
+          const container = new DataTransfer();
+          const newFile = new File([resultBlob], 'heic.jpeg', {
+            type: 'image/jpeg',
+            lastModified: new Date().getTime(),
+          });
+          container.items.add(newFile);
+          inputFile.files = container.files;
+        };
+
+        image.src = URL.createObjectURL(resultBlob);
+      });
+    }
+
     if (file?.size / 1024 <= 10240) {
       imagePreviewRef.current.src = window?.URL?.createObjectURL(file);
       setData((prev) => {
@@ -143,7 +191,7 @@ const CreateProfile = () => {
         <div className={styles['profile-create-form__wrapper']}>
           <div className={styles['profile-create-form__data']}>
             <label className={styles['profile-create-form__avatar']}>
-              <input onChange={handleUploadFile} type="file" accept=".jpg, .jpeg, .png, .pdf, .webp" />
+              <input onChange={handleUploadFile} type="file" accept=".jpg, .jpeg, .png, .pdf, .webp, .heic" />
               <img ref={imagePreviewRef} src="/icons/avatar.svg" alt="preview avatar logo" />
             </label>
             <div className={styles['profile-create-form__data-col']}>

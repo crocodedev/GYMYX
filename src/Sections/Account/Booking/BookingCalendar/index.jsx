@@ -89,7 +89,6 @@ const BookingCalendar = () => {
     });
   }, [gym]);
 
-  console.log(availableDates);
   if (loading) {
     return <Loading />;
   }

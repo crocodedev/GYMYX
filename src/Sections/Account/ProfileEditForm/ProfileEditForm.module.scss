@@ -6,7 +6,15 @@
   @include media-breakpoint-down(lg) {
   }
 
-  &__wrapper {
+  &__canvas {
+    opacity: 0;
+    width: 200px;
+    height: 200px;
+    max-width: 200px;
+    min-width: 200px;
+    min-height: 200px;
+    max-height: 200px;
+    position: absolute;
   }
 
   &__data {
