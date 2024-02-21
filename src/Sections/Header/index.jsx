@@ -106,7 +106,7 @@ const Header = ({ isLanding = false, data }) => {
           )}
           {!isLanding && (
             <Link href={'/lk/profile'} className={styles['header__controls-account']}>
-              <img src={userData?.image || '/icons/avatar.svg'} alt="account icon" />
+              <img src={userData?.image || '/icons/account.svg'} alt="account icon" />
             </Link>
           )}
         </div>
