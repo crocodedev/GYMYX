@@ -23,7 +23,7 @@ const Hero = ({ alias, fields }) => {
   return (
     <section id={alias} className={styles.hero}>
       <picture className={styles.hero__img}>
-        <source media="(max-width: 768px)" srcSet={`${image_mobile?.value}?w=390&h=780`} />
+        <source media="(max-width: 768px)" srcSet={`${image_mobile?.value}?w=390&h=844`} />
         {isMobile ? (
           <Image src={`${image_mobile?.value}`} width={390} height={720} quality={100} alt={title.value} />
         ) : (

@@ -106,9 +106,11 @@ const Training = () => {
     let returnedData = [];
     if (tab_id === 0) {
       //ПРЕДСТОЯЩИЕ
+
       returnedData = data.filter(({ date, time }) => concateDateTime(date, time) >= new Date());
     } else {
       //АРХИВ
+
       returnedData = data.filter(({ date, time }) => concateDateTime(date, time) < new Date());
     }
 
@@ -117,6 +119,7 @@ const Training = () => {
 
   const handleChangeSelectedTab = (index) => {
     setSelectedTab(index);
+    setSelectedDate(null);
   };
 
   const handleShow = (id = -1) => {

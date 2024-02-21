@@ -36,9 +36,19 @@ body {
       padding-top: calc(79px + 30px);
     }
 
-    @include media-breakpoint-up(xxl) {
+    @include media-breakpoint-between(xxl, xxxl) {
+      padding-top: calc(60px + 69px);
+    }
+
+    @include media-breakpoint-up(xxxl) {
       padding-top: calc(84px + 50px);
     }
+  }
+}
+
+.booking-page__wrapper {
+  @include media-breakpoint-up(xxxl) {
+    padding-top: 32px;
   }
 }
 
@@ -69,7 +79,6 @@ a {
   width: 100%;
   .p-datepicker-inline {
     font-family: '__Montserrat_b1da2a', '__Montserrat_Fallback_b1da2a' !important;
-    // font-family: 'Inter var';
     background: transparent;
     border: none;
 

@@ -69,9 +69,9 @@
 
     @include media-breakpoint-down(md) {
       min-width: 12px;
-      min-height: 6px;
+      min-height: 12px;
       width: 12px;
-      height: 6px;
+      height: 12px;
     }
 
     @include media-breakpoint-between(md, xxxl) {
@@ -100,24 +100,28 @@
       font-size: 12px;
       margin-bottom: 30px;
       margin-top: 10px;
+      max-width: 300px;
     }
 
     @include media-breakpoint-between(md, xl) {
       font-size: 18px;
       margin-bottom: 50px;
       margin-top: 15px;
+      max-width: 456px;
     }
 
     @include media-breakpoint-between(xl, xxxl) {
       font-size: 24px;
       margin-bottom: 60px;
       margin-top: 19px;
+      max-width: 937px;
     }
 
     @include media-breakpoint-up(xxxl) {
       font-size: 30px;
       margin-bottom: 80px;
       margin-top: 28px;
+      max-width: 937px;
     }
   }
 }

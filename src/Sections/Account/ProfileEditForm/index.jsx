@@ -267,7 +267,7 @@ const ProfileEditForm = () => {
           <div className={styles['profile-edit-form__data']}>
             <label className={styles['profile-edit-form__avatar']}>
               <input onChange={handleUploadFile} type="file" accept=".jpg, .jpeg, .png, .pdf, .webp, .heic" />
-              <img ref={imagePreviewRef} src={data.image.preview || '/icons/avatar.svg'} alt="profile image" />
+              <img ref={imagePreviewRef} src={data.image.preview || '/icons/account.svg'} alt="profile image" />
               <span className={styles['profile-edit-form__avatar-edit']}>
                 <img src="/icons/edit.svg" alt="edit" className={styles['profile-edit-form__edit-icon']} />
               </span>

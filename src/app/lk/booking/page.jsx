@@ -83,8 +83,10 @@ const Booking = () => {
           />
         </Modal>
       )}
-      <BookingHero data={activeGym} handleButtonClick={handleChangeGym} />
-      <BookingVariants />
+      <div className="booking-page__wrapper">
+        <BookingHero data={activeGym} handleButtonClick={handleChangeGym} />
+        <BookingVariants />
+      </div>
     </>
   );
 };
