@@ -1,4 +1,4 @@
-@import "@/styles/mixins.scss";
+@import '@/styles/mixins.scss';
 
 .booking-variants {
   position: relative;
@@ -7,12 +7,10 @@
     display: grid;
 
     @include media-breakpoint-down(lg) {
-      gap: 20px;
       margin-top: 20px;
     }
 
     @include media-breakpoint-up(lg) {
-      gap: 40px;
       margin-top: 40px;
     }
 

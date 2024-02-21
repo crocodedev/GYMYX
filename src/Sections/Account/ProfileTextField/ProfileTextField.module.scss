@@ -18,7 +18,7 @@
     @include media-breakpoint-between(md, xl) {
       padding: 25px 25px 35px 25px;
       gap: 25px;
-      border-radius: 30px;
+      border-radius: 25px;
     }
 
     @include media-breakpoint-between(xl, xxxl) {
@@ -30,7 +30,7 @@
     @include media-breakpoint-up(xxxl) {
       padding: 40px;
       gap: 40px;
-      border-radius: 55px;
+      border-radius: 30px;
     }
   }
 }

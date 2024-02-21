@@ -5,9 +5,17 @@
 
   &__title-wrapper {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-bottom: 40px;
+
+    @include media-breakpoint-down(lg) {
+      padding-bottom: 20px;
+      justify-content: space-between;
+    }
+
+    @include media-breakpoint-up(lg) {
+      padding-bottom: 40px;
+      align-items: center;
+      justify-content: center;
+    }
   }
 
   &__items {

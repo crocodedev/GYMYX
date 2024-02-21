@@ -81,7 +81,7 @@ const TrainersSlider = () => {
   return (
     <div className={styles['trainers-slider']}>
       <div className={styles['trainers-slider__title-wrapper']}>
-        <SectionTitle title={'Тренеры'} />
+        <SectionTitle title={'Тренеры'} align="left" />
         {sliderSettings ? (
           <SliderControls
             handleNextSlide={nextSlide}

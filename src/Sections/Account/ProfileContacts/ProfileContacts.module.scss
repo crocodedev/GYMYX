@@ -21,29 +21,15 @@
   }
 
   @include media-breakpoint-up(xxxl) {
-    padding: 40px 40px 52px 40px;
+    padding: 40px;
     border-radius: 30px;
   }
 
   &__wrapper {
-  }
-
-  &__elements {
-    @include media-breakpoint-down(md) {
-      margin-top: 16px;
-    }
-
-    @include media-breakpoint-between(md, xl) {
-      margin-top: 30px;
-    }
-
-    @include media-breakpoint-between(xl, xxxl) {
-      margin-top: 40px;
-    }
-
-    @include media-breakpoint-up(xxxl) {
-      margin-top: 52px;
-    }
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
   }
 
   &__element {

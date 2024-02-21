@@ -26,12 +26,7 @@
   }
 
   &__calendar {
-    @include media-breakpoint-down(lg) {
-      margin-bottom: 40px;
-    }
-
     @include media-breakpoint-up(lg) {
-      margin-bottom: 40px;
       width: 100%;
     }
   }

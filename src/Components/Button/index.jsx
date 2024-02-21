@@ -34,7 +34,7 @@ const Button = ({
         </div>
       ) : icon ? (
         <div className={styles.button__icon}>
-          <img style={{ transform: 'rotate(180deg)' }} src="/icons/arrow.svg" alt="arrow" width={30} height={30} />
+          <img style={{ transform: 'rotate(180deg)' }} src="/icons/arrow.svg" alt="arrow" />
         </div>
       ) : null}
     </button>

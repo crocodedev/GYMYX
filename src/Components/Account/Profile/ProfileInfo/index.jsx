@@ -19,7 +19,7 @@ const ProfileInfo = () => {
   return (
     <div className={styles['profile-info']}>
       <div className={styles['profile-info__avatar']}>
-        <img className={styles['profile-info__img']} src={userData.image || '/icons/avatar.svg'} alt="image profile" />
+        <img className={styles['profile-info__img']} src={userData.image || '/icons/account.svg'} alt="image profile" />
       </div>
       <div className={styles['profile-info__content']}>
         <p className={styles['profile-info__title']}>

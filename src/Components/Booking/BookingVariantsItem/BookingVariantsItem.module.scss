@@ -10,12 +10,20 @@
     padding: 18px;
   }
 
-  @include media-breakpoint-up(lg) {
+  @include media-breakpoint-between(lg, xxxl) {
+    padding: 30px;
+    border-radius: 22.5px;
+  }
+
+  @include media-breakpoint-up(xxxl) {
     border-radius: 30px;
     padding: 40px;
   }
 
   &.white {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     background: var(--white, #fff);
 
     p {
@@ -24,7 +32,7 @@
 
     div {
       color: var(--black, #212428);
-      border: 1px solid var(--black, #212428);
+      border: 2px solid var(--black, #212428);
     }
 
     img {
@@ -44,6 +52,10 @@
       @include media-breakpoint-between(xxl, xxxl) {
         width: 160px;
       }
+    }
+
+    @include media-breakpoint-up(xxxl) {
+      height: 390px;
     }
   }
 
@@ -121,7 +133,7 @@
 
     @include media-breakpoint-between(xxl, xxxl) {
       padding: 4px 25px;
-      margin-top: 204px;
+      margin-top: 189px;
       font-size: 20px;
       border-radius: 41px;
     }
