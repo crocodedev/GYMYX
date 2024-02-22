@@ -23,12 +23,13 @@
   &:nth-of-type(2) .About-us-item__img {
     @include media-breakpoint-down(sm) {
       right: -68px;
-      height: 275px;
+      height: 140px;
     }
 
     @include media-breakpoint-between(sm, md) {
-      right: -75px;
-      height: 390px;
+      left: 75px;
+      width: 84%;
+      height: 136px;
     }
 
     @include media-breakpoint-between(md, lg) {
@@ -82,7 +83,7 @@
 
       @include media-breakpoint-down(lg) {
         top: 0;
-        height: 80%;
+        height: 140%;
       }
 
       @include media-breakpoint-up(lg) {
@@ -102,8 +103,8 @@
     }
 
     @include media-breakpoint-up(lg) {
-      top: -25px;
-      height: 100%;
+      top: 0px;
+      height: 80%;
     }
 
     img {
@@ -113,19 +114,23 @@
     }
 
     @include media-breakpoint-between(lg, xl) {
-      left: 60px;
+      left: 110px;
+      width: 80%;
     }
 
     @include media-breakpoint-between(xl, xxl) {
-      left: 50px;
+      left: 125px;
+      width: 80%;
     }
 
     @include media-breakpoint-between(xxl, xxxl) {
-      left: 40px;
+      left: 120px;
+      width: 75%;
     }
 
     @include media-breakpoint-up(xxxl) {
-      left: 20px;
+      left: 170px;
+      width: 70%;
     }
   }
 

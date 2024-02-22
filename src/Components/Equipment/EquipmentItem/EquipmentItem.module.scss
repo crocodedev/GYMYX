@@ -99,7 +99,7 @@
       object-position: right bottom;
 
       @include media-breakpoint-down(sm) {
-        transform: translateX(-10%) translateY(5px);
+        transform: translateY(5px);
       }
     }
   }

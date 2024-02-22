@@ -7,15 +7,18 @@
   @include media-breakpoint-down(md) {
     height: 215px;
     border-radius: 7px;
+    -webkit-border-radius: 7px;
   }
 
   @include media-breakpoint-between(md, xl) {
     height: 550px;
     border-radius: 15px;
+    -webkit-border-radius: 15px;
   }
 
   @include media-breakpoint-up(xl) {
     border-radius: 20px;
+    -webkit-border-radius: 20px;
   }
 
   @include media-breakpoint-between(xl, xxxl) {

@@ -11,7 +11,7 @@ const AboutUs = ({ alias, fields }) => {
     <section id={alias} className={styles['about-us']}>
       <Container size="XL">
         <div className={styles['about-us__wrapper']}>
-          <BorderLabel label={'кто мы ?'} />
+          <BorderLabel label={'кто мы?'} />
           <h2 className={styles['about-us__title']}>{title?.value}</h2>
           <div className={styles['about-us__content']}>
             <BorderLabel label={'как это работает?'} />

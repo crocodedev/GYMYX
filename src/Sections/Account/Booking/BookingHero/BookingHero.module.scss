@@ -130,16 +130,23 @@
 
   &__content-inner-wrapper {
     display: flex;
-
-    margin-top: 30px;
     justify-content: space-between;
 
     @include media-breakpoint-down(lg) {
       flex-direction: column;
+      margin-top: 12px;
     }
 
     @include media-breakpoint-up(lg) {
       align-items: center;
+    }
+
+    @include media-breakpoint-between(lg, xxxl) {
+      margin-top: 22px;
+    }
+
+    @include media-breakpoint-up(xxxl) {
+      margin-top: 30px;
     }
   }
 }

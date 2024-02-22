@@ -64,7 +64,7 @@ export const createSvgMarkerCurPosition = () => {
       ),
 
     iconImageSize: window?.innerWidth > 1280 ? [94, 140] : [35, 53],
-    iconImageOffset: window?.innerWidth > 1280 ? [-47, -70] : [-17, -27],
+    iconImageOffset: window?.innerWidth > 1280 ? [-47, -140] : [-17, -50],
   };
 };
 
