@@ -33,6 +33,11 @@
 
   &:not(.active) {
     background: var(--white-transperent-2, rgba(255, 255, 255, 0.4));
+
+    &:hover {
+      background: #ffffffbf;
+      transition: 0.3s ease;
+    }
   }
 
   &:not(:last-of-type) {
@@ -43,11 +48,6 @@
     @include media-breakpoint-up(xl) {
       margin-right: 30px;
     }
-  }
-
-  &:hover {
-    background: #ffffffbf;
-    transition: 0.3s ease;
   }
 
   &:active {

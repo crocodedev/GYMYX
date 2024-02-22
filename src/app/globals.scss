@@ -24,7 +24,7 @@ body {
 
   &.account {
     @include media-breakpoint-down(xl) {
-      padding-top: 10px;
+      padding-top: 14px;
       padding-bottom: 150px;
     }
 
@@ -72,6 +72,24 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+.booking-calendar__calendar {
+  @include media-breakpoint-down(xl) {
+    margin-bottom: 20px;
+  }
+
+  @include media-breakpoint-between(xl, xxl) {
+    margin-bottom: 30px;
+  }
+
+  @include media-breakpoint-between(xxl, xxxl) {
+    margin-bottom: 30px;
+  }
+
+  @include media-breakpoint-up(xxxl) {
+    margin-bottom: 40px;
+  }
 }
 
 .booking-calendar__calendar,
