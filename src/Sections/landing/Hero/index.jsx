@@ -30,6 +30,9 @@ const Hero = ({ alias, fields }) => {
           <Image src={`${image?.value}`} width={1920} height={1080} quality={100} alt={title.value} />
         )}
       </picture>
+      <div className={styles['hero__billet']}>
+        <img src="./images/plashka.svg" alt="" />
+      </div>
       <div className={styles['hero__content-wrapper']}>
         <Container size="XL">
           <div className={styles.hero__content}>

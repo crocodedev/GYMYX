@@ -3,6 +3,7 @@
 .prices-list-item {
   &__price-value {
     display: flex;
+    gap: 1px;
     align-items: flex-end;
     white-space: nowrap;
 

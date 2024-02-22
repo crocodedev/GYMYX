@@ -10,6 +10,7 @@ import SliderControls from '@/Components/Slider/SliderControls';
 import SectionTitle from '@/Components/SectionTitle';
 import TrainersItem from '../TrainersItem';
 import { getTrainersData } from '@/app/lk/trainers/page';
+import PageHeading from '../../PageHeading';
 
 const TrainersSlider = () => {
   const [dataTrainers, setDataTrainers] = useState();
@@ -81,7 +82,7 @@ const TrainersSlider = () => {
   return (
     <div className={styles['trainers-slider']}>
       <div className={styles['trainers-slider__title-wrapper']}>
-        <SectionTitle title={'Тренеры'} align="left" />
+        <PageHeading title={'Тренеры'} container={false} />
         {sliderSettings ? (
           <SliderControls
             handleNextSlide={nextSlide}

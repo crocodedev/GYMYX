@@ -1,7 +1,15 @@
-@import "@/styles/mixins.scss";
+@import '@/styles/mixins.scss';
 
 .slider {
   overflow: unset;
+
+  @include media-breakpoint-up(lg) {
+    // width: 120%;
+
+    // > div > div:last-child {
+    //   margin-right: 20%;
+    // }
+  }
 
   &__heading {
     display: flex;
