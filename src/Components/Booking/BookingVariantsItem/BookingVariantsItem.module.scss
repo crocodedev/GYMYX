@@ -32,7 +32,14 @@
 
     div {
       color: var(--black, #212428);
-      border: 2px solid var(--black, #212428);
+
+      @include media-breakpoint-down(lg) {
+        border: 1px solid var(--black, #212428);
+      }
+
+      @include media-breakpoint-up(lg) {
+        border: 2px solid var(--black, #212428);
+      }
     }
 
     img {
