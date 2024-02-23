@@ -23,13 +23,12 @@
   &:nth-of-type(2) .About-us-item__img {
     @include media-breakpoint-down(sm) {
       right: -68px;
-      height: 140px;
+      height: 275px;
     }
 
     @include media-breakpoint-between(sm, md) {
-      left: 75px;
-      width: 84%;
-      height: 136px;
+      right: -75px;
+      height: 390px;
     }
 
     @include media-breakpoint-between(md, lg) {

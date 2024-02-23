@@ -12,7 +12,7 @@
     }
 
     @include media-breakpoint-up(lg) {
-      padding-bottom: 40px;
+      padding-bottom: 23px;
       align-items: center;
       justify-content: space-between;
     }
@@ -74,9 +74,9 @@
   }
 
   @include media-breakpoint-up(xxxl) {
-    max-height: 760px;
-    min-height: 760px;
-    height: 760px;
+    max-height: 751px;
+    min-height: 751px;
+    height: 751px;
   }
 }
 
