@@ -6,9 +6,10 @@ import SectionTitle from '../SectionTitle';
 import SliderControls from './SliderControls';
 import styles from './Slider.module.scss';
 import 'swiper/css';
+
 import { useState, useEffect } from 'react';
 
-import { EffectCards } from 'swiper/modules';
+import { EffectCards, Mousewheel } from 'swiper/modules';
 
 const sliderMobileSettings = {
   effect: 'cards',
@@ -19,8 +20,10 @@ const sliderMobileSettings = {
 const sliderPcSettings = {
   spaceBetween: 25,
   slidesPerView: 2.2,
-  freeMode: true,
-  cssMode: true,
+  mousewheel: {
+    thresholdDelta: 70,
+    forceToAxis: true,
+  },
 
   breakpoints: {
     992: {
@@ -40,7 +43,7 @@ const sliderPcSettings = {
 
     1920: {
       spaceBetween: 40,
-      slidesPerView: 3.6,
+      slidesPerView: 3.2,
     },
   },
 };
@@ -88,7 +91,7 @@ const Slider = ({ title, items }) => {
       </div>
       {sliderSettings && (
         <Swiper
-          modules={[EffectCards]}
+          modules={[EffectCards, Mousewheel]}
           className={`swiper-container ${styles.slider}`}
           onSlideChange={onChangeSlide}
           onSwiper={handleInit}
