@@ -20,7 +20,6 @@
   &__icon {
     position: relative;
     border-radius: 50%;
-    border: 2px solid #fff;
 
     @include media-breakpoint-down(md) {
       min-width: 12px;
@@ -36,6 +35,14 @@
       width: 16px;
       height: 16px;
       margin-top: 5px;
+    }
+
+    @include media-breakpoint-down(lg) {
+      border: 1px solid #fff;
+    }
+
+    @include media-breakpoint-up(lg) {
+      border: 2px solid #fff;
     }
 
     @include media-breakpoint-up(xxxl) {

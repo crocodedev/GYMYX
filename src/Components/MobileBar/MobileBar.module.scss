@@ -31,6 +31,7 @@
     &:not(.active) {
       img {
         filter: invert(0.3);
+        -webkit-filter: invert(0.3);
       }
 
       p {
@@ -41,6 +42,7 @@
     &.active {
       img {
         filter: invert(1);
+        -webkit-filter: invert(1);
       }
 
       p {

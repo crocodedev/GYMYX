@@ -50,7 +50,7 @@
     }
   }
 
-  &:active {
+  &:not(.active):active {
     background: #8f8f8f;
     transition: 0.3s ease;
   }
