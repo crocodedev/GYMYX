@@ -6,17 +6,12 @@
   flex-direction: column;
   background: var(--white-transperent, rgba(255, 255, 255, 0.1));
 
-  @include media-breakpoint-down(xl) {
+  @include media-breakpoint-down(lg) {
     border-radius: 15px;
     padding: 9px 18px;
   }
 
-  @include media-breakpoint-between(xl, xxl) {
-    border-radius: 20px;
-    padding: 15px 25px;
-  }
-
-  @include media-breakpoint-between(xxl, xxxl) {
+  @include media-breakpoint-between(lg, xxxl) {
     padding: 20px 30px;
     border-radius: 22px;
   }

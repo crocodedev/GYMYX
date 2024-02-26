@@ -87,27 +87,32 @@
   &__title {
     color: var(--white, #fff);
     font-weight: 600;
-    margin-bottom: 16px;
     word-break: break-word;
 
     @include media-breakpoint-down(md) {
       font-size: 24px;
+      margin-bottom: 8px;
       letter-spacing: -0.24px;
     }
 
     @include media-breakpoint-up(md) {
       letter-spacing: -0.5px;
+      margin-bottom: 12px;
     }
 
     @include media-breakpoint-between(md, xl) {
       font-size: 28px;
+      margin-bottom: 12px;
     }
 
     @include media-breakpoint-between(xl, xxxl) {
       font-size: 38px;
+      margin-bottom: 12px;
     }
 
     @include media-breakpoint-up(xxxl) {
+      margin-bottom: 16px;
+
       font-size: 50px;
     }
   }
