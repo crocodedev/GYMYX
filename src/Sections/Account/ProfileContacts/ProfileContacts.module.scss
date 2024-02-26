@@ -5,17 +5,12 @@
   box-shadow: 0px 0px 21px 0px rgba(22, 23, 26, 0.6);
   width: 100%;
 
-  @include media-breakpoint-down(md) {
+  @include media-breakpoint-down(lg) {
     padding: 18px;
     border-radius: 15px;
   }
 
-  @include media-breakpoint-between(md, xl) {
-    padding: 25px 25px 35px 25px;
-    border-radius: 25px;
-  }
-
-  @include media-breakpoint-between(xl, xxxl) {
+  @include media-breakpoint-between(lg, xxxl) {
     padding: 30px 30px 39px 30px;
     border-radius: 22px;
   }

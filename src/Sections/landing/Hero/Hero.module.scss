@@ -24,7 +24,6 @@
 
   &__billet {
     position: absolute;
-
     z-index: 2;
     animation: rotate 10s linear infinite;
 
@@ -33,6 +32,13 @@
       max-height: 80px;
       left: 37px;
       bottom: 270px;
+    }
+
+    @media (max-width: 600px) and (min-height: 900px) and (max-height: 934px) {
+      max-width: 82px;
+      max-height: 80px;
+      left: 37px;
+      bottom: 320px;
     }
 
     @include media-breakpoint-between(md, lg) {
@@ -71,10 +77,10 @@
 
   @keyframes rotate {
     from {
-      transform: rotate(0deg); /* Начальный угол вращения */
+      transform: rotate(0deg);
     }
     to {
-      transform: rotate(360deg); /* Конечный угол вращения */
+      transform: rotate(360deg);
     }
   }
 
@@ -118,6 +124,14 @@
       bottom: 17%;
     }
 
+    @media (min-width: 1500px) and (min-height: 880px) and (max-height: 1040px) {
+      bottom: 10%;
+    }
+
+    @media (min-width: 1300px) and (min-height: 680px) and (max-height: 810px) {
+      bottom: 5%;
+    }
+
     > div {
       height: 100%;
     }
@@ -139,6 +153,10 @@
 
     @include media-breakpoint-up(md) {
       max-width: 770px;
+    }
+
+    @media (min-height: 800px) and (max-height: 1040px) {
+      max-width: 930px;
     }
   }
 
@@ -171,6 +189,10 @@
       font-size: 50px;
       letter-spacing: -0.5px;
     }
+
+    @media (min-height: 800px) and (max-height: 1040px) {
+      margin-bottom: 15px;
+    }
   }
 
   &__subtitle {
@@ -190,6 +212,10 @@
     @include media-breakpoint-up(xxxl) {
       font-size: 30px;
       margin-bottom: 35px;
+    }
+
+    @media (min-height: 800px) and (max-height: 1040px) {
+      margin-bottom: 20px;
     }
   }
 

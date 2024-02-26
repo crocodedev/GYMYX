@@ -9,8 +9,10 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
 const Hero = ({ alias, fields }) => {
+  console.log(fields);
   const image = fields.find((item) => item.name === 'image');
   const image_mobile = fields.find((item) => item.name === 'image_mobile');
+  const image_medium = fields.find((item) => item.name === 'image_m');
   const title = fields.find((item) => item.name === 'title');
   const subtitle = fields.find((item) => item.name === 'subtitle');
   const price = fields.find((item) => item.name === 'price');
@@ -24,6 +26,7 @@ const Hero = ({ alias, fields }) => {
     <section id={alias} className={styles.hero}>
       <picture className={styles.hero__img}>
         <source media="(max-width: 768px)" srcSet={`${image_mobile?.value}?w=390&h=844`} />
+        <source media="(max-width: 1760px)" srcSet={`${image_medium?.value}?w=1440&h=900`} />
         {isMobile ? (
           <Image src={`${image_mobile?.value}`} width={390} height={720} quality={100} alt={title.value} />
         ) : (
