@@ -5,6 +5,7 @@ import Loading from '@/Components/Loading';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { useState, useEffect } from 'react';
+import { Mousewheel } from 'swiper/modules';
 
 import SliderControls from '@/Components/Slider/SliderControls';
 import SectionTitle from '@/Components/SectionTitle';
@@ -24,8 +25,10 @@ const TrainersSlider = () => {
   const sliderPcSettings = {
     spaceBetween: 25,
     slidesPerView: 2.2,
-    freeMode: true,
-    cssMode: true,
+    mousewheel: {
+      thresholdDelta: 70,
+      forceToAxis: true,
+    },
     breakpoints: {
       0: {
         slidesPerView: 3,
@@ -101,6 +104,7 @@ const TrainersSlider = () => {
           onSlideChange={onChangeSlide}
           onSwiper={handleInit}
           a11y={false}
+          modules={[Mousewheel]}
           mousewheel={true}
           {...sliderSettings}
         >
