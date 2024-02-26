@@ -143,15 +143,23 @@
     align-items: flex-start;
     width: 100%;
 
-    @include media-breakpoint-down(lg) {
-      height: 100%;
+    @include media-breakpoint-down(md) {
+      max-width: 320px;
       justify-content: flex-end;
       padding: 60px 0;
-      max-width: 320px;
+      margin: 0 auto;
+      height: 100%;
+    }
+
+    @include media-breakpoint-between(md, xl) {
+      max-width: 630px;
+      justify-content: flex-end;
+      padding: 60px 0;
+      height: 100%;
       margin: 0 auto;
     }
 
-    @include media-breakpoint-between(lg, xxxl) {
+    @include media-breakpoint-between(xl, xxxl) {
       max-width: 630px;
     }
 
