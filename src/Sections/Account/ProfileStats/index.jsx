@@ -40,18 +40,18 @@ const ProfileStats = () => {
       const currentMonth = new Date().getMonth() + 1;
 
       const tempMonths = [
-        { id: 1, label: 'Янв', count: 0 },
-        { id: 2, label: 'Февр', count: 0 },
-        { id: 3, label: 'Март', count: 0 },
-        { id: 4, label: 'Апр', count: 0 },
-        { id: 5, label: 'Май', count: 0 },
-        { id: 6, label: 'Июн', count: 0 },
-        { id: 7, label: 'Июл', count: 0 },
-        { id: 8, label: 'Авг', count: 0 },
-        { id: 9, label: 'Сен', count: 0 },
-        { id: 10, label: 'Окт', count: 0 },
-        { id: 11, label: 'Нояб', count: 0 },
-        { id: 12, label: 'Дек', count: 0 },
+        { id: 1, label: 'янв', count: 0 },
+        { id: 2, label: 'февр', count: 0 },
+        { id: 3, label: 'март', count: 0 },
+        { id: 4, label: 'апр', count: 0 },
+        { id: 5, label: 'май', count: 0 },
+        { id: 6, label: 'июн', count: 0 },
+        { id: 7, label: 'июл', count: 0 },
+        { id: 8, label: 'авг', count: 0 },
+        { id: 9, label: 'сен', count: 0 },
+        { id: 10, label: 'окт', count: 0 },
+        { id: 11, label: 'нояб', count: 0 },
+        { id: 12, label: 'дек', count: 0 },
       ];
 
       data?.forEach(({ date }) => {

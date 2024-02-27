@@ -8,7 +8,6 @@ import { useState, useEffect } from 'react';
 import { Mousewheel } from 'swiper/modules';
 
 import SliderControls from '@/Components/Slider/SliderControls';
-import SectionTitle from '@/Components/SectionTitle';
 import TrainersItem from '../TrainersItem';
 import { getTrainersData } from '@/app/lk/trainers/page';
 import PageHeading from '../../PageHeading';
@@ -92,6 +91,7 @@ const TrainersSlider = () => {
             handlePrevSlide={prevSlide}
             activeSlide={activeIndexSlide}
             countSlides={slider?.slides?.length}
+            isTrainers={true}
           />
         ) : null}
       </div>

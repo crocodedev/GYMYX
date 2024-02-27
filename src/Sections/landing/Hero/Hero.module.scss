@@ -121,7 +121,7 @@
 
     @include media-breakpoint-up(lg) {
       position: absolute;
-      bottom: 17%;
+      bottom: 12%;
     }
 
     @media (min-width: 1500px) and (min-height: 880px) and (max-height: 1040px) {
@@ -143,19 +143,30 @@
     align-items: flex-start;
     width: 100%;
 
-    @include media-breakpoint-down(lg) {
-      height: 100%;
+    @include media-breakpoint-down(md) {
+      max-width: 320px;
       justify-content: flex-end;
       padding: 60px 0;
-      max-width: 320px;
       margin: 0 auto;
+      height: 100%;
     }
 
-    @include media-breakpoint-up(md) {
+    @include media-breakpoint-between(md, xl) {
+      max-width: 630px;
+      justify-content: flex-end;
+      padding: 60px 0;
+      height: 100%;
+    }
+
+    @include media-breakpoint-between(xl, xxxl) {
+      max-width: 630px;
+    }
+
+    @include media-breakpoint-up(xxxl) {
       max-width: 770px;
     }
 
-    @media (min-height: 800px) and (max-height: 1040px) {
+    @media (min-width: 1760px) and (min-height: 800px) and (max-height: 1040px) {
       max-width: 930px;
     }
   }
