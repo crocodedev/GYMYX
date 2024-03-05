@@ -76,7 +76,6 @@ const ProfileStats = () => {
       <Container size="M">
         <div className={styles['profile-stats__wrapper']}>
           <ProfileBlockTitle label={'Статистика тренировок'} />
-          TTTT
           <div className={styles['profile-stats__list']}>
             <Swiper className={`swiper-container ${styles['profile-stats__list-wrapper']}`} {...sliderSettings}>
               {monthsStats.map(({ id, label, count }) => (
