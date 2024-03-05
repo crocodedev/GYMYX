@@ -26,6 +26,7 @@ async function getUserData(token) {
   });
 
   if (!response.ok) {
+    signOut({ callbackUrl: '/lk/login' });
     return null;
   }
 
@@ -42,7 +43,6 @@ const Profile = () => {
       isFirstUpdate.current = false;
       getUserData(sessionData?.user?.accessToken).then((data) => {
         if (data) {
-          console.log(data);
           update(data);
         }
       });

@@ -26,6 +26,7 @@ async function getUserData(token) {
     const result = await response.json();
     return result?.data || null;
   } catch (error) {
+    signOut({ callbackUrl: '/lk/login' });
     console.error('Error in getUserData:', error);
     throw error;
   }
