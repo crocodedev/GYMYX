@@ -64,6 +64,10 @@ export const authConfig = {
     },
 
     async session({ session, token }) {
+      if (!session.user || !session.user.email) {
+        return null;
+      }
+
       session.user.accessToken = token.accessToken;
       session.user.full_name = token?.full_name || null;
       session.user.phone = token?.phone || null;
