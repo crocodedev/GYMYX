@@ -2,9 +2,10 @@
 import ProfileBlockTitle from '@/Components/Account/Profile/ProfileBlockTitle';
 import Checkbox from '@/Components/Checkbox';
 import { useEffect, useState } from 'react';
+
 import styles from './ProfileMailing.module.scss';
 import { changeSubscribe, deleteSubscribe } from './helpers';
-import { useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 
 async function getUserData(token) {
   try {
@@ -18,6 +19,7 @@ async function getUserData(token) {
     });
 
     if (!response.ok) {
+      signOut({ callbackUrl: '/lk/login' });
       throw new Error(' response was not ok');
     }
 
