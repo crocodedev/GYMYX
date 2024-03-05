@@ -11,6 +11,29 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { useSession } from 'next-auth/react';
 
+async function getUserData(token) {
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users`, {
+      method: 'GET',
+      cache: 'no-store',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(' response was not ok');
+    }
+
+    const result = await response.json();
+    return result?.data || null;
+  } catch (error) {
+    console.error('Error in getUserData:', error);
+    throw error;
+  }
+}
+
 export const getTrainingData = async (token) => {
   const result = await fetch('/api/booking/get-bookings', {
     method: 'POST',
@@ -25,6 +48,7 @@ export const getTrainingData = async (token) => {
 
   const response = await result.json();
   if (!response.error) {
+    getUserData(token);
     return response;
   }
 };
