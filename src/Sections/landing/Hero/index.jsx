@@ -9,7 +9,6 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
 const Hero = ({ alias, fields }) => {
-  console.log(fields);
   const image = fields.find((item) => item.name === 'image');
   const image_mobile = fields.find((item) => item.name === 'image_mobile');
   const image_medium = fields.find((item) => item.name === 'image_m');
