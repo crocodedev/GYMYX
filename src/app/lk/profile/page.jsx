@@ -42,6 +42,7 @@ const Profile = () => {
       isFirstUpdate.current = false;
       getUserData(sessionData?.user?.accessToken).then((data) => {
         if (data) {
+          console.log(data);
           update(data);
         }
       });
@@ -50,6 +51,7 @@ const Profile = () => {
 
   return (
     <div className="account-page-wrapper">
+      asd
       <ProfileHeading />
       <ProfilePersonalData />
       <ProfileTrainings />
