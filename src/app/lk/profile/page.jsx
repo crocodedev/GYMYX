@@ -51,7 +51,6 @@ const Profile = () => {
 
   return (
     <div className="account-page-wrapper">
-      asd
       <ProfileHeading />
       <ProfilePersonalData />
       <ProfileTrainings />
