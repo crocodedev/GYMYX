@@ -7,6 +7,10 @@ import Header from '@/Sections/Header';
 import MobileBar from '@/Components/MobileBar';
 import Metrika from '@/Components/Metrika';
 
+import { getServerSession } from 'next-auth';
+import { authConfig } from '@/configs/auth';
+import { redirect } from 'next/navigation';
+
 export const viewport = {
   width: 'device-width',
   initialScale: 1,
@@ -38,6 +42,13 @@ async function getData() {
 export default async function AccountLayout({ children }) {
   const { data } = await getData();
   const headerData = data.modules.find((item) => item.alias === 'account_header');
+  const session = await getServerSession(authConfig);
+  const redirectBlock = children?.props?.childPropSegment;
+
+  if (session && session?.user.email === null && redirectBlock !== 'login') {
+    redirect('/lk/login/create-profile');
+  }
+
   return (
     <html lang="en">
       <Metrika />
