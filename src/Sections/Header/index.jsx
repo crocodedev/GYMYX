@@ -38,10 +38,8 @@ const Header = ({ isLanding = false, data }) => {
 
       if (sesstion && sesstion?.data?.user?.email !== null) {
         setDisableLink(false);
-        console.log(1);
       } else {
         setDisableLink(true);
-        console.log(2);
       }
     }
   }, [sesstion]);
