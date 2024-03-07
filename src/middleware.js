@@ -8,5 +8,6 @@ export const config = {
     '/lk/guide/:path*',
     '/lk/workouts/:path*',
     '/lk/trainers/:path*',
+    '/lk/login/create-profile/:path*',
   ],
 };

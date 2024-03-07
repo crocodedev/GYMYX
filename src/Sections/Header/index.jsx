@@ -18,6 +18,7 @@ const Header = ({ isLanding = false, data }) => {
   const pathname = usePathname();
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [userData, setUserData] = useState(null);
+  const [disableLink, setDisableLink] = useState(true);
 
   const fields = data?.fields;
   const logo = fields.find((field) => field.name === 'logo')?.value;
@@ -34,6 +35,14 @@ const Header = ({ isLanding = false, data }) => {
         fio: getFioShort(sesstion?.data?.user?.full_name),
         image: sesstion?.data?.user?.image,
       });
+
+      if (sesstion && sesstion?.data?.user?.email !== null) {
+        setDisableLink(false);
+        console.log(1);
+      } else {
+        setDisableLink(true);
+        console.log(2);
+      }
     }
   }, [sesstion]);
 
@@ -70,7 +79,7 @@ const Header = ({ isLanding = false, data }) => {
             return (
               <Link
                 key={link}
-                href={link}
+                href={disableLink ? '#' : link}
                 passHref
                 className={`${styles['header__nav-item']} ${pathname.includes(link) ? styles['active'] : ''}`}
               >
