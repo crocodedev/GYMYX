@@ -57,18 +57,18 @@ const CreateProfile = () => {
   });
 
   const handleChangeInput = (value, fieldName) => {
+    const sanitizedValue = value.replace(/\s/g, '');
     setData((prev) => {
       return {
         ...prev,
         [fieldName]: {
           ...prev[fieldName],
-          value,
-          isValid: validateField(value, prev[fieldName].type),
+          value: sanitizedValue,
+          isValid: validateField(sanitizedValue, prev[fieldName].type),
         },
       };
     });
   };
-
   const handleUploadFile = (e) => {
     const file = e?.target?.files[0];
     const fileExt = file.name.substr(file.name.lastIndexOf('.') + 1);
