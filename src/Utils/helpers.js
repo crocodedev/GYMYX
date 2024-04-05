@@ -24,7 +24,7 @@ export const formatPhoneNumber = (phoneNumber) => {
 export const getFioShort = (fio) => {
   if (fio != '') {
     const fioData = fio.split(' ');
-    return `${fioData[0]} ${fioData[1].charAt(0)}.`;
+    return `${fioData[0]} ${fioData[1] !== undefined ? fioData[1].charAt(0) : ''}`;
   }
   return fio;
 };
