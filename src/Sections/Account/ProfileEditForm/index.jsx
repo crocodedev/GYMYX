@@ -113,7 +113,6 @@ const ProfileEditForm = () => {
     if (!sessionData || !data) return;
     const isDifference = checkDataDifference(sessionData.user, data);
     if (isDifference) {
-      console.log(data);
       setCanSubmit(validateAllFields(data));
     } else {
       setCanSubmit(false);
