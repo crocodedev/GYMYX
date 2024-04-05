@@ -35,6 +35,7 @@ const checkDataDifference = (prevData, newData) => {
   if (prevData.full_name !== `${newData.name.value} ${newData.lastname.value}`) {
     return true;
   }
+
   if (prevData.image !== newData.image.value && newData.image.value != null) {
     return true;
   }
@@ -59,7 +60,7 @@ const ProfileEditForm = () => {
     },
     lastname: {
       value: '',
-      isValid: true,
+      isValid: false,
       type: 'text',
     },
     email: {
@@ -112,6 +113,7 @@ const ProfileEditForm = () => {
     if (!sessionData || !data) return;
     const isDifference = checkDataDifference(sessionData.user, data);
     if (isDifference) {
+      console.log(data);
       setCanSubmit(validateAllFields(data));
     } else {
       setCanSubmit(false);
@@ -199,13 +201,14 @@ const ProfileEditForm = () => {
   };
 
   const handleChangeInput = (value, fieldName) => {
+    const sanitizedValue = value.replace(/\s/g, '');
     setData((prev) => {
       return {
         ...prev,
         [fieldName]: {
           ...prev[fieldName],
-          value,
-          isValid: validateField(value, prev[fieldName].type),
+          value: sanitizedValue,
+          isValid: validateField(sanitizedValue, prev[fieldName].type),
         },
       };
     });
