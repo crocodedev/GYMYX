@@ -54,7 +54,6 @@ const MobileBar = ({ headerData }) => {
         }
       });
 
-      // Добавляем элементы "Профиль" вторым в newMenu
       const profileMenuItem = MENU.find((item) => item.title === 'Профиль');
       if (profileMenuItem) {
         newMenu.splice(2, 0, profileMenuItem);
