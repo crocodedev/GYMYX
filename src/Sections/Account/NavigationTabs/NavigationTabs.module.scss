@@ -26,6 +26,18 @@
       box-shadow: 0 0 10px 10px #37393d;
     }
 
+    &::before {
+      position: absolute;
+      content: '';
+      width: 10px;
+      height: 29px;
+      top: 16px;
+      left: -2px;
+      z-index: 2;
+      background-color: #37393d;
+      box-shadow: 0 0 10px 10px #37393d;
+    }
+
     > div {
       padding-right: 0;
       max-width: unset;
@@ -66,16 +78,5 @@
 }
 
 .swiper-tabs {
-  // &::after {
-  //   position: absolute;
-  //   content: '';
-  //   border-radius: 0 2px 0 0;
-  //   width: 20px;
-  //   height: 110%;
-  //   top: 0px;
-  //   right: -10px;
-  //   z-index: 1;
-  //   background-color: var(--dark-grey, #37393d);
-  //   box-shadow: 0px 0 8px 10px var(--dark-grey, #37393d);
-  // }
+  overflow: unset;
 }
