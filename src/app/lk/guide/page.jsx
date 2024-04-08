@@ -93,8 +93,6 @@ const Gid = () => {
     }
   }, [activeTag, tags, gids]);
 
-  console.log(gids);
-
   const handleChangeTag = (index) => {
     if (activeTag === null) {
       setActiveTag(index);
