@@ -32,6 +32,7 @@ export const getTrainingData = async (token) => {
 const ProfileStats = () => {
   const { data: sessionData } = useSession();
   const [monthsStats, setMonthsStats] = useState([]);
+  const [maxCounter, setMaxCounter] = useState({});
 
   useEffect(() => {
     if (!sessionData) return;
@@ -71,6 +72,12 @@ const ProfileStats = () => {
     });
   }, [sessionData]);
 
+  useEffect(() => {
+    const sortedMonthsStats = [...monthsStats].sort((a, b) => b.count - a.count);
+    const idWithMaxCount = sortedMonthsStats[0];
+    setMaxCounter(idWithMaxCount);
+  }, [monthsStats]);
+
   return (
     <section className={styles['profile-stats']}>
       <Container size="M">
@@ -80,7 +87,7 @@ const ProfileStats = () => {
             <Swiper className={`swiper-container ${styles['profile-stats__list-wrapper']}`} {...sliderSettings}>
               {monthsStats.map(({ id, label, count }) => (
                 <SwiperSlide key={id}>
-                  <ProfileStatsItem isCurrent={id === new Date().getMonth() + 1} label={label} count={count} />
+                  <ProfileStatsItem isCurrent={id === maxCounter?.id} label={label} count={count} />
                 </SwiperSlide>
               ))}
             </Swiper>
