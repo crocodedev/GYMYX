@@ -41,7 +41,7 @@ const Gid = () => {
     getGids(sessionData?.user?.accessToken).then(({ data }) => {
       if (data) {
         const sortedData = data.slice().sort((a, b) => (b.isFavorited ? 1 : -1) - (a.isFavorited ? 1 : -1));
-        setGids(sortedData);
+        setGids(sortedData.reverse());
       }
       setLoading(false);
     });
@@ -55,12 +55,12 @@ const Gid = () => {
       tempGids[findedIndex].isFavorited = !tempGids[findedIndex].isFavorited;
 
       tempGids.sort((a, b) => {
-        if (b.isFavorited && !a.isFavorited) {
+        if (a.isFavorited && !b.isFavorited) {
           return -1;
-        } else if (!b.isFavorited && a.isFavorited) {
+        } else if (!a.isFavorited && b.isFavorited) {
           return 1;
         } else {
-          return a.id - b.id;
+          return b.id - a.id;
         }
       });
 
@@ -89,9 +89,11 @@ const Gid = () => {
 
       setRenderedItems(resultItems);
     } else {
-      setRenderedItems(gids.reverse());
+      setRenderedItems(gids);
     }
   }, [activeTag, tags, gids]);
+
+  console.log(gids);
 
   const handleChangeTag = (index) => {
     if (activeTag === null) {
