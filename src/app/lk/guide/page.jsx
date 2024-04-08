@@ -55,9 +55,9 @@ const Gid = () => {
       tempGids[findedIndex].isFavorited = !tempGids[findedIndex].isFavorited;
 
       tempGids.sort((a, b) => {
-        if (a.isFavorited && !b.isFavorited) {
+        if (b.isFavorited && !a.isFavorited) {
           return -1;
-        } else if (!a.isFavorited && b.isFavorited) {
+        } else if (!b.isFavorited && a.isFavorited) {
           return 1;
         } else {
           return a.id - b.id;
@@ -89,7 +89,7 @@ const Gid = () => {
 
       setRenderedItems(resultItems);
     } else {
-      setRenderedItems(gids);
+      setRenderedItems(gids.reverse());
     }
   }, [activeTag, tags, gids]);
 
