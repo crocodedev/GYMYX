@@ -60,6 +60,7 @@ const MobileMenu = ({ items, isShow, toggleVisibility }) => {
                 <Link href="/lk/login">
                   <u>Войти</u>
                 </Link>
+                ыфв
                 <span className={styles['mobile-menu__login-icon']}>
                   <img src="/icons/login.svg" alt="login icon" />
                 </span>

@@ -18,6 +18,7 @@ const CheckoutSummary = ({ items, gym }) => {
   const [error, setError] = useState(false);
   const [list, setList] = useState([]);
   const [isFirstBooking, setIsFirstBooking] = useState();
+
   const totalPrice = useMemo(() => {
     let total = 0;
 
@@ -36,6 +37,12 @@ const CheckoutSummary = ({ items, gym }) => {
   }, [isFirstBooking, items, gym]);
 
   const groupedList = list.reduce((acc, { value, count, price }) => {
+    const tmpArr = list;
+
+    if (isFirstBooking && tmpArr) {
+      tmpArr[0].price = gym?.min_price;
+    }
+
     const existingItem = acc.find((item) => item.price === price);
 
     if (existingItem) {
@@ -77,7 +84,7 @@ const CheckoutSummary = ({ items, gym }) => {
           {groupedList.map(({ value, count, price }, index) => (
             <div key={`${value}_${index}`} className={styles['checkout-summary__item']}>
               <p>
-                Тренировка {isFirstBooking && index === 0 ? gym?.min_price : price} ₽/ч ({count})
+                Тренировка {isFirstBooking && index === 0 && index <= 0 ? gym?.min_price : price} ₽/ч ({count})
               </p>
               <p>{isFirstBooking && index === 0 ? gym?.min_price : price} ₽</p>
             </div>
