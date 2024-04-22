@@ -51,8 +51,6 @@ const CheckoutSummary = ({ items, gym }) => {
     return acc;
   }, []);
 
-  console.log(list);
-
   const handleSubmit = () => {
     setLoading(true);
     createBooking(sessionData.user.accessToken, gym?.id, prepareDataForBooking(list)).then(({ data }) => {
@@ -84,9 +82,9 @@ const CheckoutSummary = ({ items, gym }) => {
           {groupedList.map(({ value, count, price }, index) => (
             <div key={`${value}_${index}`} className={styles['checkout-summary__item']}>
               <p>
-                Тренировка {isFirstBooking && index === 0 && index <= 0 ? gym?.min_price : price} ₽/ч ({count})
+                Тренировка {price} ₽/ч ({count})
               </p>
-              <p>{isFirstBooking && index === 0 ? gym?.min_price : price} ₽</p>
+              <p>{price} ₽</p>
             </div>
           ))}
         </div>
