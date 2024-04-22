@@ -108,7 +108,6 @@ const Header = ({ isLanding = false, data }) => {
               )}
             </>
           )}
-          {console.log(userData)}
           {isLanding && (
             <Link href={userData ? '/lk/profile' : '/lk/login'} className={styles['header__controls-account']}>
               <img src="/icons/account.svg" alt="account icon" />

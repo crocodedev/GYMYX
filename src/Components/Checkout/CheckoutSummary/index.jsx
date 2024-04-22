@@ -37,10 +37,8 @@ const CheckoutSummary = ({ items, gym }) => {
   }, [isFirstBooking, items, gym]);
 
   const groupedList = list.reduce((acc, { value, count, price }) => {
-    const tmpArr = list;
-
-    if (isFirstBooking && tmpArr) {
-      tmpArr[0].price = gym?.min_price;
+    if (isFirstBooking) {
+      list[0].price = gym?.min_price;
     }
 
     const existingItem = acc.find((item) => item.price === price);
