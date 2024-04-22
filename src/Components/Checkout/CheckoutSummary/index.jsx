@@ -17,6 +17,7 @@ const CheckoutSummary = ({ items, gym }) => {
   const [loadingPage, setLoadingPage] = useState(true);
   const [error, setError] = useState(false);
   const [list, setList] = useState([]);
+  const [finalArr, setFinalArr] = useState([]);
   const [isFirstBooking, setIsFirstBooking] = useState();
 
   const totalPrice = useMemo(() => {
@@ -35,23 +36,21 @@ const CheckoutSummary = ({ items, gym }) => {
     return total;
   }, [isFirstBooking, items, gym]);
 
-  const groupedList = list.reduce((acc, { value, count, price }) => {
-    if (isFirstBooking) {
-      list[0].price = gym?.min_price;
-    }
+  const sortArr = () => {
+    const finalArr = list.reduce((acc, el) => {
+      const existingEl = acc.find((item) => item.price === el.price);
 
-    const existingItem = acc.find((item) => item.price === price);
+      if (existingEl) {
+        existingEl.count += el.count;
+      } else {
+        acc.push({ ...el, count: el.count });
+      }
 
-    if (existingItem) {
-      existingItem.count += count;
-    } else {
-      acc.push({ value, count, price });
-    }
+      return acc;
+    }, []);
 
-    return acc;
-  }, []);
-
-  console.log(list);
+    setFinalArr(finalArr);
+  };
 
   const handleSubmit = () => {
     setLoading(true);
@@ -70,9 +69,10 @@ const CheckoutSummary = ({ items, gym }) => {
   useEffect(() => {
     if (sessionData?.user) {
       setIsFirstBooking(!sessionData.user.enter_code);
+      sortArr();
       setLoadingPage(false);
     }
-  }, [sessionData, isFirstBooking, groupedList]);
+  }, [sessionData, isFirstBooking, list]);
 
   if (loadingPage) return;
 
@@ -80,13 +80,12 @@ const CheckoutSummary = ({ items, gym }) => {
     <div className={styles['checkout-summary']}>
       <div className={styles['checkout-summary__wrapper']}>
         <div className={styles['checkout-summary__list']}>
-          {console.log('groupedList', groupedList)}
-          {groupedList.map(({ value, count, price }, index) => (
+          {finalArr.map(({ value, count, price }, index) => (
             <div key={`${value}_${index}`} className={styles['checkout-summary__item']}>
               <p>
-                Тренировка {isFirstBooking && index === 0 && index <= 0 ? gym?.min_price : price} ₽/ч ({count})
+                Тренировка {price} ₽/ч ({count})
               </p>
-              <p>{isFirstBooking && index === 0 ? gym?.min_price : price} ₽</p>
+              <p>{price} ₽</p>
             </div>
           ))}
         </div>
