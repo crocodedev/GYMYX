@@ -95,9 +95,11 @@ const Header = ({ isLanding = false, data }) => {
           {!isLanding && (
             <>
               {!userData?.isLogined && (
-                <Link href="/lk/login" className={styles['header__controls-account-text']}>
-                  Войти
-                </Link>
+                <>
+                  <Link href="#" className={styles['header__controls-account-text']}>
+                    Войти
+                  </Link>
+                </>
               )}
               {userData?.isLogined && (
                 <Link href={'/lk/profile'}>
@@ -106,13 +108,14 @@ const Header = ({ isLanding = false, data }) => {
               )}
             </>
           )}
+          {console.log(userData)}
           {isLanding && (
             <Link href={userData ? '/lk/profile' : '/lk/login'} className={styles['header__controls-account']}>
               <img src="/icons/account.svg" alt="account icon" />
             </Link>
           )}
           {!isLanding && (
-            <Link href={'/lk/profile'} className={styles['header__controls-account']}>
+            <Link href={userData ? '/lk/profile' : '#'} className={styles['header__controls-account']}>
               <img src={userData?.image || '/icons/account.svg'} alt="account icon" />
             </Link>
           )}
