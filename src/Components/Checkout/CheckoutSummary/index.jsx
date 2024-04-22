@@ -37,7 +37,10 @@ const CheckoutSummary = ({ items, gym }) => {
   }, [isFirstBooking, items, gym]);
 
   const sortArr = () => {
-    const finalArr = list.reduce((acc, el) => {
+    const tmpArr = list.reduce((acc, el) => {
+      if (isFirstBooking) {
+        list[0].price = gym.min_price;
+      }
       const existingEl = acc.find((item) => item.price === el.price);
 
       if (existingEl) {
@@ -49,9 +52,10 @@ const CheckoutSummary = ({ items, gym }) => {
       return acc;
     }, []);
 
-    setFinalArr(finalArr);
+    setFinalArr(tmpArr);
   };
 
+  console.log(finalArr);
   const handleSubmit = () => {
     setLoading(true);
     createBooking(sessionData.user.accessToken, gym?.id, prepareDataForBooking(list)).then(({ data }) => {
