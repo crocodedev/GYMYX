@@ -17,6 +17,7 @@ const CheckoutSummary = ({ items, gym }) => {
   const [loadingPage, setLoadingPage] = useState(true);
   const [error, setError] = useState(false);
   const [list, setList] = useState([]);
+  const [finalArr, setFinalArr] = useState([]);
   const [isFirstBooking, setIsFirstBooking] = useState();
 
   const totalPrice = useMemo(() => {
@@ -35,7 +36,7 @@ const CheckoutSummary = ({ items, gym }) => {
     return total;
   }, [isFirstBooking, items, gym]);
 
-  let groupedList = list.reduce((acc, { value, count, price }) => {
+  const groupedList = list.reduce((acc, { value, count, price }) => {
     if (isFirstBooking) {
       list[0].price = gym?.min_price;
     }
@@ -51,6 +52,8 @@ const CheckoutSummary = ({ items, gym }) => {
     return acc;
   }, []);
 
+  console.log('sd', finalArr);
+
   const handleSubmit = () => {
     setLoading(true);
     createBooking(sessionData.user.accessToken, gym?.id, prepareDataForBooking(list)).then(({ data }) => {
@@ -65,21 +68,23 @@ const CheckoutSummary = ({ items, gym }) => {
     });
   };
 
+  console.log('groupedList', groupedList);
+
   useEffect(() => {
     if (sessionData?.user) {
       setIsFirstBooking(!sessionData.user.enter_code);
+      setFinalArr(groupedList);
       setLoadingPage(false);
     }
-  }, [sessionData, isFirstBooking, groupedList, list]);
+  }, [sessionData, isFirstBooking, list]);
 
   if (loadingPage) return;
 
-  return groupedList ? (
+  return (
     <div className={styles['checkout-summary']}>
       <div className={styles['checkout-summary__wrapper']}>
         <div className={styles['checkout-summary__list']}>
-          {console.log('groupedList', groupedList)}
-          {groupedList.map(({ value, count, price }, index) => (
+          {finalArr.map(({ value, count, price }, index) => (
             <div key={`${value}_${index}`} className={styles['checkout-summary__item']}>
               <p>
                 Тренировка {price} ₽/ч ({count})
@@ -106,7 +111,7 @@ const CheckoutSummary = ({ items, gym }) => {
         {error && <p className={styles['checkout-summary__summary-error']}>Произошла ошибка</p>}
       </div>
     </div>
-  ) : null;
+  );
 };
 
 export default CheckoutSummary;
