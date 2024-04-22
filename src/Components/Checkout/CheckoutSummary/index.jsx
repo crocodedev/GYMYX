@@ -74,7 +74,7 @@ const CheckoutSummary = ({ items, gym }) => {
 
   if (loadingPage) return;
 
-  return (
+  return groupedList ? (
     <div className={styles['checkout-summary']}>
       <div className={styles['checkout-summary__wrapper']}>
         <div className={styles['checkout-summary__list']}>
@@ -106,7 +106,7 @@ const CheckoutSummary = ({ items, gym }) => {
         {error && <p className={styles['checkout-summary__summary-error']}>Произошла ошибка</p>}
       </div>
     </div>
-  );
+  ) : null;
 };
 
 export default CheckoutSummary;
