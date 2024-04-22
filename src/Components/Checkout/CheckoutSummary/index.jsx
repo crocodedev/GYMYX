@@ -25,17 +25,19 @@ const CheckoutSummary = ({ items, gym }) => {
     items.forEach((entry, indexFirst) => {
       entry.time.map((time, indexSecond) => {
         if (isFirstBooking && indexFirst === 0 && indexSecond === 0) {
+          console.log('YES');
+
           total += gym.min_price;
         } else {
           total += findPrice(time, gym?.prices);
         }
       });
     });
-
     setList(countValues(items, gym?.prices));
     return total;
   }, [isFirstBooking, items, gym]);
 
+  console.log(list);
   const groupedList = list.reduce((acc, { value, count, price }) => {
     if (isFirstBooking) {
       list[0].price = gym?.min_price;
