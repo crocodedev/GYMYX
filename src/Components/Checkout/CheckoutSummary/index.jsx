@@ -55,10 +55,9 @@ const CheckoutSummary = ({ items, gym }) => {
     setFinalArr(tmpArr);
   };
 
-  console.log(finalArr);
   const handleSubmit = () => {
     setLoading(true);
-    createBooking(sessionData.user.accessToken, gym?.id, prepareDataForBooking(list)).then(({ data }) => {
+    createBooking(sessionData.user.accessToken, gym?.id, prepareDataForBooking(finalArr)).then(({ data }) => {
       if (data?.payment_link) {
         router.push(data?.payment_link);
       } else if (data?.status) {
