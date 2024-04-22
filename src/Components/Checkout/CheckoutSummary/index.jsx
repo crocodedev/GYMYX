@@ -25,8 +25,6 @@ const CheckoutSummary = ({ items, gym }) => {
     items.forEach((entry, indexFirst) => {
       entry.time.map((time, indexSecond) => {
         if (isFirstBooking && indexFirst === 0 && indexSecond === 0) {
-          console.log('YES');
-
           total += gym.min_price;
         } else {
           total += findPrice(time, gym?.prices);
@@ -37,7 +35,6 @@ const CheckoutSummary = ({ items, gym }) => {
     return total;
   }, [isFirstBooking, items, gym]);
 
-  console.log(list);
   const groupedList = list.reduce((acc, { value, count, price }) => {
     if (isFirstBooking) {
       list[0].price = gym?.min_price;
@@ -53,6 +50,8 @@ const CheckoutSummary = ({ items, gym }) => {
 
     return acc;
   }, []);
+
+  console.log(list);
 
   const handleSubmit = () => {
     setLoading(true);
@@ -73,7 +72,7 @@ const CheckoutSummary = ({ items, gym }) => {
       setIsFirstBooking(!sessionData.user.enter_code);
       setLoadingPage(false);
     }
-  }, [sessionData, isFirstBooking]);
+  }, [sessionData, isFirstBooking, groupedList]);
 
   if (loadingPage) return;
 
@@ -81,6 +80,7 @@ const CheckoutSummary = ({ items, gym }) => {
     <div className={styles['checkout-summary']}>
       <div className={styles['checkout-summary__wrapper']}>
         <div className={styles['checkout-summary__list']}>
+          {console.log('groupedList', groupedList)}
           {groupedList.map(({ value, count, price }, index) => (
             <div key={`${value}_${index}`} className={styles['checkout-summary__item']}>
               <p>
