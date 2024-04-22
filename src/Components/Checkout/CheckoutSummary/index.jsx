@@ -71,7 +71,7 @@ const CheckoutSummary = ({ items, gym }) => {
       setIsFirstBooking(!sessionData.user.enter_code);
       setLoadingPage(false);
     }
-  }, [sessionData]);
+  }, [sessionData, isFirstBooking]);
 
   if (loadingPage) return;
 
