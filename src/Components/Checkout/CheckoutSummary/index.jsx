@@ -36,23 +36,21 @@ const CheckoutSummary = ({ items, gym }) => {
     return total;
   }, [isFirstBooking, items, gym]);
 
-  const groupedList = list.reduce((acc, { value, count, price }) => {
-    if (isFirstBooking) {
-      list[0].price = gym?.min_price;
-    }
+  const sortArr = () => {
+    const finalArr = list.reduce((acc, el) => {
+      const existingEl = acc.find((item) => item.price === el.price);
 
-    const existingItem = acc.find((item) => item.price === price);
+      if (existingEl) {
+        existingEl.count += el.count;
+      } else {
+        acc.push({ ...el, count: el.count });
+      }
 
-    if (existingItem) {
-      existingItem.count += count;
-    } else {
-      acc.push({ value, count, price });
-    }
+      return acc;
+    }, []);
 
-    return acc;
-  }, []);
-
-  console.log('sd', finalArr);
+    setFinalArr(finalArr);
+  };
 
   const handleSubmit = () => {
     setLoading(true);
@@ -68,12 +66,10 @@ const CheckoutSummary = ({ items, gym }) => {
     });
   };
 
-  console.log('groupedList', groupedList);
-
   useEffect(() => {
     if (sessionData?.user) {
       setIsFirstBooking(!sessionData.user.enter_code);
-      setFinalArr(groupedList);
+      sortArr();
       setLoadingPage(false);
     }
   }, [sessionData, isFirstBooking, list]);
