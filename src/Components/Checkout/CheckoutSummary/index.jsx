@@ -4,12 +4,14 @@ import Button from '@/Components/Button';
 import styles from './CheckoutSummary.module.scss';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-
+import { useDispatch } from 'react-redux';
 import { useMemo, useState, useEffect } from 'react';
 import { findPrice, createBooking, countValues, prepareDataForBooking } from './helpers';
 import CheckoutConfirm from '@/Components/Checkout/CheckoutConfirm';
+import { updateBookingVisitDate } from '@/redux/bookingSlice';
 
 const CheckoutSummary = ({ items, gym }) => {
+  const dispatch = useDispatch();
   const router = useRouter();
   const { data: sessionData } = useSession();
   const [canSubmit, setCanSubmit] = useState(false);
@@ -60,12 +62,12 @@ const CheckoutSummary = ({ items, gym }) => {
     createBooking(sessionData.user.accessToken, gym?.id, prepareDataForBooking(list)).then(({ data }) => {
       if (data?.payment_link) {
         router.push(data?.payment_link);
+        dispatch(updateBookingVisitDate([]));
       } else if (data?.status) {
         router.push('/lk/training');
       } else {
         setError(true);
       }
-      setLoading(false);
     });
   };
 
