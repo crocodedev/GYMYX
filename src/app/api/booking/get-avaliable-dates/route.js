@@ -11,6 +11,7 @@ export async function POST(request) {
           cache: 'no-store',
           headers: {
             'Content-Type': 'application/json',
+            Authorization: `Bearer ${requestData.token}`,
           },
         },
       );

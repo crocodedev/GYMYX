@@ -1,11 +1,11 @@
-const getAvailableDates = async (gym, month, year) => {
+const getAvailableDates = async (token, gym, month, year) => {
   const result = await fetch('/api/booking/get-avaliable-dates', {
     method: 'POST',
     cache: 'no-store',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ gym, month, year }),
+    body: JSON.stringify({token, gym, month, year }),
   });
 
   const response = await result.json();
@@ -13,13 +13,13 @@ const getAvailableDates = async (gym, month, year) => {
     return response;
   }
 };
-export const takeAvailableDatesTwoMonth = async (gym_id) => {
+export const takeAvailableDatesTwoMonth = async (token, gym_id) => {
   const currentDate = new Date();
   const currentMonth = currentDate.getMonth() + 1;
   const currentYear = currentDate.getFullYear();
 
-  const fetchCurrentMonthDates = getAvailableDates(gym_id, currentMonth, currentYear);
-  const fetchNextMonthDates = getAvailableDates(gym_id, currentMonth + 1, currentYear);
+  const fetchCurrentMonthDates = getAvailableDates(token, gym_id, currentMonth, currentYear);
+  const fetchNextMonthDates = getAvailableDates(token, gym_id, currentMonth + 1, currentYear);
   return Promise.all([fetchCurrentMonthDates, fetchNextMonthDates])
     .then(([currentMonthData, nextMonthData]) => {
       const combinedDates = [...currentMonthData?.data, ...nextMonthData?.data];
