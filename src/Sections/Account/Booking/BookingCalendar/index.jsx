@@ -11,6 +11,7 @@ import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
 import Loading from '@/Components/Loading';
 import { compareDates, takeAvailableDatesTwoMonth } from './helpers';
+import { useSession } from "next-auth/react";
 
 addLocale('ru', {
   firstDayOfWeek: 1,
@@ -44,6 +45,7 @@ const BookingCalendar = () => {
   const [dates, setDates] = useState([]);
   const router = useRouter();
   const [availableDates, setAvailableDates] = useState([]);
+  const { data: sessionData } = useSession();
 
   const handleSubmit = (url) => {
     dispatch(
@@ -83,10 +85,12 @@ const BookingCalendar = () => {
       setDates(visitDate);
     }
 
-    takeAvailableDatesTwoMonth(gym.id).then((data) => {
-      setAvailableDates(data);
-      setLoading(false);
-    });
+    if(sessionData?.user?.accessToken) {
+      takeAvailableDatesTwoMonth(sessionData.user.accessToken, gym.id).then((data) => {
+        setAvailableDates(data);
+        setLoading(false);
+      });
+    }
   }, [gym]);
 
   if (loading) {

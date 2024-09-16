@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { updateBookingData } from "@/redux/bookingSlice"
 import styles from "./BookingSignUpTags.module.scss"
 import { takeAvaliableTimesDay } from "./helpers"
+import { useSession } from "next-auth/react"
 
 const findIndexByValue = (data, searchValue) => {
   const foundIndex = data.findIndex((item) => item.value === searchValue)
@@ -14,6 +15,7 @@ const findIndexByValue = (data, searchValue) => {
 }
 
 const BookingSignUpTags = () => {
+  const { data: sessionData } = useSession();
   const dispatch = useDispatch()
   const { gym, currentDate, visitDate, loading } = useSelector(
     (state) => state.booking
@@ -28,15 +30,18 @@ const BookingSignUpTags = () => {
     if (index > -1) {
       setActiveTag(data[index])
       dispatch(updateBookingData({ loading: true }))
-      takeAvaliableTimesDay(gym?.id, data[index].value).then((data) => {
-        dispatch(
-          updateBookingData({
-            currentDate: index,
-            avaliableTimesCurrentDay: data || [],
-            loading: false,
-          })
-        )
-      })
+      if(sessionData?.user?.accessToken) {
+        takeAvaliableTimesDay(sessionData.user.accessToken, gym?.id, data[index].value)
+        .then((data) => {
+          dispatch(
+            updateBookingData({
+              currentDate: index,
+              avaliableTimesCurrentDay: data || [],
+              loading: false,
+            })
+          )
+        })
+      }
     }
   }
 
@@ -57,7 +62,9 @@ const BookingSignUpTags = () => {
 
   useEffect(()=>{
     dispatch(updateBookingData({ loading: true }))
-      takeAvaliableTimesDay(gym?.id,visitDate[currentDate].value).then((data) => {
+    if(sessionData.user.accessToken) {
+      takeAvaliableTimesDay(sessionData.user.accessToken, gym?.id,visitDate[currentDate].value)
+      .then((data) => {
         dispatch(
           updateBookingData({
             avaliableTimesCurrentDay: data || [],
@@ -65,6 +72,7 @@ const BookingSignUpTags = () => {
           })
         )
       })
+    }
   },[currentDate])
 
   useEffect(() => {
