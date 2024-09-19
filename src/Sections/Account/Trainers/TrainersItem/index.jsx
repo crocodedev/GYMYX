@@ -35,7 +35,7 @@ const TrainersItem = ({ data, className }) => {
       >
         <div className={styles['trainers-item__text-inner']}>
           <p className={styles['trainers-item__name']}>{data[0].value}</p>
-          <p className={styles['trainers-item__text']}>Стаж работы {data[2].value} лет</p>
+          <p className={styles['trainers-item__text']}>Стаж работы {data[2]?.value} лет</p>
         </div>
         <ul className={styles['trainers-item__more-list']}>
           {data[3].value.split(',').map((el, index) => (

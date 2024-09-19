@@ -38,15 +38,12 @@ const SECTION_MAP = {
 
 export default async function Home() {
   const { data } = await getData();
-  console.log(data)
 
   const sections = data.modules.map((section) => section);
 
   const SECTIONS_RENDER = sections
     ? sections.map(({ name, alias, fields }) => {
         if (alias != 'header' && alias != 'footer') {
-          if(alias == 'advantages')
-          console.log(fields)
           const SectionComponent = SECTION_MAP[alias];
           return <SectionComponent key={alias} alias={alias} fields={fields} />;
         }

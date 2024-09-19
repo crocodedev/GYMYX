@@ -22,6 +22,10 @@
     border-bottom-right-radius: 50px;
   }
 
+  &--alone {
+    border-radius: 50px;
+  }
+
   @include media-breakpoint-up(xl) {
     font-size: 22px;
     line-height: 26.82px;

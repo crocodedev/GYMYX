@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import AdvantagesItem from '../Advantages/AdvantagesItem';
 import SectionTitle from '../SectionTitle';
 import SliderControls from './SliderControls';
+import TrainreSlide from './TrainerSlide';
 import styles from './Slider.module.scss';
 import 'swiper/css';
 
@@ -48,7 +49,7 @@ const sliderPcSettings = {
   },
 };
 
-const Slider = ({ title, items }) => {
+const Slider = ({ title, items, name }) => {
   const [slider, setSlider] = useState();
   const [activeIndexSlide, setIndexActiveSlide] = useState(1);
   const [sliderSettings, setSliderSettings] = useState(null);
@@ -99,7 +100,8 @@ const Slider = ({ title, items }) => {
         >
           {items.map((item) => (
             <SwiperSlide key={item.id}>
-              <AdvantagesItem props={item} />
+              {name == 'trainers' ? <TrainreSlide props={item} /> : <AdvantagesItem props={item} />}
+              {/* <AdvantagesItem props={item} /> */}
             </SwiperSlide>
           ))}
         </Swiper>

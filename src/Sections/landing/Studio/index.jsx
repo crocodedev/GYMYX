@@ -8,7 +8,6 @@ import SectionTitle from '@/Components/SectionTitle';
 import { useEffect, useState } from 'react';
 
 const Studio = ({ alias, fields }) => {
-  console.log(fields)
   const [showStudio, setShowStudio] = useState(false);
   const title = fields.find((item) => item.name === 'title')?.value;
   const model = fields.find((item) => item.name === '3dmodel')?.value;
@@ -45,7 +44,9 @@ const Studio = ({ alias, fields }) => {
             <SectionTitle title={title} width="content"></SectionTitle>
             <div className={styles['studio__switcher']}>
               {switcherData.map((switcher, i) => {
-                const position = i == switcherData.length-1 ? 'right' : !i ? 'left' : null;
+                let position = null
+                if(switcherData.length == 1) position = 'alone'
+                else position = (i == switcherData.length-1) ? 'right' : !i ? 'left' : null;
                 return <Switcher 
                 active={switchActiveId == i} 
                 label={switcher.lable} 
@@ -55,13 +56,11 @@ const Studio = ({ alias, fields }) => {
               })}
             </div>
           </div>
-          {/* {showStudio ? <iframe src={model} frameborder="0" className={`${styles['studio__iframe']}`}></iframe> : null} */}
           <div className={`${styles['studio__content']}`}>
             {switcherData.map((switcher, i) => {
               return switcher.component == 'model' 
               ? showStudio ? <iframe src={model} frameborder="0" className={`${styles['studio__iframe']} ${i != switchActiveId ? styles['studio__iframe--hidden'] : ''}`}></iframe> : null
               : <iframe className={`${styles['studio__video']} ${i != switchActiveId ? styles['studio__video--hidden'] : ''}`} src="https://www.youtube.com/embed/dUP3_8I3MDo?si=Qjr494IoPvR0AcSq" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-              // : <p className={`${styles['studio__video']} ${i != switchActiveId ? styles['studio__video--hidden'] : ''}`}>Hello Video</p>
             })}
           </div>
         </div>
