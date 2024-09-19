@@ -44,6 +44,7 @@
 
   &__content {
     position: relative;
+
     @include media-breakpoint-down(sm) {
       height: 460px;
     }
@@ -78,8 +79,8 @@
  
   }
 
-  &__video {
-    color: #fff;
-    border: 1px solid #fff;
-  }
+  // &__video {
+  //   color: #fff;
+  //   border: 1px solid #fff;
+  // }
 }

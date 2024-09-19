@@ -1,22 +1,26 @@
 'use client';
 
 import styles from './Studio.module.scss';
-// import BorderLabel from '@/Components/BorderLabel';
 import Switcher from './Switcher'
 import Container from '@/Components/Container';
 import SectionTitle from '@/Components/SectionTitle';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 const Studio = ({ alias, fields }) => {
   const [showStudio, setShowStudio] = useState(false);
   const title = fields.find((item) => item.name === 'title')?.value;
   const model = fields.find((item) => item.name === '3dmodel')?.value;
+  const video = fields.find((item) => item.name === 'video')?.value;
   const [switchActiveId, setSwitchActiveId] = useState(0)
+  const [videoIsPlay, setVideoIsPlay] = useState(false)
+  const videoRef = useRef(null)
 
-  const switcherData = [
-    {lable: '3d model', component: 'model'},
-    {lable: 'видео', component: 'video'}
-  ]
+  console.log(model, video)
+
+  const data = [
+    {lable: '3d model', name: 'model', data: model},
+    {lable: 'видео', name: 'video', data: video},
+  ].filter(data => !!data.data)
 
   const showStudioFc = () => {
     if (window.scrollY >= document.querySelector('#studio').getBoundingClientRect().top - 300) {
@@ -28,6 +32,10 @@ const Studio = ({ alias, fields }) => {
 
   const setActiveSwitcher = (id) => {
     setSwitchActiveId(id)
+    if(videoRef) {
+      setVideoIsPlay(false)
+      videoRef.current.pause()
+    }
   }
 
   useEffect(() => {
@@ -43,24 +51,27 @@ const Studio = ({ alias, fields }) => {
           <div className={styles['studio__title-wrapper']}>
             <SectionTitle title={title} width="content"></SectionTitle>
             <div className={styles['studio__switcher']}>
-              {switcherData.map((switcher, i) => {
-                let position = null
-                if(switcherData.length == 1) position = 'alone'
-                else position = (i == switcherData.length-1) ? 'right' : !i ? 'left' : null;
-                return <Switcher 
-                active={switchActiveId == i} 
-                label={switcher.lable} 
-                position={position} 
-                id={i} 
-                setActive={setActiveSwitcher}/>
+              {data.map((switcher, i) => {
+                if(switcher?.data) {
+                  let position = null
+                  if(data.length == 1) position = 'alone'
+                  else position = (i == data.length-1) ? 'right' : !i ? 'left' : null;
+                  return (<Switcher 
+                  active={switchActiveId == i} 
+                  label={switcher.lable} 
+                  position={position} 
+                  id={i} 
+                  setActive={setActiveSwitcher}/>)
+                }
               })}
             </div>
           </div>
           <div className={`${styles['studio__content']}`}>
-            {switcherData.map((switcher, i) => {
-              return switcher.component == 'model' 
-              ? showStudio ? <iframe src={model} frameborder="0" className={`${styles['studio__iframe']} ${i != switchActiveId ? styles['studio__iframe--hidden'] : ''}`}></iframe> : null
-              : <iframe className={`${styles['studio__video']} ${i != switchActiveId ? styles['studio__video--hidden'] : ''}`} src="https://www.youtube.com/embed/dUP3_8I3MDo?si=Qjr494IoPvR0AcSq" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            {data.map((data, i) => {
+              if(data.name == 'model') return showStudio ? <iframe src={model} frameborder="0" className={`${styles['studio__iframe']} ${i != switchActiveId ? styles['studio__iframe--hidden'] : ''}`}></iframe> : null
+              if(data.name == 'video') return <video ref={videoRef} className={`${styles['studio__video']} ${i != switchActiveId ? styles['studio__video--hidden'] : ''}`} controls>
+                <source src={data.data} type="video/mp4"/>
+              </video>
             })}
           </div>
         </div>
