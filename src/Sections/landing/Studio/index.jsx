@@ -55,19 +55,20 @@ const Studio = ({ alias, fields }) => {
                   if(data.length == 1) position = 'alone'
                   else position = (i == data.length-1) ? 'right' : !i ? 'left' : null;
                   return (<Switcher 
-                  active={switchActiveId == i} 
-                  label={switcher.lable} 
-                  position={position} 
-                  id={i} 
-                  setActive={setActiveSwitcher}/>)
+                    key={i}
+                    active={switchActiveId == i} 
+                    label={switcher.lable} 
+                    position={position} 
+                    id={i} 
+                    setActive={setActiveSwitcher}/>)
                 }
               })}
             </div>
           </div>
           <div className={`${styles['studio__content']}`}>
             {data.map((data, i) => {
-              if(data.name == 'model') return showStudio ? <iframe src={model} frameborder="0" className={`${styles['studio__iframe']} ${i != switchActiveId ? styles['studio__iframe--hidden'] : ''}`}></iframe> : null
-              if(data.name == 'video') return <video ref={videoRef} className={`${styles['studio__video']} ${i != switchActiveId ? styles['studio__video--hidden'] : ''}`} controls>
+              if(data.name == 'model') return showStudio ? <iframe key={i} src={model} frameBorder="0" className={`${styles['studio__iframe']} ${i != switchActiveId ? styles['studio__iframe--hidden'] : ''}`}></iframe> : null
+              if(data.name == 'video') return <video key={i} ref={videoRef} className={`${styles['studio__video']} ${i != switchActiveId ? styles['studio__video--hidden'] : ''}`} controls>
                 <source src={data.data} type="video/mp4"/>
               </video>
             })}
