@@ -15,8 +15,6 @@ const Studio = ({ alias, fields }) => {
   const [videoIsPlay, setVideoIsPlay] = useState(false)
   const videoRef = useRef(null)
 
-  console.log(model, video)
-
   const data = [
     {lable: '3d model', name: 'model', data: model},
     {lable: 'видео', name: 'video', data: video},

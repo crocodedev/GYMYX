@@ -12,7 +12,7 @@ const TrainreSlide = ({ props }) => {
   const [videoIsPlay, setVideoIsPlay] = useState(false)
   const [detailsIsShow, setDetailsIsShow] = useState(false)
 
-  function playVideo(e) {
+  const playVideo = (e) => {
     e.stopPropagation()
     if(videoRef.current) {
       const video = videoRef.current
@@ -26,7 +26,7 @@ const TrainreSlide = ({ props }) => {
     }
   }
 
-  function detailsShow(e) {
+  const detailsShow = (e) => {
     e.stopPropagation()
     if(videoRef.current) {
       videoRef.current.pause()
@@ -35,6 +35,11 @@ const TrainreSlide = ({ props }) => {
     }
     setDetailsIsShow(true)
   }
+
+  const handleVideoEnd = () => {
+    setVideoIsPlay(false);
+    videoRef.current.load()
+  };
 
   return (
     <div className={styles['slide']}>
@@ -46,7 +51,7 @@ const TrainreSlide = ({ props }) => {
         </div>}
       <div className={styles['slide__img']}>
         {video 
-        ? <video ref={videoRef} className={styles['slide__video']} webkit-playsinline="" playsinline="" loop poster={image}>
+        ? <video ref={videoRef} className={styles['slide__video']} webkit-playsinline="" playsinline="" poster={image} onEnded={handleVideoEnd}>
             <source src={video} type="video/mp4"/>
           </video>
         : <Image src={image} width={500} height={800} quality={100} alt={fio} loading="lazy" />
@@ -67,7 +72,7 @@ const TrainreSlide = ({ props }) => {
               <li key={index}>{el}</li>
             ))}
         </ul>
-        <a href="#" className={styles['slide__btn']}>Записаться</a>
+        <a href="/lk/login" className={styles['slide__btn']}>Записаться</a>
       </div>
     </div>
   );

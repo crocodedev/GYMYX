@@ -10,7 +10,7 @@ const AdvantagesItem = ({ props }) => {
   const videoRef = useRef(null)
   const [videoIsPlay, setVideoIsPlay] = useState(false)
 
-  function playVideo(e) {
+  const playVideo = (e) => {
     e.stopPropagation()
     if(videoRef.current) {
       const video = videoRef.current
@@ -24,6 +24,11 @@ const AdvantagesItem = ({ props }) => {
     }
   }
 
+  const handleVideoEnd = () => {
+    setVideoIsPlay(false);
+    videoRef.current.load()
+  };
+
   return (
     <div className={styles['advantages-item']}>
       {video && 
@@ -34,7 +39,7 @@ const AdvantagesItem = ({ props }) => {
         </div>}
       <div className={styles['advantages-item__img']}>
         {video 
-        ? <video ref={videoRef} className={styles['advantages-item__video']} webkit-playsinline="" playsinline="" loop poster={image}>
+        ? <video ref={videoRef} className={styles['advantages-item__video']} webkit-playsinline="" playsinline="" poster={image} onEnded={handleVideoEnd}>
             <source src={video} type="video/mp4"/>
           </video>
         : <Image src={image} width={500} height={800} quality={100} alt={title} loading="lazy" />

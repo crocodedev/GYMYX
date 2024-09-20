@@ -3,11 +3,11 @@
 import styles from './EquipmentItem.module.scss';
 import Image from 'next/image';
 
-const EquipmentItem = ({ props }) => {
+const EquipmentItem = ({ props, id }) => {
   const { title, image, content } = props;
 
   return (
-    <div className={styles['equipment-item']}>
+    <div className={styles['equipment-item']} data-id={id} data-name={title}>
       <p className={styles['equipment-item__title']}>{title}</p>
       <div className={styles['equipment-item__image']}>
         <Image src={image} width={150} height={150} quality={100} alt={title} />

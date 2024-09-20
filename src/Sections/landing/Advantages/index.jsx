@@ -7,7 +7,7 @@ import styles from './Advantages.module.scss';
 const Advantages = ({ alias, fields }) => {
   const title = fields.find((item) => item.name === 'title');
   const list = fields.find((item) => item.name === 'list')?.childrens || [];
-  console.log(list)
+  
   const sortedList = list.sort((a, b) => {
     const aHasValidVideo = a.some(item => item.name === 'video' && item.value.trim() !== '');
     const bHasValidVideo = b.some(item => item.name === 'video' && item.value.trim() !== '');
