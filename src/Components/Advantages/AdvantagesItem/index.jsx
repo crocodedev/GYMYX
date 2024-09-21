@@ -17,11 +17,9 @@ const AdvantagesItem = ({ props }) => {
       const video = videoRef.current
       if(videoIsPlay) {
         video.pause()
-        setVideoIsPlay(false)
       } else {
         pauseAllVideo()
         video.play()
-        setVideoIsPlay(true)
       }
     }
   }
@@ -41,7 +39,7 @@ const AdvantagesItem = ({ props }) => {
         </div>}
       <div className={styles['advantages-item__img']}>
         {video 
-        ? <video ref={videoRef} className={styles['advantages-item__video']} playsInline webkit-playsinline poster={image} onEnded={handleVideoEnd} onPause={() => setVideoIsPlay(false)}>
+        ? <video ref={videoRef} className={styles['advantages-item__video']} playsInline webkit-playsinline poster={image} onEnded={handleVideoEnd} onPause={() => setVideoIsPlay(false)} onPlay={() => setVideoIsPlay(true)}>
             <source src={video} type="video/mp4"/>
           </video>
         : <Image src={image} width={500} height={800} quality={100} alt={title} loading="lazy" />

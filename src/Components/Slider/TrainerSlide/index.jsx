@@ -1,7 +1,7 @@
 'use client'
 
 import styles from './TrainerSlide.module.scss';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import Image from 'next/image';
 import { pauseAllVideo } from '@/Utils/video';
 
@@ -13,21 +13,14 @@ const TrainreSlide = ({ props }) => {
   const [videoIsPlay, setVideoIsPlay] = useState(false)
   const [detailsIsShow, setDetailsIsShow] = useState(false)
 
-  useEffect(() => {
-    
-  })
-
   const playVideo = (e) => {
     e.stopPropagation()
     if(videoRef.current) {
-      const video = videoRef.current
       if(videoIsPlay) {
-        video.pause()
-        setVideoIsPlay(false)
+        videoRef.current.pause()
       } else {
         pauseAllVideo()
-        video.play()
-        setVideoIsPlay(true)
+        videoRef.current.play()
       }
     }
   }
@@ -35,15 +28,16 @@ const TrainreSlide = ({ props }) => {
   const detailsShow = (e) => {
     e.stopPropagation()
     if(videoRef.current) {
-      videoRef.current.pause()
-      videoRef.current.load()
-      setVideoIsPlay(false)
+      if(videoIsPlay) {
+        videoRef.current.pause()
+        videoRef.current.load()
+        setVideoIsPlay(false)
+      }
     }
     setDetailsIsShow(true)
   }
 
   const handleVideoEnd = () => {
-    setVideoIsPlay(false);
     videoRef.current.load()
   };
 
@@ -57,7 +51,7 @@ const TrainreSlide = ({ props }) => {
         </div>}
       <div className={styles['slide__img']}>
         {video 
-        ? <video ref={videoRef} className={styles['slide__video']} playsInline webkit-playsinline poster={image} onEnded={handleVideoEnd} onPause={() => setVideoIsPlay(false)}>
+        ? <video ref={videoRef} className={styles['slide__video']} playsInline webkit-playsinline poster={image} onEnded={handleVideoEnd} onPause={() => setVideoIsPlay(false)} onPlay={() => setVideoIsPlay(true)}>
             <source src={video} type="video/mp4"/>
           </video>
         : <Image src={image} width={500} height={800} quality={100} alt={fio} loading="lazy" />
