@@ -68,7 +68,7 @@ const Studio = ({ alias, fields }) => {
           <div className={`${styles['studio__content']}`}>
             {data.map((data, i) => {
               if(data.name == 'model') return showStudio ? <iframe key={i} src={model} frameBorder="0" className={`${styles['studio__iframe']} ${i != switchActiveId ? styles['studio__iframe--hidden'] : ''}`}></iframe> : null
-              if(data.name == 'video') return <video key={i} ref={videoRef} className={`${styles['studio__video']} ${i != switchActiveId ? styles['studio__video--hidden'] : ''}`} controls>
+              if(data.name == 'video') return <video key={i} ref={videoRef} playsInline webkit-playsinline className={`${styles['studio__video']} ${i != switchActiveId ? styles['studio__video--hidden'] : ''}`} controls>
                 <source src={data.data} type="video/mp4"/>
               </video>
             })}
