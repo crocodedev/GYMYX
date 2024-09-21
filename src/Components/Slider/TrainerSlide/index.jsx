@@ -51,7 +51,7 @@ const TrainreSlide = ({ props }) => {
         </div>}
       <div className={styles['slide__img']}>
         {video 
-        ? <video ref={videoRef} className={styles['slide__video']} playsInline="" poster={image} onEnded={handleVideoEnd}>
+        ? <video ref={videoRef} className={styles['slide__video']} playsInline webkit-playsinline poster={image} onEnded={handleVideoEnd}>
             <source src={video} type="video/mp4"/>
           </video>
         : <Image src={image} width={500} height={800} quality={100} alt={fio} loading="lazy" />

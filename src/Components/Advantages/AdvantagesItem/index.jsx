@@ -39,7 +39,7 @@ const AdvantagesItem = ({ props }) => {
         </div>}
       <div className={styles['advantages-item__img']}>
         {video 
-        ? <video ref={videoRef} className={styles['advantages-item__video']} playsInline="" poster={image} onEnded={handleVideoEnd}>
+        ? <video ref={videoRef} className={styles['advantages-item__video']} playsInline webkit-playsinline poster={image} onEnded={handleVideoEnd}>
             <source src={video} type="video/mp4"/>
           </video>
         : <Image src={image} width={500} height={800} quality={100} alt={title} loading="lazy" />
