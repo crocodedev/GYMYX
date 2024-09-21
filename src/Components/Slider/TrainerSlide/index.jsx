@@ -1,8 +1,9 @@
 'use client'
 
 import styles from './TrainerSlide.module.scss';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
+import { pauseAllVideo } from '@/Utils/video';
 
 const TrainreSlide = ({ props }) => {
   const { image, fio, description, experience, directions, phone, video } = props;
@@ -12,6 +13,10 @@ const TrainreSlide = ({ props }) => {
   const [videoIsPlay, setVideoIsPlay] = useState(false)
   const [detailsIsShow, setDetailsIsShow] = useState(false)
 
+  useEffect(() => {
+    
+  })
+
   const playVideo = (e) => {
     e.stopPropagation()
     if(videoRef.current) {
@@ -20,6 +25,7 @@ const TrainreSlide = ({ props }) => {
         video.pause()
         setVideoIsPlay(false)
       } else {
+        pauseAllVideo()
         video.play()
         setVideoIsPlay(true)
       }
@@ -51,7 +57,7 @@ const TrainreSlide = ({ props }) => {
         </div>}
       <div className={styles['slide__img']}>
         {video 
-        ? <video ref={videoRef} className={styles['slide__video']} playsInline webkit-playsinline poster={image} onEnded={handleVideoEnd}>
+        ? <video ref={videoRef} className={styles['slide__video']} playsInline webkit-playsinline poster={image} onEnded={handleVideoEnd} onPause={() => setVideoIsPlay(false)}>
             <source src={video} type="video/mp4"/>
           </video>
         : <Image src={image} width={500} height={800} quality={100} alt={fio} loading="lazy" />

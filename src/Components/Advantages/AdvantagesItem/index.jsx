@@ -3,6 +3,7 @@
 import styles from './AdvantagesItem.module.scss';
 import { useRef, useState } from 'react';
 import Image from 'next/image';
+import { pauseAllVideo } from '@/Utils/video';
 
 const AdvantagesItem = ({ props }) => {
   const { image, title, text, alt, video } = props;
@@ -18,6 +19,7 @@ const AdvantagesItem = ({ props }) => {
         video.pause()
         setVideoIsPlay(false)
       } else {
+        pauseAllVideo()
         video.play()
         setVideoIsPlay(true)
       }
@@ -39,7 +41,7 @@ const AdvantagesItem = ({ props }) => {
         </div>}
       <div className={styles['advantages-item__img']}>
         {video 
-        ? <video ref={videoRef} className={styles['advantages-item__video']} playsInline webkit-playsinline poster={image} onEnded={handleVideoEnd}>
+        ? <video ref={videoRef} className={styles['advantages-item__video']} playsInline webkit-playsinline poster={image} onEnded={handleVideoEnd} onPause={() => setVideoIsPlay(false)}>
             <source src={video} type="video/mp4"/>
           </video>
         : <Image src={image} width={500} height={800} quality={100} alt={title} loading="lazy" />
