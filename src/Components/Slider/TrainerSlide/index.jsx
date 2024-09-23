@@ -57,7 +57,7 @@ const TrainreSlide = ({ props }) => {
         : <Image src={image} width={500} height={800} quality={100} alt={fio} loading="lazy" />
         }
       </div>
-      <div className={styles['slide__content']} onClick={playVideo}>
+      <div className={`${styles['slide__content']} ${videoIsPlay ? styles['slide__content--hidden'] : ''}`} onClick={playVideo}>
         <div className={`${styles['slide__content_inner']} ${videoIsPlay ? styles['slide__content_inner--hidden'] : ''}`}>
           <p className={styles['slide__name']}>{fio}</p>
           <p className={styles['slide__description']}>{description}</p>

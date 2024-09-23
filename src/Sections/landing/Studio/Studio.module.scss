@@ -71,16 +71,20 @@
     &--hidden {
       opacity: 0;
       visibility: hidden;
-      display: none;
     }
+  }
+
+  &__video {
+    left: 50%;
+    margin: 0 auto;
+    max-width: 1400px;
+    object-fit: cover;
+    border-radius: 35px;
+    transform: translateX(-50%);
+    // border: 1px solid #fff;
   }
 
   &__iframe {
  
   }
-
-  // &__video {
-  //   color: #fff;
-  //   border: 1px solid #fff;
-  // }
 }

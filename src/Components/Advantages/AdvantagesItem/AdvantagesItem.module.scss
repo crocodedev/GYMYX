@@ -135,6 +135,15 @@
     flex-direction: column;
     height: 100%;
     justify-content: flex-end;
+  }
+
+  &__content_inner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 100%;
+    transition: 0.3s;
 
     @include media-breakpoint-down(md) {
       padding: 18px;
@@ -152,6 +161,11 @@
       padding: 40px;
     }
 
+    &--hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+
     &::after {
       content: '';
       position: absolute;
@@ -163,20 +177,6 @@
       width: 100%;
       height: 100%;
       z-index: -1;
-    }
-  }
-
-  &__content_inner {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    height: 100%;
-    transition: 0.3s;
-
-    &--hidden {
-      opacity: 0;
-      visibility: hidden;
     }
   }
 
