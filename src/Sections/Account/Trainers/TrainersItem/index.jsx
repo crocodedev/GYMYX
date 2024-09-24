@@ -5,6 +5,7 @@ import styles from './TrainersItem.module.scss';
 import Button from '@/Components/Button';
 import Image from 'next/image';
 import BtnPlay from '@/Components/Video/BtnPlay';
+import { pauseAllVideo } from '@/Utils/video';
 
 const TrainersItem = ({ data, className }) => {
   const fio = data.find((field) => field.name === 'fio');
@@ -20,8 +21,10 @@ const TrainersItem = ({ data, className }) => {
   const [showMore, setShowMore] = useState(false);
   const [videoIsPlay, setVideoIsPlay] = useState(false)
 
-  const handleShow = () => {
-    setShowMore((prev) => !prev);
+  const handleShow = (e) => {
+    e.stopPropagation()
+    if(videoRef.current) showMore && videoRef.current.pause()
+    setShowMore(!showMore);
   };
 
   const handleClick = (event) => {
@@ -32,33 +35,37 @@ const TrainersItem = ({ data, className }) => {
     videoRef.current.load()
   }
 
+  const handlerVideoPlay = () => {
+    if(videoRef.current) {
+      pauseAllVideo()
+      !videoIsPlay && videoRef.current.play()
+    }
+  }
+
   const formattedPhoneNumber = phone.value.replace(/^(\+\d)(\d{3})(\d{3})(\d{2})(\d{2})$/, '$1 $2 $3 $4 $5');
 
   return (
     <div className={className}>
-      <div className={styles['trainers-item__img-wrapper']}>
-        {/* <BtnPlay/> */}
-        {/* {video 
-        ? <video ref={videoRef} className={styles['advantages-item__video']} playsInline webkit-playsinline poster={image} onEnded={handleVideoEnd} onPause={() => setVideoIsPlay(false)} onPlay={() => setVideoIsPlay(true)}>
-            <source src={video} type="video/mp4"/>
+      {video.value && <BtnPlay zindex={4} isShow={!videoIsPlay} handlerClick={handlerVideoPlay}/>}
+      
+      <div className={styles['trainers-item__img-wrapper']} >
+        {video.value 
+        ? <video ref={videoRef} className={styles['trainers-item__img']} playsInline poster={image.value} onEnded={handleVideoEnd} onPause={() => setVideoIsPlay(false)} onPlay={() => setVideoIsPlay(true)}>
+            <source src={video.value} type="video/mp4"/>
           </video>
-        : <Image src={image} width={500} height={800} quality={100} alt={title} loading="lazy" />
-        } */}
-
-        <Image className={styles['trainers-item__img']} width={500} height={800} src={image.value} alt={description.value} quality={100} loading="lazy" />
-        {/* <img src={image.value} alt={description.value} className={styles['trainers-item__img']} /> */}
+        : <Image className={styles['trainers-item__img']} src={image.value} width={500} height={800} quality={100} alt={fio.value} loading="lazy" />
+        }
       </div>
-      <div className={styles['trainers-item__text-wrapper']}>
-        <div className={styles['trainers-item__text-inner']}>
+
+      <div className={`${styles['trainers-item__text-wrapper']} ${videoIsPlay ? styles['trainers-item__text-wrapper--hidden'] : ''}`} onClick={handlerVideoPlay}>
+        <div className={`${styles['trainers-item__text-inner']} ${videoIsPlay ? styles['trainers-item__text-inner--hidden'] : ''}`}>
           <p className={styles['trainers-item__name']}>{fio.value}</p>
           <p className={styles['trainers-item__text']}>{description.value}</p>
         </div>
         <Button size="sl" label="Подробнее" fullSize={true} onClick={handleShow} disabledShadow={true}></Button>
       </div>
-      <div
-        className={showMore ? styles['trainers-item__more-wrapper--active'] : styles['trainers-item__more-wrapper']}
-        onClick={handleShow}
-      >
+
+      <div className={showMore ? styles['trainers-item__more-wrapper--active'] : styles['trainers-item__more-wrapper']} onClick={handleShow}>
         <div className={styles['trainers-item__text-inner']}>
           <p className={styles['trainers-item__name']}>{fio.value}</p>
           <p className={styles['trainers-item__text']}>Стаж работы {experience?.value} лет</p>

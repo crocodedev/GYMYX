@@ -2,14 +2,13 @@
 
 .btn {
     position: absolute;
+    // z-index: 3;
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 1;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 10;
     border-radius: 50%;
     border: none;
     background: #294AE7;
