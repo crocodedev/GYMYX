@@ -46,10 +46,10 @@ const TrainersItem = ({ data, className }) => {
 
   return (
     <div className={className}>
-      {video.value && <BtnPlay zindex={4} isShow={!videoIsPlay} handlerClick={handlerVideoPlay}/>}
-      
+      {video?.value && <BtnPlay zindex={4} isShow={!videoIsPlay} handlerClick={handlerVideoPlay}/>}
+
       <div className={styles['trainers-item__img-wrapper']} >
-        {video.value 
+        {video?.value 
         ? <video ref={videoRef} className={styles['trainers-item__img']} playsInline poster={image.value} onEnded={handleVideoEnd} onPause={() => setVideoIsPlay(false)} onPlay={() => setVideoIsPlay(true)}>
             <source src={video.value} type="video/mp4"/>
           </video>
