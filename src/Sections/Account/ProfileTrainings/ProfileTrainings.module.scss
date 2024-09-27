@@ -4,6 +4,7 @@
   position: relative;
 
   &__wrapper {
+    display: flex;
     position: relative;
     background: var(--blue-gradient-diagonal, linear-gradient(108deg, #294ae7 0%, #0d2dc8 100%));
 
@@ -23,9 +24,19 @@
     }
   }
 
+  &__content {
+    flex: content
+  }
+
+  &__asside {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: space-between;
+  }
+
   &__object {
     position: absolute;
-
     bottom: 0;
 
     @include media-breakpoint-down(sm) {
@@ -59,7 +70,6 @@
   }
 
   &__btn {
-    position: absolute;
     display: flex;
     cursor: pointer;
 
@@ -91,7 +101,32 @@
     }
   }
 
-  &__content {
+  &__btn-transfer {
+    color: #fff;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition: 0.3s;
+
+    @include media-breakpoint-down(lg) {
+      width: 15px;
+      height: 15px;
+    }
+
+    @include media-breakpoint-between(lg, xxl) {
+      width: 25px;
+      height: 25px;
+    }
+
+    @include media-breakpoint-up(xxl) {
+      width: 35px;
+      height: 35px;
+    }
+
+    &--disabled {
+      pointer-events: none;
+      opacity: 0.5;
+    }
   }
 
   &__date {

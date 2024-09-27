@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { updateBookingData } from "@/redux/bookingSlice"
 import styles from "./BookingSignUpTags.module.scss"
 import { takeAvaliableTimesDay } from "./helpers"
+import { takeAvaliableTimesToLine } from "./helpers"
 import { useSession } from "next-auth/react"
 
 const findIndexByValue = (data, searchValue) => {
@@ -14,12 +15,11 @@ const findIndexByValue = (data, searchValue) => {
   return foundIndex !== -1 ? foundIndex : false
 }
 
-const BookingSignUpTags = () => {
+const BookingSignUpTags = ({change = false}) => {
   const { data: sessionData } = useSession();
   const dispatch = useDispatch()
-  const { gym, currentDate, visitDate, loading } = useSelector(
-    (state) => state.booking
-  )
+  const { gym, currentDate, visitDate, loading } = useSelector((state) => state.booking)
+  const { oldId } = useSelector((state) => state.transfer)
   const [activeTag, setActiveTag] = useState({})
   const [data, setData] = useState([])
 
@@ -30,17 +30,31 @@ const BookingSignUpTags = () => {
     if (index > -1) {
       setActiveTag(data[index])
       dispatch(updateBookingData({ loading: true }))
+
       if(sessionData?.user?.accessToken) {
-        takeAvaliableTimesDay(sessionData.user.accessToken, gym?.id, data[index].value)
-        .then((data) => {
-          dispatch(
-            updateBookingData({
-              currentDate: index,
-              avaliableTimesCurrentDay: data || [],
-              loading: false,
-            })
-          )
-        })
+        if(change) {
+          takeAvaliableTimesToLine(sessionData.user.accessToken, oldId, data[index].value)
+          .then((data) => {
+            dispatch(
+              updateBookingData({
+                currentDate: index,
+                avaliableTimesCurrentDay: data || [],
+                loading: false,
+              })
+            )
+          })
+        } else {
+          takeAvaliableTimesDay(sessionData.user.accessToken, gym?.id, data[index].value)
+          .then((data) => {
+            dispatch(
+              updateBookingData({
+                currentDate: index,
+                avaliableTimesCurrentDay: data || [],
+                loading: false,
+              })
+            )
+          })
+        }
       }
     }
   }
@@ -62,16 +76,29 @@ const BookingSignUpTags = () => {
 
   useEffect(()=>{
     dispatch(updateBookingData({ loading: true }))
-    if(sessionData.user.accessToken) {
-      takeAvaliableTimesDay(sessionData.user.accessToken, gym?.id,visitDate[currentDate].value)
-      .then((data) => {
-        dispatch(
-          updateBookingData({
-            avaliableTimesCurrentDay: data || [],
-            loading: false,
-          })
-        )
-      })
+    if(sessionData?.user?.accessToken) {
+
+      if(change) {
+        takeAvaliableTimesToLine(sessionData.user.accessToken, oldId, visitDate[currentDate].value)
+        .then((data) => {
+          dispatch(
+            updateBookingData({
+              avaliableTimesCurrentDay: data || [],
+              loading: false,
+            })
+          )
+        })
+      } else {
+        takeAvaliableTimesDay(sessionData.user.accessToken, gym?.id, visitDate[currentDate].value)
+        .then((data) => {
+          dispatch(
+            updateBookingData({
+              avaliableTimesCurrentDay: data || [],
+              loading: false,
+            })
+          )
+        })
+      }
     }
   },[currentDate])
 

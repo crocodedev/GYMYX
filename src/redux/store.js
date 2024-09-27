@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit"
 import bookingReducer from "./bookingSlice"
+import transferSlice from "./transferTrainingData"
 import { combineReducers } from "redux"
 import storage from "redux-persist/lib/storage"
 import {
@@ -14,6 +15,7 @@ import {
 
 const reducers = combineReducers({
   booking: bookingReducer,
+  transfer: transferSlice,
 })
 
 const persistConfig = {

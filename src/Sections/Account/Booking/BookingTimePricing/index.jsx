@@ -9,17 +9,23 @@ import { updateBookingVisitDate } from '@/redux/bookingSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import { checkData, prepareVisitDateWithTime } from './helpers';
+import { useSession } from 'next-auth/react';
+import { transferTraining } from './helpers';
 
-const BookingTimePricing = ({ variants = [] }) => {
+const BookingTimePricing = ({ variants = [], change = false, setModaldata }) => {
   const dispatch = useDispatch();
   const { visitDate, currentDate, loading } = useSelector((state) => state.booking);
+  const { oldId } = useSelector((state) => state.transfer);
   const [data, setData] = useState([]);
-  const router = useRouter();
   const [canSubmit, setCanSubmit] = useState(false);
+  const { data: sessionData } = useSession();
+  const router = useRouter();
 
   const handleChangeData = (value) => {
+    console.log(value)
     if (!data.includes(value)) {
-      setData([...data, value]);
+      if(change) setData([value]);
+      else setData([...data, value]);
     } else {
       const tempData = data.filter((item) => item !== value);
       setData(tempData);
@@ -27,7 +33,34 @@ const BookingTimePricing = ({ variants = [] }) => {
   };
 
   const handleSubmit = () => {
-    router.push('/lk/checkout');
+    if(change) {
+      const value = visitDate[0].value
+      const time = visitDate[0].time[0]
+      if(value) {
+        const avalibleData = (num) => num > 9 ? num : '0'+num 
+        const date = `${value.getFullYear()}-${avalibleData(value.getMonth()+1)}-${value.getDate()}`
+        transferTraining(sessionData.user.accessToken, oldId, date, time)
+        .then(res => {
+          if(res?.data?.message === "Practice has been rescheduled") {
+            setModaldata((prevData) => ({
+              ...prevData,
+              text: 'Ваша тренировка успешно перенесена!',
+              isShow: true
+            }))
+          } else {
+            setModaldata((prevData) => ({
+              ...prevData,
+              text: 'Что то пошло не так, попробуйте позже =(',
+              isShow: true
+            }))
+          }
+        })
+      }
+    }
+    else {
+      router.push('/lk/checkout');
+    }
+    
   };
 
   useEffect(() => {

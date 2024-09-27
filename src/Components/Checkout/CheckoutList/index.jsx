@@ -35,6 +35,7 @@ const CheckoutList = ({ items }) => {
                 time={timeZome}
                 gymTitle={gym?.name}
                 address={gym?.address}
+                transferIsShow={false}
               />
             );
           });

@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Loading from '@/Components/Loading';
 import { compareDates, takeAvailableDatesTwoMonth } from './helpers';
 import { useSession } from "next-auth/react";
+import { setTrainingData } from '@/redux/transferTrainingData';
 
 addLocale('ru', {
   firstDayOfWeek: 1,
@@ -38,23 +39,29 @@ addLocale('ru', {
   clear: 'Очистить',
 });
 
-const BookingCalendar = () => {
+const BookingCalendar = ({change = false}) => {
   const [loading, setLoading] = useState(true);
   const { gym, visitDate, variant } = useSelector((state) => state.booking);
+  const { date } = useSelector((state) => state.transfer);
   const dispatch = useDispatch();
   const [dates, setDates] = useState([]);
   const router = useRouter();
   const [availableDates, setAvailableDates] = useState([]);
   const { data: sessionData } = useSession();
 
-  const handleSubmit = (url) => {
-    dispatch(
-      updateBookingData({
-        visitDate: [...dates]?.sort(compareDates),
-        currentDate: 0,
-      }),
-    );
-    router.push(url);
+  const handleSubmit = () => {
+      dispatch(
+        updateBookingData({
+          visitDate: [...dates]?.sort(compareDates),
+          currentDate: 0,
+        }),
+      );
+
+    if(change) {
+      router.push('/lk/booking/change-trainitg/change-time');
+    } else {
+      router.push('/lk/booking/sign-up/choose-time');
+    }
   };
 
   const handleAddDate = (e) => {
@@ -68,13 +75,17 @@ const BookingCalendar = () => {
       }
     };
 
-    const newDates = value.map((valueItem) => {
+    let newDates = value.map((valueItem) => {
       const time = getTime(valueItem);
       return {
         value: valueItem,
         time: time?.time || [],
       };
     });
+
+    if(change) {
+      newDates = (newDates.at(-1)) ? [newDates.at(-1)] : []
+    }
 
     setDates(newDates);
   };
@@ -113,7 +124,7 @@ const BookingCalendar = () => {
           enabledDates={availableDates}
         />
         <Button
-          onClick={() => handleSubmit('/lk/booking/sign-up/choose-time')}
+          onClick={handleSubmit}
           disabled={!dates.length}
           fullSize={true}
           variant="blue"
