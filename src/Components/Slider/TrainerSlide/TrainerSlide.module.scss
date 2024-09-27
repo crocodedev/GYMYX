@@ -296,7 +296,8 @@
     z-index: 100;
     width: 100%;
     height: 100%;
-    background: linear-gradient(260deg, rgba(13,45,200,1) 45%, rgba(41,74,231,1) 100%);
+    // background: linear-gradient(260deg, rgba(13,45,200,1) 45%, rgba(41,74,231,1) 100%);
+    background: #294AE7;
     transition: 0.3s;
 
     @include media-breakpoint-down(md) {
@@ -324,16 +325,22 @@
     font-weight: 600;
     color: #fff;
 
-    @include media-breakpoint-up(xxl) {
+    @include media-breakpoint-up(xxxl) {
       font-size: 40px;
       line-height: 45px;
       margin-bottom: 13px;
     }
 
+    @include media-breakpoint-between(xxl, xxxl) {
+      font-size: 34px;
+      line-height: 45px;
+      margin-bottom: 10px;
+    }
+
     @include media-breakpoint-between(xl, xxl) {
       font-size: 28px;
       line-height: 34px;
-      margin-bottom: 10px;
+      margin-bottom: 5px;
     }
 
     @include media-breakpoint-between(lg, xl) {
@@ -347,21 +354,51 @@
       line-height: 18px;
       margin-bottom: 8px;
     }
+
+    // @include media-breakpoint-down(lg) {
+    //   font-size: 24px;
+    //   line-height: 28px;
+    //   margin-bottom: 8px;
+    // }
+
+    // @include media-breakpoint-between(lg, xl) {
+    //   font-size: 36px;
+    //   line-height: 38px;
+    //   margin-bottom: 10px;
+    // }
+
+    // @include media-breakpoint-between(xl, xxxl) {
+    //   font-size: 38px;
+    //   line-height: 45px;
+    //   margin-bottom: 10px;
+    // }
+
+    // @include media-breakpoint-up(xxxl) {
+    //   font-size: 50px;
+    //   line-height: 58px;
+    //   margin-bottom: 13px;
+    // }
   }
 
   &__details_experience {
     font-weight: 500;
     color: #fff;
 
-    @include media-breakpoint-up(xxl) {
+    @include media-breakpoint-up(xxxl) {
       font-size: 26px;
       line-height: 35px;
       margin-bottom: 31px;
     }
 
+    @include media-breakpoint-between(xxl, xxxl) {
+      font-size: 22px;
+      line-height: 28px;
+      margin-bottom: 22px;
+    }
+
     @include media-breakpoint-between(xl, xxl) {
-      font-size: 20px;
-      line-height: 25px;
+      font-size: 18px;
+      line-height: 22px;
       margin-bottom: 20px;
     }
 
@@ -372,10 +409,33 @@
     }
 
     @include media-breakpoint-down(lg) {
-      font-size: 16px;
+      font-size: 15px;
       line-height: 18px;
       margin-bottom: 10px;
     }
+    // @include media-breakpoint-down(sm) {
+    //   font-size: 12px;
+    //   line-height: 14px;
+    //   margin-bottom: 10px;
+    // }
+
+    // @include media-breakpoint-between(sm, md) {
+    //   font-size: 16px;
+    //   line-height: 18px;
+    //   margin-bottom: 10px;
+    // }
+
+    // @include media-breakpoint-between(md, xxxl) {
+    //   font-size: 20px;
+    //   line-height: 27px;
+    //   margin-bottom: 20px;
+    // }
+
+    // @include media-breakpoint-up(xxxl) {
+    //   font-size: 26px;
+    //   line-height: 35px;
+    //   margin-bottom: 31px;
+    // }
   }
 
   &__details_directions {
@@ -387,15 +447,21 @@
       font-weight: 500;
       color: #fff;
 
-      @include media-breakpoint-up(xxl) {
-        font-size: 28px;
+      @include media-breakpoint-up(xxxl) {
+        font-size: 30px;
         line-height: 36px;
+        margin-bottom: 13px;
+      }
+
+      @include media-breakpoint-between(xxl, xxxl) {
+        font-size: 24px;
+        line-height: 28px;
         margin-bottom: 13px;
       }
 
       @include media-breakpoint-between(xl, xxl) {
         font-size: 20px;
-        line-height: 25px;
+        line-height: 24px;
         margin-bottom: 10px;
       }
 
@@ -410,6 +476,30 @@
         line-height: 19px;
         margin-bottom: 8px;
       }
+
+      // @include media-breakpoint-down(sm) {
+      //   font-size: 12px;
+      //   line-height: 14px;
+      //   margin-bottom: 8px;
+      // }
+  
+      // @include media-breakpoint-between(sm, md) {
+      //   font-size: 16px;
+      //   line-height: 18px;
+      //   margin-bottom: 10px;
+      // }
+  
+      // @include media-breakpoint-between(md, xxxl) {
+      //   font-size: 20px;
+      //   line-height: 27px;
+      //   margin-bottom: 10px;
+      // }
+  
+      // @include media-breakpoint-up(xxxl) {
+      //   font-size: 26px;
+      //   line-height: 35px;
+      //   margin-bottom: 13px;
+      // }
     }
   }
 }
