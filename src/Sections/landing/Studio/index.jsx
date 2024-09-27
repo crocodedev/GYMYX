@@ -16,7 +16,7 @@ const Studio = ({ alias, fields }) => {
   const videoRef = useRef(null)
 
   const data = [
-    {lable: '3d model', name: 'model', data: model},
+    {lable: '3d модель', name: 'model', data: model},
     {lable: 'видео', name: 'video', data: video},
   ].filter(data => !!data.data)
 
