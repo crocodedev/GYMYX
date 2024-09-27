@@ -10,7 +10,7 @@ const EquipmentItem = ({ props, id }) => {
     <div className={styles['equipment-item']} data-id={id} data-name={title}>
       <p className={styles['equipment-item__title']}>{title}</p>
       <div className={styles['equipment-item__image']}>
-        <Image src={image} width={150} height={150} quality={100} alt={title} />
+        <Image src={image} width={400} height={400} quality={100} alt={title} />
       </div>
       <div id="equipment-item__modal" className={styles['equipment-item__content']}>
         {content}
