@@ -39,11 +39,7 @@ const ChooseTime = () => {
     if (gym?.prices && sessionData) {
       let variantsTemp = [];
 
-      if (sessionData.user.enter_code) {
-        variantsTemp = gym.prices.map((item, index) => {
-          return { ...item, bgColor: variants[index]?.bgColor };
-        });
-      } else {
+      if (sessionData.user.is_new) {
         if (!checkIsOnlyTraining(visitDate)) {
           variantsTemp = gym.prices.map((item, index) => {
             return { ...item, bgColor: variants[index]?.bgColor };
@@ -58,6 +54,10 @@ const ChooseTime = () => {
             },
           ];
         }
+      } else {
+        variantsTemp = gym.prices.map((item, index) => {
+          return { ...item, bgColor: variants[index]?.bgColor };
+        });
       }
       setPricesVariants(variantsTemp);
     }
