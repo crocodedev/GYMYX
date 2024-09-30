@@ -4,20 +4,28 @@
   position: relative;
 
   &__wrapper {
-    display: grid;
+    display: flex;
 
     @include media-breakpoint-down(lg) {
       margin-top: 20px;
+      flex-direction: column;
+      gap: 20px;
     }
 
-    @include media-breakpoint-up(lg) {
+    @include media-breakpoint-between(lg, xxxl) {
+      margin-top: 30px;
+      gap: 30px;
+    }
+
+    @include media-breakpoint-up(xxxl) {
       margin-top: 40px;
+      gap: 40px;
     }
 
-    &:not(.one-child) {
-      @include media-breakpoint-up(md) {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
+    // &:not(.one-child) {
+    //   @include media-breakpoint-up(md) {
+    //     grid-template-columns: repeat(2, 1fr);
+    //   }
+    // }
   }
 }
