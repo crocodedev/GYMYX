@@ -87,6 +87,7 @@ const Slider = ({ title, items, name }) => {
             handlePrevSlide={prevSlide}
             activeSlide={activeIndexSlide}
             countSlides={slider?.slides?.length}
+            isShowCount={false}
           />
         )}
       </div>

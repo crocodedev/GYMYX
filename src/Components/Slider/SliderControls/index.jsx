@@ -1,17 +1,20 @@
 import styles from './SliderControls.module.scss';
 
-const SliderControls = ({ handlePrevSlide, handleNextSlide, activeSlide, countSlides, isTrainers }) => {
+const SliderControls = ({ handlePrevSlide, handleNextSlide, activeSlide, countSlides, isTrainers, isShowCount = true }) => {
   return (
     <div className={styles['slider-controls']}>
-      {isTrainers ? (
-        <p className={styles['slider-controls__counter-trainers']}>
-          {activeSlide}/{countSlides}
-        </p>
-      ) : (
-        <p className={styles['slider-controls__counter']}>
-          {activeSlide}/{countSlides}
-        </p>
-      )}
+      {isShowCount && 
+        (isTrainers ? (
+          <p className={styles['slider-controls__counter-trainers']}>
+            {activeSlide}/{countSlides}
+          </p>
+        ) : (
+          <p className={styles['slider-controls__counter']}>
+            {activeSlide}/{countSlides}
+          </p>
+        ))
+      }
+      
 
       <div className={styles['slider-controls__btns']}>
         {isTrainers ? (
