@@ -12,7 +12,7 @@ import TrainersItem from '../TrainersItem';
 import { getTrainersData } from '@/app/lk/trainers/page';
 import PageHeading from '../../PageHeading';
 
-const TrainersSlider = () => {
+const TrainersSlider = ({isShowVideo = false}) => {
   const [dataTrainers, setDataTrainers] = useState();
   const [slider, setSlider] = useState();
   const [activeIndexSlide, setIndexActiveSlide] = useState(1);
@@ -120,14 +120,14 @@ const TrainersSlider = () => {
         >
           {dataTrainers.map((dataTrainers, index) => (
             <SwiperSlide className={styles['trainers-item']} key={dataTrainers[0].value}>
-              <TrainersItem data={dataTrainers} key={index} />
+              <TrainersItem data={dataTrainers} key={index} isShowVideo={isShowVideo}/>
             </SwiperSlide>
           ))}
         </Swiper>
       ) : (
         <div className={styles['trainers-slider__items']}>
           {dataTrainers.map((dataTrainers, index) => (
-            <TrainersItem key={index} className={styles['trainers-item']} data={dataTrainers} />
+            <TrainersItem key={index} className={styles['trainers-item']} data={dataTrainers} isShowVideo={isShowVideo}/>
           ))}
         </div>
       )}

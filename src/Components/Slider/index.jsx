@@ -87,6 +87,7 @@ const Slider = ({ title, items, name }) => {
             handlePrevSlide={prevSlide}
             activeSlide={activeIndexSlide}
             countSlides={slider?.slides?.length}
+            isShowCount={false}
           />
         )}
       </div>
@@ -101,7 +102,6 @@ const Slider = ({ title, items, name }) => {
           {items.map((item) => (
             <SwiperSlide key={item.id}>
               {name == 'trainers' ? <TrainreSlide props={item} /> : <AdvantagesItem props={item} />}
-              {/* <AdvantagesItem props={item} /> */}
             </SwiperSlide>
           ))}
         </Swiper>

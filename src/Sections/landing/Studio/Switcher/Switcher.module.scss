@@ -1,6 +1,7 @@
 @import '@/styles/mixins.scss';
 
 .switcher {
+  font-family: inherit;
   font-weight: 600;
   border: none;
   color: #fff;
@@ -26,7 +27,7 @@
     border-radius: 50px;
   }
 
-  @include media-breakpoint-up(xl) {
+  @include media-breakpoint-up(xxl) {
     font-size: 22px;
     line-height: 26.82px;
     min-width: 211px;
