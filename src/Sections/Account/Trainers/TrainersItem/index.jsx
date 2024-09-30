@@ -7,7 +7,7 @@ import Image from 'next/image';
 import BtnPlay from '@/Components/Video/BtnPlay';
 import { pauseAllVideo } from '@/Utils/video';
 
-const TrainersItem = ({ data, className }) => {
+const TrainersItem = ({ data, className, isShowVideo = false }) => {
   const fio = data.find((field) => field.name === 'fio');
   const description = data.find((field) => field.name === 'description');
   const experience = data.find((field) => field.name === 'experience');
@@ -46,10 +46,10 @@ const TrainersItem = ({ data, className }) => {
 
   return (
     <div className={className}>
-      {video?.value && <BtnPlay zindex={4} isShow={!videoIsPlay} handlerClick={handlerVideoPlay}/>}
+      {(video?.value && isShowVideo) && <BtnPlay zindex={4} isShow={!videoIsPlay} handlerClick={handlerVideoPlay}/>}
 
       <div className={styles['trainers-item__img-wrapper']} >
-        {video?.value 
+        {(video?.value && isShowVideo)
         ? <video ref={videoRef} className={styles['trainers-item__img']} playsInline poster={image.value} onEnded={handleVideoEnd} onPause={() => setVideoIsPlay(false)} onPlay={() => setVideoIsPlay(true)}>
             <source src={video.value} type="video/mp4"/>
           </video>
