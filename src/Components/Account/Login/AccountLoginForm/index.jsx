@@ -32,12 +32,7 @@ const AccountLoginForm = ({ handleToogleModal }) => {
 
   useEffect(() => {
     if (session.status === 'authenticated') {
-      let url = '';
-      if (session?.data?.user?.full_name) {
-        url = '/lk/profile';
-      } else {
-        url = '/lk/login/create-profile';
-      }
+      let url = session?.data?.user?.full_name ? '/lk/profile' : '/lk/login/create-profile'
       router.push(url);
     }
   }, [session.status]);

@@ -20,6 +20,10 @@ const BookingVariants = () => {
     router.push(url);
   };
 
+  const handlerPurchasinPackage = (url) => {
+    router.push(url);
+  }
+
   return (
     <section className={styles['booking-variants']}>
       <Container>
@@ -32,7 +36,7 @@ const BookingVariants = () => {
             variant="white"
           />
           <BookingVariantsItem
-            onClick={() => handleChooseVariant('/lk/booking/sign-up', 'multiple')}
+            onClick={() => handleChooseVariant('/lk/booking/purchasing-package', 'multiple')}
             tagLabel={'тренировки на балансе'}
             title={'Выбрать пакет тренировок'}
             variant="black"

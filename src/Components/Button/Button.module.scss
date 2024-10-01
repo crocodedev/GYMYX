@@ -83,6 +83,11 @@
     }
   }
 
+  &-blue-gradient {
+    color: #fff;
+    background: linear-gradient(270deg, #0d2dc8 25%, #294ae7 100%);
+  }
+
   &-black {
     background: linear-gradient(90deg, #353a40 0%, #212428 99.9%);
     color: white;
@@ -100,7 +105,7 @@
     // }
   }
 
-  &:not(.button-blue):not(.button-black) {
+  &:not(.button-blue):not(.button-black):not(.button-blue-gradient ) {
     &:hover {
       background: #ffffffbf;
       transition: 0.3s ease;

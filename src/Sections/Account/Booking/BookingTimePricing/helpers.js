@@ -34,15 +34,7 @@ export const transferTraining = async (token, line, date, time) => {
 };
 
 export const takeAvaliableTimesToLine = async (token, line, date, time) => {
-  // const currentDate = new Date(date);
-  // const currentDay = currentDate.getDate();
-  // const currentMonth = currentDate.getMonth() + 1;
-  // const currentYear = currentDate.getFullYear();
-
   const fetchCurrentDayTimes = transferTraining(token, line, date, time);
 
-  return fetchCurrentDayTimes.then(({ data }) => {
-    
-    return data
-  });
+  return fetchCurrentDayTimes.then(({ data }) => data);
 };

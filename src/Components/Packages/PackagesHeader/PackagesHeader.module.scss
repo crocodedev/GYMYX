@@ -1,0 +1,41 @@
+@import '/src/styles/mixins.scss';
+
+.package-header {
+  @include media-breakpoint-up(xxxl) {
+    margin-bottom: 35px;
+  }
+
+  @include media-breakpoint-between(lg, xxxl) {
+    margin-bottom: 30px;
+  }
+
+  @include media-breakpoint-between(sm, lg) {
+    margin-bottom: 25px;
+  }
+
+  @include media-breakpoint-down(sm) {
+    margin-bottom: 20px;
+  }
+
+  &__items {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    @include media-breakpoint-up(xxxl) {
+      gap: 35px;
+    }
+
+    @include media-breakpoint-between(lg, xxxl) {
+      gap: 30px;
+    }
+
+    @include media-breakpoint-between(sm, lg) {
+      gap: 25px;
+    }
+    
+    @include media-breakpoint-down(sm) {
+      gap: 10px;
+    }
+  }
+}
