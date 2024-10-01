@@ -33,7 +33,7 @@ const checkIsOnlyTraining = (data) => {
   return result;
 };
 
-const changeTime = () => {
+const ChangeTime = () => {
   const { data: sessionData } = useSession();
   const { gym, visitDate } = useSelector((state) => state.booking);
   const [pricesVariants, setPricesVariants] = useState([]);
@@ -102,4 +102,4 @@ const changeTime = () => {
   );
 };
 
-export default changeTime;
+export default ChangeTime;

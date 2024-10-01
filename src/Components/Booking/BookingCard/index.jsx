@@ -1,3 +1,5 @@
+'use client'
+
 import { formatDate, formatTime } from "@/Utils/helpers";
 import styles from "./BookingCard.module.scss";
 import { useEffect, useState } from "react";

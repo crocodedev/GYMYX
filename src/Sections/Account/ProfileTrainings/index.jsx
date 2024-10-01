@@ -135,7 +135,7 @@ const ProfileTrainings = ({isShowTranfer = false}) => {
           <div className={styles['profile-trainings__wrapper']}>
             <div className={styles['profile-trainings__content']}>
               <div className={styles['profile-trainings__object']}>
-                <img src="/icons/icon.svg" />
+                <img src="/icons/icon.svg" alt="icon"/>
               </div>
               <div className={styles['profile-trainings__content']}>
                 <div className={styles['profile-trainings__date']}>
