@@ -6,6 +6,9 @@ import BookingSignUpContent from '@/Sections/Account/Booking/BookingSignUpConten
 import BookingSteps from '@/Sections/Account/Booking/BookingSteps';
 import NavigationBack from '@/Sections/Account/NavigationBack';
 import BookingTimePricing from '@/Sections/Account/Booking/BookingTimePricing';
+import Modal from '@/Components/Modal';
+import Button from '@/Components/Button';
+import { useRouter } from 'next/navigation';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
@@ -30,10 +33,21 @@ const checkIsOnlyTraining = (data) => {
   return result;
 };
 
-const ChooseTime = () => {
+const ChangeTime = () => {
   const { data: sessionData } = useSession();
   const { gym, visitDate } = useSelector((state) => state.booking);
   const [pricesVariants, setPricesVariants] = useState([]);
+  const [modalData, setModalData] = useState({
+    text: 'Ваша тренировка успешно перенесена!',
+    isShow: false
+  })
+  const router = useRouter()
+
+  console.log(visitDate)
+
+  const hanglerModalButtonClick = () => {
+    router.push('/lk/workouts')
+  }
 
   useEffect(() => {
     if (gym?.prices && sessionData) {
@@ -65,15 +79,27 @@ const ChooseTime = () => {
 
   return (
     <>
-      <NavigationBack buttonLabel={'Вернуться к выбору дней'} link={'/lk/booking/sign-up'} />
-      <BookingSignUpHeading showButtonEditGym={false} headingTitle={'Купить несколько тренировок'} />
-      <BookingSignUpTags change={false}/>
+    {modalData.isShow && (
+        <Modal handleClose={() => {}} text={modalData.text}>
+          <Button
+            onClick={hanglerModalButtonClick}
+            fullSize={modalData.isShow}
+            size="l"
+            label="К тренировкам"
+            variant="blue"
+            disabledShadow={true}
+          />
+        </Modal>
+      )}
+      <NavigationBack buttonLabel={'Вернуться к выбору дней'} link={'/lk/booking/change-trainitg'} />
+      <BookingSignUpHeading showButtonEditGym={false} headingTitle={'Купить тренировоку'}/>
+      <BookingSignUpTags change={true}/>
       <BookingSignUpContent>
-        <BookingTimePricing variants={pricesVariants} />
+        <BookingTimePricing variants={pricesVariants} change={true} setModaldata={setModalData}/>
         <BookingSteps stepNumber={2} stepTitle={'Выберите время'} />
       </BookingSignUpContent>
     </>
   );
 };
 
-export default ChooseTime;
+export default ChangeTime;

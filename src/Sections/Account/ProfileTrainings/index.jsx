@@ -11,14 +11,21 @@ import Loading from '@/Components/Loading';
 import { formatDate, formatTime } from '@/Utils/helpers';
 import Modal from '@/Components/Modal';
 import Button from '@/Components/Button';
+import { useDispatch } from 'react-redux';
+import { resetTrainingData, setTrainingData } from '@/redux/transferTrainingData';
+import { updateBookingVisitDate } from '@/redux/bookingSlice';
+import { useRouter } from 'next/navigation';
 
-const ProfileTrainings = () => {
+const ProfileTrainings = ({isShowTranfer = false}) => {
   const { data: sessionData } = useSession();
   const [closestTraining, setClosestTraining] = useState(null);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [curIdItem, setCurIdItem] = useState(null);
   const [loadingDelete, setLoadingDelete] = useState(false);
+  const [transferIsActive, setTransferIsActive] = useState(false)
+  const dispatch = useDispatch()
+  const router = useRouter()
 
   useEffect(() => {
     updateData();
@@ -47,9 +54,11 @@ const ProfileTrainings = () => {
             const dateA = parseDateTime(a.date, a.time);
             const dateB = parseDateTime(b.date, b.time);
             return dateA - dateB;
-          });
+          })
 
         const closestTraining = sortedData[0];
+        console.log(closestTraining)
+        setTransferIsActive(!isDifferenceMoreThan4Hours(closestTraining.date, closestTraining.time))
 
         setClosestTraining(closestTraining);
       }
@@ -82,6 +91,26 @@ const ProfileTrainings = () => {
     handleDeleteItem(curIdItem);
   };
 
+  const handlerClickChange = (id, date, time) => {
+    dispatch(resetTrainingData())
+    console.log(id, date, time) 
+    if (!sessionData?.user?.accessToken) return;
+
+    dispatch(updateBookingVisitDate({ visitDate: {value: "", time: []}}));
+    dispatch(setTrainingData({oldId: id, oldDate:  date, oldTime: time}))
+    router.push(`/lk/booking/change-trainitg`)
+  }
+
+  const isDifferenceMoreThan4Hours = (dateStr, timeStr) => { 
+    console.log(dateStr, timeStr)
+    const dateTime = new Date(`${dateStr}T${timeStr}`);
+    const nowTime = new Date();
+  
+    const differenceInMs = dateTime - nowTime;
+    const differenceInHours = differenceInMs / (1000 * 60 * 60);
+    return (differenceInHours < 4)
+  }
+
   if (loading) return <Loading full_screen={true} background={true} />;
   if (!closestTraining) return;
 
@@ -104,21 +133,37 @@ const ProfileTrainings = () => {
       <section className={styles['profile-trainings']}>
         <Container size="M">
           <div className={styles['profile-trainings__wrapper']}>
-            <div className={styles['profile-trainings__object']}>
-              <img src="/icons/icon.svg" />
-            </div>
-            <div className={styles['profile-trainings__btn']} onClick={() => handleClickItem(closestTraining?.id)}>
-              <img src="/icons/cross.svg" alt="" />
-            </div>
             <div className={styles['profile-trainings__content']}>
-              <div className={styles['profile-trainings__date']}>
-                <p className={styles['profile-trainings__date-value']}>{formatDate(closestTraining.date)}</p>
-                <div className={styles['profile-trainings__date-time']}>{formatTime(closestTraining.time)}</div>
+              <div className={styles['profile-trainings__object']}>
+                <img src="/icons/icon.svg" alt="icon"/>
               </div>
-              <div className={styles['profile-trainings__col']}>
-                <p className={styles['profile-trainings__title']}>{closestTraining?.gym?.name || ''}</p>
-                <p className={styles['profile-trainings__text']}>{closestTraining?.gym?.address || ''}</p>
+              <div className={styles['profile-trainings__content']}>
+                <div className={styles['profile-trainings__date']}>
+                  <p className={styles['profile-trainings__date-value']}>{formatDate(closestTraining.date)}</p>
+                  <div className={styles['profile-trainings__date-time']}>{formatTime(closestTraining.time)}</div>
+                </div>
+                <div className={styles['profile-trainings__col']}>
+                  <p className={styles['profile-trainings__title']}>{closestTraining?.gym?.name || ''}</p>
+                  <p className={styles['profile-trainings__text']}>{closestTraining?.gym?.address || ''}</p>
+                </div>
               </div>
+            </div>
+            <div className={styles['profile-trainings__asside']}>
+              <div className={styles['profile-trainings__btn']} onClick={() => handleClickItem(closestTraining?.id)}>
+                <img src="/icons/cross.svg" alt="" />
+              </div>
+              {isShowTranfer && 
+              (
+                <button className={`${styles["profile-trainings__btn-transfer"]} 
+                  ${!transferIsActive ? styles["profile-trainings__btn-transfer--disabled"] : ''}`} type='button'
+                  onClick={() => handlerClickChange(closestTraining?.id, closestTraining.date, closestTraining?.time)}
+                  >
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 41 42" fill="none">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M26.1544 13.8711L32.7932 12.521C29.1039 8.1411 23.1224 5.97812 17.187 7.44409C11.5897 8.82654 7.45871 13.0842 5.97807 18.256L1.79057 17.3083C3.62283 10.6052 8.93363 5.06642 16.159 3.28186C23.701 1.41908 31.3013 4.14769 36.0142 9.6889L34.7777 1.5299L38.4868 0.967804L40.5779 14.7661L26.9019 17.5473L26.1544 13.8711ZM15.2122 27.1571L8.73444 29.1662C12.4077 33.6877 18.4854 35.9441 24.5157 34.4547C30.1129 33.0722 34.2439 28.8146 35.7246 23.6427L39.9121 24.5905C38.0798 31.2936 32.769 36.8324 25.5437 38.6169C18.0826 40.4597 10.5644 37.8091 5.84114 32.3873L7.86568 40.2985L4.2314 41.2285L0.771484 27.7083L14.1009 23.5741L15.2122 27.1571Z" fill="currentColor"/>
+                  </svg>
+                </button>
+              )}
+              
             </div>
           </div>
         </Container>

@@ -16,3 +16,33 @@ export const checkData = (data) => {
 
     return status
 }
+
+export const transferTraining = async (token, line, date, time) => {
+  const result = await fetch('/api/booking/transfer-training', {
+    cache: 'no-store',
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({token, line, date, time }),
+  });
+
+    const response = await result.json();
+    if (!response.error) {
+      return response;
+    }
+};
+
+export const takeAvaliableTimesToLine = async (token, line, date, time) => {
+  // const currentDate = new Date(date);
+  // const currentDay = currentDate.getDate();
+  // const currentMonth = currentDate.getMonth() + 1;
+  // const currentYear = currentDate.getFullYear();
+
+  const fetchCurrentDayTimes = transferTraining(token, line, date, time);
+
+  return fetchCurrentDayTimes.then(({ data }) => {
+    
+    return data
+  });
+};

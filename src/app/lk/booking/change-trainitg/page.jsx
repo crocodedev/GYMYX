@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 import BookingSignUpContent from '@/Sections/Account/Booking/BookingSignUpContent';
 import { useState } from 'react';
 
-const BookingSignUp = () => {
+const BookingChangeTraining = () => {
   const [showModal, setShowModal] = useState(false);
   const { gym, variant } = useSelector((state) => state.booking);
 
@@ -30,14 +30,14 @@ const BookingSignUp = () => {
       <BookingSignUpHeading
         handleChangeGym={() => setShowModal((prev) => !prev)}
         gymTitle={gym?.name}
-        headingTitle={variant === 'single' ? 'Записаться на тренировку' : 'Купить несколько тренировок'}
+        headingTitle={'Записаться на тренировку'}
       />
       <BookingSignUpContent>
-        <BookingCalendar change={false}/>
+        <BookingCalendar change={true}/>
         <BookingSteps stepNumber={1} stepTitle={'Выберите день'} />
       </BookingSignUpContent>
     </>
   );
 };
 
-export default BookingSignUp;
+export default BookingChangeTraining;

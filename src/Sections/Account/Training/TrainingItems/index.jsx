@@ -11,6 +11,7 @@ const TrainingItems = ({
   selectedDate,
   handleDeleteItem,
   handleUpdateDate,
+  handlerChangeTraining,
   deleteItem,
   handleShow,
   token,
@@ -41,6 +42,7 @@ const TrainingItems = ({
               isSingle={archive}
               older={archive}
               onClickDelete={() => handleDeleteItem(id)}
+              onClickChangeTraining={handlerChangeTraining}
               key={id}
               date={date}
               time={time}

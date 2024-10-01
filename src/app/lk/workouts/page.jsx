@@ -1,7 +1,12 @@
 'use client';
 
 import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { setTrainingData, resetTrainingData } from '@/redux/transferTrainingData';
+
+// import { useSelector } from 'react-redux';
 
 import PageHeading from '@/Sections/Account/PageHeading';
 import NavigationTabs from '@/Sections/Account/NavigationTabs';
@@ -12,6 +17,7 @@ import Loading from '@/Components/Loading';
 import { formatDate } from '@/Utils/helpers';
 import Modal from '@/Components/Modal';
 import Button from '@/Components/Button';
+import { updateBookingVisitDate } from '@/redux/bookingSlice';
 
 import { cancelBooking, canDelete } from '@/Sections/Account/ProfileTrainings/helpers';
 
@@ -52,6 +58,8 @@ const Training = () => {
   const [showModal, setShowModal] = useState(false);
   const [currentItemId, setCurrentItemId] = useState(null);
   const [loadingDelete, setLoadingDelete] = useState(false);
+  const router = useRouter();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     updateDate();
@@ -74,6 +82,16 @@ const Training = () => {
       }) || [],
     );
   }, [selectedTab, allTrainingsDates]);
+
+  const changeTraining = (oldId, oldDate, oldTime) => {
+    dispatch(resetTrainingData())
+    console.log(oldId, oldDate, oldTime) 
+    if (!sessionData?.user?.accessToken) return;
+
+    dispatch(updateBookingVisitDate({ visitDate: {value: "", time: []}}));
+    dispatch(setTrainingData({oldId, oldDate, oldTime}))
+    router.push(`/lk/booking/change-trainitg`)
+  }
 
   const updateDate = () => {
     if (!sessionData?.user?.accessToken) return;
@@ -177,6 +195,7 @@ const Training = () => {
             token={sessionData?.user?.accessToken}
             handleUpdateDate={updateDate}
             handleDeleteItem={handleShow}
+            handlerChangeTraining={changeTraining}
             selectedDate={selectedDate}
             archive={selectedTab === 1}
             items={sortedTrainingsDates}
