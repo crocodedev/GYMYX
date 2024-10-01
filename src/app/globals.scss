@@ -74,6 +74,10 @@ a {
   text-decoration: none;
 }
 
+button {
+  font-family: inherit;
+}
+
 .booking-calendar__calendar {
   @include media-breakpoint-down(xl) {
     margin-bottom: 20px;

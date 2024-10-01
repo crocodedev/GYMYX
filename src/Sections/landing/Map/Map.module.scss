@@ -13,7 +13,8 @@
 
   &__wrapper {
     display: grid;
-    background: rgba(255, 255, 255, 0.09);
+    // background-color: #ffffff17;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.09) 10%, rgba(255, 255, 255, 0.015) 100%);
     box-shadow: 0px 0px 27px 30px rgba(22, 23, 26, 0.3);
 
     @include media-breakpoint-down(md) {
