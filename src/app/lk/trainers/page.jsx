@@ -1,5 +1,3 @@
-import { useSession } from 'next-auth/react';
-import Loading from '@/Components/Loading';
 import Container from '@/Components/Container';
 import TrainersSlider from '@/Sections/Account/Trainers/TrainersSlider';
 
@@ -18,7 +16,7 @@ const Trainings = async () => {
   return (
     <section className="trainers-page-wrapper">
       <Container>
-        <TrainersSlider />
+        <TrainersSlider isShowVideo={false}/>
       </Container>
     </section>
   );

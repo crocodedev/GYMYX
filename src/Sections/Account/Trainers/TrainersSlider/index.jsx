@@ -12,7 +12,7 @@ import TrainersItem from '../TrainersItem';
 import { getTrainersData } from '@/app/lk/trainers/page';
 import PageHeading from '../../PageHeading';
 
-const TrainersSlider = () => {
+const TrainersSlider = ({isShowVideo = false}) => {
   const [dataTrainers, setDataTrainers] = useState();
   const [slider, setSlider] = useState();
   const [activeIndexSlide, setIndexActiveSlide] = useState(1);
@@ -69,12 +69,22 @@ const TrainersSlider = () => {
     setSlider(e);
   };
 
+  const sortForVideo = (data) => {
+    return data.sort((a, b) => {
+      const aHasValidVideo = a.some(item => item.name === 'video' && item.value.trim() !== '');
+      const bHasValidVideo = b.some(item => item.name === 'video' && item.value.trim() !== '');
+      if (aHasValidVideo && !bHasValidVideo) return -1;
+      if (!aHasValidVideo && bHasValidVideo) return 1;
+      return 0;
+    });
+  }
+
   useEffect(() => {
     const isMobile = window.matchMedia('(max-width: 992px)').matches;
     isMobile ? handleInit : setSliderSettings(sliderPcSettings);
 
     getTrainersData().then((dataTrainers) => {
-      setDataTrainers(dataTrainers.data.modules[0].fields[0]);
+      setDataTrainers(sortForVideo(dataTrainers.data.modules[0].fields[0].childrens));
       setLoading(false);
     });
   }, []);
@@ -108,16 +118,16 @@ const TrainersSlider = () => {
           mousewheel={true}
           {...sliderSettings}
         >
-          {dataTrainers.childrens.map((dataTrainers, index) => (
+          {dataTrainers.map((dataTrainers, index) => (
             <SwiperSlide className={styles['trainers-item']} key={dataTrainers[0].value}>
-              <TrainersItem data={dataTrainers} key={index} />
+              <TrainersItem data={dataTrainers} key={index} isShowVideo={isShowVideo}/>
             </SwiperSlide>
           ))}
         </Swiper>
       ) : (
         <div className={styles['trainers-slider__items']}>
-          {dataTrainers.childrens.map((dataTrainers, index) => (
-            <TrainersItem key={index} className={styles['trainers-item']} data={dataTrainers} />
+          {dataTrainers.map((dataTrainers, index) => (
+            <TrainersItem key={index} className={styles['trainers-item']} data={dataTrainers} isShowVideo={isShowVideo}/>
           ))}
         </div>
       )}
