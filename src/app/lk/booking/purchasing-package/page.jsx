@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import BookingSignUpHeading from "@/Sections/Account/Booking/BookingSignUpHeading"
 import NavigationBack from "@/Sections/Account/NavigationBack"
@@ -9,7 +9,7 @@ import { useState } from "react"
 import { useSelector } from "react-redux"
 import Loading from "@/Components/Loading"
 
-const purchasingPackages = () => {
+const PurchasingPackages = () => {
   const [showModal, setShowModal] = useState(false)
   const { gym } = useSelector((state) => state.booking);
   const [loadIsShow, setLoadIsShow] = useState(true)
@@ -41,4 +41,4 @@ const purchasingPackages = () => {
   )
 }
 
-export default purchasingPackages
+export default PurchasingPackages
