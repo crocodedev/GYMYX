@@ -12,7 +12,7 @@ import { checkData, prepareVisitDateWithTime } from './helpers';
 import { useSession } from 'next-auth/react';
 import { transferTraining } from './helpers';
 
-const BookingTimePricing = ({ variants = [], change = false, setModaldata, setBalence, balance }) => {
+const BookingTimePricing = ({ variants = [], change = false, setModaldata }) => {
   const dispatch = useDispatch();
   const { visitDate, currentDate, loading } = useSelector((state) => state.booking);
   const { oldId } = useSelector((state) => state.transfer);
@@ -68,12 +68,6 @@ const BookingTimePricing = ({ variants = [], change = false, setModaldata, setBa
     updatedVisitDate[currentDate] = result;
     dispatch(updateBookingVisitDate(updatedVisitDate));
     setCanSubmit(checkData(updatedVisitDate));
-
-    // console.log(visitDate)
-
-    // if(sessionData?.user?.balance) {
-    //   setBalence((sessionData?.user?.balance - data.length))
-    // }
   }, [data]);
 
   useEffect(() => {

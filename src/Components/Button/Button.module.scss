@@ -88,21 +88,19 @@
     background: linear-gradient(270deg, #0d2dc8 25%, #294ae7 100%);
   }
 
+  &-ligt-blue-gradient {
+    color: #fff;
+    background: linear-gradient(270deg, #5871E8 45%, #7B92FF 100%);
+  }
+
+  &-black-gradient {
+    color: #fff;
+    background: linear-gradient(270deg, #212428 30%, #353A40 100%);
+  }
+
   &-black {
     background: linear-gradient(90deg, #353a40 0%, #212428 99.9%);
     color: white;
-    // transition: all 0.3s ease;
-
-    // &:hover {
-    //   background: linear-gradient(90deg, #20426c 0%, #212428 99.9%);
-
-    //   transition: 0.3s ease;
-    // }
-
-    // &:active {
-    //   background: #3d434a;
-    //   transition: 0.3s ease;
-    // }
   }
 
   &:not(.button-blue):not(.button-black):not(.button-blue-gradient ) {

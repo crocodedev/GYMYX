@@ -14,6 +14,7 @@ const BookingSignUp = () => {
   const { data: sessionData } = useSession();
   const [showModal, setShowModal] = useState(false);
   const { gym, variant } = useSelector((state) => state.booking);
+  const balance = sessionData?.user?.balance || 0
 
   return (
     <>
@@ -36,7 +37,7 @@ const BookingSignUp = () => {
       />
       <BookingSignUpContent>
         <BookingCalendar change={false}/>
-        <BookingSteps stepNumber={1} stepTitle={'Выберите день'} balance={sessionData?.user?.balance}/>
+        <BookingSteps stepNumber={1} stepTitle={'Выберите день'} balance={balance} packageIsActive={balance > 0}/>
       </BookingSignUpContent>
     </>
   );

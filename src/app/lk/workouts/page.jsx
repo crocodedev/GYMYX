@@ -154,8 +154,11 @@ const Training = () => {
 
   const deleteBookingItem = (id) => {
     if (canDelete(sortedTrainingsDates)) {
-      cancelBooking(sessionData.user.accessToken, id).then((data) => {
-        if (data.data.status) {
+      console.log(sessionData.user.accessToken, id)
+      cancelBooking(sessionData.user.accessToken, id)
+      .then((data) => {
+        console.log(data)
+        if (data?.data?.status) {
           updateDate();
           setLoadingDelete(false);
           handleShow();

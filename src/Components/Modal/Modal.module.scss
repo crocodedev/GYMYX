@@ -59,7 +59,8 @@
 
     @include media-breakpoint-up(xxxl) {
       padding: 40px 40px 46px 40px;
-      max-width: 584px;
+      // max-width: 584px;
+      width: max-content;
       border-radius: 30px;
     }
   }

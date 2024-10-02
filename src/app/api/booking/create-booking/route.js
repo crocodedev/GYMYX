@@ -6,6 +6,7 @@ export async function POST(request) {
 
       const requestBody = {
         gym_id: requestData.gym_id,
+        with_balance: requestData.with_balance,
         lines: requestData.lines,
       };
 

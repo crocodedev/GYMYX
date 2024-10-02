@@ -1,11 +1,11 @@
-export async function createBooking(token, gym_id, items) {
+export async function createBooking(token, gym_id, with_balance, items) {
   const result = await fetch('/api/booking/create-booking', {
     method: 'POST',
     cache: 'no-store',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ token, gym_id, lines: items }),
+    body: JSON.stringify({ token, gym_id, with_balance, lines: items }),
   });
 
   const response = await result.json();
@@ -77,4 +77,36 @@ export function prepareDataForBooking(arr) {
   });
 
   return result;
+}
+
+export const fun = (arr, balance) => {
+  let finalTraining = {
+    paid: [],
+    not_paid: []
+  }
+
+  const paid = [];
+  const not_paid = [];
+
+  arr.forEach(item => {
+    if (balance >= item.count) {
+      // Если баланс позволяет оплатить все count
+      finalTraining.paid.push(item);
+      balance -= item.count; // Уменьшаем баланс на оплаченные count
+    } else {
+      // Если баланс меньше, чем count
+      if (balance > 0) {
+        // Добавляем в paid столько, сколько позволяет баланс
+        finalTraining.paid.push({ ...item, count: balance });
+      }
+      
+      // Добавляем остаток в not_paid
+      const remainingCount = item.count - balance;
+      finalTraining.not_paid.push({ ...item, count: remainingCount });
+      balance = 0;
+    }
+  });
+  console.log(finalTraining)
+
+  return finalTraining
 }

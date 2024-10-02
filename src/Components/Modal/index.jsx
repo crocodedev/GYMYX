@@ -19,7 +19,7 @@ const Modal = ({ handleClose, text, children }) => {
         className={styles.modal__backdrop}
       ></div>
       <div className={styles.modal__wrapper}>
-        <p className={styles.modal__text}>{text}</p>
+        {text && (<p className={styles.modal__text}>{text}</p>)}
         <div className={styles.modal__controls}>{children}</div>
       </div>
     </div>

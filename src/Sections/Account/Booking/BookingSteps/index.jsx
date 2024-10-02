@@ -1,7 +1,7 @@
 import styles from "./BookingSteps.module.scss"
 import BorderLabel from "@/Components/BorderLabel"
 
-const BookingSteps = ({ stepNumber, stepTitle, balance }) => {
+const BookingSteps = ({ stepNumber, stepTitle, balance, packageIsActive = false }) => {
   return (
   <div className={styles['wrapper']}>
     <div className={styles["booking-steps"]}>
@@ -10,8 +10,8 @@ const BookingSteps = ({ stepNumber, stepTitle, balance }) => {
           <p className={styles["booking-steps__text"]}>{stepTitle}</p>
         </div>
       </div>
-    {balance > 0 && (
-      <BorderLabel label={`баланс тренировок: ${balance}`}/>
+    {packageIsActive && (
+      <BorderLabel label={`баланс тренировок: ${(balance > 0) ? balance : 0}`}/>
     )}
   </div>
   )
