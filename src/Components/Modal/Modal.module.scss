@@ -39,11 +39,13 @@
     width: 100%;
 
     @include media-breakpoint-down(md) {
-      max-width: 80%;
+      max-width: 93%;
+      // width: max-content;
     }
 
     @include media-breakpoint-between(md, xl) {
-      max-width: 350px;
+      // max-width: 350px;
+      width: max-content;
     }
 
     @include media-breakpoint-down(xl) {
@@ -52,7 +54,8 @@
     }
 
     @include media-breakpoint-between(xl, xxxl) {
-      max-width: 432px;
+      // max-width: 432px;
+      width: max-content;
       padding: 30px;
       border-radius: 22px;
     }

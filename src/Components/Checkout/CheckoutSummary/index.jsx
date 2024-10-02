@@ -10,6 +10,7 @@ import { findPrice, createBooking, countValues, prepareDataForBooking, fun } fro
 import CheckoutConfirm from '@/Components/Checkout/CheckoutConfirm';
 import { getUserData } from '@/Utils/updateDataUser';
 import Modal from '@/Components/Modal';
+import Loading from '@/Components/Loading';
 
 const CheckoutSummary = ({ items, gym, isActivePackage = 0 }) => {
   const router = useRouter();
@@ -21,13 +22,14 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0 }) => {
   const [list, setList] = useState([]);
   const [finalArr, setFinalArr] = useState([]);
   const [isFirstBooking, setIsFirstBooking] = useState();
-  const [modalData, setModalDdata] = useState({
+  const [modalData, setModalData] = useState({
     type: '', // successful, confirm, crowded
     isShow: false,
     text: '',
   })
   const balance = sessionData?.user?.balance || 0
   const [paidData, setPaidData] = useState({})
+  const [isLoad, setIsLoad] = useState(false)
 
   const totalPrice = useMemo(() => {
     let total = 0;
@@ -84,7 +86,7 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0 }) => {
     const countTrainint = finalArr.reduce((acc, el) => acc + (el?.count || 0), 0)
 
     if(countTrainint > balance) {
-      setModalDdata(prev => ({
+      setModalData(prev => ({
         ...prev,
         type: 'crowded',
         isShow: true,
@@ -96,7 +98,7 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0 }) => {
       : countTrainint > 1 && countTrainint <= 4 
       ? 'тренировки' 
       : 'тренировок'} с баланса?`
-      setModalDdata(prev => ({
+      setModalData(prev => ({
         ...prev,
         type: 'confirm',
         isShow: true,
@@ -113,7 +115,7 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0 }) => {
   }
 
   const closeModal = () => {
-    setModalDdata(prev => ({
+    setModalData(prev => ({
       ...prev,
       isShow: false,
     }))
@@ -133,7 +135,8 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0 }) => {
     <>
     {modalData.isShow && sessionData && (
       <Modal text={modalData.text} handleClose={closeModal}>
-        {ModalInner(modalData.type, sessionData.user.accessToken, gym, paidData, setModalDdata, update)}
+        {isLoad && <Loading full_screen={true}/>}
+        {ModalInner(modalData.type, sessionData.user.accessToken, gym, paidData, setModalData, setIsLoad)}
       </Modal>
     )}
     
@@ -187,10 +190,9 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0 }) => {
 export default CheckoutSummary;
 
 
-function ModalInner(type, token, gym, trainingsObj, setModalDdata, updateSession) {
+function ModalInner(type, token, gym, trainingsObj, setModalData, setIsLoad) {
   const router = useRouter()
   const totalPrice = trainingsObj.not_paid.reduce((acc, el) => acc + el.price * el.count, 0)
-  const totalBalance = trainingsObj.paid.reduce((acc, el) => acc + el.count, 0)
 
   console.log(trainingsObj)
 
@@ -198,22 +200,42 @@ function ModalInner(type, token, gym, trainingsObj, setModalDdata, updateSession
     router.push('/lk/workouts')
   }
 
-  const paymentByBalance = () => {
+  const paymentFullByBalance = () => {
+    setIsLoad(true)
     createBooking(token, gym?.id, true, prepareDataForBooking(trainingsObj.paid))
     .then(({data}) => {
       console.log(data)
       if(data?.payment_link) {
-        getUserData(token).then(data => {
-          if(data) updateSession(data)
-          goToWorcouts()
-        })
-        
+        setModalData(prev => ({
+          ...prev,
+          type: 'successful',
+          isShow: true,
+          text: 'Спасибо за покупку!',
+        }))
       }
+      setIsLoad(false)
     })
   } 
 
+  const paymentByBalance = () => {
+    setIsLoad(true)
+    createBooking(token, gym?.id, true, prepareDataForBooking(trainingsObj.paid))
+    .then(({data}) => {
+      console.log(data)
+      if(data?.payment_link) {
+          createBooking(token, gym?.id, false, prepareDataForBooking(trainingsObj.not_paid))
+          .then(({ data }) => {
+            console.log(data)
+            if (data?.payment_link) router.push(data?.payment_link)
+            else if (data?.status) router.push('/lk/training')
+          });
+      }
+      setIsLoad(false)
+    })
+  }
+
   const closeModal = () => {
-    setModalDdata(prev => ({
+    setModalData(prev => ({
       ...prev,
       isShow: false
     }))
@@ -236,7 +258,7 @@ function ModalInner(type, token, gym, trainingsObj, setModalDdata, updateSession
       <div className={styles['modal-inner']}>
         <div className={styles['modal-inner__buttons']}>
           <Button
-            onClick={paymentByBalance}
+            onClick={paymentFullByBalance}
             size="l"
             variant="blue-gradient"
             fullSize={true}
@@ -285,7 +307,7 @@ function ModalInner(type, token, gym, trainingsObj, setModalDdata, updateSession
         </div>
         <div className={styles['modal-inner__buttons']}>
           <Button
-            onClick={goToWorcouts}
+            onClick={paymentByBalance}
             size="l"
             variant="blue-gradient"
             fullSize={true}

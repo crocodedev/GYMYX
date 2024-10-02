@@ -9,6 +9,7 @@ import BookingTimePricing from '@/Sections/Account/Booking/BookingTimePricing';
 import Modal from '@/Components/Modal';
 import Button from '@/Components/Button';
 import { useRouter } from 'next/navigation';
+import Loading from '@/Components/Loading';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
@@ -37,6 +38,7 @@ const ChangeTime = () => {
   const { data: sessionData } = useSession();
   const { gym, visitDate } = useSelector((state) => state.booking);
   const [pricesVariants, setPricesVariants] = useState([]);
+  const [isLoad, setIsLoad] = useState(false)
   const [modalData, setModalData] = useState({
     text: 'Ваша тренировка успешно перенесена!',
     isShow: false
@@ -79,6 +81,7 @@ const ChangeTime = () => {
 
   return (
     <>
+    {isLoad && <Loading full_screen={true}/>}
     {modalData.isShow && (
         <Modal handleClose={() => {}} text={modalData.text}>
           <Button
@@ -95,7 +98,7 @@ const ChangeTime = () => {
       <BookingSignUpHeading showButtonEditGym={false} headingTitle={'Купить тренировоку'}/>
       <BookingSignUpTags change={true}/>
       <BookingSignUpContent>
-        <BookingTimePricing variants={pricesVariants} change={true} setModaldata={setModalData}/>
+        <BookingTimePricing variants={pricesVariants} change={true} setModaldata={setModalData} setIsLoad={setIsLoad}/>
         <BookingSteps stepNumber={2} stepTitle={'Выберите время'} />
       </BookingSignUpContent>
     </>

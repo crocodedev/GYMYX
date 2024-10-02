@@ -130,27 +130,65 @@
   flex-direction: column;
 
   &__header {
-    min-width: 700px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 15px;
-    margin-bottom: 64px;
+
+    @include media-breakpoint-up(xxxl) {
+      min-width: 700px;
+      margin-bottom: 64px;
+    }
+
+    @include media-breakpoint-between(md, xxxl) {
+      margin-bottom: 30px;
+    }
+
+    @include media-breakpoint-down(md) {
+      margin-bottom: 28px;
+    }
   }
 
   &__header-title {
     font-weight: 600;
-    font-size: 50px;
-    line-height: 58.5px;
     letter-spacing: -1%;
     color: #212428;
+
+    @include media-breakpoint-up(xxxl) {
+      font-size: 50px;
+      line-height: 58.5px;
+    }
+
+    @include media-breakpoint-between(md, xxxl) {
+      font-size: 36px;
+      line-height: 40px;
+    }
+
+    @include media-breakpoint-down(md) {
+      font-size: 18px;
+      line-height: 20.7px;
+    }
   }
 
   &__header-icon {
-    width: 30px;
-    height: 30px;
     border: none;
     background: transparent;
+    cursor: pointer;
+
+    @include media-breakpoint-up(xxxl) {
+      width: 30px;
+      height: 30px;
+    }
+
+    @include media-breakpoint-between(md, xxxl) {
+      width: 25px;
+      height: 25px;
+    }
+
+    @include media-breakpoint-down(md) {
+      width: 15px;
+      height: 15px;
+    }
 
     & > svg {
       width: 100%;
@@ -161,8 +199,21 @@
   &__list {
     display: flex;
     flex-direction: column;
-    gap: 24px;
-    margin-bottom: 40px;
+
+    @include media-breakpoint-up(xxxl) {
+      margin-bottom: 40px;
+      gap: 24px;
+    }
+
+    @include media-breakpoint-between(md, xxxl) {
+      margin-bottom: 20px;
+      gap: 16px;
+    }
+
+    @include media-breakpoint-down(md) {
+      margin-bottom: 8px;
+      gap: 8px;
+    }
   }
 
   &__list-item {
@@ -171,9 +222,22 @@
     justify-content: space-between;
     gap: 20px;
     font-weight: 500;
-    font-size: 30px;
-    line-height: 36.57px;
     color: #212428;
+
+    @include media-breakpoint-up(xxxl) {
+      font-size: 30px;
+      line-height: 36.57px;
+    }
+
+    @include media-breakpoint-between(md, xxxl) {
+      font-size: 24px;
+      line-height: 28px;
+    }
+
+    @include media-breakpoint-down(md) {
+      font-size: 12px;
+      line-height: 16.2px;
+    }
 
     &--paid {
       position: relative;
@@ -188,6 +252,14 @@
         width: 100%;
         height: 2px;
         background-color: #404145;
+
+        @include media-breakpoint-up(md) {
+          height: 2px;
+        }
+    
+        @include media-breakpoint-down(md) {
+          height: 1px;
+        }
       }
     }
   }
@@ -198,28 +270,47 @@
     margin-bottom: 24px;
   }
 
-  &__text {
-    font-weight: 600;
-    font-size: 40px;
-    line-height: 45.2px;
-    color: #212428;
-  }
-
   &__summary {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 20px;
-    padding: 38px 0 41px;
-    border-top: 2px solid #212428;
+
+    @include media-breakpoint-up(xxxl) {
+      padding: 38px 0 41px;
+      border-top: 2px solid #212428;
+    }
+
+    @include media-breakpoint-between(md, xxxl) {
+      padding: 25px 0;
+      border-top: 2px solid #212428;
+    }
+
+    @include media-breakpoint-down(md) {
+      padding: 25px 0;
+      border-top: 1px solid #212428;
+    }
   }
 
   &__summary-text,
   &__summary-price {
     font-weight: 600;
-    font-size: 40px;
-    line-height: 45.2px;
     color: #212428;
+
+    @include media-breakpoint-up(xxxl) {
+      font-size: 40px;
+      line-height: 45.2px;
+    }
+
+    @include media-breakpoint-between(md, xxxl) {
+      font-size: 30px;
+      line-height: 38px;
+    }
+
+    @include media-breakpoint-down(md) {
+      font-size: 18px;
+      line-height: 20.7px;
+    }
   }
 
   &__buttons {
