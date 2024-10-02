@@ -34,8 +34,12 @@ const ChooseTime = () => {
   const { data: sessionData } = useSession();
   const { gym, visitDate } = useSelector((state) => state.booking);
   const [pricesVariants, setPricesVariants] = useState([]);
+  const balanceCount = sessionData?.user?.balance || 0
+  const [balance, setBalence] = useState(balanceCount)
 
   useEffect(() => {
+    console.log(gym?.prices)
+    setCountBalace()
     if (gym?.prices && sessionData) {
       let variantsTemp = [];
 
@@ -63,14 +67,19 @@ const ChooseTime = () => {
     }
   }, [gym, sessionData, visitDate]);
 
+  const setCountBalace = () => {
+    const countTime = visitDate.reduce((acc, el) => acc + el.time.length ,0)
+    setBalence(balanceCount - countTime)
+  }
+
   return (
     <>
       <NavigationBack buttonLabel={'Вернуться к выбору дней'} link={'/lk/booking/sign-up'} />
       <BookingSignUpHeading showButtonEditGym={false} headingTitle={'Купить несколько тренировок'} />
       <BookingSignUpTags change={false}/>
       <BookingSignUpContent>
-        <BookingTimePricing variants={pricesVariants} />
-        <BookingSteps stepNumber={2} stepTitle={'Выберите время'} />
+        <BookingTimePricing variants={pricesVariants} setBalence={setBalence} balance={balance}/>
+        <BookingSteps stepNumber={2} stepTitle={'Выберите время'} balance={balance}/>
       </BookingSignUpContent>
     </>
   );

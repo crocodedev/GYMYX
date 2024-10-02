@@ -8,8 +8,10 @@ import BookingSteps from '@/Sections/Account/Booking/BookingSteps';
 import { useSelector } from 'react-redux';
 import BookingSignUpContent from '@/Sections/Account/Booking/BookingSignUpContent';
 import { useState } from 'react';
+import { useSession } from 'next-auth/react';
 
 const BookingSignUp = () => {
+  const { data: sessionData } = useSession();
   const [showModal, setShowModal] = useState(false);
   const { gym, variant } = useSelector((state) => state.booking);
 
@@ -34,7 +36,7 @@ const BookingSignUp = () => {
       />
       <BookingSignUpContent>
         <BookingCalendar change={false}/>
-        <BookingSteps stepNumber={1} stepTitle={'Выберите день'} />
+        <BookingSteps stepNumber={1} stepTitle={'Выберите день'} balance={sessionData?.user?.balance}/>
       </BookingSignUpContent>
     </>
   );

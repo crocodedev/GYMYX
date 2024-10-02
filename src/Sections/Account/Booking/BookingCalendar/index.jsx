@@ -97,12 +97,13 @@ const BookingCalendar = ({change = false}) => {
     }
 
     if(sessionData?.user?.accessToken) {
-      takeAvailableDatesTwoMonth(sessionData.user.accessToken, gym.id).then((data) => {
+      takeAvailableDatesTwoMonth(sessionData.user.accessToken, gym.id)
+      .then((data) => {
         setAvailableDates(data);
         setLoading(false);
       });
     }
-  }, [gym]);
+  }, [gym, sessionData]);
 
   if (loading) {
     return <Loading />;
