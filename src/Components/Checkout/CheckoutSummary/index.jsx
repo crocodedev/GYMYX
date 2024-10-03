@@ -70,13 +70,9 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0 }) => {
     setLoading(true);
     createBooking(sessionData.user.accessToken, gym?.id, false, prepareDataForBooking(finalArr))
     .then(({ data }) => {
-      if (data?.payment_link) {
-        router.push(data?.payment_link);
-      } else if (data?.status) {
-        router.push('/lk/training');
-      } else {
-        setError(true);
-      }
+      if (data?.payment_link) router.push(data?.payment_link);
+      else if (data?.status) router.push('/lk/training');
+      else setError(true);
       setLoading(false);
     });
   };
@@ -85,14 +81,13 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0 }) => {
     setPaidData(fun(finalArr, balance))
     const countTrainint = finalArr.reduce((acc, el) => acc + (el?.count || 0), 0)
 
-    if(countTrainint > balance) {
-      setModalData(prev => ({
-        ...prev,
-        type: 'crowded',
-        isShow: true,
-        text: '',
-      }))
-    } else if(countTrainint <= balance) {
+    if(countTrainint > balance) setModal('crowded')
+    else if(countTrainint <= balance) setModal('confirm')
+  }
+
+  const setModal = (type) => {
+    if(type == 'confirm') {
+      const countTrainint = finalArr.reduce((acc, el) => acc + (el?.count || 0), 0)
       const text = `Списать ${countTrainint} ${countTrainint == 1 
       ? 'тренировку' 
       : countTrainint > 1 && countTrainint <= 4 
@@ -104,14 +99,28 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0 }) => {
         isShow: true,
         text: text,
       }))
+    } else if(type == 'crowded') {
+      setModalData(prev => ({
+        ...prev,
+        type: 'crowded',
+        isShow: true,
+        text: '',
+      }))
+    } else if(type == 'successful') {
+      setModalData(prev => ({
+        ...prev,
+        type: 'successful',
+        isShow: true,
+        text: 'Спасибо за покупку!',
+      }))
+    } else if(type == 'close') {
+      setModalData(prev => ({
+        ...prev,
+        type: '',
+        isShow: false,
+        text: '',
+      }))
     }
-
-    // setModalDdata(prev => ({
-    //   ...prev,
-    //   type: 'successful',
-    //   isShow: true,
-    //   text: 'Спасибо за покупку!',
-    // }))
   }
 
   const closeModal = () => {
@@ -136,7 +145,7 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0 }) => {
     {modalData.isShow && sessionData && (
       <Modal text={modalData.text} handleClose={closeModal}>
         {isLoad && <Loading full_screen={true}/>}
-        {ModalInner(modalData.type, sessionData.user.accessToken, gym, paidData, setModalData, setIsLoad)}
+        {ModalInner(modalData.type, sessionData.user.accessToken, update, gym, paidData, setModal, setIsLoad)}
       </Modal>
     )}
     
@@ -190,7 +199,7 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0 }) => {
 export default CheckoutSummary;
 
 
-function ModalInner(type, token, gym, trainingsObj, setModalData, setIsLoad) {
+function ModalInner(type, token, updateUserData, gym, trainingsObj, setModal, setIsLoad) {
   const router = useRouter()
   const totalPrice = trainingsObj.not_paid.reduce((acc, el) => acc + el.price * el.count, 0)
 
@@ -206,39 +215,41 @@ function ModalInner(type, token, gym, trainingsObj, setModalData, setIsLoad) {
     .then(({data}) => {
       console.log(data)
       if(data?.payment_link) {
-        setModalData(prev => ({
-          ...prev,
-          type: 'successful',
-          isShow: true,
-          text: 'Спасибо за покупку!',
-        }))
+        getUserData(token).then(data => {
+          if(data?.data) {
+            updateUserData(data?.data)
+            setModal('successful')
+          }
+        })
       }
       setIsLoad(false)
     })
   } 
 
-  const paymentByBalance = () => {
+  const partialPayment = () => {
     setIsLoad(true)
     createBooking(token, gym?.id, true, prepareDataForBooking(trainingsObj.paid))
     .then(({data}) => {
       console.log(data)
       if(data?.payment_link) {
-          createBooking(token, gym?.id, false, prepareDataForBooking(trainingsObj.not_paid))
-          .then(({ data }) => {
-            console.log(data)
-            if (data?.payment_link) router.push(data?.payment_link)
-            else if (data?.status) router.push('/lk/training')
-          });
+        getUserData(token).then(data => {
+          if(data?.data) {
+            updateUserData(data?.data)
+            createBooking(token, gym?.id, false, prepareDataForBooking(trainingsObj.not_paid))
+            .then(({ data }) => {
+              console.log(data)
+              if (data?.payment_link) router.push(data?.payment_link)
+              else if (data?.status) router.push('/lk/training')
+            });
+          }
+        })
       }
       setIsLoad(false)
     })
   }
 
   const closeModal = () => {
-    setModalData(prev => ({
-      ...prev,
-      isShow: false
-    }))
+    setModal('close')
   }
 
   return (
@@ -307,7 +318,7 @@ function ModalInner(type, token, gym, trainingsObj, setModalData, setIsLoad) {
         </div>
         <div className={styles['modal-inner__buttons']}>
           <Button
-            onClick={paymentByBalance}
+            onClick={partialPayment}
             size="l"
             variant="blue-gradient"
             fullSize={true}

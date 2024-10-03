@@ -17,6 +17,7 @@ import Loading from '@/Components/Loading';
 import { formatDate } from '@/Utils/helpers';
 import Modal from '@/Components/Modal';
 import Button from '@/Components/Button';
+import { getUserData } from '@/Utils/updateDataUser';
 import { updateBookingVisitDate } from '@/redux/bookingSlice';
 
 import { cancelBooking, canDelete } from '@/Sections/Account/ProfileTrainings/helpers';
@@ -48,7 +49,7 @@ const concateDateTime = (date, time) => {
 };
 
 const Training = () => {
-  const { data: sessionData } = useSession();
+  const { data: sessionData, update } = useSession();
   const [allTrainingsDates, setAllTrainingsDates] = useState([]);
   const [sortedTrainingsDates, setSortedTrainingsDates] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -58,6 +59,7 @@ const Training = () => {
   const [showModal, setShowModal] = useState(false);
   const [currentItemId, setCurrentItemId] = useState(null);
   const [loadingDelete, setLoadingDelete] = useState(false);
+  const [deleteIsError, setDeleteIsError] = useState(false)
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -141,6 +143,7 @@ const Training = () => {
   };
 
   const handleShow = (id = -1) => {
+    setDeleteIsError(false)
     setShowModal((prev) => !prev);
     setCurrentItemId(id);
   };
@@ -154,15 +157,22 @@ const Training = () => {
 
   const deleteBookingItem = (id) => {
     if (canDelete(sortedTrainingsDates)) {
-      console.log(sessionData.user.accessToken, id)
       cancelBooking(sessionData.user.accessToken, id)
       .then((data) => {
-        console.log(data)
         if (data?.data?.status) {
           updateDate();
-          setLoadingDelete(false);
           handleShow();
+          getUserData(sessionData?.user?.accessToken)
+          .then(data => {
+            if(data?.data) {
+              console.log(data.data)
+              update(data?.data)
+            }
+          })
+        } else {
+          setDeleteIsError(true)
         }
+        setLoadingDelete(false);
       });
     }
   };
@@ -173,15 +183,27 @@ const Training = () => {
     <>
       {showModal && (
         <Modal handleClose={handleShow} text={'Вы точно хотите отменить тренировку?'}>
-          <Button
-            onClick={handleClickDelete}
-            fullSize={true}
-            size="l"
-            label={!loadingDelete ? 'Да' : 'Загрузка'}
-            variant="black"
-            disabledShadow={true}
-          />
-          <Button onClick={handleShow} fullSize={true} size="l" label="Нет" variant="blue" disabledShadow={true} />
+          <div style={{width: '100%'}}>
+            <div style={{display: 'flex', gap: '24px'}}>
+              <Button
+                onClick={handleClickDelete}
+                fullSize={true}
+                size="l"
+                label={!loadingDelete ? 'Да' : 'Загрузка'}
+                variant="black"
+                disabledShadow={true}
+              />
+              <Button 
+                onClick={handleShow} 
+                fullSize={true} 
+                size="l" 
+                label="Нет" 
+                variant="blue" 
+                disabledShadow={true} 
+              />
+            </div>
+            {deleteIsError && <p className="" style={{color: 'red', fontSize: '18px', paddingTop: '15px', textAlign: 'center'}}>Произошла ошибка попробуйте позже</p>}
+          </div>
         </Modal>
       )}
       <div className="account-page-wrapper">

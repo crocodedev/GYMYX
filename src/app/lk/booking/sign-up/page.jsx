@@ -15,6 +15,7 @@ const BookingSignUp = () => {
   const [showModal, setShowModal] = useState(false);
   const { gym, variant } = useSelector((state) => state.booking);
   const balance = sessionData?.user?.balance || 0
+  console.log(balance)
 
   return (
     <>
