@@ -60,6 +60,11 @@ const Training = () => {
   const [currentItemId, setCurrentItemId] = useState(null);
   const [loadingDelete, setLoadingDelete] = useState(false);
   const [deleteIsError, setDeleteIsError] = useState(false)
+  const [modalData, setModalData] = useState({
+    type: '', //transfer, delete, toggle
+    isShow: false,
+    text: '',
+  })
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -144,7 +149,7 @@ const Training = () => {
 
   const handleShow = (id = -1) => {
     setDeleteIsError(false)
-    setShowModal((prev) => !prev);
+    modalType('delete')
     setCurrentItemId(id);
   };
 
@@ -161,49 +166,88 @@ const Training = () => {
       .then((data) => {
         if (data?.data?.status) {
           updateDate();
-          handleShow();
           getUserData(sessionData?.user?.accessToken)
           .then(data => {
-            if(data?.data) {
-              console.log(data.data)
-              update(data?.data)
-            }
+            if(data?.data) update(data?.data)
           })
         } else {
           setDeleteIsError(true)
         }
         setLoadingDelete(false);
+        modalType();
       });
     }
   };
+
+  const modalType = (type) => {
+    console.log(type)
+    if(type == 'delete') {
+      setModalData(prev => ({
+        ...prev,
+        type: 'delete',
+        isShow: true,
+        text: 'Вы точно хотите отменить тренировку?'
+      }))
+    } else if(type == 'transfer') {
+      setModalData(prev => ({
+        ...prev,
+        type: 'transfer',
+        isShow: true,
+        text: 'извините, перенос возможен не позднее 4 часов до занятия :('
+      }))
+    } else if(type == 'toggle') {
+      setModalData(prev => ({
+        ...prev,
+        isShow: !modalData.isShow
+      }))
+    } else {
+      setModalData(prev => ({
+        ...prev,
+        isShow: false
+      }))
+    }
+  }
 
   if (loading) return <Loading full_screen={true} />;
 
   return (
     <>
-      {showModal && (
-        <Modal handleClose={handleShow} text={'Вы точно хотите отменить тренировку?'}>
-          <div style={{width: '100%'}}>
+      {modalData.isShow && (
+        <Modal handleClose={modalType} text={modalData.text}>
+          {modalData.type == 'transfer' && (
+            <Button
+              onClick={modalType}
+              fullSize={true}
+              size="l"
+              label={'Закрыть'}
+              variant="blue-gradient"
+              disabledShadow={true}
+            />
+          )}
+          {modalData.type == 'delete' && (
+            <div style={{width: '100%'}}>
             <div style={{display: 'flex', gap: '24px'}}>
               <Button
                 onClick={handleClickDelete}
                 fullSize={true}
                 size="l"
-                label={!loadingDelete ? 'Да' : 'Загрузка'}
-                variant="black"
+                label={'Да'}
+                disabled={loadingDelete}
+                variant="black-gradient"
                 disabledShadow={true}
               />
               <Button 
-                onClick={handleShow} 
+                onClick={modalType} 
                 fullSize={true} 
                 size="l" 
                 label="Нет" 
-                variant="blue" 
+                variant="blue-gradient" 
                 disabledShadow={true} 
               />
             </div>
             {deleteIsError && <p className="" style={{color: 'red', fontSize: '18px', paddingTop: '15px', textAlign: 'center'}}>Произошла ошибка попробуйте позже</p>}
           </div>
+          )}
         </Modal>
       )}
       <div className="account-page-wrapper">
@@ -224,6 +268,7 @@ const Training = () => {
             selectedDate={selectedDate}
             archive={selectedTab === 1}
             items={sortedTrainingsDates}
+            modalType={modalType}
           />
         </TrainingContent>
       </div>

@@ -143,9 +143,11 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0 }) => {
   return (
     <>
     {modalData.isShow && sessionData && (
-      <Modal text={modalData.text} handleClose={closeModal}>
-        {isLoad && <Loading full_screen={true}/>}
-        {ModalInner(modalData.type, sessionData.user.accessToken, update, gym, paidData, setModal, setIsLoad)}
+      <Modal 
+      text={modalData.text} 
+      handleClose={modalData.type == 'successful' ? ()=>{} : closeModal} 
+      size={modalData.type == 'crowded' ? 'xl' :''}>
+        {ModalInner(modalData.type, sessionData.user.accessToken, update, gym, paidData, setModal, isLoad, setIsLoad)}
       </Modal>
     )}
     
@@ -199,7 +201,7 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0 }) => {
 export default CheckoutSummary;
 
 
-function ModalInner(type, token, updateUserData, gym, trainingsObj, setModal, setIsLoad) {
+function ModalInner(type, token, updateUserData, gym, trainingsObj, setModal, isLoad, setIsLoad) {
   const router = useRouter()
   const totalPrice = trainingsObj.not_paid.reduce((acc, el) => acc + el.price * el.count, 0)
 
@@ -213,16 +215,19 @@ function ModalInner(type, token, updateUserData, gym, trainingsObj, setModal, se
     setIsLoad(true)
     createBooking(token, gym?.id, true, prepareDataForBooking(trainingsObj.paid))
     .then(({data}) => {
-      console.log(data)
+      console.log('full balanse', data)
       if(data?.payment_link) {
-        getUserData(token).then(data => {
+        getUserData(token)
+        .then(data => {
           if(data?.data) {
             updateUserData(data?.data)
             setModal('successful')
           }
         })
+        .finally(() => {
+          setIsLoad(false)
+        })
       }
-      setIsLoad(false)
     })
   } 
 
@@ -275,6 +280,7 @@ function ModalInner(type, token, updateUserData, gym, trainingsObj, setModal, se
             fullSize={true}
             label={'Да'}
             disabledShadow={true}
+            disabled={isLoad}
           />
           <Button
             onClick={closeModal}
@@ -325,6 +331,7 @@ function ModalInner(type, token, updateUserData, gym, trainingsObj, setModal, se
             icon={'arrow'}
             label={'Докупить тренировки'}
             disabledShadow={true}
+            disabled={isLoad}
           />
         </div>
       </div>

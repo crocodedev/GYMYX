@@ -103,7 +103,10 @@
     color: white;
   }
 
-  &:not(.button-blue):not(.button-black):not(.button-blue-gradient ) {
+  &:not(.button-blue)
+  :not(.button-black)
+  :not(.button-blue-gradient)
+  :not(.button-black-gradient) {
     &:hover {
       background: #ffffffbf;
       transition: 0.3s ease;

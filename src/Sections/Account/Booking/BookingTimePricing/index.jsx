@@ -34,6 +34,7 @@ const BookingTimePricing = ({ variants = [], change = false, setModaldata, setIs
   const handleSubmit = () => {
     if(change) {
       setIsLoad(true)
+      setCanSubmit(false)
       const value = visitDate[0].value
       const time = visitDate[0].time[0]
       if(value) {
@@ -54,6 +55,7 @@ const BookingTimePricing = ({ variants = [], change = false, setModaldata, setIs
               isShow: true
             }))
           }
+          setCanSubmit(true)
           setIsLoad(false)
         })
       }
@@ -89,7 +91,7 @@ const BookingTimePricing = ({ variants = [], change = false, setModaldata, setIs
           onClick={handleSubmit}
           disabled={!canSubmit}
           size="l"
-          variant="blue"
+          variant="blue-gradient"
           fullSize={true}
           label={'Забронировать'}
         />

@@ -15,6 +15,7 @@ const TrainingItems = ({
   deleteItem,
   handleShow,
   token,
+  modalType
 }) => {
   const dispatch = useDispatch();
 
@@ -48,6 +49,7 @@ const TrainingItems = ({
               time={time}
               gymTitle={gym?.name}
               address={gym?.address}
+              modalType={modalType}
             />
           );
         })}

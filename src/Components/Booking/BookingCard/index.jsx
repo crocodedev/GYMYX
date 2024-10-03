@@ -15,6 +15,7 @@ const BookingCard = ({
   address = "",
   older = false,
   transferIsShow = true,
+  modalType
   
 }) => {
   const [transferIsDisabled, setTransferIsDisabled] = useState(false)
@@ -29,7 +30,8 @@ const BookingCard = ({
 
   const handlerClickChange = () => {
     setTransferIsDisabled(isDifferenceMoreThan4Hours(date, time))
-    if(!transferIsDisabled) onClickChangeTraining(id, date, time)
+    if(transferIsDisabled) modalType('transfer')
+    else onClickChangeTraining(id, date, time)
   }
 
   const isDifferenceMoreThan4Hours = (dateStr, timeStr) => { 

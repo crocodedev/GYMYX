@@ -58,7 +58,9 @@ const ProfileTrainings = ({isShowTranfer = false}) => {
 
         const closestTraining = sortedData[0];
         // console.log(closestTraining)
-        setTransferIsActive(!isDifferenceMoreThan4Hours(closestTraining.date, closestTraining.time))
+        if(closestTraining) {
+          setTransferIsActive(!isDifferenceMoreThan4Hours(closestTraining.date, closestTraining.time))
+        }
 
         setClosestTraining(closestTraining);
       }

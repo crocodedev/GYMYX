@@ -78,7 +78,7 @@ const ChooseTime = () => {
       <BookingSignUpHeading showButtonEditGym={false} headingTitle={'Купить несколько тренировок'} />
       <BookingSignUpTags change={false}/>
       <BookingSignUpContent>
-        <BookingTimePricing variants={pricesVariants}/>
+        <BookingTimePricing variants={pricesVariants} change={false}/>
         <BookingSteps stepNumber={2} stepTitle={'Выберите время'} balance={balance} packageIsActive={balanceCount > 0}/>
       </BookingSignUpContent>
     </>
