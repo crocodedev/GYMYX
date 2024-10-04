@@ -8,6 +8,7 @@ import ProfileContactOptions from '@/Sections/Account/ProfileContactOptions';
 import ProfileContacts from '@/Sections/Account/ProfileContacts';
 import ProfileMailing from '@/Sections/Account/ProfileMailing';
 import ProfileTextField from '@/Sections/Account/ProfileTextField';
+import ProfileBalace from '@/Components/Account/Profile/ProfileBalace';
 
 import { signOut, useSession } from 'next-auth/react';
 import { useEffect } from 'react';
@@ -26,6 +27,7 @@ const Profile = () => {
   return (
     <div className="account-page-wrapper">
       <ProfileHeading />
+      <ProfileBalace/>
       <ProfilePersonalData />
       <ProfileTrainings isShowTranfer={false}/>
       <ProfileStats />

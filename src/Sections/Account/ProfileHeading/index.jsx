@@ -18,7 +18,7 @@ const ProfileHeading = () => {
           <ProfileInfo />
           <div className={styles['profile-heading__controls']}>
             <Link href={'/lk/profile/edit'}>
-              <Button variant="blue" size="m" label={'Редактировать'} />
+              <Button variant="blue-gradient" size="m" label={'Редактировать'} />
             </Link>
             <ProfileLogout handleClick={() => signOut({ callbackUrl: '/lk/login' })} />
           </div>

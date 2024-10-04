@@ -2,7 +2,7 @@
 
 .profile-stats {
   &__wrapper {
-    background: var(--white-transperent, rgba(255, 255, 255, 0.1));
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.092) 10%, rgba(255, 255, 255, 0.041));
 
     @include media-breakpoint-down(lg) {
       padding: 18px;

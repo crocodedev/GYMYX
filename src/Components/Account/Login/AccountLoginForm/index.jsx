@@ -31,6 +31,7 @@ const AccountLoginForm = ({ handleToogleModal }) => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    console.log(session.status)
     if (session.status === 'authenticated') {
       let url = session?.data?.user?.full_name ? '/lk/profile' : '/lk/login/create-profile'
       router.push(url);
@@ -143,7 +144,7 @@ const AccountLoginForm = ({ handleToogleModal }) => {
             disabled={data.phone.valid && data.agreePolicy ? false : true}
             fullSize={true}
             size="l"
-            variant="blue"
+            variant="blue-gradient"
             icon={!loading ? 'arrow' : ''}
             label={!loading ? 'Продолжить' : 'Загрузка'}
           />
@@ -154,7 +155,7 @@ const AccountLoginForm = ({ handleToogleModal }) => {
             onClick={handleSubmitCheckCode}
             fullSize={true}
             size="l"
-            variant="blue"
+            variant="blue-gradient"
             label={!loading ? 'Подтвердить' : 'Загрузка'}
           />
         )}
