@@ -6,7 +6,7 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
 import { useMemo, useState, useEffect } from 'react';
-import { findPrice, createBooking, countValues, prepareDataForBooking, fun } from './helpers';
+import { findPrice, createBooking, countValues, prepareDataForBooking, fun, sortByDate } from './helpers';
 import CheckoutConfirm from '@/Components/Checkout/CheckoutConfirm';
 import { getUserData } from '@/Utils/updateDataUser';
 import Modal from '@/Components/Modal';
@@ -43,11 +43,12 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0 }) => {
         }
       });
     });
-    setList(countValues(items, gym?.prices));
+    setList(sortByDate(countValues(items, gym?.prices)));
     return total;
   }, [isFirstBooking, items, gym]);
 
   const sortArr = () => {
+    console.log(list)
     const tmpArr = list.reduce((acc, el) => {
       if (isFirstBooking) {
         list[0].price = gym.min_price;
@@ -59,16 +60,17 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0 }) => {
       } else {
         acc.push({ ...el, count: el.count });
       }
-
       return acc;
     }, []);
+    console.log(tmpArr)
 
     setFinalArr(tmpArr);
   };
 
   const handleSubmit = () => {
     setLoading(true);
-    createBooking(sessionData.user.accessToken, gym?.id, false, prepareDataForBooking(finalArr))
+    console.log(prepareDataForBooking(list))
+    createBooking(sessionData.user.accessToken, gym?.id, false, prepareDataForBooking(list))
     .then(({ data }) => {
       if (data?.payment_link) router.push(data?.payment_link);
       else if (data?.status) router.push('/lk/training');
@@ -78,11 +80,13 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0 }) => {
   };
 
   const handlerClicktByBalance = () => {
-    setPaidData(fun(finalArr, balance))
+    // let trainings = fun(list, balance, gym.min_price)
+    // console.log('sortTrainings', trainings)
+    setPaidData(fun(list, balance, gym.min_price))
     const countTrainint = finalArr.reduce((acc, el) => acc + (el?.count || 0), 0)
 
-    if(countTrainint > balance) setModal('crowded')
-    else if(countTrainint <= balance) setModal('confirm')
+    if(countTrainint <= balance) setModal('confirm')
+    else setModal('crowded')
   }
 
   const setModal = (type) => {
@@ -132,7 +136,7 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0 }) => {
 
   useEffect(() => {
     if (sessionData?.user) {
-      setIsFirstBooking(sessionData.user.is_new);
+      setIsFirstBooking(sessionData?.user?.is_new);
       sortArr();
       setLoadingPage(false);
     }
@@ -147,7 +151,7 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0 }) => {
       text={modalData.text} 
       handleClose={modalData.type == 'successful' ? ()=>{} : closeModal} 
       size={modalData.type == 'crowded' ? 'xl' :''}>
-        {ModalInner(modalData.type, sessionData.user.accessToken, update, gym, paidData, setModal, isLoad, setIsLoad)}
+        {ModalInner(modalData.type, sessionData.user.accessToken, update, gym, paidData, setModal, isLoad, setIsLoad, list)}
       </Modal>
     )}
     
@@ -201,7 +205,7 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0 }) => {
 export default CheckoutSummary;
 
 
-function ModalInner(type, token, updateUserData, gym, trainingsObj, setModal, isLoad, setIsLoad) {
+function ModalInner(type, token, updateUserData, gym, trainingsObj, setModal, isLoad, setIsLoad, list) {
   const router = useRouter()
   const totalPrice = trainingsObj.not_paid.reduce((acc, el) => acc + el.price * el.count, 0)
 
@@ -213,15 +217,14 @@ function ModalInner(type, token, updateUserData, gym, trainingsObj, setModal, is
 
   const paymentFullByBalance = () => {
     setIsLoad(true)
-    createBooking(token, gym?.id, true, prepareDataForBooking(trainingsObj.paid))
-    .then(({data}) => {
-      console.log('full balanse', data)
-      if(data?.payment_link) {
+    createBooking(token, gym?.id, true, prepareDataForBooking(list))
+    .then((res) => {
+      console.log('full balanse', res)
+      if(res?.data?.payment_link) {
         getUserData(token)
         .then(data => {
           if(data?.data) {
             updateUserData(data?.data)
-            setModal('successful')
           }
         })
         .finally(() => {
@@ -232,20 +235,15 @@ function ModalInner(type, token, updateUserData, gym, trainingsObj, setModal, is
   } 
 
   const partialPayment = () => {
+    console.log(list)
     setIsLoad(true)
-    createBooking(token, gym?.id, true, prepareDataForBooking(trainingsObj.paid))
-    .then(({data}) => {
-      console.log(data)
-      if(data?.payment_link) {
+    createBooking(token, gym?.id, true, prepareDataForBooking(list)).then((res) => {
+      if(res?.data?.payment_link) {
+        console.log('partial payment', res)
         getUserData(token).then(data => {
           if(data?.data) {
             updateUserData(data?.data)
-            createBooking(token, gym?.id, false, prepareDataForBooking(trainingsObj.not_paid))
-            .then(({ data }) => {
-              console.log(data)
-              if (data?.payment_link) router.push(data?.payment_link)
-              else if (data?.status) router.push('/lk/training')
-            });
+            router.push(res?.data?.payment_link)
           }
         })
       }
@@ -305,14 +303,14 @@ function ModalInner(type, token, updateUserData, gym, trainingsObj, setModal, is
           </button>
         </div>
         <div className={styles['modal-inner__list']}>
-          {trainingsObj?.paid && trainingsObj.paid.map(({ value, count, price }, index) => (
-            <div key={`${value}_${index}`} className={`${styles['modal-inner__list-item']} ${styles['modal-inner__list-item--paid']}`}>
+          {trainingsObj?.paid && trainingsObj.paid.map(({count, price }, index) => (
+            <div key={`${index}`} className={`${styles['modal-inner__list-item']} ${styles['modal-inner__list-item--paid']}`}>
               <p>Тренировка {price} ₽/ч ({count})</p>
               <p>{price} ₽</p>
             </div>
           ))}
-          {trainingsObj?.not_paid && trainingsObj.not_paid.map(({ value, count, price }, index) => (
-            <div key={`${value}_${index}`} className={styles['modal-inner__list-item']}>
+          {trainingsObj?.not_paid && trainingsObj.not_paid.map(({count, price }, index) => (
+            <div key={`${index}`} className={styles['modal-inner__list-item']}>
               <p>Тренировка {price} ₽/ч ({count})</p>
               <p>{price} ₽</p>
             </div>

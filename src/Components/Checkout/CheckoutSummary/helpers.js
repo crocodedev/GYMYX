@@ -79,34 +79,50 @@ export function prepareDataForBooking(arr) {
   return result;
 }
 
-export const fun = (arr, balance) => {
+export const fun = (arr, balance, minPrice) => {
   let finalTraining = {
     paid: [],
     not_paid: []
   }
 
-  const paid = [];
-  const not_paid = [];
+  const minPriceId = arr.findIndex(el => el.price == minPrice)
+  if(minPriceId >= 0) {
+    finalTraining.not_paid.push(arr[not_paid])
+    arr.splice(minPriceId, 1)
+    balance -= 1
+  }
 
-  arr.forEach(item => {
-    if (balance >= item.count) {
-      // Если баланс позволяет оплатить все count
-      finalTraining.paid.push(item);
-      balance -= item.count; // Уменьшаем баланс на оплаченные count
-    } else {
-      // Если баланс меньше, чем count
-      if (balance > 0) {
-        // Добавляем в paid столько, сколько позволяет баланс
-        finalTraining.paid.push({ ...item, count: balance });
-      }
-      
-      // Добавляем остаток в not_paid
-      const remainingCount = item.count - balance;
-      finalTraining.not_paid.push({ ...item, count: remainingCount });
-      balance = 0;
-    }
-  });
-  console.log(finalTraining)
+  finalTraining.paid = mergeByPrice(arr.slice(0, balance))
+  finalTraining.not_paid = mergeByPrice(arr.slice(balance))
 
   return finalTraining
+}
+
+export const sortByDate = (arr) => {
+  const data = arr.sort((a, b) => {
+    const dateA = new Date(`${a.value}T${a.time}`);
+    const dateB = new Date(`${b.value}T${b.time}`);
+  
+    return dateA - dateB;
+  });
+  return data
+}
+
+function mergeByPrice(arr) {
+  const result = [];
+
+  arr.forEach(item => {
+    const existingItem = result.find(el => el.price === item.price);
+    
+    if (existingItem) {
+      existingItem.count += item.count;
+    } else {
+      const { price, count } = item;
+      result.push({ price, count });
+    }
+  });
+
+  result.sort((a, b) => a.price - b.price);
+
+  return result;
 }
