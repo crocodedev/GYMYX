@@ -31,6 +31,7 @@ const AccountLoginForm = ({ handleToogleModal }) => {
   const router = useRouter();
   const [data, setData] = useState(INIT_FORM_DATA);
   const [loading, setLoading] = useState(false);
+  const [telegramUserData, setTelegramUserData] = useState({})
 
   useEffect(() => {
     if (session.status === 'authenticated') {
@@ -122,19 +123,19 @@ const AccountLoginForm = ({ handleToogleModal }) => {
 
   useEffect(() => {
     const tg = WebApp
-    const user = tg.initDataUnsafe?.user
-    const userId = user?.id
-    console.log('user', user)
-    console.log('userID', userId)
+    const initDataUnsafe = tg?.initDataUnsafe
+    console.log('tg', tg)
+    console.log('initDataUnsafe', initDataUnsafe)
+    // console.log('user', user)
 
-    if(userId) {
-      console.log('usersID', userId)
-      authTelegram(userId).then(res => {
-        console.log(res)
-      })
-    } else {
-      console.log('not id')
-    }
+    // if(user) {
+    //   console.log('usersID', user)
+    //   authTelegram(user).then(res => {
+    //     console.log(res)
+    //   })
+    // } else {
+    //   console.log('not id')
+    // }
     
   }, [])
 
