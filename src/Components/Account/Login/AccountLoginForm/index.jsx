@@ -120,14 +120,12 @@ const AccountLoginForm = ({ handleToogleModal }) => {
     setLoading(false);
   };
 
-  // const auth = (id) => {
-  //   authTelegram.t
-  // }  
-
   useEffect(() => {
     const tg = WebApp
     const user = tg.initDataUnsafe?.user
     const userId = user?.id
+    console.log('user', user)
+    console.log('userID', userId)
 
     if(userId) {
       console.log('usersID', userId)
