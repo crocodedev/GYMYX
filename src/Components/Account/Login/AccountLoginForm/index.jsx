@@ -11,6 +11,8 @@ import { useSession } from 'next-auth/react';
 import styles from './AccountLoginForm.module.scss';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { checkValidPhone, formatPhoneNumber } from '@/Utils/helpers';
+import { authTelegram } from './helper';
+import WebApp from '@twa-dev/sdk';
 
 const INIT_FORM_DATA = {
   phone: {
@@ -31,7 +33,6 @@ const AccountLoginForm = ({ handleToogleModal }) => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    console.log(session.status)
     if (session.status === 'authenticated') {
       let url = session?.data?.user?.full_name ? '/lk/profile' : '/lk/login/create-profile'
       router.push(url);
@@ -118,6 +119,26 @@ const AccountLoginForm = ({ handleToogleModal }) => {
     }
     setLoading(false);
   };
+
+  // const auth = (id) => {
+  //   authTelegram.t
+  // }  
+
+  useEffect(() => {
+    const tg = WebApp
+    const user = tg.initDataUnsafe?.user
+    const userId = user?.id
+
+    if(userId) {
+      console.log('usersID', userId)
+      authTelegram(userId).then(res => {
+        console.log(res)
+      })
+    } else {
+      console.log('not id')
+    }
+    
+  }, [])
 
   return (
     <div className={styles['account-login-form']}>
