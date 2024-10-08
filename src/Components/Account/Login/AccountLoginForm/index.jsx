@@ -24,15 +24,13 @@ const INIT_FORM_DATA = {
   receivedCode: null,
 };
 
-const AccountLoginForm = ({ handleToogleModal }) => {
+const AccountLoginForm = ({ handleToogleModal, setIsShowLoading }) => {
   const inputRef = useRef();
   const session = useSession();
   const inputCodeRef = useRef();
   const router = useRouter();
   const [data, setData] = useState(INIT_FORM_DATA);
   const [loading, setLoading] = useState(false);
-
-
 
   const handleChangePhone = useCallback(() => {
     const phone = checkValidPhone(inputRef.current.value);
@@ -116,13 +114,16 @@ const AccountLoginForm = ({ handleToogleModal }) => {
   };
 
   useEffect(() => {
-    setLoading(true);
+    if (session.status === 'authenticated') {
+      let url = session?.data?.user?.full_name ? '/lk/profile' : '/lk/login/create-profile'
+      router.push(url);
+    }
+  }, [session.status]);
+
+  useEffect(() => {
     const tg = WebApp
     const userData = tg.initDataUnsafe?.user
     const userId = userData?.id // 1685607638
-    // console.log('tg', tg)
-    // console.log('userData', userData)
-    // console.log('userId', userId)
 
     if(userId) {
       authTelegram(userId).then(res => {
@@ -132,18 +133,13 @@ const AccountLoginForm = ({ handleToogleModal }) => {
             redirect: false,
           });
         }
-      }).finally(() => {
-        setLoading(false);
       })
+    } else {
+      setIsShowLoading(false);
     }
   }, [])
 
-  useEffect(() => {
-    if (session.status === 'authenticated') {
-      let url = session?.data?.user?.full_name ? '/lk/profile' : '/lk/login/create-profile'
-      router.push(url);
-    }
-  }, [session.status]);
+
 
   return (
     <div className={styles['account-login-form']}>
