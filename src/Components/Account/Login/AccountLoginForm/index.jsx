@@ -13,6 +13,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { checkValidPhone, formatPhoneNumber } from '@/Utils/helpers';
 import { authTelegram } from './helper';
 import WebApp from '@twa-dev/sdk';
+import { fun } from '@/Components/Checkout/CheckoutSummary/helpers';
 
 const INIT_FORM_DATA = {
   phone: {
@@ -31,7 +32,6 @@ const AccountLoginForm = ({ handleToogleModal }) => {
   const router = useRouter();
   const [data, setData] = useState(INIT_FORM_DATA);
   const [loading, setLoading] = useState(false);
-  const [telegramUserData, setTelegramUserData] = useState({})
 
   useEffect(() => {
     if (session.status === 'authenticated') {
@@ -122,21 +122,24 @@ const AccountLoginForm = ({ handleToogleModal }) => {
   };
 
   useEffect(() => {
-    const tg = WebApp
-    const initDataUnsafe = tg?.initDataUnsafe
-    console.log('tg', tg)
-    console.log('initDataUnsafe', initDataUnsafe)
-    // console.log('user', user)
-
-    // if(user) {
-    //   console.log('usersID', user)
-    //   authTelegram(user).then(res => {
-    //     console.log(res)
-    //   })
-    // } else {
-    //   console.log('not id')
-    // }
     
+    const tg = WebApp
+    // const userId = tg.initDataUnsafe?.auth_date
+    const userId = +"1728372265"
+    console.log('tg', tg)
+    console.log('userId', userId)
+
+    if(userId) {
+      console.log('userId', userId)
+      authTelegram(userId).then(res => {
+        console.log(res)
+        if(res?.data) {
+          console.log('data', res?.data)
+        }
+      })
+    } else {
+      console.log('not id')
+    }
   }, [])
 
   return (
