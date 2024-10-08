@@ -3,12 +3,18 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+
+  @include media-breakpoint-up(lg) {
+    gap: 20px;
+  }
+
+  @include media-breakpoint-down(lg) {
+    flex-direction: column-reverse;
+  }
 }
 
 .booking-steps {
   position: relative;
-
 
   @include media-breakpoint-down(lg) {
     order: -1;

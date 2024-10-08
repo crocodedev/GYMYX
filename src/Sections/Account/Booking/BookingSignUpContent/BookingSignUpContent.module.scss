@@ -12,7 +12,7 @@
     display: flex;
 
     @include media-breakpoint-down(lg) {
-      flex-direction: column;
+      flex-direction: column-reverse;
     }
 
     > *:first-child {

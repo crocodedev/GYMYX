@@ -4,9 +4,13 @@
   border-radius: 41px;
   border: 2px solid var(--white, #fff);
   display: inline-flex;
-
   justify-content: center;
   align-items: center;
+  max-width: max-content;
+
+  @include media-breakpoint-down(lg) {
+    margin-bottom: 20px;
+  }
 
   &__title {
     color: #fff;
