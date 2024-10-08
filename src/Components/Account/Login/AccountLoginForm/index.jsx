@@ -124,8 +124,8 @@ const AccountLoginForm = ({ handleToogleModal }) => {
   useEffect(() => {
     
     const tg = WebApp
-    // const userId = tg.initDataUnsafe?.auth_date
-    const userId = +"1728372265"
+    // const userData = tg.initDataUnsafe?.user
+    const userId = 1685607638 // userData?.id
     console.log('tg', tg)
     console.log('userId', userId)
 

@@ -9,7 +9,7 @@ export async function POST(request) {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ telegram_id: requestData.id}),
+        body: JSON.stringify({ telegram_id: requestData.telegram_id}),
       });
 
       const result = await response.json();
