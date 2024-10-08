@@ -18,11 +18,14 @@ const Profile = () => {
   const { data: sessionData, update } = useSession();
 
   useEffect(() => {
-    getUserData(sessionData?.user?.accessToken).then(data => {
-      if(data?.data) update(data?.data)
-      else signOut({ callbackUrl: '/lk/login' });
-    })
-  }, [])
+    if(sessionData?.user?.accessToken) {
+      getUserData(sessionData?.user?.accessToken)
+      .then(data => {
+        if(data?.data) update(data?.data)
+        else signOut({ callbackUrl: '/lk/login' });
+      })
+    }
+  }, [sessionData?.user?.accessToken])
 
   return (
     <div className="account-page-wrapper">
