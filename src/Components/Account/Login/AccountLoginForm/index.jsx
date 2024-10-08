@@ -116,31 +116,25 @@ const AccountLoginForm = ({ handleToogleModal }) => {
   };
 
   useEffect(() => {
+    setLoading(true);
     const tg = WebApp
     const userData = tg.initDataUnsafe?.user
     const userId = userData?.id // 1685607638
-    console.log('tg', tg)
-    console.log('userData', userData)
-    console.log('userId', userId)
+    // console.log('tg', tg)
+    // console.log('userData', userData)
+    // console.log('userId', userId)
 
     if(userId) {
-      setLoading(true);
-      authTelegram(userId)
-      .then(res => {
-        console.log(res)
+      authTelegram(userId).then(res => {
         if(res?.access_token) {
           signIn('credentials', {
             token: res.access_token,
             redirect: false,
           });
         }
-      })
-      .finally(() => {
+      }).finally(() => {
         setLoading(false);
       })
-
-    } else {
-      console.log('not id')
     }
   }, [])
 
