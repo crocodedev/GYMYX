@@ -54,6 +54,7 @@ export const authConfig = {
           phone: user?.phone || null,
           email: user?.email || null,
           image: user?.image || null,
+          is_new: user?.is_new || false,
           is_active_enter_code: user?.is_active_enter_code || null,
           enter_code: user?.enter_code || null,
           subscriptions: user?.subscriptions || null,
@@ -69,6 +70,7 @@ export const authConfig = {
       session.user.phone = token?.phone || null;
       session.user.email = token?.email || null;
       session.user.image = token?.image || null;
+      session.user.is_new = token?.is_new || false;
       session.user.is_active_enter_code = token?.is_active_enter_code || null;
       session.user.enter_code = token?.enter_code || null;
       session.user.subscriptions = token?.subscriptions || null;
