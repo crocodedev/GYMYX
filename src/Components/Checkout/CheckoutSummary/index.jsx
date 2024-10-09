@@ -225,6 +225,7 @@ function ModalInner(type, token, updateUserData, gym, trainingsObj, setModal, is
         .then(data => {
           if(data?.data) {
             updateUserData(data?.data)
+            setModal('successful')
           }
         })
         .finally(() => {

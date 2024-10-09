@@ -19,5 +19,6 @@
   @include media-breakpoint-down(sm) {
     flex-direction: column;
     gap: 25px;
+    padding-bottom: 40px;
   }
 }

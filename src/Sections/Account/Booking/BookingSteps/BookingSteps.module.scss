@@ -114,4 +114,52 @@
       font-size: 26px;
     }
   }
+
+  &__balance {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    font-weight: 500;
+    border-radius: 50px;
+    color: #fff;
+
+    @include media-breakpoint-up(xxxl) {
+      font-size: 26px;
+      line-height: 35.1px;
+      height: 57px;
+      border: 2px solid #fff;
+    }
+
+    @include media-breakpoint-between(xxl, xxxl) {
+      font-size: 20px;
+      line-height: 27px;
+      height: 44px;
+      border: 2px solid #fff;
+    }
+
+    // @include media-breakpoint-between(xl, xxl) {
+    //   font-size: 16px;
+    //   line-height: 20px;
+    //   height: 40px;
+    //   border: 2px solid #fff;
+    // }
+
+    @include media-breakpoint-between(lg, xxl) {
+      font-size: 16px;
+      line-height: 20px;
+      height: 40px;
+      border: 2px solid #fff;
+    }
+
+    @include media-breakpoint-down(lg) {
+      font-size: 12px;
+      line-height: 16.2px;
+      padding: 0 13px;
+      height: 25px;
+      max-width: max-content;
+      border: 1px solid #fff;
+      margin-bottom: 25px;
+    }
+  }
 }

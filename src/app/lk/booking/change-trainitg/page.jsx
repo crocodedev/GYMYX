@@ -31,6 +31,7 @@ const BookingChangeTraining = () => {
         handleChangeGym={() => setShowModal((prev) => !prev)}
         gymTitle={gym?.name}
         headingTitle={'Записаться на тренировку'}
+        showButtonEditGym={false}
       />
       <BookingSignUpContent>
         <BookingCalendar change={true}/>

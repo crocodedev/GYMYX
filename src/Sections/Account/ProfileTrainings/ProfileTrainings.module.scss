@@ -80,14 +80,14 @@
       right: 18px;
     }
 
-    @include media-breakpoint-between(lg, xxl) {
+    @include media-breakpoint-between(lg, xxxl) {
       width: 25px;
       height: 25px;
       top: 28px;
       right: 28px;
     }
 
-    @include media-breakpoint-up(xxl) {
+    @include media-breakpoint-up(xxxl) {
       width: 35px;
       height: 35px;
       top: 40px;
@@ -108,19 +108,19 @@
     cursor: pointer;
     transition: 0.3s;
 
+    @include media-breakpoint-up(xxxl) {
+      width: 40px;
+      height: 40px;
+    }
+
+    @include media-breakpoint-between(lg, xxxl) {
+      width: 30px;
+      height: 30px;
+    }
+
     @include media-breakpoint-down(lg) {
-      width: 15px;
-      height: 15px;
-    }
-
-    @include media-breakpoint-between(lg, xxl) {
-      width: 25px;
-      height: 25px;
-    }
-
-    @include media-breakpoint-up(xxl) {
-      width: 35px;
-      height: 35px;
+      width: 19px;
+      height: 19px;
     }
 
     &--disabled {

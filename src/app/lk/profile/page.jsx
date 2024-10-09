@@ -32,7 +32,7 @@ const Profile = () => {
       <ProfileHeading />
       <ProfileBalace/>
       <ProfilePersonalData />
-      <ProfileTrainings isShowTranfer={false}/>
+      <ProfileTrainings isShowTranfer={true}/>
       <ProfileStats />
       <ProfileContactOptions>
         <ProfileMailing />

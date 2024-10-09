@@ -93,13 +93,13 @@ const ProfileTrainings = ({isShowTranfer = false}) => {
     handleDeleteItem(curIdItem);
   };
 
-  const handlerClickChange = (id, date, time) => {
+  const handlerClickChange = (oldId, oldDate, oldTime) => {
     dispatch(resetTrainingData())
-    // console.log(id, date, time) 
+    console.log(oldId, oldDate, oldTime) 
     if (!sessionData?.user?.accessToken) return;
 
     dispatch(updateBookingVisitDate({ visitDate: {value: "", time: []}}));
-    dispatch(setTrainingData({oldId: id, oldDate:  date, oldTime: time}))
+    dispatch(setTrainingData({oldId, oldDate, oldTime}))
     router.push(`/lk/booking/change-trainitg`)
   }
 

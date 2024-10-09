@@ -143,8 +143,7 @@
     }
   }
 
-  &__aside-btn, 
-  &__aside-btn-transfer {
+  &__aside-btn {
     position: relative;
     margin-left: auto;
     padding: 0;
@@ -186,6 +185,35 @@
       object-fit: contain;
     }
   }
+
+  &__aside-btn-transfer {
+    color: #fff;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition: 0.3s;
+
+    @include media-breakpoint-up(xxxl) {
+      width: 40px;
+      height: 40px;
+    }
+
+    @include media-breakpoint-between(xxl, xxxl) {
+      width: 30px;
+      height: 30px;
+    }
+
+    @include media-breakpoint-between(lg, xxl) {
+      width: 25px;
+      height: 25px;
+    }
+
+    @include media-breakpoint-down(lg) {
+      width: 19px;
+      height: 19px;
+    }
+  }
+ 
 
   &__title {
     color: var(--white, #fff);

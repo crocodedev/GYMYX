@@ -11,7 +11,7 @@ const BookingSteps = ({ stepNumber, stepTitle, balance, packageIsActive = false 
         </div>
       </div>
     {packageIsActive && (
-      <BorderLabel label={`баланс тренировок: ${(balance > 0) ? balance : 0}`}/>
+      <div className={styles['booking-steps__balance']}>{`баланс тренировок: ${(balance > 0) ? balance : 0}`}</div>
     )}
   </div>
   )

@@ -132,6 +132,8 @@ const AccountLoginForm = ({ handleToogleModal, setIsShowLoading }) => {
             token: res.access_token,
             redirect: false,
           });
+        } else {
+          setIsShowLoading(false);
         }
       })
     } else {

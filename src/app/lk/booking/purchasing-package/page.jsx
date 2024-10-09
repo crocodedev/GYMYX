@@ -35,6 +35,7 @@ const PurchasingPackages = () => {
         handleChangeGym={() => setShowModal((prev) => !prev)}
         gymTitle={gym?.name}
         headingTitle={'Выбирете пакет тренировок'}
+        showButtonEditGym={false}
       />
     <BookingPackages setLoadIsShow={setLoadIsShow}/>
     </>
