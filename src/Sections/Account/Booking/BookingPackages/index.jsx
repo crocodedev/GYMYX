@@ -17,11 +17,12 @@ const BookingPackages = ({setLoadIsShow}) => {
   const router = useRouter()
 
   const submit = () => {
+    console.log('buy split')
     if(sessionData?.user?.accessToken && packages[packageIdActive]?.id) {
       buyPackage(sessionData.user.accessToken, packages[packageIdActive].id)
-      .then(({data}) => {
-        if(data?.payment_link) {
-          router.push(data.payment_link)
+      .then((res) => {
+        if(res?.data?.payment_link) {
+          router.push(res?.data?.payment_link)
         }
       })
     } else {
@@ -30,7 +31,17 @@ const BookingPackages = ({setLoadIsShow}) => {
   }
 
   const submitSplit = () => {
-    console.log('submit split')
+    console.log('bue split')
+    if(sessionData?.user?.accessToken && packages[packageIdActive]?.id) {
+      buyPackage(sessionData.user.accessToken, packages[packageIdActive].id, true)
+      .then((res) => {
+        if(res?.data?.payment_link) {
+          router.push(res?.data?.payment_link)
+        }
+      })
+    } else {
+      console.log('error')
+    }
   }
  
   useEffect(() => {

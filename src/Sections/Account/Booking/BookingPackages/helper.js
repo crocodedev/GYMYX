@@ -13,14 +13,14 @@ export const getPackages = async () => {
     }
 };
 
-export const buyPackage = async (token, package_id) => {
+export const buyPackage = async (token, package_id, split = false) => {
   const result = await fetch('/api/package/buy-package', {
     cache: 'no-store',
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({token, package_id})
+    body: JSON.stringify({token, package_id, split})
   });
 
     const response = await result.json();

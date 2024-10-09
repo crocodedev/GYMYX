@@ -6,6 +6,7 @@ export async function POST(request) {
 
       const requestBody = {
         package_id: requestData.package_id,
+        split: requestData.split,
       };
 
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/packages`, {
