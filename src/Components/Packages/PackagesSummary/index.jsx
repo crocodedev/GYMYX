@@ -1,7 +1,7 @@
 import styles from './PackagesSummary.module.scss'
 import Button from '@/Components/Button'
 
-const PackagesSummary = ({packageData, handlerSubmit}) => {
+const PackagesSummary = ({packageData, handlerSubmit, submitSplit}) => {
   console.log(packageData)
   const workoutsNumber = packageData?.count || 0
   const price = packageData?.price?.package || 0
@@ -18,15 +18,26 @@ const PackagesSummary = ({packageData, handlerSubmit}) => {
           <span className={styles['packages-summary__result-text']}>Итого</span>
           <span className={styles['packages-summary__result-price']}>{result}₽</span>
         </div>
-        <Button
-          onClick={handlerSubmit}
-          size="l"
-          variant="blue-gradient"
-          fullSize={true}
-          label={'Оплатить'}
-          icon={'arrow'}
-          disabledShadow={true}
-        />
+        <div className={styles['packages-summary__buttons']}>
+          <Button
+            onClick={handlerSubmit}
+            size="l"
+            variant="blue-gradient"
+            fullSize={true}
+            label={'Оплатить'}
+            icon={'arrow'}
+            disabledShadow={true}
+          />
+          <Button
+            onClick={submitSplit}
+            size="l"
+            variant="light-blue-gradient"
+            fullSize={true}
+            label={'Оплатить'}
+            icon={'split'}
+            disabledShadow={true}
+          />
+        </div>
       </div>
     </section>
   )

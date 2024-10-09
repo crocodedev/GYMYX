@@ -126,4 +126,26 @@
       line-height: 25px;
     }
   }
+
+  &__buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    @include media-breakpoint-up(xxxl) {
+      gap: 24px;
+    }
+  
+    @include media-breakpoint-between(lg, xxxl) {
+      gap: 20px;
+    }
+
+    @include media-breakpoint-between(sm, lg) {
+      gap: 16px;
+    }
+
+    @include media-breakpoint-down(sm) {
+      gap: 14px;
+    }
+  }
 }

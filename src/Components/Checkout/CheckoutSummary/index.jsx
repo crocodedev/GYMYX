@@ -184,7 +184,7 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0 }) => {
           <Button
             onClick={handlerClicktByBalance}
             size="l"
-            variant="ligt-blue-gradient"
+            variant="light-blue-gradient"
             fullSize={true}
             label={!loading ? 'Списать с баланса' : 'Ожидание'}
             icon={!loading ? 'arrow' : null}

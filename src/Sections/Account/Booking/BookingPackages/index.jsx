@@ -28,6 +28,10 @@ const BookingPackages = ({setLoadIsShow}) => {
       console.log('error')
     }
   }
+
+  const submitSplit = () => {
+    console.log('submit split')
+  }
  
   useEffect(() => {
     setLoadIsShow(true)
@@ -48,7 +52,7 @@ const BookingPackages = ({setLoadIsShow}) => {
         <Container>
           <div className={styles["booking-packages__content"]}>
             <PackagesCard packageData={packages?.[packageIdActive]}/>
-            <PackagesSummary packageData={packages?.[packageIdActive]} handlerSubmit={submit}/>
+            <PackagesSummary packageData={packages?.[packageIdActive]} handlerSubmit={submit} submitSplit={submitSplit}/>
           </div>
         </Container>
       </>

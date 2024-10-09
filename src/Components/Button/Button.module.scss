@@ -67,6 +67,36 @@
     }
   }
 
+  &__icon--split {
+    display: flex;
+    align-items: center;
+
+    @include media-breakpoint-up(xxxl) {
+      height: 48px;
+      margin-left: 20px;
+    }
+
+    @include media-breakpoint-between(xl, xxxl) {
+      height: 34px;
+      margin-left: 10px;
+    }
+
+    @include media-breakpoint-between(lg, xl) {
+      height: 26px;
+      margin-left: 10px;
+    }
+
+    @include media-breakpoint-down(lg) {
+      height: 20px;
+      margin-left: 8px;
+    }
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
   &-blue {
     background: #294ae7;
     color: white;
@@ -88,7 +118,7 @@
     background: linear-gradient(270deg, #0d2dc8 25%, #294ae7 100%);
   }
 
-  &-ligt-blue-gradient {
+  &-light-blue-gradient {
     color: #fff;
     background: linear-gradient(270deg, #5871E8 45%, #7B92FF 100%);
   }
