@@ -15,9 +15,9 @@ const PackagesHeader = ({packagesData, packageIdActive, setPackageIdActive}) => 
         <div className={styles['package-header__inner']}>
           <div className={styles['package-header__items']}>
             {packagesData.map((packageItem, i) => <PackagesTagItem id={i} name={packageItem.name} isActive={packageIdActive == i} key={i} handlerClick={handlerClick}/>)}
-            <PackagesTagItem name='Мини'/>
+            {/* <PackagesTagItem name='Мини'/>
             <PackagesTagItem name='Миди'/>
-            <PackagesTagItem name='Макс'/>
+            <PackagesTagItem name='Макс'/> */}
           </div>
         </div>
       </Container>

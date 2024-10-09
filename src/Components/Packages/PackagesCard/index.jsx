@@ -17,7 +17,7 @@ const PackagesCard = ({packageData}) => {
           <span className={styles['packages-card__name']}>{name}</span>
           <span className={styles['packages-card__price']}>{price} ₽/тренировка</span>
           <ol className={styles['packages-card__description-list']}>
-            {description.map(text => <li className={styles['packages-card__description-item']}>{text}</li>)}
+            {description.map(text => <li className={styles['packages-card__description-item']} key={i}>{text}</li>)}
           </ol>
           <span className={styles['packages-card__benefit']}>выгоднее на {savingPrice}₽</span>
           <div className={styles['packages-card__workout-list']}>
