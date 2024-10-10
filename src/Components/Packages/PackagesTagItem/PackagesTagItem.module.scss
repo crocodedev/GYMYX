@@ -28,19 +28,22 @@
 
   @include media-breakpoint-between(sm, lg) {
     flex: 1 0 auto;
-    min-width: 100px;
-    padding: 5px 10px;
+    max-width: max-content;
+    padding: 5px 20px;
     font-size: 16px;
     line-height: 22px;
   }
 
   @include media-breakpoint-down(sm) {
     flex: 1 0 auto;
-    width: 100px;
-    min-width: max-content;
-    padding: 3px 10px;
+    max-width: max-content;
+    padding: 3px 17px;
     font-size: 14px;
     line-height: 20px;
+    
+    &::after {
+      content: '';
+    }
   }
 
   &--active {

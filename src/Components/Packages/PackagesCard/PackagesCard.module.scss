@@ -32,9 +32,7 @@
     color: #fff;
   }
 
-  &__name, 
-  &__description-item,
-  &__benefit {
+  &__name {
     font-weight: 500;
 
     @include media-breakpoint-up(xxxl) {
@@ -106,51 +104,95 @@
       gap: 8px;
     }
 
-    @include media-breakpoint-between(lg, xxxl) {
+    @include media-breakpoint-between(xl, xxxl) {
       padding-left: 24px;
       margin-bottom: 30px;
       gap: 3px;
     }
 
-    @include media-breakpoint-between(sm, lg) {
+    @include media-breakpoint-between(lg, xl) {
       padding-left: 21px;
+      margin-bottom: 30px;
+      gap: 3px;
+    }
+
+    @include media-breakpoint-between(sm, lg) {
+      padding-left: 20px;
       margin-bottom: 25px;
       gap: 3px;
     }
 
     @include media-breakpoint-down(sm) {
-      padding-left: 19px;
-      margin-bottom: 15px;
+      padding-left: 14px;
+      margin-bottom: 20px;
       gap: 3px;
     }
   }
 
   &__description-item {
+    font-weight: 500;
+
+    @include media-breakpoint-up(xxxl) {
+      font-size: 26px;
+      line-height: 35px;
+    }
+
+    @include media-breakpoint-between(xl, xxxl) {
+      font-size: 20px;
+      line-height: 27px;
+    }
+
+    @include media-breakpoint-between(lg, xl) {
+      font-size: 18px;
+      line-height: 22px;
+    }
+
+    @include media-breakpoint-between(sm, lg) {
+      font-size: 16px;
+      line-height: 20px;
+    }
+
+    @include media-breakpoint-down(sm) {
+      font-size: 12px;
+      line-height: 16.2px;
+    }
   }
 
   &__benefit {
     width: max-content;
     border-radius: 40px;
-    border: 2px solid #fff;
+    font-weight: 500;
 
     @include media-breakpoint-up(xxxl) {
       margin-bottom: 20px;
       padding: 4px 30px;
+      font-size: 26px;
+      line-height: 35px;
+      border: 2px solid #fff;
     }
 
     @include media-breakpoint-between(lg, xxxl) {
       margin-bottom: 28px;
       padding: 4px 25px;
+      font-size: 20px;
+      line-height: 27px;
+      border: 2px solid #fff;
     }
 
     @include media-breakpoint-between(sm, lg) {
       margin-bottom: 20px;
       padding: 4px 20px;
+      font-size: 16px;
+      line-height: 20px;
+      border: 2px solid #fff;
     }
 
     @include media-breakpoint-down(sm) {
       margin-bottom: 10px;
-      padding: 3px 10px;
+      padding: 3px 14px;
+      font-size: 12px;
+      line-height: 16.2px;
+      border: 1px solid #fff;
     }
   }
 
@@ -240,7 +282,7 @@
         width: 30px;
         height: 30px;
         border-radius: 6px;
-        background-size: 12px;
+        background-size: 14px;
       }
     }
 

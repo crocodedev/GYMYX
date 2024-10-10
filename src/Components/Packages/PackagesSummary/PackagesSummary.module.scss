@@ -52,30 +52,30 @@
     }
   }
 
-  &__shopping-item {
-    font-weight: 500;
-    color: #fff;
+  // &__shopping-item {
+  //   font-weight: 500;
+  //   color: #fff;
 
-    @include media-breakpoint-up(xxxl) {
-      font-size: 26px;
-      line-height: 35.1px;
-    }
+  //   @include media-breakpoint-up(xxxl) {
+  //     font-size: 26px;
+  //     line-height: 35.1px;
+  //   }
   
-    @include media-breakpoint-between(lg, xxxl) {
-      font-size: 24px;
-      line-height: 29.26px;
-    }
+  //   @include media-breakpoint-between(lg, xxxl) {
+  //     font-size: 24px;
+  //     line-height: 29.26px;
+  //   }
 
-    @include media-breakpoint-between(sm, lg) {
-      font-size: 20px;
-      line-height: 25px;
-    }
+  //   @include media-breakpoint-between(sm, lg) {
+  //     font-size: 20px;
+  //     line-height: 25px;
+  //   }
 
-    @include media-breakpoint-down(sm) {
-      font-size: 16px;
-      line-height: 20px;
-    }
-  }
+  //   @include media-breakpoint-down(sm) {
+  //     font-size: 16px;
+  //     line-height: 20px;
+  //   }
+  // }
 
   &__result {
     display: flex;
@@ -102,7 +102,8 @@
   }
 
   &__result-text,
-  &__result-price {
+  &__result-price,
+  &__shopping-item {
     font-weight: 600;
     color: #fff;
 

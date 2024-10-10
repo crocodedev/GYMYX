@@ -11,16 +11,14 @@ const PackagesHeader = ({packagesData, packageIdActive, setPackageIdActive}) => 
 
   return (
     <section className={styles['package-header']}>
-      <Container>
-        <div className={styles['package-header__inner']}>
-          <div className={styles['package-header__items']}>
-            {packagesData.map((packageItem, i) => <PackagesTagItem id={i} name={packageItem.name} isActive={packageIdActive == i} key={i} handlerClick={handlerClick}/>)}
-            {/* <PackagesTagItem name='Мини'/>
-            <PackagesTagItem name='Миди'/>
-            <PackagesTagItem name='Макс'/> */}
-          </div>
+      <div className={styles['package-header__inner']}>
+      <Container classTitle={styles['container']}>
+        <div className={styles['package-header__items']}>
+          {packagesData.map((packageItem, i) => <PackagesTagItem id={i} name={packageItem.name} isActive={packageIdActive == i} key={i} handlerClick={handlerClick}/>)}
+          <div className={styles['last']}>x</div>
         </div>
       </Container>
+      </div>
     </section>
   )
 }
