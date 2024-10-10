@@ -42,13 +42,6 @@ const BookingSignUp = () => {
         <BookingCalendar change={false}/>
         <BookingSteps stepNumber={1} stepTitle={'Выберите день'} balance={balance} packageIsActive={balance > 0}/>
       </BookingSignUpContent>
-
-      {/* <Container>
-        <BookingGym 
-          gymTitle={gym?.name}
-          handleChangeGym={() => setShowModal((prev) => !prev)}
-        />
-      </Container> */}
     </>
   );
 };

@@ -20,7 +20,11 @@ const ProfileTrainings = ({isShowTranfer = false}) => {
   const { data: sessionData } = useSession();
   const [closestTraining, setClosestTraining] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState({
+    type: '',
+    isShow: false,
+    text: ''
+  });
   const [curIdItem, setCurIdItem] = useState(null);
   const [loadingDelete, setLoadingDelete] = useState(false);
   const [transferIsActive, setTransferIsActive] = useState(false)
@@ -80,7 +84,12 @@ const ProfileTrainings = ({isShowTranfer = false}) => {
   };
 
   const handleClickItem = (id) => {
-    handleShow();
+    const less4Hours = isDifferenceMoreThan4Hours(closestTraining.date, closestTraining.time)
+    if(less4Hours) {
+      modalTypes('warning')
+    } else {
+      modalTypes('delete')
+    }
     setCurIdItem(id);
   };
 
@@ -94,6 +103,16 @@ const ProfileTrainings = ({isShowTranfer = false}) => {
   };
 
   const handlerClickChange = (oldId, oldDate, oldTime) => {
+    const less4Hours = isDifferenceMoreThan4Hours(closestTraining.date, closestTraining.time)
+    if(less4Hours) {
+      modalTypes('notification')
+    } else {
+      changeTraining(oldId, oldDate, oldTime)
+    }
+    
+  }
+
+  const changeTraining = (oldId, oldDate, oldTime) => {
     dispatch(resetTrainingData())
     console.log(oldId, oldDate, oldTime) 
     if (!sessionData?.user?.accessToken) return;
@@ -101,6 +120,39 @@ const ProfileTrainings = ({isShowTranfer = false}) => {
     dispatch(updateBookingVisitDate({ visitDate: {value: "", time: []}}));
     dispatch(setTrainingData({oldId, oldDate, oldTime}))
     router.push(`/lk/booking/change-trainitg`)
+  }
+
+  const modalTypes = (type) => {
+    if(type === 'delete') {
+      setShowModal(prev => ({
+        ...prev,
+        type: 'delete',
+        isShow: true,
+        text: 'Вы точно хотите отменить тренировку?'
+      }))
+    } else if(type === 'warning') {
+      setShowModal(prev => ({
+        ...prev,
+        type: 'delete',
+        isShow: true,
+        text: `До тренировки осталось меньше 4 часов, средства не будут возвращены. 
+        Отменить?`
+      }))
+    } else if(type === 'notification') {
+      setShowModal(prev => ({
+        ...prev,
+        type: 'notification',
+        isShow: true,
+        text: `Извините, перенос возможен не позднее 4 часов до занятия :(`
+      }))
+    } else {
+      setShowModal(prev => ({
+        ...prev,
+        type: '',
+        isShow: false,
+        text: ``
+      }))
+    }
   }
 
   const isDifferenceMoreThan4Hours = (dateStr, timeStr) => { 
@@ -118,17 +170,24 @@ const ProfileTrainings = ({isShowTranfer = false}) => {
 
   return (
     <>
-      {showModal && (
-        <Modal handleClose={handleShow} text={'Вы точно хотите отменить тренировку?'}>
-          <Button
-            fullSize={true}
-            size="l"
-            label={!loadingDelete ? 'Да' : 'Загрузка'}
-            variant="blue"
-            onClick={handleClickDelete}
-            disabledShadow={true}
-          />
-          <Button fullSize={true} size="l" label="Нет" variant="black" onClick={handleShow} disabledShadow={true} />
+      {showModal.isShow && (
+        <Modal handleClose={handleShow} text={showModal.text}>
+          {showModal.type === 'delete' && (
+            <>
+              <Button
+              fullSize={true}
+              size="l"
+              label={!loadingDelete ? 'Да' : 'Загрузка'}
+              variant="blue-gradient"
+              onClick={handleClickDelete}
+              disabledShadow={true}
+            />
+            <Button fullSize={true} size="l" label="Нет" variant="black-gradient" onClick={handleShow} disabledShadow={true} />
+            </>
+          )}
+          {showModal.type === 'notification' && (
+            <Button fullSize={true} size="l" label="Закрыть" variant="blue-gradient" onClick={modalTypes} disabledShadow={true} />
+          )}
         </Modal>
       )}
 
@@ -152,7 +211,7 @@ const ProfileTrainings = ({isShowTranfer = false}) => {
             </div>
             <div className={styles['profile-trainings__asside']}>
               <div className={styles['profile-trainings__btn']} onClick={() => handleClickItem(closestTraining?.id)}>
-                <img src="/icons/cross.svg" alt="" />
+                <img src="/icons/cross.svg" alt="cross" />
               </div>
               {isShowTranfer && 
               (
