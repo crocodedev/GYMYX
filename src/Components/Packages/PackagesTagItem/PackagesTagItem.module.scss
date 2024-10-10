@@ -29,6 +29,7 @@
   @include media-breakpoint-between(sm, lg) {
     flex: 1 0 auto;
     max-width: max-content;
+    min-width: 110px;
     padding: 5px 20px;
     font-size: 16px;
     line-height: 22px;
@@ -37,6 +38,7 @@
   @include media-breakpoint-down(sm) {
     flex: 1 0 auto;
     max-width: max-content;
+    min-width: 90px;
     padding: 3px 17px;
     font-size: 14px;
     line-height: 20px;

@@ -113,7 +113,18 @@
   &__buttons {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+
+    @include media-breakpoint-up(xxxl) {
+      gap: 24px;
+    }
+
+    @include media-breakpoint-between(lg, xxxl) {
+      gap: 20px;
+    }
+
+    @include media-breakpoint-down(lg) {
+      gap: 14px;
+    }
   }
 
   &__summary-error {

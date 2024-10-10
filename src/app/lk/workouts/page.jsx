@@ -61,7 +61,7 @@ const Training = () => {
   const [loadingDelete, setLoadingDelete] = useState(false);
   const [deleteIsError, setDeleteIsError] = useState(false)
   const [modalData, setModalData] = useState({
-    type: '', //transfer, delete, toggle
+    type: '', //transfer, delete, toggle, confirmation
     isShow: false,
     text: '',
   })
@@ -149,7 +149,6 @@ const Training = () => {
 
   const handleShow = (id = -1) => {
     setDeleteIsError(false)
-    modalType('delete')
     setCurrentItemId(id);
   };
 
@@ -181,7 +180,16 @@ const Training = () => {
 
   const modalType = (type) => {
     console.log(type)
-    if(type == 'delete') {
+    if(type == 'confirmation') {
+      setModalData(prev => ({
+        ...prev,
+        type: 'delete',
+        isShow: true,
+        text: `До тренировки осталось меньше 4 часов, средства не будут возвращены. 
+        Отменить?`
+      }))
+    }
+    else if(type == 'delete') {
       setModalData(prev => ({
         ...prev,
         type: 'delete',
@@ -224,29 +232,29 @@ const Training = () => {
               disabledShadow={true}
             />
           )}
-          {modalData.type == 'delete' && (
+          {(modalData.type == 'delete' || modalData.type == 'confirmation') && (
             <div style={{width: '100%'}}>
-            <div style={{display: 'flex', gap: '24px'}}>
-              <Button
-                onClick={handleClickDelete}
-                fullSize={true}
-                size="l"
-                label={'Да'}
-                disabled={loadingDelete}
-                variant="black-gradient"
-                disabledShadow={true}
-              />
-              <Button 
-                onClick={modalType} 
-                fullSize={true} 
-                size="l" 
-                label="Нет" 
-                variant="blue-gradient" 
-                disabledShadow={true} 
-              />
+              <div style={{display: 'flex', gap: '24px'}}>
+                <Button
+                  onClick={handleClickDelete}
+                  fullSize={true}
+                  size="l"
+                  label={'Да'}
+                  disabled={loadingDelete}
+                  variant="black-gradient"
+                  disabledShadow={true}
+                />
+                <Button 
+                  onClick={modalType} 
+                  fullSize={true} 
+                  size="l" 
+                  label="Нет" 
+                  variant="blue-gradient" 
+                  disabledShadow={true} 
+                />
+              </div>
+              {deleteIsError && <p className="" style={{color: 'red', fontSize: '18px', paddingTop: '15px', textAlign: 'center'}}>Произошла ошибка попробуйте позже</p>}
             </div>
-            {deleteIsError && <p className="" style={{color: 'red', fontSize: '18px', paddingTop: '15px', textAlign: 'center'}}>Произошла ошибка попробуйте позже</p>}
-          </div>
           )}
         </Modal>
       )}

@@ -24,7 +24,7 @@ const INIT_FORM_DATA = {
   receivedCode: null,
 };
 
-const AccountLoginForm = ({ handleToogleModal, setIsShowLoading }) => {
+const AccountLoginForm = ({ handleToogleModal, setIsShowLoading, setIsShowModalNumber }) => {
   const inputRef = useRef();
   const session = useSession();
   const inputCodeRef = useRef();
@@ -113,14 +113,8 @@ const AccountLoginForm = ({ handleToogleModal, setIsShowLoading }) => {
     setLoading(false);
   };
 
-  useEffect(() => {
-    if (session.status === 'authenticated') {
-      let url = session?.data?.user?.full_name ? '/lk/profile' : '/lk/login/create-profile'
-      router.push(url);
-    }
-  }, [session.status]);
-
-  useEffect(() => {
+  const loginFromTelegram = () => {
+    console.log('teletgram')
     const tg = WebApp
     const userData = tg.initDataUnsafe?.user
     const userId = userData?.id // 1685607638
@@ -132,6 +126,10 @@ const AccountLoginForm = ({ handleToogleModal, setIsShowLoading }) => {
             token: res.access_token,
             redirect: false,
           });
+        } else if(res?.message === 'not found user') {
+          console.log(res.message)
+          setIsShowModalNumber(true)
+          setIsShowLoading(false);
         } else {
           setIsShowLoading(false);
         }
@@ -139,7 +137,41 @@ const AccountLoginForm = ({ handleToogleModal, setIsShowLoading }) => {
     } else {
       setIsShowLoading(false);
     }
-  }, [])
+  }
+
+  useEffect(() => {
+    console.log(session.status)
+    if(session.status === 'loading') {
+      setIsShowLoading(true);
+    } else if (session.status === 'authenticated') {
+      let url = session?.data?.user?.full_name ? '/lk/profile' : '/lk/login/create-profile'
+      router.push(url);
+    } else if(session.status === 'unauthenticated') {
+      loginFromTelegram()
+    } 
+  }, [session.status]);
+
+
+  // useEffect(() => {
+  //   const tg = WebApp
+  //   const userData = tg.initDataUnsafe?.user
+  //   const userId = userData?.id // 1685607638
+
+  //   if(userId) {
+  //     authTelegram(userId).then(res => {
+  //       if(res?.access_token) {
+  //         signIn('credentials', {
+  //           token: res.access_token,
+  //           redirect: false,
+  //         });
+  //       } else {
+  //         setIsShowLoading(false);
+  //       }
+  //     })
+  //   } else {
+  //     setIsShowLoading(false);
+  //   }
+  // }, [])
 
 
 

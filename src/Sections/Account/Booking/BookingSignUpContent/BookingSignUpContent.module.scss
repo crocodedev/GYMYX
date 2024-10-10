@@ -29,4 +29,14 @@
       }
     }
   }
+
+  &__gym {
+    @include media-breakpoint-up(md) {
+      display: none;
+    }
+
+    @include media-breakpoint-down(md) {
+      margin-top: 20px;
+    }
+  }
 }

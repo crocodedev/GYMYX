@@ -67,8 +67,8 @@
 
     &--xl {
       @include media-breakpoint-down(md) {
-        max-width: 93%;
-        width: max-content;
+        width: 93%;
+        max-width: 310px;
       }
   
       @include media-breakpoint-between(md, xl) {

@@ -95,9 +95,9 @@ const ChangeTime = () => {
         </Modal>
       )}
       <NavigationBack buttonLabel={'Вернуться к выбору дней'} link={'/lk/booking/change-trainitg'} />
-      <BookingSignUpHeading showButtonEditGym={false} headingTitle={'Купить тренировоку'}/>
+      <BookingSignUpHeading showButtonEditGym={false} headingTitle={'Перенести тренировоку'}/>
       <BookingSignUpTags change={true}/>
-      <BookingSignUpContent>
+      <BookingSignUpContent gymIsShow={false}>
         <BookingTimePricing variants={pricesVariants} change={true} setModaldata={setModalData} setIsLoad={setIsLoad}/>
         <BookingSteps stepNumber={2} stepTitle={'Выберите время'} />
       </BookingSignUpContent>

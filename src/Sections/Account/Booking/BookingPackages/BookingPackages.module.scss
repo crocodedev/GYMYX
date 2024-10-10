@@ -11,14 +11,19 @@
     gap: 30px;
   }
 
+  @include media-breakpoint-between(lg, xl) {
+    padding-bottom: 60px;
+  }
+
   @include media-breakpoint-between(sm, lg) {
     flex-direction: column;
     gap: 25px;
+    padding-bottom: 40px;
   }
 
   @include media-breakpoint-down(sm) {
     flex-direction: column;
     gap: 25px;
-    padding-bottom: 40px;
+    padding-bottom: 20px;
   }
 }

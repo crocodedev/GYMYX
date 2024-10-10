@@ -48,34 +48,9 @@
     }
 
     @include media-breakpoint-down(sm) {
-      margin-bottom: 15px;
+      margin-bottom: 10px;
     }
   }
-
-  // &__shopping-item {
-  //   font-weight: 500;
-  //   color: #fff;
-
-  //   @include media-breakpoint-up(xxxl) {
-  //     font-size: 26px;
-  //     line-height: 35.1px;
-  //   }
-  
-  //   @include media-breakpoint-between(lg, xxxl) {
-  //     font-size: 24px;
-  //     line-height: 29.26px;
-  //   }
-
-  //   @include media-breakpoint-between(sm, lg) {
-  //     font-size: 20px;
-  //     line-height: 25px;
-  //   }
-
-  //   @include media-breakpoint-down(sm) {
-  //     font-size: 16px;
-  //     line-height: 20px;
-  //   }
-  // }
 
   &__result {
     display: flex;
@@ -97,7 +72,7 @@
     }
 
     @include media-breakpoint-down(sm) {
-      padding: 15px 0 15px;
+      padding: 22px 0 14px;
     }
   }
 
@@ -111,10 +86,15 @@
       font-size: 40px;
       line-height: 45.2px;
     }
-  
-    @include media-breakpoint-between(lg, xxxl) {
+
+    @include media-breakpoint-between(xl, xxxl) {
       font-size: 30px;
       line-height: 33.9px;
+    }
+  
+    @include media-breakpoint-between(lg, xl) {
+      font-size: 28px;
+      line-height: 30px;
     }
 
     @include media-breakpoint-between(sm, lg) {
@@ -123,15 +103,14 @@
     }
 
     @include media-breakpoint-down(sm) {
-      font-size: 20px;
-      line-height: 25px;
+      font-size: 18px;
+      line-height: 20.7px;
     }
   }
 
   &__buttons {
     display: flex;
     flex-direction: column;
-    gap: 24px;
 
     @include media-breakpoint-up(xxxl) {
       gap: 24px;

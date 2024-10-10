@@ -12,17 +12,8 @@ export async function POST(request) {
         body: JSON.stringify({ telegram_id: requestData.telegram_id}),
       });
 
-      // const result = await response;
+      return response
 
-      if (response.ok) {
-        // if (result?.message === 'Unauthorized') {
-        //   return Response.json({ error: 'Unauthorized' });
-        // }
-        // return Response.json({ error: 'Network response was not ok' });
-        return response
-      }
-
-      // return Response.json({ data: result?.data });
     } catch (error) {
       return Response.json({ error: 'Error fetching data' });
     }

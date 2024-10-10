@@ -7,8 +7,10 @@ import BookingCalendar from '@/Sections/Account/Booking/BookingCalendar';
 import BookingSteps from '@/Sections/Account/Booking/BookingSteps';
 import { useSelector } from 'react-redux';
 import BookingSignUpContent from '@/Sections/Account/Booking/BookingSignUpContent';
+import BookingGym from '@/Sections/Account/Booking/BookingGym';
 import { useState } from 'react';
 import { useSession } from 'next-auth/react';
+import Container from '@/Components/Container';
 
 const BookingSignUp = () => {
   const { data: sessionData } = useSession();
@@ -36,10 +38,17 @@ const BookingSignUp = () => {
         gymTitle={gym?.name}
         headingTitle={variant === 'single' ? 'Записаться на тренировку' : 'Купить несколько тренировок'}
       />
-      <BookingSignUpContent>
+      <BookingSignUpContent gymTitle={gym?.name} handleChangeGym={() => setShowModal((prev) => !prev)}>
         <BookingCalendar change={false}/>
         <BookingSteps stepNumber={1} stepTitle={'Выберите день'} balance={balance} packageIsActive={balance > 0}/>
       </BookingSignUpContent>
+
+      {/* <Container>
+        <BookingGym 
+          gymTitle={gym?.name}
+          handleChangeGym={() => setShowModal((prev) => !prev)}
+        />
+      </Container> */}
     </>
   );
 };

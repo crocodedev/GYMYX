@@ -77,7 +77,7 @@ const ChooseTime = () => {
       <NavigationBack buttonLabel={'Вернуться к выбору дней'} link={'/lk/booking/sign-up'} />
       <BookingSignUpHeading showButtonEditGym={false} headingTitle={'Купить несколько тренировок'} />
       <BookingSignUpTags change={false}/>
-      <BookingSignUpContent>
+      <BookingSignUpContent gymIsShow={false}>
         <BookingTimePricing variants={pricesVariants} change={false}/>
         <BookingSteps stepNumber={2} stepTitle={'Выберите время'} balance={balance} packageIsActive={balanceCount > 0}/>
       </BookingSignUpContent>

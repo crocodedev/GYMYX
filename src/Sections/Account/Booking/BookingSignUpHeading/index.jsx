@@ -1,6 +1,6 @@
 import Container from "@/Components/Container"
-import Button from "@/Components/Button"
 import styles from "./BookingSignUpHeading.module.scss"
+import BookingGym from "../BookingGym"
 
 const BookingSignUpHeading = ({
   showButtonEditGym = true,
@@ -16,16 +16,11 @@ const BookingSignUpHeading = ({
             {headingTitle}
           </p>
           {showButtonEditGym && (
-            <div className={styles["booking-sign-up-heading__info"]}>
-              <p className={styles["booking-sign-up-heading__info-title"]}>
-                {gymTitle}
-              </p>
-              <Button
-                onClick={handleChangeGym}
-                variant="blue"
-                label={"Изменить зал"}
-              />
-            </div>
+            <BookingGym 
+              classTitle={styles['booking-sign-up-heading__gym']}
+              gymTitle={gymTitle}
+              handleChangeGym={handleChangeGym}
+            />
           )}
         </div>
       </Container>

@@ -92,16 +92,16 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0 }) => {
   const setModal = (type) => {
     if(type == 'confirm') {
       const countTrainint = finalArr.reduce((acc, el) => acc + (el?.count || 0), 0)
-      const text = `Списать ${countTrainint} ${countTrainint == 1 
+      const text = countTrainint == 1 
       ? 'тренировку' 
       : countTrainint > 1 && countTrainint <= 4 
       ? 'тренировки' 
-      : 'тренировок'} с баланса?`
+      : 'тренировок'
       setModalData(prev => ({
         ...prev,
         type: 'confirm',
         isShow: true,
-        text: text,
+        text: `Списать ${countTrainint} ${text} с баланса?`,
       }))
     } else if(type == 'crowded') {
       setModalData(prev => ({
@@ -150,7 +150,7 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0 }) => {
       <Modal 
       text={modalData.text} 
       handleClose={modalData.type == 'successful' ? ()=>{} : closeModal} 
-      size={modalData.type == 'crowded' ? 'xl' :''}>
+      size={modalData.type == 'crowded' ? 'xl' : ''}>
         {ModalInner(modalData.type, sessionData.user.accessToken, update, gym, paidData, setModal, isLoad, setIsLoad, list)}
       </Modal>
     )}
@@ -328,7 +328,7 @@ function ModalInner(type, token, updateUserData, gym, trainingsObj, setModal, is
             variant="blue-gradient"
             fullSize={true}
             icon={'arrow'}
-            label={'Докупить тренировки'}
+            label={'Оплатить'}
             disabledShadow={true}
             disabled={isLoad}
           />
