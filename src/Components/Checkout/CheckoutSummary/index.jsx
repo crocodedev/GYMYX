@@ -73,7 +73,7 @@ const CheckoutSummary = ({ items, gym }) => {
 
   useEffect(() => {
     if (sessionData?.user) {
-      setIsFirstBooking(!sessionData.user.enter_code);
+      setIsFirstBooking(sessionData.user.is_new);
       sortArr();
       setLoadingPage(false);
     }
