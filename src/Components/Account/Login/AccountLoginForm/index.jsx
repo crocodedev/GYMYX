@@ -118,7 +118,7 @@ const AccountLoginForm = ({ handleToogleModal, setIsShowLoading }) => {
     console.log('teletgram')
     const tg = WebApp
     const userData = tg.initDataUnsafe?.user
-    const userId = 1685607639// userData?.id // 1685607638
+    const userId = userData?.id // 1685607638
 
     if(userId) {
       authTelegram(userId).then(res => {
