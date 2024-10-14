@@ -5,7 +5,7 @@ const PackagesSummary = ({packageData, handlerSubmit, submitSplit}) => {
   console.log(packageData)
   const workoutsNumber = packageData?.count || 0
   const price = packageData?.price?.package || 0
-  const result = price * workoutsNumber
+  const result = (price * workoutsNumber) || 0
   
 
   return (

@@ -7,6 +7,7 @@ import AccountCheckBox from '@/Components/Account/Login/AccountCheckBox';
 import AccountRepeatCode from '@/Components/Account/Login/AccountRepeatCode';
 import Button from '@/Components/Button';
 import { useSession } from 'next-auth/react';
+import Image from 'next/image';
 
 import styles from './AccountLoginForm.module.scss';
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -128,9 +129,7 @@ const AccountLoginForm = ({ handleToogleModal, setIsShowLoading }) => {
             redirect: false,
           });
         } else if(res?.message === 'not found user') {
-          console.log(res.message)
           setErrorTelegram(true)
-          // setIsShowModalNumber(true)
           setIsShowLoading(false);
         } else {
           setIsShowLoading(false);
@@ -164,7 +163,7 @@ const AccountLoginForm = ({ handleToogleModal, setIsShowLoading }) => {
       <div className={styles['error-login-telegram']}>
         <div className={styles['error-login-telegram__inner']}>
           <div className={styles['error-login-telegram__logo']}>
-            <img src="/icons/loginFormIcon.svg" />
+            <Image src="/icons/loginFormIcon.svg" width={300} height={300} alt='Logo'/>
           </div>
           <p className={styles['error-login-telegram__text']}>Пожалуйста, поделитесь контактом в чате, чтобы продолжить</p>
           <Button
@@ -182,7 +181,7 @@ const AccountLoginForm = ({ handleToogleModal, setIsShowLoading }) => {
     <div className={styles['account-login-form']}>
       <div className={styles['account-login-form__wrapper']}>
         <div className={styles['account-login-form__logo']}>
-          <img src="/icons/loginFormIcon.svg" />
+          <Image src="/icons/loginFormIcon.svg" width={300} height={300} alt='Logo'/>
         </div>
         <h1 className={styles['account-login-form__title']}>Войти или зарегистрироваться</h1>
         {!data.receivedCode && (

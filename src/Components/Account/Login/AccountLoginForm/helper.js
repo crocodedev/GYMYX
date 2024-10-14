@@ -1,5 +1,4 @@
 export const authTelegram = async (id) => {
-  // try {
     const result = await fetch('/api/auth/telegramauth', {
       cache: 'no-store',
       method: 'POST',
@@ -16,9 +15,4 @@ export const authTelegram = async (id) => {
       } else if(response?.message) {
         return response
       }
-
-  // } catch(err) {
-  //   console.log('err', err)
-  //   return {error: err}
-  // }
   };
