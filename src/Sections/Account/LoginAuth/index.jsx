@@ -10,12 +10,12 @@ import Loading from "@/Components/Loading";
 const LoginAuth = () => {
   const [isShowModal, setIsShowModal] = useState(false);
   const [isShowLoading, setIsShowLoading] = useState(true)
-  const [isShowModalNumber, setIsShowModalNumber] = useState(false)
+  // const [isShowModalNumber, setIsShowModalNumber] = useState(false)
 
   return (
     <>
     {isShowLoading && <Loading full_screen={true} background={true}/>}
-    {isShowModalNumber && <Modal handleClose={() => {}} text={'Поделитесь номером в телеграмм боте'}/>}
+    {/* {isShowModalNumber && <Modal handleClose={() => {}} text={'Поделитесь номером в телеграмм боте'}/>} */}
     
     <section className={styles["account-auth"]}>
       <div className={styles["account-auth__wrapper"]}>
@@ -34,7 +34,7 @@ const LoginAuth = () => {
         <AccountLoginForm
           handleToogleModal={() => setIsShowModal((prev) => !prev)}
           setIsShowLoading={setIsShowLoading}
-          setIsShowModalNumber={setIsShowModalNumber}
+          // setIsShowModalNumber={setIsShowModalNumber}
         />
       </div>
     </section>

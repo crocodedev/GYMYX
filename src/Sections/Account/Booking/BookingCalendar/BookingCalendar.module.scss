@@ -26,6 +26,7 @@
   }
 
   &__calendar {
+    
     @include media-breakpoint-up(lg) {
       width: 100%;
     }

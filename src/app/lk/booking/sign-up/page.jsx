@@ -36,7 +36,7 @@ const BookingSignUp = () => {
       <BookingSignUpHeading
         handleChangeGym={() => setShowModal((prev) => !prev)}
         gymTitle={gym?.name}
-        headingTitle={variant === 'single' ? 'Записаться на тренировку' : 'Купить несколько тренировок'}
+        headingTitle={'Запишитесь на тренировки'}
       />
       <BookingSignUpContent gymTitle={gym?.name} handleChangeGym={() => setShowModal((prev) => !prev)}>
         <BookingCalendar change={false}/>

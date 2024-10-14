@@ -24,13 +24,14 @@ const INIT_FORM_DATA = {
   receivedCode: null,
 };
 
-const AccountLoginForm = ({ handleToogleModal, setIsShowLoading, setIsShowModalNumber }) => {
+const AccountLoginForm = ({ handleToogleModal, setIsShowLoading }) => {
   const inputRef = useRef();
   const session = useSession();
   const inputCodeRef = useRef();
   const router = useRouter();
   const [data, setData] = useState(INIT_FORM_DATA);
   const [loading, setLoading] = useState(false);
+  const [errorTelegram, setErrorTelegram] = useState(false)
 
   const handleChangePhone = useCallback(() => {
     const phone = checkValidPhone(inputRef.current.value);
@@ -117,7 +118,7 @@ const AccountLoginForm = ({ handleToogleModal, setIsShowLoading, setIsShowModalN
     console.log('teletgram')
     const tg = WebApp
     const userData = tg.initDataUnsafe?.user
-    const userId = userData?.id // 1685607638
+    const userId = 1685607639// userData?.id // 1685607638
 
     if(userId) {
       authTelegram(userId).then(res => {
@@ -128,7 +129,8 @@ const AccountLoginForm = ({ handleToogleModal, setIsShowLoading, setIsShowModalN
           });
         } else if(res?.message === 'not found user') {
           console.log(res.message)
-          setIsShowModalNumber(true)
+          setErrorTelegram(true)
+          // setIsShowModalNumber(true)
           setIsShowLoading(false);
         } else {
           setIsShowLoading(false);
@@ -151,31 +153,32 @@ const AccountLoginForm = ({ handleToogleModal, setIsShowLoading, setIsShowModalN
     } 
   }, [session.status]);
 
-
-  // useEffect(() => {
-  //   const tg = WebApp
-  //   const userData = tg.initDataUnsafe?.user
-  //   const userId = userData?.id // 1685607638
-
-  //   if(userId) {
-  //     authTelegram(userId).then(res => {
-  //       if(res?.access_token) {
-  //         signIn('credentials', {
-  //           token: res.access_token,
-  //           redirect: false,
-  //         });
-  //       } else {
-  //         setIsShowLoading(false);
-  //       }
-  //     })
-  //   } else {
-  //     setIsShowLoading(false);
-  //   }
-  // }, [])
-
-
+  const handlerClosePWA = () => {
+    WebApp.close();
+  }
 
   return (
+    
+    <>
+    {errorTelegram && (
+      <div className={styles['error-login-telegram']}>
+        <div className={styles['error-login-telegram__inner']}>
+          <div className={styles['error-login-telegram__logo']}>
+            <img src="/icons/loginFormIcon.svg" />
+          </div>
+          <p className={styles['error-login-telegram__text']}>Пожалуйста, поделитесь контактом в чате, чтобы продолжить</p>
+          <Button
+            onClick={handlerClosePWA}
+            fullSize={true}
+            size="xl"
+            variant="blue-gradient"
+            label='Назад в чат'
+          />
+        </div>
+      </div>
+    )}
+    
+
     <div className={styles['account-login-form']}>
       <div className={styles['account-login-form__wrapper']}>
         <div className={styles['account-login-form__logo']}>
@@ -225,6 +228,8 @@ const AccountLoginForm = ({ handleToogleModal, setIsShowLoading, setIsShowModalN
         )}
       </div>
     </div>
+    </>
+    
   );
 };
 

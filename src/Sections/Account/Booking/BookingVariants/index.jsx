@@ -38,7 +38,7 @@ const BookingVariants = () => {
           <BookingVariantsItem
             onClick={() => handleChooseVariant('/lk/booking/purchasing-package', 'multiple')}
             tagLabel={'тренировки на балансе'}
-            title={'Выбрать пакет тренировок'}
+            title={'Купить пакет тренировок'}
             variant="black"
             discount={discountData}
           />

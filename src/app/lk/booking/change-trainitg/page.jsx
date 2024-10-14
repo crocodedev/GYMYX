@@ -30,7 +30,7 @@ const BookingChangeTraining = () => {
       <BookingSignUpHeading
         handleChangeGym={() => setShowModal((prev) => !prev)}
         gymTitle={gym?.name}
-        headingTitle={'Перенести тренировку'}
+        headingTitle={'Перенесите тренировку'}
         showButtonEditGym={false}
       />
       <BookingSignUpContent gymIsShow={false}>

@@ -128,7 +128,7 @@ const BookingCalendar = ({change = false}) => {
           onClick={handleSubmit}
           disabled={!dates.length}
           fullSize={true}
-          variant="blue"
+          variant="blue-gradient"
           size="l"
           label={!loading ? 'Далее' : 'Загрузка'}
           icon="arrow"

@@ -242,4 +242,30 @@
       border-radius: 50px;
     }
   }
+
+  &-size-xl {
+    @include media-breakpoint-down(lg) {
+      padding: 11px 15.59px;
+      font-size: 18px;
+      border-radius: 27.83px;
+    }
+
+    @include media-breakpoint-between(lg, xxl) {
+      padding: 10px 20px;
+      font-size: 18px;
+      border-radius: 35px;
+    }
+
+    @include media-breakpoint-between(xxl, xxxl) {
+      padding: 10px 20px;
+      font-size: 20px;
+      border-radius: 40px;
+    }
+
+    @include media-breakpoint-up(xxxl) {
+      padding: 14px 28px;
+      font-size: 28px;
+      border-radius: 50px;
+    }
+  }
 }

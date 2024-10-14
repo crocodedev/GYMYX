@@ -2,7 +2,18 @@
 
 .booking-sign-up-heading {
   position: relative;
-  margin-bottom: 35px;
+
+  @include media-breakpoint-up(xxxl) {
+    margin-bottom: 35px;
+  }
+
+  @include media-breakpoint-between(lg, xxxl) {
+    margin-bottom: 30px;
+  }
+
+  @include media-breakpoint-down(lg) {
+    margin-bottom: 20px;
+  }
 
   &__wrapper {
     display: flex;
