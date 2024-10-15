@@ -141,6 +141,7 @@ const AccountLoginForm = ({ handleToogleModal, setIsShowLoading }) => {
   }
 
   useEffect(() => {
+    WebApp?.expand()
     console.log(session.status)
     if(session.status === 'loading') {
       setIsShowLoading(true);
