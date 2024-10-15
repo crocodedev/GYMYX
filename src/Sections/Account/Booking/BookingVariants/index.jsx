@@ -20,10 +20,6 @@ const BookingVariants = () => {
     router.push(url);
   };
 
-  const handlerPurchasinPackage = (url) => {
-    router.push(url);
-  }
-
   return (
     <section className={styles['booking-variants']}>
       <Container>

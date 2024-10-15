@@ -61,7 +61,6 @@ const ProfileTrainings = ({isShowTranfer = false}) => {
           })
 
         const closestTraining = sortedData[0];
-        // console.log(closestTraining)
         if(closestTraining) {
           setTransferIsActive(!isDifferenceMoreThan4Hours(closestTraining.date, closestTraining.time))
         }
@@ -114,7 +113,6 @@ const ProfileTrainings = ({isShowTranfer = false}) => {
 
   const changeTraining = (oldId, oldDate, oldTime) => {
     dispatch(resetTrainingData())
-    console.log(oldId, oldDate, oldTime) 
     if (!sessionData?.user?.accessToken) return;
 
     dispatch(updateBookingVisitDate({ visitDate: {value: "", time: []}}));

@@ -159,11 +159,18 @@
   }
 
   &__date-time {
-    border: 2px solid var(--white, #fff);
     color: var(--white, #fff);
     text-align: center;
     font-weight: 500;
     line-height: 135%;
+
+    @include media-breakpoint-up(md) {
+      border: 2px solid var(--white, #fff);
+    }
+
+    @include media-breakpoint-down(md) {
+      border: 1px solid var(--white, #fff);
+    }
 
     @include media-breakpoint-down(xxl) {
       font-size: 12px;

@@ -21,11 +21,5 @@
       margin-top: 40px;
       gap: 40px;
     }
-
-    // &:not(.one-child) {
-    //   @include media-breakpoint-up(md) {
-    //     grid-template-columns: repeat(2, 1fr);
-    //   }
-    // }
   }
 }

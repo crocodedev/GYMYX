@@ -7,7 +7,6 @@
   gap: 20px;
 
   &__item {
-    border: 2px solid #fff;
     border-radius: 50px;
     color: #fff;
 
@@ -16,6 +15,7 @@
       font-weight: 500;
       font-size: 26px;
       line-height: 25.1px;
+      border: 2px solid #fff;
     }
 
     @include media-breakpoint-between(xxl, xxxl) {
@@ -23,6 +23,7 @@
       font-weight: 600;
       font-size: 20px;
       line-height: 27px;
+      border: 2px solid #fff;
     }
 
     @include media-breakpoint-between(md, xxl) {
@@ -30,6 +31,7 @@
       font-weight: 600;
       font-size: 18px;
       line-height: 24px;
+      border: 2px solid #fff;
     }
 
     @include media-breakpoint-down(md) {
@@ -37,6 +39,7 @@
       font-weight: 500;
       font-size: 12px;
       line-height: 16px;
+      border: 1px solid #fff;
     }
   }
 }

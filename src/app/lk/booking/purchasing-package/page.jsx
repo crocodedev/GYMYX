@@ -19,7 +19,7 @@ const PurchasingPackages = () => {
     <BookingSignUpHeading
         handleChangeGym={() => {}}
         gymTitle={gym?.name}
-        headingTitle={'Выбирете пакет тренировок'}
+        headingTitle={'Выберите пакет тренировок'}
         showButtonEditGym={false}
       />
     <BookingPackages setLoadIsShow={setLoadIsShow}/>

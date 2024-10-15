@@ -86,7 +86,14 @@
 
     .booking-variants-item__tag {
       color: var(--white, #fff);
-      border: 2px solid var(--white, #fff);
+
+      @include media-breakpoint-down(lg) {
+        border: 1px solid var(--white, #fff);
+      }
+
+      @include media-breakpoint-up(lg) {
+        border: 2px solid var(--white, #fff);
+      }
     }
 
     .booking-variants-item__img {
@@ -175,7 +182,6 @@
   top: 50%;
   right: 0;
   box-shadow: 0 0 21px #16171a99;
-  // background-color: #294AE7;
   background: linear-gradient(270deg, rgba(13,45,200,1) 25%, rgba(41,74,231,1) 100%);
 
   @include media-breakpoint-up(xxxl) {

@@ -75,7 +75,7 @@ const ChooseTime = () => {
   return (
     <>
       <NavigationBack buttonLabel={'Вернуться к выбору дней'} link={'/lk/booking/sign-up'} />
-      <BookingSignUpHeading showButtonEditGym={false} headingTitle={'Купить несколько тренировок'} />
+      <BookingSignUpHeading showButtonEditGym={false} headingTitle={'Запишитесь на тренировки'} />
       <BookingSignUpTags change={false}/>
       <BookingSignUpContent gymIsShow={false}>
         <BookingTimePricing variants={pricesVariants} change={false}/>
