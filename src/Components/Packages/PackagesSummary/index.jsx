@@ -28,7 +28,7 @@ const PackagesSummary = ({packageData, handlerSubmit, submitSplit}) => {
             icon={'arrow'}
             disabledShadow={true}
           />
-          <Button
+          {/* <Button
             onClick={submitSplit}
             size="l"
             variant="light-blue-gradient"
@@ -36,7 +36,7 @@ const PackagesSummary = ({packageData, handlerSubmit, submitSplit}) => {
             label={'Оплатить'}
             icon={'split'}
             disabledShadow={true}
-          />
+          /> */}
         </div>
       </div>
     </section>
