@@ -9,6 +9,7 @@ import ProfileContacts from '@/Sections/Account/ProfileContacts';
 import ProfileMailing from '@/Sections/Account/ProfileMailing';
 import ProfileTextField from '@/Sections/Account/ProfileTextField';
 import ProfileBalace from '@/Components/Account/Profile/ProfileBalace';
+import ProfileGid from '@/Sections/Account/ProfileGid';
 
 import { signOut, useSession } from 'next-auth/react';
 import { useEffect } from 'react';
@@ -33,6 +34,7 @@ const Profile = () => {
       <ProfileBalace/>
       <ProfilePersonalData />
       <ProfileTrainings isShowTranfer={true}/>
+      {/* <ProfileGid/> */}
       <ProfileStats />
       <ProfileContactOptions>
         <ProfileMailing />
