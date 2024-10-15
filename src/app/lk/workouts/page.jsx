@@ -259,7 +259,7 @@ const Training = () => {
         </Modal>
       )}
       <div className="account-page-wrapper">
-        <PageHeading title={'Мои тренировки'} />
+        <PageHeading title={'Тренировки'} />
         <NavigationTabs items={TABS} selectedTab={selectedTab} handleChangeTab={handleChangeSelectedTab} />
         <TrainingContent>
           <TrainingCalendar
