@@ -4,13 +4,10 @@ import Button from '@/Components/Button';
 import styles from './CheckoutSummary.module.scss';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import { useDispatch } from 'react-redux';
 import { useMemo, useState, useEffect } from 'react';
 import { findPrice, createBooking, countValues, prepareDataForBooking, fun, sortByDate } from './helpers';
 import CheckoutConfirm from '@/Components/Checkout/CheckoutConfirm';
-import { getUserData } from '@/Utils/updateDataUser';
 import Modal from '@/Components/Modal';
-import Loading from '@/Components/Loading';
 
 const CheckoutSummary = ({ items, gym, isActivePackage = 0 }) => {
   const router = useRouter();
@@ -146,7 +143,7 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0 }) => {
       text={modalData.text} 
       handleClose={modalData.type == 'successful' ? ()=>{} : closeModal} 
       size={modalData.type == 'crowded' ? 'xl' : ''}>
-        {ModalInner(modalData.type, sessionData.user.accessToken, update, gym, paidData, setModal, isLoad, setIsLoad, list)}
+        {ModalInner(modalData.type, sessionData.user.accessToken, gym, paidData, setModal, isLoad, setIsLoad, list)}
       </Modal>
     )}
     
@@ -200,10 +197,9 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0 }) => {
 export default CheckoutSummary;
 
 
-function ModalInner(type, token, updateUserData, gym, trainingsObj, setModal, isLoad, setIsLoad, list) {
+function ModalInner(type, token, gym, trainingsObj, setModal, isLoad, setIsLoad, list) {
   const router = useRouter()
   const totalPrice = trainingsObj.not_paid.reduce((acc, el) => acc + el.price * el.count, 0)
-
 
   const goToWorcouts = () => {
     router.push('/lk/workouts')
@@ -214,30 +210,20 @@ function ModalInner(type, token, updateUserData, gym, trainingsObj, setModal, is
     createBooking(token, gym?.id, true, prepareDataForBooking(list))
     .then((res) => {
       if(res?.data?.payment_link) {
-        getUserData(token)
-        .then(data => {
-          if(data?.data) {
-            updateUserData(data?.data)
-            setModal('successful')
-          }
-        })
-        .finally(() => {
-          setIsLoad(false)
-        })
+        setModal('successful')
       }
+    })
+    .finally(() => {
+      setIsLoad(false)
     })
   } 
 
   const partialPayment = () => {
     setIsLoad(true)
-    createBooking(token, gym?.id, true, prepareDataForBooking(list)).then((res) => {
+    createBooking(token, gym?.id, true, prepareDataForBooking(list))
+    .then((res) => {
       if(res?.data?.payment_link) {
-        getUserData(token).then(data => {
-          if(data?.data) {
-            updateUserData(data?.data)
-            router.push(res?.data?.payment_link)
-          }
-        })
+        router.push(res?.data?.payment_link)
       }
       setIsLoad(false)
     })

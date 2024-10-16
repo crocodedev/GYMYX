@@ -3,9 +3,7 @@ import Button from '@/Components/Button'
 
 const PackagesSummary = ({packageData, handlerSubmit, submitSplit}) => {
   const workoutsNumber = packageData?.count || 0
-  const price = packageData?.price?.package || 0
-  const result = (price * workoutsNumber) || 0
-  
+  const result = packageData?.price?.full || 0
 
   return (
     <section className={styles["packages-summary"]}>
