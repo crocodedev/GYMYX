@@ -45,8 +45,6 @@ const ChangeTime = () => {
   })
   const router = useRouter()
 
-  console.log(visitDate)
-
   const hanglerModalButtonClick = () => {
     router.push('/lk/workouts')
   }

@@ -17,7 +17,6 @@ const BookingPackages = ({setLoadIsShow}) => {
   const router = useRouter()
 
   const submit = () => {
-    console.log('buy split')
     if(sessionData?.user?.accessToken && packages[packageIdActive]?.id) {
       buyPackage(sessionData.user.accessToken, packages[packageIdActive].id)
       .then((res) => {
@@ -31,7 +30,6 @@ const BookingPackages = ({setLoadIsShow}) => {
   }
 
   const submitSplit = () => {
-    console.log('bue split')
     if(sessionData?.user?.accessToken && packages[packageIdActive]?.id) {
       buyPackage(sessionData.user.accessToken, packages[packageIdActive].id, true)
       .then((res) => {
@@ -51,7 +49,6 @@ const BookingPackages = ({setLoadIsShow}) => {
         setPackages(res.data)
         setLoadIsShow(false)
       }
-      console.log(res.data)
     })
   }, [sessionData])
 

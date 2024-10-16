@@ -154,7 +154,6 @@ const ProfileTrainings = ({isShowTranfer = false}) => {
   }
 
   const isDifferenceMoreThan4Hours = (dateStr, timeStr) => { 
-    console.log(dateStr, timeStr)
     const dateTime = new Date(`${dateStr}T${timeStr}`);
     const nowTime = new Date();
   

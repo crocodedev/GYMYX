@@ -1,7 +1,6 @@
 import styles from './PackagesCard.module.scss'
 
 const PackagesCard = ({packageData}) => {
-  console.log(packageData)
 
   const name = packageData?.name || ''
   const count = packageData?.count || 0
@@ -27,9 +26,7 @@ const PackagesCard = ({packageData}) => {
             {workout.map((_, i) => 
               (i < workout.length - savingTraining)
               ? <div className={styles['packages-card__workout-item']} key={i}>{i+1}</div>
-              : <div className={styles['packages-card__workout-item--last']} key={i}> 
-                {/* {savingTraining > 1 &&  <span className={styles['packages-card__workout-item-factor']}>x{savingTraining}</span>} */}
-                </div>
+              : <div className={styles['packages-card__workout-item--last']} key={i}> </div>
             )}
           </div>
         </div>

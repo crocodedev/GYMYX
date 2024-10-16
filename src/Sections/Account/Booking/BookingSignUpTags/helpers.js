@@ -39,7 +39,6 @@ export const takeAvaliableTimesDay = async (token, gym_id, date) => {
   const fetchCurrentDayTimes = getAvailableTimes(token, gym_id, currentDay, currentMonth, currentYear);
 
   return fetchCurrentDayTimes.then(({ data }) => {
-    console.log('data')
     return data ? data : [];
   });
 };
@@ -53,10 +52,8 @@ export const takeAvaliableTimesToLine = async (token, line, date) => {
   const fetchCurrentDayTimes = getAvailableTimesForLine(token, line, currentDay, currentMonth, currentYear);
 
   return fetchCurrentDayTimes.then(({ data }) => {
-    console.log(data)
     let times = []
     data.forEach(data => times.push(data.time))
-    console.log('line')
     return times
   });
 };

@@ -38,7 +38,6 @@ const ChooseTime = () => {
   const [balance, setBalence] = useState(balanceCount)
 
   useEffect(() => {
-    console.log(gym?.prices)
     setCountBalace()
     if (gym?.prices && sessionData) {
       let variantsTemp = [];

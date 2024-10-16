@@ -48,7 +48,6 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0 }) => {
   }, [isFirstBooking, items, gym]);
 
   const sortArr = () => {
-    console.log(list)
     const tmpArr = list.reduce((acc, el) => {
       if (isFirstBooking) {
         list[0].price = gym.min_price;
@@ -62,14 +61,12 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0 }) => {
       }
       return acc;
     }, []);
-    console.log(tmpArr)
 
     setFinalArr(tmpArr);
   };
 
   const handleSubmit = () => {
     setLoading(true);
-    console.log(prepareDataForBooking(list))
     createBooking(sessionData.user.accessToken, gym?.id, false, prepareDataForBooking(list))
     .then(({ data }) => {
       if (data?.payment_link) router.push(data?.payment_link);
@@ -80,8 +77,6 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0 }) => {
   };
 
   const handlerClicktByBalance = () => {
-    // let trainings = fun(list, balance, gym.min_price)
-    // console.log('sortTrainings', trainings)
     setPaidData(fun(list, balance, gym.min_price))
     const countTrainint = finalArr.reduce((acc, el) => acc + (el?.count || 0), 0)
 
@@ -209,7 +204,6 @@ function ModalInner(type, token, updateUserData, gym, trainingsObj, setModal, is
   const router = useRouter()
   const totalPrice = trainingsObj.not_paid.reduce((acc, el) => acc + el.price * el.count, 0)
 
-  console.log(trainingsObj)
 
   const goToWorcouts = () => {
     router.push('/lk/workouts')
@@ -219,7 +213,6 @@ function ModalInner(type, token, updateUserData, gym, trainingsObj, setModal, is
     setIsLoad(true)
     createBooking(token, gym?.id, true, prepareDataForBooking(list))
     .then((res) => {
-      console.log('full balanse', res)
       if(res?.data?.payment_link) {
         getUserData(token)
         .then(data => {
@@ -236,11 +229,9 @@ function ModalInner(type, token, updateUserData, gym, trainingsObj, setModal, is
   } 
 
   const partialPayment = () => {
-    console.log(list)
     setIsLoad(true)
     createBooking(token, gym?.id, true, prepareDataForBooking(list)).then((res) => {
       if(res?.data?.payment_link) {
-        console.log('partial payment', res)
         getUserData(token).then(data => {
           if(data?.data) {
             updateUserData(data?.data)

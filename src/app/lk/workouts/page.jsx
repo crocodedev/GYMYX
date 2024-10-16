@@ -92,7 +92,6 @@ const Training = () => {
 
   const changeTraining = (oldId, oldDate, oldTime) => {
     dispatch(resetTrainingData())
-    console.log(oldId, oldDate, oldTime) 
     if (!sessionData?.user?.accessToken) return;
 
     dispatch(updateBookingVisitDate({ visitDate: {value: "", time: []}}));
@@ -179,7 +178,6 @@ const Training = () => {
   };
 
   const modalType = (type) => {
-    console.log(type)
     if(type == 'confirmation') {
       setModalData(prev => ({
         ...prev,

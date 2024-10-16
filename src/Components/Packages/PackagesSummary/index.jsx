@@ -2,7 +2,6 @@ import styles from './PackagesSummary.module.scss'
 import Button from '@/Components/Button'
 
 const PackagesSummary = ({packageData, handlerSubmit, submitSplit}) => {
-  console.log(packageData)
   const workoutsNumber = packageData?.count || 0
   const price = packageData?.price?.package || 0
   const result = (price * workoutsNumber) || 0

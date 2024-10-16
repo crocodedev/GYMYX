@@ -116,7 +116,6 @@ const AccountLoginForm = ({ handleToogleModal, setIsShowLoading }) => {
   };
 
   const loginFromTelegram = () => {
-    console.log('teletgram')
     const tg = WebApp
     const userData = tg.initDataUnsafe?.user
     const userId = userData?.id // 1685607638
@@ -142,7 +141,6 @@ const AccountLoginForm = ({ handleToogleModal, setIsShowLoading }) => {
 
   useEffect(() => {
     WebApp?.expand()
-    console.log(session.status)
     if(session.status === 'loading') {
       setIsShowLoading(true);
     } else if (session.status === 'authenticated') {
