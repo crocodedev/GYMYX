@@ -43,7 +43,11 @@ const ChooseTime = () => {
     if (gym?.prices && sessionData) {
       let variantsTemp = [];
 
-      if (sessionData.user.is_new) {
+      if (!sessionData.user.is_new) {
+        variantsTemp = gym.prices.map((item, index) => {
+          return { ...item, bgColor: variants[index]?.bgColor };
+        });
+      } else {
         if (!checkIsOnlyTraining(visitDate)) {
           variantsTemp = gym.prices.map((item, index) => {
             return { ...item, bgColor: variants[index]?.bgColor };
