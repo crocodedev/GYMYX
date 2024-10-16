@@ -273,9 +273,20 @@ const ProfileEditForm = () => {
               <span className={styles['profile-edit-form__avatar-edit']}>
                 <img src="/icons/edit.svg" alt="edit" className={styles['profile-edit-form__edit-icon']} />
               </span>
+              {/* <span className={styles['profile-edit-form__date-birth']}>
+                02.12.2001 
+                <span className={styles['profile-edit-form__date-birth-edit-icon']}>
+
+                </span>
+              </span> */}
             </label>
             <div className={styles['profile-edit-form__data-col']}>
-              <ProfileField prefix="Имя" name={'name'} value={data.name.value} onInput={handleChangeInput} />
+              <ProfileField 
+                prefix="Имя" 
+                name={'name'} 
+                value={data.name.value} 
+                onInput={handleChangeInput} 
+              />
               <ProfileField
                 name={'lastname'}
                 prefix="Фамилия"

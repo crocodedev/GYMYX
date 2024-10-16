@@ -1,7 +1,12 @@
 'use client';
 
 import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { setTrainingData, resetTrainingData } from '@/redux/transferTrainingData';
+
+// import { useSelector } from 'react-redux';
 
 import PageHeading from '@/Sections/Account/PageHeading';
 import NavigationTabs from '@/Sections/Account/NavigationTabs';
@@ -12,6 +17,8 @@ import Loading from '@/Components/Loading';
 import { formatDate } from '@/Utils/helpers';
 import Modal from '@/Components/Modal';
 import Button from '@/Components/Button';
+import { getUserData } from '@/Utils/updateDataUser';
+import { updateBookingVisitDate } from '@/redux/bookingSlice';
 
 import { cancelBooking, canDelete } from '@/Sections/Account/ProfileTrainings/helpers';
 
@@ -42,7 +49,7 @@ const concateDateTime = (date, time) => {
 };
 
 const Training = () => {
-  const { data: sessionData } = useSession();
+  const { data: sessionData, update } = useSession();
   const [allTrainingsDates, setAllTrainingsDates] = useState([]);
   const [sortedTrainingsDates, setSortedTrainingsDates] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -52,6 +59,14 @@ const Training = () => {
   const [showModal, setShowModal] = useState(false);
   const [currentItemId, setCurrentItemId] = useState(null);
   const [loadingDelete, setLoadingDelete] = useState(false);
+  const [deleteIsError, setDeleteIsError] = useState(false)
+  const [modalData, setModalData] = useState({
+    type: '', //transfer, delete, toggle, confirmation
+    isShow: false,
+    text: '',
+  })
+  const router = useRouter();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     updateDate();
@@ -74,6 +89,16 @@ const Training = () => {
       }) || [],
     );
   }, [selectedTab, allTrainingsDates]);
+
+  const changeTraining = (oldId, oldDate, oldTime) => {
+    dispatch(resetTrainingData())
+    console.log(oldId, oldDate, oldTime) 
+    if (!sessionData?.user?.accessToken) return;
+
+    dispatch(updateBookingVisitDate({ visitDate: {value: "", time: []}}));
+    dispatch(setTrainingData({oldId, oldDate, oldTime}))
+    router.push(`/lk/booking/change-trainitg`)
+  }
 
   const updateDate = () => {
     if (!sessionData?.user?.accessToken) return;
@@ -123,7 +148,7 @@ const Training = () => {
   };
 
   const handleShow = (id = -1) => {
-    setShowModal((prev) => !prev);
+    setDeleteIsError(false)
     setCurrentItemId(id);
   };
 
@@ -136,35 +161,105 @@ const Training = () => {
 
   const deleteBookingItem = (id) => {
     if (canDelete(sortedTrainingsDates)) {
-      cancelBooking(sessionData.user.accessToken, id).then((data) => {
-        if (data.data.status) {
+      cancelBooking(sessionData.user.accessToken, id)
+      .then((data) => {
+        if (data?.data?.status) {
           updateDate();
-          setLoadingDelete(false);
-          handleShow();
+          getUserData(sessionData?.user?.accessToken)
+          .then(data => {
+            if(data?.data) update(data?.data)
+          })
+        } else {
+          setDeleteIsError(true)
         }
+        setLoadingDelete(false);
+        modalType();
       });
     }
   };
+
+  const modalType = (type) => {
+    console.log(type)
+    if(type == 'confirmation') {
+      setModalData(prev => ({
+        ...prev,
+        type: 'delete',
+        isShow: true,
+        text: `До тренировки осталось меньше 4 часов, средства не будут возвращены. 
+        Отменить?`
+      }))
+    }
+    else if(type == 'delete') {
+      setModalData(prev => ({
+        ...prev,
+        type: 'delete',
+        isShow: true,
+        text: 'Вы точно хотите отменить тренировку?'
+      }))
+    } else if(type == 'transfer') {
+      setModalData(prev => ({
+        ...prev,
+        type: 'transfer',
+        isShow: true,
+        text: 'извините, перенос возможен не позднее 4 часов до занятия :('
+      }))
+    } else if(type == 'toggle') {
+      setModalData(prev => ({
+        ...prev,
+        isShow: !modalData.isShow
+      }))
+    } else {
+      setModalData(prev => ({
+        ...prev,
+        isShow: false
+      }))
+    }
+  }
 
   if (loading) return <Loading full_screen={true} />;
 
   return (
     <>
-      {showModal && (
-        <Modal handleClose={handleShow} text={'Вы точно хотите отменить тренировку?'}>
-          <Button
-            onClick={handleClickDelete}
-            fullSize={true}
-            size="l"
-            label={!loadingDelete ? 'Да' : 'Загрузка'}
-            variant="black"
-            disabledShadow={true}
-          />
-          <Button onClick={handleShow} fullSize={true} size="l" label="Нет" variant="blue" disabledShadow={true} />
+      {modalData.isShow && (
+        <Modal handleClose={modalType} text={modalData.text}>
+          {modalData.type == 'transfer' && (
+            <Button
+              onClick={modalType}
+              fullSize={true}
+              size="l"
+              label={'Закрыть'}
+              variant="blue-gradient"
+              disabledShadow={true}
+            />
+          )}
+          {(modalData.type == 'delete' || modalData.type == 'confirmation') && (
+            <div style={{width: '100%'}}>
+              <div style={{display: 'flex', gap: '24px'}}>
+                <Button
+                  onClick={handleClickDelete}
+                  fullSize={true}
+                  size="l"
+                  label={'Да'}
+                  disabled={loadingDelete}
+                  variant="black-gradient"
+                  disabledShadow={true}
+                />
+                <Button 
+                  onClick={modalType} 
+                  fullSize={true} 
+                  size="l" 
+                  label="Нет" 
+                  variant="blue-gradient" 
+                  disabledShadow={true} 
+                />
+              </div>
+              {deleteIsError && <p className="" style={{color: 'red', fontSize: '18px', paddingTop: '15px', textAlign: 'center'}}>Произошла ошибка попробуйте позже</p>}
+            </div>
+          )}
         </Modal>
       )}
       <div className="account-page-wrapper">
-        <PageHeading title={'Мои тренировки'} />
+        <PageHeading title={'Тренировки'} />
         <NavigationTabs items={TABS} selectedTab={selectedTab} handleChangeTab={handleChangeSelectedTab} />
         <TrainingContent>
           <TrainingCalendar
@@ -177,9 +272,11 @@ const Training = () => {
             token={sessionData?.user?.accessToken}
             handleUpdateDate={updateDate}
             handleDeleteItem={handleShow}
+            handlerChangeTraining={changeTraining}
             selectedDate={selectedDate}
             archive={selectedTab === 1}
             items={sortedTrainingsDates}
+            modalType={modalType}
           />
         </TrainingContent>
       </div>

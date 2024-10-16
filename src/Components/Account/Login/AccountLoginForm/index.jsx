@@ -7,10 +7,13 @@ import AccountCheckBox from '@/Components/Account/Login/AccountCheckBox';
 import AccountRepeatCode from '@/Components/Account/Login/AccountRepeatCode';
 import Button from '@/Components/Button';
 import { useSession } from 'next-auth/react';
+import Image from 'next/image';
 
 import styles from './AccountLoginForm.module.scss';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { checkValidPhone, formatPhoneNumber } from '@/Utils/helpers';
+import { authTelegram } from './helper';
+import WebApp from '@twa-dev/sdk';
 
 const INIT_FORM_DATA = {
   phone: {
@@ -22,25 +25,14 @@ const INIT_FORM_DATA = {
   receivedCode: null,
 };
 
-const AccountLoginForm = ({ handleToogleModal }) => {
+const AccountLoginForm = ({ handleToogleModal, setIsShowLoading }) => {
   const inputRef = useRef();
   const session = useSession();
   const inputCodeRef = useRef();
   const router = useRouter();
   const [data, setData] = useState(INIT_FORM_DATA);
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    if (session.status === 'authenticated') {
-      let url = '';
-      if (session?.data?.user?.full_name) {
-        url = '/lk/profile';
-      } else {
-        url = '/lk/login/create-profile';
-      }
-      router.push(url);
-    }
-  }, [session.status]);
+  const [errorTelegram, setErrorTelegram] = useState(false)
 
   const handleChangePhone = useCallback(() => {
     const phone = checkValidPhone(inputRef.current.value);
@@ -123,11 +115,74 @@ const AccountLoginForm = ({ handleToogleModal }) => {
     setLoading(false);
   };
 
+  const loginFromTelegram = () => {
+    console.log('teletgram')
+    const tg = WebApp
+    const userData = tg.initDataUnsafe?.user
+    const userId = userData?.id // 1685607638
+
+    if(userId) {
+      authTelegram(userId).then(res => {
+        if(res?.access_token) {
+          signIn('credentials', {
+            token: res.access_token,
+            redirect: false,
+          });
+        } else if(res?.message === 'not found user') {
+          setErrorTelegram(true)
+          setIsShowLoading(false);
+        } else {
+          setIsShowLoading(false);
+        }
+      })
+    } else {
+      setIsShowLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    WebApp?.expand()
+    console.log(session.status)
+    if(session.status === 'loading') {
+      setIsShowLoading(true);
+    } else if (session.status === 'authenticated') {
+      let url = session?.data?.user?.full_name ? '/lk/profile' : '/lk/login/create-profile'
+      router.push(url);
+    } else if(session.status === 'unauthenticated') {
+      loginFromTelegram()
+    } 
+  }, [session.status]);
+
+  const handlerClosePWA = () => {
+    WebApp.close();
+  }
+
   return (
+    
+    <>
+    {errorTelegram && (
+      <div className={styles['error-login-telegram']}>
+        <div className={styles['error-login-telegram__inner']}>
+          <div className={styles['error-login-telegram__logo']}>
+            <Image src="/icons/loginFormIcon.svg" width={300} height={300} alt='Logo'/>
+          </div>
+          <p className={styles['error-login-telegram__text']}>Пожалуйста, поделитесь контактом в чате, чтобы продолжить</p>
+          <Button
+            onClick={handlerClosePWA}
+            fullSize={true}
+            size="xl"
+            variant="blue-gradient"
+            label='Назад в чат'
+          />
+        </div>
+      </div>
+    )}
+    
+
     <div className={styles['account-login-form']}>
       <div className={styles['account-login-form__wrapper']}>
         <div className={styles['account-login-form__logo']}>
-          <img src="/icons/loginFormIcon.svg" />
+          <Image src="/icons/loginFormIcon.svg" width={300} height={300} alt='Logo'/>
         </div>
         <h1 className={styles['account-login-form__title']}>Войти или зарегистрироваться</h1>
         {!data.receivedCode && (
@@ -148,7 +203,7 @@ const AccountLoginForm = ({ handleToogleModal }) => {
             disabled={data.phone.valid && data.agreePolicy ? false : true}
             fullSize={true}
             size="l"
-            variant="blue"
+            variant="blue-gradient"
             icon={!loading ? 'arrow' : ''}
             label={!loading ? 'Продолжить' : 'Загрузка'}
           />
@@ -159,7 +214,7 @@ const AccountLoginForm = ({ handleToogleModal }) => {
             onClick={handleSubmitCheckCode}
             fullSize={true}
             size="l"
-            variant="blue"
+            variant="blue-gradient"
             label={!loading ? 'Подтвердить' : 'Загрузка'}
           />
         )}
@@ -173,6 +228,8 @@ const AccountLoginForm = ({ handleToogleModal }) => {
         )}
       </div>
     </div>
+    </>
+    
   );
 };
 

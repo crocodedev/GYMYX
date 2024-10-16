@@ -133,6 +133,19 @@
     }
   }
 
+  &__date-birth {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 2;
+    color: #fff;
+
+  }
+
+  &__date-birth-edit-icon {
+    color: #fff;
+  }
+
   &__contacts {
     position: relative;
 
