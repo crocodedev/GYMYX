@@ -4,11 +4,12 @@ const PackagesCard = ({packageData}) => {
 
   const name = packageData?.name || ''
   const count = packageData?.count || 0
-  const price = packageData?.price?.package || 0
   const savingPrice = packageData?.saving?.price || 0
   const savingTraining = packageData?.saving?.training || 0
   const workout = Array.from({length: count})
-  const description = (packageData?.description || '')//.replace(/^\s+|\s+$/g, '').split(';')
+  const description = (packageData?.description || '')
+  const fullPrice = packageData?.price?.full || 0
+  const price = Math.round(fullPrice / count) || 0
 
   return (
       <section className={styles['packages-card']}>

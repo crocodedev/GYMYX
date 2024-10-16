@@ -6,6 +6,7 @@ import BookingSignUpContent from '@/Sections/Account/Booking/BookingSignUpConten
 import BookingSteps from '@/Sections/Account/Booking/BookingSteps';
 import NavigationBack from '@/Sections/Account/NavigationBack';
 import BookingTimePricing from '@/Sections/Account/Booking/BookingTimePricing';
+import { getUserData } from '@/Utils/updateDataUser';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
@@ -34,11 +35,34 @@ const ChooseTime = () => {
   const { data: sessionData } = useSession();
   const { gym, visitDate } = useSelector((state) => state.booking);
   const [pricesVariants, setPricesVariants] = useState([]);
-  const balanceCount = sessionData?.user?.balance || 0
-  const [balance, setBalence] = useState(balanceCount)
+  const packageBalance = sessionData?.user?.balance || 0
+  const [balance, setBalance] = useState({
+    full_balance: packageBalance,
+    count_bacance: 0,
+  })
+
+  const setCountBalace = () => {
+    const countTime = visitDate.reduce((acc, el) => acc + el.time.length, 0)
+    setBalance(prev => ({
+      ...prev,
+      count_bacance: balance.full_balance - countTime
+    }))
+  }
 
   useEffect(() => {
-    setCountBalace()
+    if(sessionData?.user?.accessToken)
+    getUserData(sessionData?.user?.accessToken)
+    .then(res => {
+      if(res?.data) {
+        setBalance(prev => ({
+          ...prev,
+          full_balance: res?.data?.balance,
+        }))
+      }
+    })
+  }, [sessionData])
+
+  useEffect(() => {
     if (gym?.prices && sessionData) {
       let variantsTemp = [];
 
@@ -68,13 +92,9 @@ const ChooseTime = () => {
       //   });
       // }
       setPricesVariants(variantsTemp);
+      setCountBalace()
     }
   }, [gym, sessionData, visitDate]);
-
-  const setCountBalace = () => {
-    const countTime = visitDate.reduce((acc, el) => acc + el.time.length ,0)
-    setBalence(balanceCount - countTime)
-  }
 
   return (
     <>
@@ -83,7 +103,7 @@ const ChooseTime = () => {
       <BookingSignUpTags change={false}/>
       <BookingSignUpContent gymIsShow={false}>
         <BookingTimePricing variants={pricesVariants} change={false}/>
-        <BookingSteps stepNumber={2} stepTitle={'Выберите время'} balance={balance} packageIsActive={balanceCount > 0}/>
+        <BookingSteps stepNumber={2} stepTitle={'Выберите время'} balance={balance.count_bacance} packageIsActive={balance.full_balance > 0}/>
       </BookingSignUpContent>
     </>
   );

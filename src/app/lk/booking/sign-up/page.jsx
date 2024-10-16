@@ -7,16 +7,25 @@ import BookingCalendar from '@/Sections/Account/Booking/BookingCalendar';
 import BookingSteps from '@/Sections/Account/Booking/BookingSteps';
 import { useSelector } from 'react-redux';
 import BookingSignUpContent from '@/Sections/Account/Booking/BookingSignUpContent';
-import BookingGym from '@/Sections/Account/Booking/BookingGym';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
-import Container from '@/Components/Container';
+import { getUserData } from '@/Utils/updateDataUser';
 
 const BookingSignUp = () => {
-  const { data: sessionData } = useSession();
+  const { data: sessionData, update } = useSession();
   const [showModal, setShowModal] = useState(false);
+  const [balance, setBalance] = useState(0);
   const { gym, variant } = useSelector((state) => state.booking);
-  const balance = sessionData?.user?.balance || 0
+
+  useEffect(() => {
+    if(sessionData?.user?.accessToken)
+    getUserData(sessionData?.user?.accessToken)
+    .then(res => {
+      if(res?.data) {
+        setBalance(res?.data?.balance)
+      }
+    })
+  }, [sessionData])
 
   return (
     <>
