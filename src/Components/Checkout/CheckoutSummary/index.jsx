@@ -4,7 +4,7 @@ import Button from '@/Components/Button';
 import styles from './CheckoutSummary.module.scss';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-
+import { useDispatch } from 'react-redux';
 import { useMemo, useState, useEffect } from 'react';
 import { findPrice, createBooking, countValues, prepareDataForBooking, fun, sortByDate } from './helpers';
 import CheckoutConfirm from '@/Components/Checkout/CheckoutConfirm';

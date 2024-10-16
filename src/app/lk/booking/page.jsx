@@ -9,13 +9,15 @@ import { useEffect, useState } from 'react';
 import Loading from '@/Components/Loading';
 import { useDispatch } from 'react-redux';
 import { updateBookingData } from '@/redux/bookingSlice';
+import { useSession } from 'next-auth/react';
 
-const getGyms = async () => {
+const getGyms = async (token) => {
   const result = await fetch('/api/booking/get-gyms', {
     cache: 'no-store',
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
     },
   });
 
@@ -27,6 +29,8 @@ const getGyms = async () => {
 
 const Booking = () => {
   const dispatch = useDispatch();
+  const { data: sessionData, update } = useSession();
+
   const [showModal, setShowModal] = useState(false);
   const [gyms, setGyms] = useState([{}]);
   const [activeGym, setActiveGym] = useState({});
@@ -45,25 +49,28 @@ const Booking = () => {
   };
 
   useEffect(() => {
+
     setLoading(true);
-    getGyms().then(({ data }) => {
-      if (data.length > 0) {
-        setGyms(data);
-        setActiveGym(data[0]);
-        dispatch(
-          updateBookingData({
-            gym: data[0],
-            variant: null,
-            visitDate: null,
-            currentDate: 0,
-            avaliableTimesCurrentDay: [],
-            loading: false,
-          }),
-        );
-      }
-      setLoading(false);
-    });
-  }, []);
+    if (sessionData) {
+      getGyms(sessionData?.user?.accessToken).then(({ data }) => {
+        if (data.length > 0) {
+          setGyms(data);
+          setActiveGym(data[0]);
+          dispatch(
+            updateBookingData({
+              gym: data[0],
+              variant: null,
+              visitDate: null,
+              currentDate: 0,
+              avaliableTimesCurrentDay: [],
+              loading: false,
+            }),
+          );
+        }
+        setLoading(false);
+      });
+    }
+  }, [sessionData]);
 
   if (loading) {
     return <Loading full_screen={true} />;
