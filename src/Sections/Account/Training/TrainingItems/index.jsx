@@ -11,9 +11,11 @@ const TrainingItems = ({
   selectedDate,
   handleDeleteItem,
   handleUpdateDate,
+  handlerChangeTraining,
   deleteItem,
   handleShow,
   token,
+  modalType
 }) => {
   const dispatch = useDispatch();
 
@@ -41,11 +43,13 @@ const TrainingItems = ({
               isSingle={archive}
               older={archive}
               onClickDelete={() => handleDeleteItem(id)}
+              onClickChangeTraining={handlerChangeTraining}
               key={id}
               date={date}
               time={time}
               gymTitle={gym?.name}
               address={gym?.address}
+              modalType={modalType}
             />
           );
         })}

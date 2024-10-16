@@ -4,6 +4,7 @@
   position: relative;
 
   &__wrapper {
+    display: flex;
     position: relative;
     background: var(--blue-gradient-diagonal, linear-gradient(108deg, #294ae7 0%, #0d2dc8 100%));
 
@@ -23,9 +24,19 @@
     }
   }
 
+  &__content {
+    flex: content
+  }
+
+  &__asside {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: space-between;
+  }
+
   &__object {
     position: absolute;
-
     bottom: 0;
 
     @include media-breakpoint-down(sm) {
@@ -59,7 +70,6 @@
   }
 
   &__btn {
-    position: absolute;
     display: flex;
     cursor: pointer;
 
@@ -70,14 +80,14 @@
       right: 18px;
     }
 
-    @include media-breakpoint-between(lg, xxl) {
+    @include media-breakpoint-between(lg, xxxl) {
       width: 25px;
       height: 25px;
       top: 28px;
       right: 28px;
     }
 
-    @include media-breakpoint-up(xxl) {
+    @include media-breakpoint-up(xxxl) {
       width: 35px;
       height: 35px;
       top: 40px;
@@ -91,7 +101,31 @@
     }
   }
 
-  &__content {
+  &__btn-transfer {
+    color: #fff;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition: 0.3s;
+
+    @include media-breakpoint-up(xxxl) {
+      width: 40px;
+      height: 40px;
+    }
+
+    @include media-breakpoint-between(lg, xxxl) {
+      width: 30px;
+      height: 30px;
+    }
+
+    @include media-breakpoint-down(lg) {
+      width: 19px;
+      height: 19px;
+    }
+
+    &--disabled {
+      opacity: 0.5;
+    }
   }
 
   &__date {
@@ -125,11 +159,18 @@
   }
 
   &__date-time {
-    border: 2px solid var(--white, #fff);
     color: var(--white, #fff);
     text-align: center;
     font-weight: 500;
     line-height: 135%;
+
+    @include media-breakpoint-up(md) {
+      border: 2px solid var(--white, #fff);
+    }
+
+    @include media-breakpoint-down(md) {
+      border: 1px solid var(--white, #fff);
+    }
 
     @include media-breakpoint-down(xxl) {
       font-size: 12px;

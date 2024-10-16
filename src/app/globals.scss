@@ -273,10 +273,20 @@ button {
     }
   }
 
-  .p-datepicker:not(.p-disabled) table td span:not(.p-highlight):not(.p-disabled):hover,
   .p-datepicker table td.p-datepicker-today > span {
     background: var(--white, #ffffff36);
     color: var(--dark-grey, #37393d);
+  }
+
+  .p-datepicker:not(.p-disabled) table td span:not(.p-highlight):not(.p-disabled) {
+    &:hover {
+
+      @include media-breakpoint-up(xl) {
+        background: var(--white, #ffffff36);
+        color: var(--dark-grey, #37393d);
+      }
+      
+    }
   }
 
   .p-datepicker table th > span {

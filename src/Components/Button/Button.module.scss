@@ -67,6 +67,37 @@
     }
   }
 
+  &__icon--split {
+    display: flex;
+    align-items: center;
+    aspect-ratio: 4/1;
+
+    @include media-breakpoint-up(xxxl) {
+      height: 48px;
+      margin-left: 20px;
+    }
+
+    @include media-breakpoint-between(xl, xxxl) {
+      height: 34px;
+      margin-left: 10px;
+    }
+
+    @include media-breakpoint-between(lg, xl) {
+      height: 26px;
+      margin-left: 10px;
+    }
+
+    @include media-breakpoint-down(lg) {
+      height: 20px;
+      margin-left: 8px;
+    }
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
   &-blue {
     background: #294ae7;
     color: white;
@@ -83,24 +114,30 @@
     }
   }
 
+  &-blue-gradient {
+    color: #fff;
+    background: linear-gradient(270deg, #0d2dc8 25%, #294ae7 100%);
+  }
+
+  &-light-blue-gradient {
+    color: #fff;
+    background: linear-gradient(270deg, #5871E8 45%, #7B92FF 100%);
+  }
+
+  &-black-gradient {
+    color: #fff;
+    background: linear-gradient(270deg, #212428 30%, #353A40 100%);
+  }
+
   &-black {
     background: linear-gradient(90deg, #353a40 0%, #212428 99.9%);
     color: white;
-    // transition: all 0.3s ease;
-
-    // &:hover {
-    //   background: linear-gradient(90deg, #20426c 0%, #212428 99.9%);
-
-    //   transition: 0.3s ease;
-    // }
-
-    // &:active {
-    //   background: #3d434a;
-    //   transition: 0.3s ease;
-    // }
   }
 
-  &:not(.button-blue):not(.button-black) {
+  &:not(.button-blue)
+  :not(.button-black)
+  :not(.button-blue-gradient)
+  :not(.button-black-gradient) {
     &:hover {
       background: #ffffffbf;
       transition: 0.3s ease;
@@ -184,6 +221,32 @@
   &-size-sl {
     @include media-breakpoint-down(lg) {
       padding: 7.79px 15.59px;
+      font-size: 18px;
+      border-radius: 27.83px;
+    }
+
+    @include media-breakpoint-between(lg, xxl) {
+      padding: 10px 20px;
+      font-size: 18px;
+      border-radius: 35px;
+    }
+
+    @include media-breakpoint-between(xxl, xxxl) {
+      padding: 10px 20px;
+      font-size: 20px;
+      border-radius: 40px;
+    }
+
+    @include media-breakpoint-up(xxxl) {
+      padding: 14px 28px;
+      font-size: 28px;
+      border-radius: 50px;
+    }
+  }
+
+  &-size-xl {
+    @include media-breakpoint-down(lg) {
+      padding: 11px 15.59px;
       font-size: 18px;
       border-radius: 27.83px;
     }
