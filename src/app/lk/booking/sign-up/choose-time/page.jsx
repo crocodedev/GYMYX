@@ -62,11 +62,12 @@ const ChooseTime = () => {
             },
           ];
         }
-      } else {
-        variantsTemp = gym.prices.map((item, index) => {
-          return { ...item, bgColor: variants[index]?.bgColor };
-        });
-      }
+      } 
+      // else {
+      //   variantsTemp = gym.prices.map((item, index) => {
+      //     return { ...item, bgColor: variants[index]?.bgColor };
+      //   });
+      // }
       setPricesVariants(variantsTemp);
     }
   }, [gym, sessionData, visitDate]);
