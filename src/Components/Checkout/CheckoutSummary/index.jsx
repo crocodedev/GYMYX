@@ -11,7 +11,7 @@ import Modal from '@/Components/Modal';
 
 const CheckoutSummary = ({ items, gym, isActivePackage = 0 }) => {
   const router = useRouter();
-  const { data: sessionData, update } = useSession();
+  const { data: sessionData } = useSession();
   const [canSubmit, setCanSubmit] = useState(false);
   const [loading, setLoading] = useState(false);
   const [loadingPage, setLoadingPage] = useState(true);
@@ -42,7 +42,7 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0 }) => {
     });
     setList(sortByDate(countValues(items, gym?.prices)));
     return total;
-  }, [isFirstBooking, items, gym]);
+  }, [isFirstBooking, items, gym, modalData]);
 
   const sortArr = () => {
     const tmpArr = list.reduce((acc, el) => {
@@ -74,6 +74,7 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0 }) => {
   };
 
   const handlerClicktByBalance = () => {
+
     setPaidData(fun(list, balance, gym.min_price))
     const countTrainint = finalArr.reduce((acc, el) => acc + (el?.count || 0), 0)
 
