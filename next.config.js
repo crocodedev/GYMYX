@@ -16,7 +16,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'workspace.gymyx.ru',
+        hostname: 'gymyx.dev.crocodelab.com',
         pathname: '**',
       },
     ],

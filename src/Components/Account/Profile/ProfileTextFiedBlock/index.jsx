@@ -24,9 +24,7 @@ const ProfileTextFiedBlock = () => {
     <div className={styles['profile-textfied-block']}>
       <textarea
         placeholder="Расскажите о плохом и хорошем…"
-        className={
-          isLoading ? styles['profile-textfied-block__input-disable'] : styles['profile-textfied-block__input']
-        }
+        className={`${styles['profile-textfied-block__input']} ${isLoading ? styles['profile-textfied-block__input--disable'] : ''}`}
         onInput={(e) => setText(e.target.value)}
         value={text}
       />

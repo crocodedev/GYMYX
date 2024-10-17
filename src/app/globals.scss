@@ -1,6 +1,7 @@
 @import '../styles/mixins.scss';
 
 * {
+  font-family: inherit;
   box-sizing: border-box;
   padding: 0;
   margin: 0;
@@ -100,7 +101,7 @@ button {
 .training-calendar__calendar {
   width: 100%;
   .p-datepicker-inline {
-    font-family: '__Montserrat_b1da2a', '__Montserrat_Fallback_b1da2a' !important;
+    // font-family: '__Montserrat_b1da2a', '__Montserrat_Fallback_b1da2a' !important;
     background: transparent;
     border: none;
 
