@@ -80,6 +80,7 @@ export function prepareDataForBooking(arr) {
 }
 
 export const fun = (arr, balance, minPrice) => {
+  console.log(arr)
   let finalTraining = {
     paid: [],
     not_paid: []
@@ -87,7 +88,7 @@ export const fun = (arr, balance, minPrice) => {
 
   const minPriceId = arr.findIndex(el => el.price == minPrice)
   if(minPriceId >= 0) {
-    finalTraining.not_paid.push(arr[not_paid])
+    finalTraining.not_paid.push(arr[minPriceId])
     arr.splice(minPriceId, 1)
     balance -= 1
   }
