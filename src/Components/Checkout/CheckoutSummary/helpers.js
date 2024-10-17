@@ -59,7 +59,6 @@ export function countValues(arr, pricesRange) {
       }
     });
   });
-
   return countArray;
 }
 
@@ -80,7 +79,6 @@ export function prepareDataForBooking(arr) {
 }
 
 export const fun = (arr, balance, minPrice) => {
-  console.log(arr)
   let finalTraining = {
     paid: [],
     not_paid: []
@@ -95,7 +93,6 @@ export const fun = (arr, balance, minPrice) => {
 
   finalTraining.paid = mergeByPrice(arr.slice(0, balance))
   finalTraining.not_paid = mergeByPrice(arr.slice(balance))
-
   return finalTraining
 }
 
