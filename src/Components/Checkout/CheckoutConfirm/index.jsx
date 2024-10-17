@@ -8,13 +8,7 @@ const CheckoutConfirm = ({ handleChangeCanSubmit, isActive }) => {
       <Container>
         <div className={`${styles['checkout-confirm__wrapper']}`}>
           <div className={`${styles['checkout-confirm__btn']} ${isActive ? styles['isActive'] : ''}`}></div>
-          <div className={styles['checkout-confirm__text']}>
-            С{' '}
-            <a target="_blank" href="https://gymyx.ru/offer.pdf">
-              пользовательским соглашением
-            </a>{' '}
-            ознакомлен и согласен
-          </div>
+          <p className={styles['checkout-confirm__text']}>С <a target="_blank" href="https://gymyx.ru/offer.pdf">пользовательским соглашением</a> ознакомлен и согласен</p>
         </div>
       </Container>
     </div>
