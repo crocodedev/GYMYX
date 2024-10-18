@@ -152,8 +152,8 @@ const AccountLoginForm = ({ handleToogleModal, setIsShowLoading }) => {
   }, [session.status]);
 
   const handlerClosePWA = () => {
-    window.location='https://t.me/Gymyxtest_bot'
-    WebApp.close();
+    window.location ='https://t.me/Gymyxtest_bot'
+    // WebApp.close();
     // router.push('t.me/@Gymyxtest_bot')
   }
 
