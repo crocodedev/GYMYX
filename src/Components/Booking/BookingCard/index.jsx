@@ -15,14 +15,17 @@ const BookingCard = ({
   address = "",
   older = false,
   transferIsShow = true,
-  modalType
+  modalType = () => {}
   
 }) => {
   const [transferIsDisabled, setTransferIsDisabled] = useState(false)
 
   const handleClickRemove = () => {
-    const less4Hours = isDifferenceMoreThan4Hours(date, time)
-    modalType(less4Hours ? 'confirmation' : 'delete')
+    if(transferIsShow) {
+      const less4Hours = isDifferenceMoreThan4Hours(date, time)
+      modalType(less4Hours ? 'confirmation' : 'delete')
+    }
+    
     onClickDelete(id);
   };
 

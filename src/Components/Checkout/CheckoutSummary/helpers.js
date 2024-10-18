@@ -84,12 +84,12 @@ export const fun = (arr, balance, minPrice) => {
     not_paid: []
   }
 
-  const minPriceId = arr.findIndex(el => el.price == minPrice)
-  if(minPriceId >= 0) {
-    finalTraining.not_paid.push(arr[minPriceId])
-    arr.splice(minPriceId, 1)
-    balance -= 1
-  }
+  // const minPriceId = arr.findIndex(el => el.price == minPrice)
+  // if(minPriceId >= 0) {
+  //   finalTraining.not_paid.push(arr[minPriceId])
+  //   arr.splice(minPriceId, 1)
+  //   balance -= 1
+  // }
 
   finalTraining.paid = mergeByPrice(arr.slice(0, balance))
   finalTraining.not_paid = mergeByPrice(arr.slice(balance))

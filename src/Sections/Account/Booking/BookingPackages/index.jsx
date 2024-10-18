@@ -46,7 +46,6 @@ const BookingPackages = ({setLoadIsShow}) => {
     setLoadIsShow(true)
     getPackages().then(res => {
       if(res?.data) {
-        console.log(res.data)
         setPackages(res.data)
         setLoadIsShow(false)
       }
