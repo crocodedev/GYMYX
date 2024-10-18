@@ -77,6 +77,9 @@ export default async function LandingLayout({ children }) {
     <html lang="en">
       <link rel="preload" href={`${heroData.fields[0].value}?w=390&h=844`} as="image" />
       <Metrika />
+      <head>
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,regular,500,600,700,800,900" rel="stylesheet" />
+      </head>
       <body className={MontserratFont.className}>
         <Providers>
           <Header isLanding={true} data={headerData} />

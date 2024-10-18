@@ -2,15 +2,8 @@ import ProfileBlockTitle from '@/Components/Account/Profile/ProfileBlockTitle';
 
 import styles from './ProfileContacts.module.scss';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
 
 const ProfileContacts = () => {
-  const [labelText, setLabelText] = useState('Связаться с нами');
-
-  // useEffect(() => {
-  //   const isMobile = window.matchMedia('(max-width: 992px)').matches;
-  //   setLabelText(isMobile ? 'Контакты' : 'Связаться с нами');
-  // }, []);
 
   return (
     <section className={styles['profile-contacts']}>

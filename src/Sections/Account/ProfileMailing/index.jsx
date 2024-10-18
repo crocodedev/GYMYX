@@ -1,4 +1,5 @@
 'use client';
+
 import ProfileBlockTitle from '@/Components/Account/Profile/ProfileBlockTitle';
 import Checkbox from '@/Components/Checkbox';
 import { useEffect, useState } from 'react';
@@ -34,14 +35,14 @@ async function getUserData(token) {
 
 export const ProfileMailing = () => {
   const pcItems = [
-    { id: 1, label: 'E-mail', value: 'email' },
-    { id: 2, label: 'Sms', value: 'phone' },
+    { id: 1, label: 'Whatsapp', value: 'email' },
+    { id: 2, label: 'Telegram', value: 'phone' },
     { id: 3, label: 'Не получать рассылку', value: 'none' },
   ];
 
   const mobileItems = [
-    { id: 1, label: 'E-mail', value: 'email' },
-    { id: 2, label: 'Sms', value: 'phone' },
+    { id: 1, label: 'Whatsapp', value: 'email' },
+    { id: 2, label: 'Telegram', value: 'phone' },
     { id: 3, label: 'Не получать', value: 'none' },
   ];
 
