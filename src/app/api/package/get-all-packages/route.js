@@ -3,6 +3,8 @@ export async function POST(request) {
   if (request.method === 'POST') {
 
     try {
+      const requestData = await request.json();
+
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/packages`,
         {
@@ -10,6 +12,7 @@ export async function POST(request) {
           cache: 'no-store',
           headers: {
             'Content-Type': 'application/json',
+            Authorization: `Bearer ${requestData.token}`,
           },
         },
       )
