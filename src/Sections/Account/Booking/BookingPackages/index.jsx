@@ -44,12 +44,14 @@ const BookingPackages = ({setLoadIsShow}) => {
  
   useEffect(() => {
     setLoadIsShow(true)
-    getPackages().then(res => {
-      if(res?.data) {
-        setPackages(res.data)
-        setLoadIsShow(false)
-      }
-    })
+    if(sessionData?.user?.accessToken) {
+      getPackages(sessionData.user.accessToken).then(res => {
+        if(res?.data) {
+          setPackages(res.data)
+          setLoadIsShow(false)
+        }
+      })
+    }
   }, [sessionData])
 
   return (

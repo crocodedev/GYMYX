@@ -1,9 +1,10 @@
 export const dynamic = 'force-dynamic'; // defaults to force-static
 export async function POST(request) {
   if (request.method === 'POST') {
-    const requestData = await request.json();
 
     try {
+      const requestData = await request.json();
+      
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/packages/${requestData.packageId}`,
         {
@@ -11,6 +12,7 @@ export async function POST(request) {
           cache: 'no-store',
           headers: {
             'Content-Type': 'application/json',
+            Authorization: `Bearer ${requestData.token}`,
           },
         },
       );
