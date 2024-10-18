@@ -118,7 +118,7 @@ const AccountLoginForm = ({ handleToogleModal, setIsShowLoading }) => {
   const loginFromTelegram = () => {
     const tg = WebApp
     const userData = tg.initDataUnsafe?.user
-    const userId = 1685607639 //userData?.id // 1685607638
+    const userId = userData?.id // 1685607638
 
     if(userId) {
       authTelegram(userId).then(res => {
@@ -152,7 +152,7 @@ const AccountLoginForm = ({ handleToogleModal, setIsShowLoading }) => {
   }, [session.status]);
 
   const handlerClosePWA = () => {
-    window.location ='https://t.me/Gymyxtest_bot'
+    window.location = 'https://t.me/Gymyxtest_bot'
     // WebApp.close();
     // router.push('t.me/@Gymyxtest_bot')
   }
