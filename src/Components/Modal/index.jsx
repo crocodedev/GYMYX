@@ -3,7 +3,7 @@
 import { useEffect } from "react"
 import styles from "./Modal.module.scss"
 
-const Modal = ({ handleClose, text, size, children }) => {
+const Modal = ({ handleClose = () => {}, text, size, children }) => {
   useEffect(() => {
     document.body.style.overflow = "hidden"
     document.body.style.height = "0"

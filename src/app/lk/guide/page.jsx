@@ -7,6 +7,7 @@ import { useState, useEffect, useRef } from 'react';
 import Loading from '@/Components/Loading';
 import Container from '@/Components/Container';
 import { useSession } from 'next-auth/react';
+import GideFilter from '@/Sections/Gide/GideFilter';
 
 export const getGids = async (token) => {
   const result = await fetch('/api/gids/get-gids', {
@@ -35,80 +36,90 @@ const Gid = () => {
 
   useEffect(() => {
     if (!sessionData?.user?.accessToken) return;
-    if (firstInit.current) return;
-    firstInit.current = true;
+    // if (firstInit.current) return;
+    // firstInit.current = true;
     setLoading(true);
-    getGids(sessionData?.user?.accessToken).then(({ data }) => {
-      if (data) {
-        const sortedData = data.slice().sort((a, b) => (b.isFavorited ? 1 : -1) - (a.isFavorited ? 1 : -1));
+    getGids(sessionData?.user?.accessToken).then(res => {
+      if (res?.data) {
+        console.log(res.data)
+        const sortedData = res?.data.slice().sort((a, b) => (b.isFavorited ? 1 : -1) - (a.isFavorited ? 1 : -1));
         setGids(sortedData.reverse());
       }
       setLoading(false);
     });
   }, [sessionData]);
 
-  const updateData = (id = -1) => {
-    if (id > -1) {
-      const findedIndex = gids.findIndex((item) => item.id === id);
-      const tempGids = [...gids];
+  // const updateData = (id = -1) => {
+  //   if (id > -1) {
+  //     const findedIndex = gids.findIndex((item) => item.id === id);
+  //     const tempGids = [...gids];
 
-      tempGids[findedIndex].isFavorited = !tempGids[findedIndex].isFavorited;
+  //     tempGids[findedIndex].isFavorited = !tempGids[findedIndex].isFavorited;
 
-      tempGids.sort((a, b) => {
-        if (a.isFavorited && !b.isFavorited) {
-          return -1;
-        } else if (!a.isFavorited && b.isFavorited) {
-          return 1;
-        } else {
-          return b.id - a.id;
-        }
-      });
+  //     tempGids.sort((a, b) => {
+  //       if (a.isFavorited && !b.isFavorited) {
+  //         return -1;
+  //       } else if (!a.isFavorited && b.isFavorited) {
+  //         return 1;
+  //       } else {
+  //         return b.id - a.id;
+  //       }
+  //     });
 
-      setGids(tempGids);
-    }
-  };
+  //     setGids(tempGids);
+  //   }
+  // };
 
-  useEffect(() => {
-    const uniqueTags = [];
+  // useEffect(() => {
+  //   const uniqueTags = [];
 
-    gids.forEach(({ tags }) => {
-      tags.forEach((tag) => {
-        uniqueTags[tag] = { title: tag };
-      });
-    });
+  //   gids.forEach(({ tags }) => {
+  //     tags.forEach((tag) => {
+  //       uniqueTags[tag] = { title: tag };
+  //     });
+  //   });
 
-    const uniqueTagsArray = Object.values(uniqueTags);
-    setTags(uniqueTagsArray);
-  }, [gids]);
+  //   const uniqueTagsArray = Object.values(uniqueTags);
+  //   setTags(uniqueTagsArray);
+  // }, [gids]);
 
-  useEffect(() => {
-    if (activeTag !== null) {
-      const tag = tags[activeTag];
+  // useEffect(() => {
+  //   if (activeTag !== null) {
+  //     const tag = tags[activeTag];
 
-      const resultItems = gids.filter((item) => item.tags.includes(tag.title));
+  //     const resultItems = gids.filter((item) => item.tags.includes(tag.title));
 
-      setRenderedItems(resultItems);
-    } else {
-      setRenderedItems(gids);
-    }
-  }, [activeTag, tags, gids]);
+  //     setRenderedItems(resultItems);
+  //   } else {
+  //     setRenderedItems(gids);
+  //   }
+  // }, [activeTag, tags, gids]);
 
-  const handleChangeTag = (index) => {
-    if (activeTag === null) {
-      setActiveTag(index);
-    } else {
-      setActiveTag(index === activeTag ? null : index);
-    }
-  };
+  // const handleChangeTag = (index) => {
+  //   if (activeTag === null) {
+  //     setActiveTag(index);
+  //   } else {
+  //     setActiveTag(index === activeTag ? null : index);
+  //   }
+  // };
 
   if (loading) return <Loading full_screen={true} />;
   return (
     <div className="account-page-wrapper">
       <PageHeading title={'Онлайн гид'} />
+      <GideFilter/>
       {!!gids?.length ? (
         <>
-          <NavigationTabs items={tags} selectedTab={activeTag} handleChangeTab={handleChangeTag} itemIcon={null} />
-          <GidList items={!!renderedItems?.length ? renderedItems : gids} updateData={updateData} />
+          {/* <NavigationTabs 
+          items={tags} 
+          selectedTab={activeTag} 
+          // handleChangeTab={handleChangeTag} 
+          itemIcon={null} 
+          /> */}
+          <GidList 
+          items={!!renderedItems?.length ? renderedItems : gids} 
+          // updateData={updateData} 
+          />
         </>
       ) : (
         <Container>

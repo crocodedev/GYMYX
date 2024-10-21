@@ -1,0 +1,61 @@
+.gide-filter {
+
+  &__filter {
+    width: 422px;
+  }
+
+  &__filter-inner {
+    position: relative;
+    z-index: 20;
+    border-radius: 25px;
+    padding: 10px 25px;
+    background: #37393D;
+  }
+
+  &__filter-header {
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: transparent;
+    border: none;
+    width: 100%;
+  }
+
+  &__filter-header-text {
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 26.82px;
+    color: #fff;
+  }
+
+  &__filter-header-icon {
+    width: 15px;
+    color: #fff;
+  }
+
+  &__filter-list {
+    position: absolute;
+    z-index: 1;
+    top: 20px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 46px 25px 10px;
+    list-style: none;
+    background: #37393D;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+  }
+
+  &__filter-item {
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 26.82px;
+    color: #fff;
+  }
+}

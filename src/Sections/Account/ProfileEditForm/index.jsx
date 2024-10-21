@@ -9,6 +9,8 @@ import ProfileField from '@/Components/Account/Profile/ProfileField';
 import styles from './ProfileEditForm.module.scss';
 import { checkValidPhone } from '@/Utils/helpers';
 import heic2any from 'heic2any';
+import { EditIcon } from '../../../../public/svg';
+import { formatDateForBirth, isValidDate } from './helper';
 
 const validateField = (value, fieldType) => {
   if (fieldType === 'text') {
@@ -20,26 +22,39 @@ const validateField = (value, fieldType) => {
     return true;
   } else if (fieldType === 'tel') {
     return checkValidPhone(value).valid;
+  } else if (fieldType === 'date') {
+    return isValidDate(value)
   }
 };
 
 const validateAllFields = (fields) => {
+  console.log('data', Object.values(fields))
   return Object.values(fields).every((field) => field.isValid);
 };
 
 const checkDataDifference = (prevData, newData) => {
   if (prevData.email !== newData.email.value) {
+    console.log('email', prevData.email !== newData.email.value)
     return true;
   }
 
   if (prevData.full_name !== `${newData.name.value} ${newData.lastname.value}`) {
+    console.log('full_name', prevData.full_name !== `${newData.name.value} ${newData.lastname.value}`)
     return true;
   }
 
   if (prevData.image !== newData.image.value && newData.image.value != null) {
+    console.log('image', prevData.image !== newData.image.value && newData.image.value != null)
     return true;
   }
+
   if (prevData.phone !== checkValidPhone(newData.phone.value).value) {
+    console.log('phone', prevData.phone !== checkValidPhone(newData.phone.value).value)
+    return true;
+  }
+
+  console.log('birth', prevData.birth !== newData.birth.value)
+  if (prevData.birth !== newData.birth.value) {
     return true;
   }
 
@@ -52,37 +67,64 @@ const ProfileEditForm = () => {
   const [isErrorSubmit, setIsErrorSubmit] = useState();
   const [loading, setLoading] = useState(false);
   const [canSubmit, setCanSubmit] = useState(false);
+  const [isDifference, setIsDifference] = useState(false)
   const [data, setData] = useState({
     name: {
+      name: 'name',
       value: '',
       isValid: true,
       type: 'text',
     },
     lastname: {
+      name: 'lastname',
       value: '',
-      isValid: false,
+      isValid: true,
       type: 'text',
     },
     email: {
+      name: 'email',
       value: '',
       isValid: true,
       type: 'email',
     },
     phone: {
+      name: 'phone',
       value: '',
       isValid: true,
       type: 'tel',
     },
     image: {
+      name: 'image',
       value: null,
       preview: null,
       isValid: true,
       type: 'file',
       error: false,
     },
+    birth: {
+      name: 'birth',
+      value: '',
+      isValid: true,
+      type: 'date',
+    }
   });
 
+  const handleChangeInput = (value, fieldName) => {
+    const sanitizedValue = value.replace(/\s/g, '');
+    setData((prev) => {
+      return {
+        ...prev,
+        [fieldName]: {
+          ...prev[fieldName],
+          value: sanitizedValue,
+          isValid: validateField(sanitizedValue, prev[fieldName].type),
+        },
+      };
+    });
+  };
+
   useEffect(() => {
+    console.log('difference', isDifference, canSubmit)
     setData((prev) => {
       return {
         name: {
@@ -105,6 +147,10 @@ const ProfileEditForm = () => {
           ...prev.email,
           value: sessionData?.user?.email || '',
         },
+        birth: {
+          ...prev.birth,
+          value: sessionData?.user?.birth || '',
+        }
       };
     });
   }, [sessionData]);
@@ -112,6 +158,7 @@ const ProfileEditForm = () => {
   useEffect(() => {
     if (!sessionData || !data) return;
     const isDifference = checkDataDifference(sessionData.user, data);
+    console.log('isDifference', isDifference)
     if (isDifference) {
       setCanSubmit(validateAllFields(data));
     } else {
@@ -199,20 +246,6 @@ const ProfileEditForm = () => {
     }
   };
 
-  const handleChangeInput = (value, fieldName) => {
-    const sanitizedValue = value.replace(/\s/g, '');
-    setData((prev) => {
-      return {
-        ...prev,
-        [fieldName]: {
-          ...prev[fieldName],
-          value: sanitizedValue,
-          isValid: validateField(sanitizedValue, prev[fieldName].type),
-        },
-      };
-    });
-  };
-
   const handleSubmit = async () => {
     setLoading(true);
     setIsErrorSubmit(false);
@@ -267,19 +300,29 @@ const ProfileEditForm = () => {
       <Container size="M">
         <div className={styles['profile-edit-form__wrapper']}>
           <div className={styles['profile-edit-form__data']}>
-            <label className={styles['profile-edit-form__avatar']}>
-              <input onChange={handleUploadFile} type="file" accept=".jpg, .jpeg, .png, .pdf, .webp, .heic" />
-              <img ref={imagePreviewRef} src={data.image.preview || '/icons/account.svg'} alt="profile image" />
-              <span className={styles['profile-edit-form__avatar-edit']}>
-                <img src="/icons/edit.svg" alt="edit" className={styles['profile-edit-form__edit-icon']} />
-              </span>
-              {/* <span className={styles['profile-edit-form__date-birth']}>
-                02.12.2001 
-                <span className={styles['profile-edit-form__date-birth-edit-icon']}>
 
+            <div className={styles['profile-edit-form__avatar-wrapper']}>
+              <label className={styles['profile-edit-form__avatar']}>
+                <input onChange={handleUploadFile} type="file" accept=".jpg, .jpeg, .png, .pdf, .webp, .heic" />
+                <img ref={imagePreviewRef} src={data.image.preview || '/icons/account.svg'} alt="profile image" />
+                <span className={styles['profile-edit-form__avatar-edit']}>
+                  <img src="/icons/edit.svg" alt="edit" className={styles['profile-edit-form__edit-icon']} />
                 </span>
-              </span> */}
-            </label>
+              </label>
+                <label className={styles['profile-edit-form__date-birth']}>
+                  <input 
+                    type='date' 
+                    className={styles['profile-edit-form__date-birth-text']} 
+                    max={formatDateForBirth(new Date)} 
+                    onInput={(e) => handleChangeInput(e.target.value, 'birth')} 
+                    value={data.birth.value}
+                  />
+                  <span className={styles['profile-edit-form__date-birth-edit-icon']} type='button'>
+                    <EditIcon/>
+                  </span>
+                </label>
+            </div>
+            
             <div className={styles['profile-edit-form__data-col']}>
               <ProfileField 
                 prefix="Имя" 
@@ -319,7 +362,7 @@ const ProfileEditForm = () => {
             disabled={!canSubmit}
             size="l"
             label={loading ? 'Загрузка' : 'Сохранить'}
-            variant="blue"
+            variant="blue-gradient"
             fullSize={true}
           />
           {isErrorSubmit && <p className={styles['profile-edit-form__error-field']}>{isErrorSubmit}</p>}

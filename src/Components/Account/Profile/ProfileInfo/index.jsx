@@ -1,6 +1,8 @@
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import styles from './ProfileInfo.module.scss';
+import { EditIcon } from '../../../../../public/svg';
+import Link from 'next/link';
 
 const ProfileInfo = () => {
   const session = useSession();
@@ -23,8 +25,11 @@ const ProfileInfo = () => {
       </div>
       <div className={styles['profile-info__content']}>
         <p className={styles['profile-info__title']}>
-          <span>{userData.name}</span>
-          <span>{userData.lastname}</span>
+          <span className={styles['profile-info__name']}>{userData.name}</span>
+          <span className={styles['profile-info__last-name']}>
+            {userData.lastname}
+            <Link href='/lk/profile/edit' className={styles['profile-info__edit-icon']}><EditIcon/></Link>
+          </span>
         </p>
         {userData.enter_code && (
           <div className={`${styles['profile-info__code']}`}>

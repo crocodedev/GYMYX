@@ -24,26 +24,29 @@
 
     @include media-breakpoint-down(md) {
       grid-template-columns: 1fr;
+      justify-items: center;
     }
 
     @include media-breakpoint-between(md, lg) {
       grid-template-columns: repeat(2, 1fr);
+      justify-items: center;
     }
   }
 }
 
 .trainers-item {
   position: relative;
-
   overflow: hidden;
   box-shadow: 0px 0px 21px 0px rgba(22, 23, 26, 0.6);
 
   @include media-breakpoint-down(md) {
-    height: 265px;
+    width: 327px;
+    height: 427px;
   }
 
   @include media-breakpoint-between(md, lg) {
-    height: 365px;
+    width: 100%;
+    aspect-ratio: 7/9;
   }
 
   @include media-breakpoint-down(lg) {

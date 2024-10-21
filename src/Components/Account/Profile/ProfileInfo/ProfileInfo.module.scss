@@ -58,13 +58,14 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
   }
 
   &__title {
     color: var(--white, #fff);
     font-weight: 600;
     line-height: 117%;
-    margin-bottom: 16px;
+    
     display: flex;
     flex-direction: column;
 
@@ -72,16 +73,50 @@
       font-size: 24px;
       letter-spacing: -0.24px;
       text-align: center;
+      max-width: max-content;
+      margin-bottom: 10px;
     }
 
     @include media-breakpoint-between(lg, xxxl) {
       font-size: 38px;
       letter-spacing: -0.5px;
+      margin-bottom: 16px;
     }
 
     @include media-breakpoint-up(xxxl) {
       font-size: 50px;
       letter-spacing: -0.5px;
+      margin-bottom: 16px;
+    }
+  }
+
+  &__last-name {
+    position: relative;
+    
+  }
+
+  &__edit-icon {
+    @include media-breakpoint-up(lg) {
+      display: none;
+    }
+
+    @include media-breakpoint-down(lg) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: 50%;
+      right: -8px;
+      transform: translate(100%, -50%);
+      width: 27px;
+      height: 27px;
+      padding: 4px;
+      border-radius: 50%;
+      background: linear-gradient(270deg, #0d2dc8 25%, #294ae7 100%);
+
+      & > :first-child {
+        transform: translate(-1px);
+      }
     }
   }
 
