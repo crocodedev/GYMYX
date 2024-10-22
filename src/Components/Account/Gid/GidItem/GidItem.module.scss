@@ -6,20 +6,35 @@
   &__wrapper {
     display: grid;
     width: 100%;
+    background: linear-gradient(180deg,hsla(0,0%,100%,.092) 10%,hsla(0,0%,100%,.041));
 
     @include media-breakpoint-down(lg) {
-      grid-template-columns: 1fr;
-      gap: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      padding: 15px 0;
+      border-radius: 15px;
     }
 
-    @include media-breakpoint-between(lg, xxl) {
-      grid-template-columns: auto 250px;
+    @include media-breakpoint-between(lg, xl) {
+      grid-template-columns: auto 300px;
       gap: 40px;
+      padding: 30px;
+      border-radius: 22px;
     }
 
-    @include media-breakpoint-up(xxl) {
+    @include media-breakpoint-between(xl, xxxl) {
       grid-template-columns: auto 360px;
       gap: 40px;
+      padding: 40px;
+      border-radius: 22px;
+    }
+
+    @include media-breakpoint-up(xxxl) {
+      grid-template-columns: auto 500px;
+      gap: 40px;
+      padding: 40px;
+      border-radius: 40px;
     }
   }
 }

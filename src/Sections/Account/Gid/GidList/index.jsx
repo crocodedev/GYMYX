@@ -31,7 +31,7 @@ const GidList = ({ items = [], updateData }) => {
     <section className={styles['grid-list']}>
       <Container>
         <div className={styles['grid-list__wrapper']}>
-          {items.map(({ tags, id, ...rest }) => (
+          {items.map(({id, ...rest }) => (
             <GidItem
               key={id}
               {...rest}

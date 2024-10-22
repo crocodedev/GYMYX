@@ -1,15 +1,44 @@
+@import '@/styles/mixins.scss';
+
 .gide-filter {
+  @include media-breakpoint-down(lg) {
+    margin-bottom: -20px;
+  }
+
+  &__wrapper {
+    display: flex;
+
+    @include media-breakpoint-up(xxxl) {
+      gap: 50px;
+    }
+
+    @include media-breakpoint-between(lg, xxxl) {
+      gap: 25px;
+    }
+  }
 
   &__filter {
-    width: 422px;
+    @include media-breakpoint-up(xxxl) {
+      width: 100%;
+      max-width: 422px;
+    }
+
+    @include media-breakpoint-between(lg, xxxl) {
+      width: 100%;
+      max-width: 290px;
+    }
+
+    @include media-breakpoint-down(lg) {
+      position: fixed;
+      left: 50%;
+      bottom: 153px;
+      transform: translatex(-50%);
+      width: 201px;
+    }
   }
 
   &__filter-inner {
     position: relative;
-    z-index: 20;
-    border-radius: 25px;
-    padding: 10px 25px;
-    background: #37393D;
   }
 
   &__filter-header {
@@ -19,43 +48,129 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: transparent;
+    border-radius: 25px;
+    background: #37393D;
     border: none;
     width: 100%;
+    cursor: pointer;
+
+    @include media-breakpoint-up(xxxl) {
+      padding: 10px 25px;
+    }
+
+    @include media-breakpoint-between(lg, xxxl) {
+      padding: 7.5px 15px;
+    }
+
+    @include media-breakpoint-down(lg) {
+      padding: 5px 14px;
+      box-shadow: 0px 4px 4px 0px #00000040;
+    }
   }
 
   &__filter-header-text {
     font-weight: 600;
-    font-size: 22px;
-    line-height: 26.82px;
     color: #fff;
+
+    @include media-breakpoint-up(xxxl) {
+      font-size: 22px;
+      line-height: 26.82px;
+    }
+
+    @include media-breakpoint-between(lg, xxxl) {
+      font-size: 16px;
+      line-height: 19.5px;
+    }
+
+    @include media-breakpoint-down(lg) {
+      font-size: 12px;
+      line-height: 14.66px;
+    }
   }
 
   &__filter-header-icon {
-    width: 15px;
     color: #fff;
+
+    @include media-breakpoint-up(xxxl) {
+      width: 15px;
+    }
+
+    @include media-breakpoint-between(lg, xxxl) {
+      width: 13px;
+    }
+
+    @include media-breakpoint-down(lg) {
+      width: 8px;
+    }
   }
 
   &__filter-list {
     position: absolute;
     z-index: 1;
-    top: 20px;
     left: 0;
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    padding: 46px 25px 10px;
+    gap: 20px;
     list-style: none;
     background: #37393D;
-    border-bottom-left-radius: 25px;
-    border-bottom-right-radius: 25px;
+    box-shadow: 0px 0px 21px 0px #16171A99;
+
+    @include media-breakpoint-up(xxxl) {
+      top: calc(100% + 20px);
+      padding: 40px;
+      border-radius: 25px;
+    }
+
+    @include media-breakpoint-between(lg, xxxl) {
+      top: calc(100% + 11px);
+      padding: 15px;
+      border-radius: 17px;
+    }
+
+    @include media-breakpoint-down(lg) {
+      bottom: calc(100% + 10px);
+      padding: 20px;
+      border-radius: 14px;
+    }
   }
 
   &__filter-item {
     font-weight: 600;
-    font-size: 22px;
-    line-height: 26.82px;
     color: #fff;
+    cursor: pointer;
+
+    @include media-breakpoint-up(xxxl) {
+      font-size: 22px;
+      line-height: 26.82px;
+    }
+
+    @include media-breakpoint-between(lg, xxxl) {
+      font-size: 16px;
+      line-height: 19.5px;
+    }
+
+    @include media-breakpoint-down(lg) {
+      font-size: 12px;
+      line-height: 14.63px;
+    }
+
+    &--active {
+      position: relative;
+      padding-right: 20px;
+      pointer-events: none;
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+        width: 12px;
+        aspect-ratio: 1/1;
+        border-radius: 50%;
+        background: #fff;
+      }
+    }
   }
 }
