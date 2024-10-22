@@ -12,7 +12,7 @@ const GideTags = ({activeTags = [], setActiveTags}) => {
     <div className={styles['select-tags']}>
       <div className={styles['select-tags__inner']}>
         {activeTags.map((tag, i) => (
-          <div className={styles['select-tags__item']}>
+          <div className={styles['select-tags__item']} key={i}>
             <span className={styles['select-tags__name']}>{tag.name}</span>
             <button type='bytton' className={styles['select-tags__delete-icon']} onClick={deleteActiveTag}><CrossIcon/></button>
           </div>
