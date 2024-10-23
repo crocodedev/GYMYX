@@ -4,10 +4,10 @@ import styles from './GideFilter.module.scss'
 
 import Container from '@/Components/Container'
 import GideTags from '../GideTags'
-import { ChevronIcon, CrossIcon } from '../../../../public/svg'
+import { ChevronIcon } from '../../../../public/svg'
 import { useState, useEffect, useRef } from 'react'
 
-const GideFilter = ({tags, activeTags, setActiveTags}) => {
+const GideFilter = ({tags = [], activeTags, setActiveTags}) => {
   const [filterIsOpen, setFilterIsOpen] = useState(false)
   const filterRef = useRef(null)
 
@@ -21,8 +21,14 @@ const GideFilter = ({tags, activeTags, setActiveTags}) => {
     }
   }
 
-  const addTags = () => {
-    setActiveTags(prev => [...prev])
+  const addTags = (tag) => {
+    setActiveTags(prev => [...prev, tag])
+  }
+
+  const deleteTags = (tag) => {
+    setActiveTags(prev => {
+      return prev.filter(activeTag => activeTag != tag)
+    })
   }
 
   useEffect(() => {
@@ -46,16 +52,21 @@ const GideFilter = ({tags, activeTags, setActiveTags}) => {
               </button>
               {filterIsOpen && (
                 <ul className={styles['gide-filter__filter-list']}>
-                  <li className={`${styles['gide-filter__filter-item']} ${true ? styles['gide-filter__filter-item--active'] : ''}`} onClick={addTags}>1 item</li>
-                  <li className={styles['gide-filter__filter-item']}>2 item</li>
-                  <li className={styles['gide-filter__filter-item']}>3 item</li>
-                  <li className={styles['gide-filter__filter-item']}>4 item</li>
+                  {tags.map((tag, i) => (
+                    <li className={`
+                      ${styles['gide-filter__filter-item']} 
+                      ${(activeTags.find(activeTag => activeTag == tag)) ? styles['gide-filter__filter-item--active'] : ''}`} 
+                      key={i} 
+                      onClick={() => addTags(tag)}>
+                      {tag}
+                    </li>
+                  ))}
                 </ul>
               )}
             </div>
           </div>
 
-          <GideTags/>
+          <GideTags activeTags={activeTags} deleteTagHandler={deleteTags}/>
         </div>
       </Container>
     </section>

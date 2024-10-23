@@ -15,4 +15,4 @@ export const authTelegram = async (id) => {
       } else if(response?.message) {
         return response
       }
-  };
+};

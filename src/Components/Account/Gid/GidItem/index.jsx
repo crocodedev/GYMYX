@@ -17,8 +17,6 @@ const GidItem = (props) => {
     onClickVideo,
   } = props;
 
-  // console.log(props)
-
   return (
     <div className={styles['gid-item']}>
       <div className={styles['gid-item__wrapper']}>

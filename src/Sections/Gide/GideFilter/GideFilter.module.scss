@@ -111,7 +111,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
     list-style: none;
     background: #37393D;
     box-shadow: 0px 0px 21px 0px #16171A99;
@@ -136,6 +136,7 @@
   }
 
   &__filter-item {
+    padding: 5px 0;
     font-weight: 600;
     color: #fff;
     cursor: pointer;

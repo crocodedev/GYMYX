@@ -1,7 +1,9 @@
 @import "@/styles/mixins.scss";
 
 .gid-item-info {
-  overflow: hidden;
+  @include media-breakpoint-down(lg) {
+    overflow: hidden;
+  }
 
   &__cards {
     @include media-breakpoint-down(lg) {

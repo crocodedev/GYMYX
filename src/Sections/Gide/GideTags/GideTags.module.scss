@@ -1,7 +1,6 @@
 @import '@/styles/mixins.scss';
 
 .select-tags {
-
   @include media-breakpoint-down(lg) {
     position: fixed;
     bottom: 0;
@@ -101,6 +100,7 @@
     border: none;
     color: #212428;
     background: transparent;
+    cursor: pointer;
 
     @include media-breakpoint-up(xxxl) {
       width: 15px;

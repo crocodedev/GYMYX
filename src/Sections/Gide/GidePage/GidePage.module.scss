@@ -3,7 +3,14 @@
 .gide-page {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+
+  @include media-breakpoint-up(lg) {
+    gap: 40px;
+  }
+
+  @include media-breakpoint-down(lg) {
+    gap: 20px;
+  }
   
   @include media-breakpoint-down(lg) {
     padding-bottom: 50px;

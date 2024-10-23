@@ -1,4 +1,5 @@
 import styles from './ProfileGid.module.scss'
+import Link from 'next/link'
 
 import Container from '@/Components/Container'
 
@@ -6,7 +7,7 @@ const ProfileGid = ({}) => {
   return (
       <div className={styles['profile-gid']}>
         <Container size='m'>
-          <div className={styles['profile-gid__inner']}>
+          <Link href={'/lk/studio-guide'} className={styles['profile-gid__inner']}>
             <div className={styles['profile-gid__content']}>
               <p className={styles['profile-gid__title']}>Гид по студии</p>
               <p className={styles['profile-gid__text']}>Видео-инструкции, ответы на самые частые вопросы и правила зала</p>
@@ -18,7 +19,7 @@ const ProfileGid = ({}) => {
                 </svg>
               </span>
             </div>
-          </div>
+          </Link>
         </Container>
       </div>
   )

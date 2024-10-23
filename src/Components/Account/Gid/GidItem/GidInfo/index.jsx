@@ -1,18 +1,23 @@
 import styles from './GidInfo.module.scss';
 
 const GidInfo = ({ description, trainingTime, tags }) => {
-  // const arr = [[], []]
+  // console.log(tags)
+  tags = tags.sort((a, b) =>  (a.tag_blue && !b.tag_blue) ? -1 : (!a.tag_blue && b.tag_blue) ? 1 : 0)
+
   return (
     <div className={styles['gid-item-info']}>
       <div className={styles['gid-item-info__cards']}>
-
         <div className={styles['gid-item-info__item']}>
           <p className={styles['gid-item-info__item-description']}>{description}</p>
           <ul className={styles['gid-item-info__item-tags']}>
-            <li className={`${styles['gid-item-info__item-tag']} ${ true ? styles['gid-item-info__item-tag--main'] : styles['gid-item-info__item-tag--default']}`}>грудь</li>
-            <li className={`${styles['gid-item-info__item-tag']} ${ false ? styles['gid-item-info__item-tag--main'] : styles['gid-item-info__item-tag--default']}`}>ноги</li>
-            <li className={`${styles['gid-item-info__item-tag']} ${ false ? styles['gid-item-info__item-tag--main'] : styles['gid-item-info__item-tag--default']}`}>руки</li>
-            <li className={`${styles['gid-item-info__item-tag']} ${ false ? styles['gid-item-info__item-tag--main'] : styles['gid-item-info__item-tag--default']}`}>плечи</li>
+            {tags.map((tag, i) => (
+              <li className={`
+                ${styles['gid-item-info__item-tag']} 
+                ${ tag?.tag_blue ? styles['gid-item-info__item-tag--main'] : styles['gid-item-info__item-tag--default']}`} 
+                 key={i}>
+                  {tag.name}
+              </li>
+            ))}
           </ul>
         </div>
 
@@ -25,14 +30,14 @@ const GidInfo = ({ description, trainingTime, tags }) => {
 
       <div className={styles['gid-item-info__item-tags-wrapper']}>
         <ul className={styles['gid-item-info__item-tags--mobile']}>
-          <li className={`${styles['gid-item-info__item-tag']} ${ true ? styles['gid-item-info__item-tag--main'] : styles['gid-item-info__item-tag--default']}`}>грудь</li>
-          <li className={`${styles['gid-item-info__item-tag']} ${ false ? styles['gid-item-info__item-tag--main'] : styles['gid-item-info__item-tag--default']}`}>ноги</li>
-          <li className={`${styles['gid-item-info__item-tag']} ${ false ? styles['gid-item-info__item-tag--main'] : styles['gid-item-info__item-tag--default']}`}>руки</li>
-          <li className={`${styles['gid-item-info__item-tag']} ${ false ? styles['gid-item-info__item-tag--main'] : styles['gid-item-info__item-tag--default']}`}>плечи</li>
-          <li className={`${styles['gid-item-info__item-tag']} ${ true ? styles['gid-item-info__item-tag--main'] : styles['gid-item-info__item-tag--default']}`}>грудь</li>
-          <li className={`${styles['gid-item-info__item-tag']} ${ false ? styles['gid-item-info__item-tag--main'] : styles['gid-item-info__item-tag--default']}`}>ноги</li>
-          <li className={`${styles['gid-item-info__item-tag']} ${ false ? styles['gid-item-info__item-tag--main'] : styles['gid-item-info__item-tag--default']}`}>руки</li>
-          <li className={`${styles['gid-item-info__item-tag']} ${ false ? styles['gid-item-info__item-tag--main'] : styles['gid-item-info__item-tag--default']}`}>плечи</li>
+         {tags.map((tag, i) => (
+            <li className={`
+              ${styles['gid-item-info__item-tag']} 
+              ${ tag?.tag_blue ? styles['gid-item-info__item-tag--main'] : styles['gid-item-info__item-tag--default']}`} 
+              key={i}>
+                {tag.name}
+            </li>
+          ))}
         </ul>
       </div>
     </div>

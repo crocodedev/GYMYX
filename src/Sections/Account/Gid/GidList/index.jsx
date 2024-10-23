@@ -5,11 +5,24 @@ import styles from './GidList.module.scss';
 import { useSession } from 'next-auth/react';
 
 import { addFavoriteExerciser, deleteFavoriteExerciser, addWatchedExerciser } from './helpers';
-import { useState } from 'react';
 
-const GidList = ({ items = [], updateData }) => {
+const GidList = ({ items = [], activeTags = [], updateData }) => {
   const { data: sessionData } = useSession();
-  const [favoriteArray, favoriteItems] = useState([]);
+
+  const filteredItems = (type = 'some') => {
+    // type = 'some' 'every'
+    return items.filter(item => {
+      const tagNames = item.tags.map(tag => tag.name);
+
+      if(type == 'some' && activeTags.length) {
+        return activeTags.some(activeTag => tagNames.includes(activeTag));
+      } else if(type == 'every') {
+        return activeTags.every(activeTag => tagNames.includes(activeTag));
+      } else {
+        return items
+      }
+    });
+  }
 
   const handleToggleFavorite = (id, isFavorited) => {
     if (isFavorited) {
@@ -30,16 +43,22 @@ const GidList = ({ items = [], updateData }) => {
   return (
     <section className={styles['grid-list']}>
       <Container>
-        <div className={styles['grid-list__wrapper']}>
-          {items.map(({id, ...rest }) => (
-            <GidItem
-              key={id}
-              {...rest}
-              onClickFavorite={() => handleToggleFavorite(id, rest.isFavorited)}
-              onClickVideo={() => handleClickWatched(id)}
-            />
-          ))}
-        </div>
+        {!items.length 
+        ? <p className={styles['grid-list__message']}>{'Пока что здесь пусто =('}</p>
+        : !filteredItems().length 
+        ? <p className={styles['grid-list__message']}>По выбранным фильтрам видео не найдены</p>
+        : (
+          <div className={styles['grid-list__wrapper']}>
+            {filteredItems().map(({id, ...rest }) => (
+              <GidItem
+                key={id}
+                {...rest}
+                onClickFavorite={() => handleToggleFavorite(id, rest.isFavorited)}
+                onClickVideo={() => handleClickWatched(id)}
+              />
+            ))}
+          </div>
+        )}
       </Container>
     </section>
   );

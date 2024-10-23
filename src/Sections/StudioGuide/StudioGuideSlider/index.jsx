@@ -1,6 +1,6 @@
 'use client';
 
-import styles from './TrainersSlider.module.scss';
+import styles from './StudioGuideSlider.module.scss';
 import Loading from '@/Components/Loading';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -8,11 +8,11 @@ import { useState, useEffect } from 'react';
 import { Mousewheel } from 'swiper/modules';
 
 import SliderControls from '@/Components/Slider/SliderControls';
-import TrainersItem from '../TrainersItem';
+import TrainersItem from '@/Sections/Account/Trainers/TrainersItem';
 import { getTrainersData } from '@/app/lk/trainers/page';
-import PageHeading from '../../PageHeading';
+import PageHeading from '@/Sections/Account/PageHeading';
 
-const TrainersSlider = ({isShowVideo = false}) => {
+const StudioGuideSlider = ({isShowVideo = false}) => {
   const [dataTrainers, setDataTrainers] = useState();
   const [slider, setSlider] = useState();
   const [activeIndexSlide, setIndexActiveSlide] = useState(1);
@@ -136,4 +136,4 @@ const TrainersSlider = ({isShowVideo = false}) => {
   );
 };
 
-export default TrainersSlider;
+export default StudioGuideSlider;
