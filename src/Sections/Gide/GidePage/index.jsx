@@ -76,7 +76,7 @@ const GidePage = () => {
       <PageHeading title={'Онлайн гид'} />
       <GideSwitcher data={SWITCHER_DATA} activeId={switcherIdActive} handlerClick={setSwitcherIdActive}/>
 
-      {switcherIdActive == 0 && (
+      {!switcherIdActive && (
         <GideFilter tags={tags} activeTags={activeTags} setActiveTags={setActiveTags}/>
       )}
       

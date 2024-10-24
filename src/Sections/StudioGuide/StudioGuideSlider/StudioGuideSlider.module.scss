@@ -1,20 +1,20 @@
 @import '@/styles/mixins.scss';
 
 .trainers-slider {
+  margin-top: -50px;
   position: relative;
 
   &__title-wrapper {
     display: flex;
+    justify-content:  flex-end;
 
     @include media-breakpoint-down(lg) {
       padding-bottom: 20px;
-      justify-content: space-between;
     }
 
     @include media-breakpoint-up(lg) {
       padding-bottom: 23px;
       align-items: center;
-      justify-content: space-between;
     }
   }
 
@@ -87,23 +87,7 @@
   }
 }
 
-.slider__start {
-  &::before {
-    transition: 0.2s ease;
-    content: '';
-    top: 0;
-    position: absolute;
-    left: 0px;
-    width: 60px;
-    height: 100%;
-    opacity: 1;
-    z-index: 10;
-    box-shadow: 0px 0px 51px 65px #212428;
-    width: 20px;
-    background: linear-gradient(90deg, transparent -55%, #212428 0%, #212428 100%);
-  }
-}
-
+.slider__start,
 .slider__start__end {
   &::before {
     transition: 0.2s ease;
@@ -113,11 +97,22 @@
     left: 0px;
     width: 60px;
     height: 100%;
-    opacity: 0;
     z-index: 10;
     box-shadow: 0px 0px 51px 65px #212428;
     width: 20px;
     background: linear-gradient(90deg, transparent -55%, #212428 0%, #212428 100%);
+  }
+}
+
+.slider__start {
+  &::before {
+    opacity: 1;
+  }
+}
+
+.slider__start__end {
+  &::before {
+    opacity: 0;
   }
 }
 

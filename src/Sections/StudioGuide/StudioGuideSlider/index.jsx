@@ -11,15 +11,18 @@ import SliderControls from '@/Components/Slider/SliderControls';
 import TrainersItem from '@/Sections/Account/Trainers/TrainersItem';
 import { getTrainersData } from '@/app/lk/trainers/page';
 import PageHeading from '@/Sections/Account/PageHeading';
+import StudioGuideSlide from '../StudioGuideSlide';
 
-const StudioGuideSlider = ({isShowVideo = false}) => {
-  const [dataTrainers, setDataTrainers] = useState();
+const StudioGuideSlider = ({isShowVideo = false, items}) => {
+  const [dataTrainers, setDataTrainers] = useState(items);
   const [slider, setSlider] = useState();
   const [activeIndexSlide, setIndexActiveSlide] = useState(1);
   const [sliderSettings, setSliderSettings] = useState(null);
   const [endSlider, setEndSlider] = useState(false);
   const [startSlider, setStartSlider] = useState(true);
   const [loading, setLoading] = useState(true);
+
+  console.log(items)
 
   const sliderPcSettings = {
     spaceBetween: 25,
@@ -44,7 +47,7 @@ const StudioGuideSlider = ({isShowVideo = false}) => {
 
       1400: {
         spaceBetween: 40,
-        slidesPerView: 2.4,
+        slidesPerView: 2.656,
       },
     },
   };
@@ -69,32 +72,24 @@ const StudioGuideSlider = ({isShowVideo = false}) => {
     setSlider(e);
   };
 
-  const sortForVideo = (data) => {
-    return data.sort((a, b) => {
-      const aHasValidVideo = a.some(item => item.name === 'video' && item.value.trim() !== '');
-      const bHasValidVideo = b.some(item => item.name === 'video' && item.value.trim() !== '');
-      if (aHasValidVideo && !bHasValidVideo) return -1;
-      if (!aHasValidVideo && bHasValidVideo) return 1;
-      return 0;
-    });
-  }
+  // const sortForVideo = (data) => {
+  //   return data.sort((a, b) => {
+  //     const aHasValidVideo = a.some(item => item.name === 'video' && item.value.trim() !== '');
+  //     const bHasValidVideo = b.some(item => item.name === 'video' && item.value.trim() !== '');
+  //     if (aHasValidVideo && !bHasValidVideo) return -1;
+  //     if (!aHasValidVideo && bHasValidVideo) return 1;
+  //     return 0;
+  //   });
+  // }
 
   useEffect(() => {
     const isMobile = window.matchMedia('(max-width: 992px)').matches;
     isMobile ? handleInit : setSliderSettings(sliderPcSettings);
-
-    getTrainersData().then((dataTrainers) => {
-      setDataTrainers(sortForVideo(dataTrainers.data.modules[0].fields[0].childrens));
-      setLoading(false);
-    });
   }, []);
-
-  if (loading) return <Loading full_screen={true} />;
 
   return (
     <div className={styles['trainers-slider']}>
       <div className={styles['trainers-slider__title-wrapper']}>
-        <PageHeading title={'Тренеры'} container={false} />
         {sliderSettings ? (
           <SliderControls
             handleNextSlide={nextSlide}
@@ -119,16 +114,18 @@ const StudioGuideSlider = ({isShowVideo = false}) => {
           mousewheel={true}
           {...sliderSettings}
         >
-          {dataTrainers.map((dataTrainers, index) => (
-            <SwiperSlide className={styles['trainers-item']} key={dataTrainers[0].value}>
-              <TrainersItem data={dataTrainers} key={index} isShowVideo={isShowVideo}/>
+          {dataTrainers.map((item, i) => (
+            <SwiperSlide className={styles['trainers-item']} key={i}>
+              {/* <TrainersItem data={dataTrainers} key={index} isShowVideo={isShowVideo}/> */}
+              <StudioGuideSlide data={item}/>
             </SwiperSlide>
           ))}
         </Swiper>
       ) : (
         <div className={styles['trainers-slider__items']}>
-          {dataTrainers.map((dataTrainers, index) => (
-            <TrainersItem key={index} className={styles['trainers-item']} data={dataTrainers} isShowVideo={isShowVideo}/>
+          {dataTrainers.map((item, i) => (
+            <StudioGuideSlide data={item} key={i}/>
+            // <TrainersItem key={index} className={styles['trainers-item']} data={dataTrainers} isShowVideo={isShowVideo}/>
           ))}
         </div>
       )}

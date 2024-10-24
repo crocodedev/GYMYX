@@ -6,7 +6,7 @@ import { CrossIcon } from '../../../../public/svg'
 const GideTags = ({activeTags = [], deleteTagHandler}) => {
 
   return (
-    <div className={styles['select-tags']}>
+    <div className={`${styles['select-tags']} ${!activeTags.length ? styles['select-tags--hidden'] : ''}`}>
       <div className={styles['select-tags__inner']}>
         {activeTags.map((tag, i) => (
           <div className={styles['select-tags__item']} key={i}>

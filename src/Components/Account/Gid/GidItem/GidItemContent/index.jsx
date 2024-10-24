@@ -1,32 +1,45 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { pauseAllVideo } from '@/Utils/video';
 import styles from './GidItemContent.module.scss';
 
 const GidItemContent = ({ duration, link, title, lock, isViewed, video_poster, onClickFavorite, onClickVideo }) => {
-  const [isPlayed, setIsPlayed] = useState(false);
+  // const [isPlayed, setIsPlayed] = useState(false);
+  const [isShowBg, setIsShowBg] = useState(true)
   const videoRef = useRef(null)
 
   const handleClickPlay = () => {
     pauseAllVideo()
+    setIsShowBg(false)
     videoRef.current.play()
   };
 
   const handlerPause = () => {
-    setIsPlayed(false)
-  }
-
-  const handletoggle = () => {
-    setIsPlayed(prev => !prev)
+    setIsShowBg(true)
+    videoRef.current.controls = false
   }
 
   const playVideo = () => {
-    setIsPlayed(true);
+    videoRef.current.play()
+    videoRef.current.controls = true
   }
 
   const handlerEndVideo = () => {
+    setIsShowBg(true)
+    videoRef.current.controls = false
     videoRef.current.load()
+  }
+
+  const videoSeeked = () => {
+    setIsShowBg(false)
+    videoRef.current.controls = true
+    videoRef.current.play()
+  }
+
+  const videoSeeking = () => {
+    setIsShowBg(false)
+    videoRef.current.controls = true
   }
 
   return (
@@ -34,12 +47,21 @@ const GidItemContent = ({ duration, link, title, lock, isViewed, video_poster, o
       <div className={styles['gid-item-content__inner']}>
 
         <div className={styles['gid-item-content__video-wrapper']}>
-          <video ref={videoRef} className={styles['gid-item-content__video']} playsInline controls poster={video_poster} onPlay={playVideo} onPause={handlerPause} onEnded={handlerEndVideo}>
+          <video 
+            ref={videoRef} 
+            className={styles['gid-item-content__video']} 
+            playsInline poster={video_poster} 
+            onPlay={playVideo} 
+            onPause={handlerPause} 
+            onEnded={handlerEndVideo}
+            onSeeked={videoSeeked}
+            onSeeking={videoSeeking}
+          >
             <source src={link} type="video/mp4"/>
           </video>
         </div>
         
-        <div className={`${styles['gid-item-content__befor']} ${isPlayed ? styles['gid-item-content__befor--hidden'] : ''}`}>
+        <div className={`${styles['gid-item-content__befor']} ${!isShowBg ? styles['gid-item-content__befor--hidden'] : ''}`}>
           <div className={styles['gid-item-content__befor-inner']}>
             <button type='button' className={`${styles['gid-item-content__btn-lock']} ${lock ? styles['active'] : ''}`} onClick={onClickFavorite}>
               <img className={styles['gid-item-content__btn-icon']} src="/icons/key.svg" alt="lock  icon button" />
@@ -54,7 +76,7 @@ const GidItemContent = ({ duration, link, title, lock, isViewed, video_poster, o
             </button>
             <div className={styles['gid-item-content__about']}>
               <p className={styles['gid-item-content__title']}>{title}</p>
-              {isViewed && !isPlayed && (
+              {isShowBg && (
                 <p className={styles['gid-item-content__status']}>
                   <span className={styles['gid-item-content__status-icon']}>
                     <img src="/icons/confirm.svg" alt="confirm icon" />

@@ -42,9 +42,9 @@ const GideFilter = ({tags = [], activeTags, setActiveTags}) => {
   return (
     <section className={styles['gide-filter']}>
       <Container>
-        <div className={styles['gide-filter__wrapper']}>
+        <div className={`${styles['gide-filter__wrapper']} ${filterIsOpen ? styles['gide-filter__wrapper--bg'] : ''}`}>
 
-          <div ref={filterRef} className={styles['gide-filter__filter']}>
+          <div ref={filterRef} className={`${styles['gide-filter__filter']} ${!activeTags.length ? styles['gide-filter__filter--down'] : ''}`}>
             <div className={styles['gide-filter__filter-inner']}>
               <button type='button' className={styles['gide-filter__filter-header']} onClick={filterToggle}>
                 <span className={styles['gide-filter__filter-header-text']}>всe</span>

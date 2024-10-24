@@ -10,6 +10,7 @@
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
     background: #37393D;
+    transition: 0.3s;
 
     &::before,
     &::after {
@@ -28,6 +29,13 @@
 
     &::after {
       right: 0;
+    }
+
+    &--hidden {
+      @include media-breakpoint-down(lg) {
+        opacity: 0;
+        visibility: hidden;
+      }
     }
   }
 
@@ -79,6 +87,7 @@
   &__name {
     font-weight: 600;
     color: #212428;
+    text-wrap: nowrap;
 
     @include media-breakpoint-up(xxxl) {
       font-size: 22px;
