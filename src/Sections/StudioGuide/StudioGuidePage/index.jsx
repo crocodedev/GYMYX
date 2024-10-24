@@ -18,9 +18,9 @@ const StudioGuidePage = ({data}) => {
   const studioGuideVideo = data?.find(module => module.alias === 'studioGuideVideo')
   const studioGuideElements = studioGuideVideo.fields?.find(el => el.type === 'object')?.childrens
 
-  // useEffect(() => {
-  //   // console.log(studioGuideVideo.fields.find(el => el.name == 'title'))
-  // }, [data])
+  useEffect(() => {
+    // console.log(studioGuideVideo.fields.find(el => el.name == 'title'))
+  }, [data])
 
   const SwitcherData = [
     {title: studioGuideVideo.fields.find(el => el.name == 'title').value},

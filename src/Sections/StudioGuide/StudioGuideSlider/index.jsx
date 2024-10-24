@@ -22,8 +22,6 @@ const StudioGuideSlider = ({isShowVideo = false, items}) => {
   const [startSlider, setStartSlider] = useState(true);
   const [loading, setLoading] = useState(true);
 
-  console.log(items)
-
   const sliderPcSettings = {
     spaceBetween: 25,
     slidesPerView: 2.2,
