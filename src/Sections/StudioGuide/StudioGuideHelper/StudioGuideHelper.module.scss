@@ -1,0 +1,21 @@
+.studio-guide-helper {
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  &__title {
+    font-weight: 600;
+    font-size: 50px;
+    line-height: 58.5px;
+    color: #fff;
+    text-align: center;
+  }
+
+  &__items {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 40px;
+  }
+}

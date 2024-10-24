@@ -7,7 +7,9 @@ const StudioGuideSwitcher = ({data, handlerClick, activeId = 0}) => {
   return (
     <section className={styles['studio-guide-switcher']}>
       <Container>
-        <Switcher data={data} handlerClick={handlerClick} activeId={activeId}/>
+        <div className={styles['studio-guide-switcher__inner']}>
+          <Switcher data={data} handlerClick={handlerClick} activeId={activeId}/>
+        </div>
       </Container>
     </section>
   )

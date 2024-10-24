@@ -4,19 +4,22 @@ import styles from './StudioGuideSlide.module.scss'
 
 import { useState, useRef } from 'react'
 
+import { pauseAllVideo } from '@/Utils/video'
+
 const StudioGuideSlide = ({data}) => {
   const [videoIsPlay, setVideoIsPlay] = useState(false)
   const videoRef = useRef(null)
-  console.log('item', data)
+  // console.log('item', data)
 
   const name = data?.find(el => el.name == 'name')?.value || ''
   const poster = data?.find(el => el.name == 'poster')?.value || ''
   const video = data?.find(el => el.name == 'video')?.value || ''
 
-  const handlerClick = () => {
-    videoRef.current.play()
-    setVideoIsPlay(true)
-  }
+  // const handlerClick = () => {
+  //   pauseAllVideo()
+  //   videoRef.current.play()
+  //   setVideoIsPlay(true)
+  // }
 
   const endedVideo = () => {
     videoRef.current.load()
@@ -25,6 +28,7 @@ const StudioGuideSlide = ({data}) => {
 
   const toggled = () => {
     setVideoIsPlay(prev => {
+      pauseAllVideo()
       if(prev) videoRef.current.pause()
       else videoRef.current.play()
     })
@@ -42,7 +46,7 @@ const StudioGuideSlide = ({data}) => {
     <div className={styles['studio-guide-slide']}>
       <div className={styles['studio-guide-slide__inner']}>
 
-        <button className={`${styles['studio-guide-slide__btn-play']} ${videoIsPlay ? styles['studio-guide-slide__btn-play--hidden'] : ''}`} onClick={handlerClick}>
+        <button className={`${styles['studio-guide-slide__btn-play']} ${videoIsPlay ? styles['studio-guide-slide__btn-play--hidden'] : ''}`} onClick={toggled}>
           <span className={styles['studio-guide-slide__btn-icon']}>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 45 51" fill="none">
               <path d="M41.8013 21.3221C44.999 23.1683 44.999 27.7838 41.8013 29.63L7.47686 49.4472C4.27916 51.2934 0.282036 48.9856 0.282036 45.2932L0.282036 5.65884C0.282036 1.96645 4.27916 -0.341295 7.47686 1.5049L41.8013 21.3221Z" fill="white"/>

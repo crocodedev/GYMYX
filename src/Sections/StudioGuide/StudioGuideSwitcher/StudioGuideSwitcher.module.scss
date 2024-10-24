@@ -1,0 +1,17 @@
+@import '@/styles/mixins.scss';
+
+.studio-guide-switcher {
+  position: relative;
+  z-index: 3;
+
+  @include media-breakpoint-up(xxxl) {
+    padding: 20px 0 10px;
+  }
+
+  &__inner {
+    position: relative;
+    z-index: 3;
+    max-width: max-content;
+  }
+ 
+}
