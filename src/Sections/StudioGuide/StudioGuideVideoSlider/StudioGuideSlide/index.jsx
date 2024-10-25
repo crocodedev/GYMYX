@@ -3,23 +3,15 @@
 import styles from './StudioGuideSlide.module.scss'
 
 import { useState, useRef } from 'react'
-
 import { pauseAllVideo } from '@/Utils/video'
 
 const StudioGuideSlide = ({data}) => {
   const [videoIsPlay, setVideoIsPlay] = useState(false)
   const videoRef = useRef(null)
-  // console.log('item', data)
 
   const name = data?.find(el => el.name == 'name')?.value || ''
   const poster = data?.find(el => el.name == 'poster')?.value || ''
   const video = data?.find(el => el.name == 'video')?.value || ''
-
-  // const handlerClick = () => {
-  //   pauseAllVideo()
-  //   videoRef.current.play()
-  //   setVideoIsPlay(true)
-  // }
 
   const endedVideo = () => {
     videoRef.current.load()

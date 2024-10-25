@@ -35,6 +35,35 @@
       justify-items: center;
     }
   }
+
+  &__swiper-wrapper {
+    position: relative;
+    margin: 0 -40px;
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      z-index: 2;
+      top: 0;
+      width: 10px;
+      height: 100%;
+      background: #212428;
+      box-shadow: 0 0 30px 30px #212428;
+    }
+
+    &::before {
+      left: 0;
+    }
+
+    &::after {
+      right: 0;
+    }
+  }
+
+  &__swiper {
+    padding: 0 40px;
+  }
 }
 
 .trainers-item {
@@ -61,16 +90,16 @@
   }
 
   @include media-breakpoint-between(lg, xxxl) {
-    max-height: 610px;
-    min-height: 610px;
+    // max-height: 610px;
+    // min-height: 610px;
     height: 610px;
   }
 
   @include media-breakpoint-up(xxxl) {
-    max-height: 775px;
-    min-height: 775px;
+    // max-height: 775px;
+    // min-height: 775px;
     height: 775px;
-  }
+  } 
 }
 
 .slider {

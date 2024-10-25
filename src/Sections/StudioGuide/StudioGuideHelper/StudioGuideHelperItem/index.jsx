@@ -3,12 +3,10 @@ import styles from './StudioGuideHelperItem.module.scss'
 import Image from 'next/image'
 
 const StudioGuideHelperItem = ({itemData}) => {
-  console.log(itemData)
 
   const title = itemData.find(el => el.name == 'title')?.value
   const description = itemData.find(el => el.name == 'description')?.value
   const image = itemData.find(el => el.name == 'image')?.value
-
   
   return (
     <div className={styles['studio-guide-helper-item']}>

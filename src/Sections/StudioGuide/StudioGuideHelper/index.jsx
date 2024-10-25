@@ -2,13 +2,34 @@ import styles from './StudioGuideHelper.module.scss'
 
 import Container from '@/Components/Container'
 import StudioGuideHelperItem from './StudioGuideHelperItem'
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Mousewheel } from 'swiper/modules';
 
-const StudioGuideHelper = ({helperData}) => {
-  const title = helperData.find(el => el.name == 'title')?.value
-  const items = helperData.find(el => el.type == 'object')?.childrens
+const StudioGuideHelper = ({data}) => {
+  const title = data.find(el => el.name == 'title')?.value
+  const items = data.find(el => el.type == 'object')?.childrens
 
-  // console.log("helperData", items)
-
+  const sliderPcSettings = {
+    slidesPerView: 3,
+    mousewheel: {
+      thresholdDelta: 70,
+      forceToAxis: true,
+    },
+    breakpoints: {
+      0: {
+        slidesPerView: 1.5,
+      },
+      425: {
+        slidesPerView: 1.9,
+      },
+      576: {
+        slidesPerView: 2.5,
+      },
+      768: {
+        slidesPerView: 3,
+      },
+    },
+  };
 
   return (
     <div className={styles['studio-guide-helper']}>
@@ -16,9 +37,21 @@ const StudioGuideHelper = ({helperData}) => {
         <div className={styles['studio-guide-helper__inner']}>
           <h2 className={styles['studio-guide-helper__title']}>{title}</h2>
           <div className={styles['studio-guide-helper__items']}>
-            {items.map((item, i) => (
-              <StudioGuideHelperItem itemData={item} key={i}/>
-            ))}
+            <Swiper
+              className={styles['studio-guide-helper__slider']}
+              a11y={false}
+              modules={[Mousewheel]}
+              mousewheel={true}
+              {...sliderPcSettings}
+            >
+
+              {items.map((item, i) => (
+                <SwiperSlide key={i} className={styles['studio-guide-helper__slide']}>
+                  <StudioGuideHelperItem itemData={item} key={i}/>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+            
           </div>
         </div>
       </Container>

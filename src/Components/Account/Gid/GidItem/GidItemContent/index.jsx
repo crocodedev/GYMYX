@@ -5,7 +5,6 @@ import { pauseAllVideo } from '@/Utils/video';
 import styles from './GidItemContent.module.scss';
 
 const GidItemContent = ({ duration, link, title, lock, isViewed, video_poster, onClickFavorite, onClickVideo }) => {
-  // const [isPlayed, setIsPlayed] = useState(false);
   const [isShowBg, setIsShowBg] = useState(true)
   const videoRef = useRef(null)
 
@@ -23,6 +22,7 @@ const GidItemContent = ({ duration, link, title, lock, isViewed, video_poster, o
   const playVideo = () => {
     videoRef.current.play()
     videoRef.current.controls = true
+    onClickVideo()
   }
 
   const handlerEndVideo = () => {
@@ -76,7 +76,7 @@ const GidItemContent = ({ duration, link, title, lock, isViewed, video_poster, o
             </button>
             <div className={styles['gid-item-content__about']}>
               <p className={styles['gid-item-content__title']}>{title}</p>
-              {isShowBg && (
+              {isViewed && (
                 <p className={styles['gid-item-content__status']}>
                   <span className={styles['gid-item-content__status-icon']}>
                     <img src="/icons/confirm.svg" alt="confirm icon" />

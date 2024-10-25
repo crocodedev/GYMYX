@@ -3,7 +3,6 @@
 .studio-guide-slide {
   display: flex;
   width: 100%;
-  
 
   @include media-breakpoint-up(lg) {
     height: 100%;
@@ -19,7 +18,18 @@
   &__inner {
     position: relative;
     width: 100%;
-    height: 100%;
+
+    @include media-breakpoint-up(xxxl) {
+      height: 775px;
+    }
+
+    @include media-breakpoint-between(lg, xxxl) {
+      height: 610px;
+    }
+
+    @include media-breakpoint-down(lg) {
+      height: 100%;
+    }
   }
 
   &__btn-play {
