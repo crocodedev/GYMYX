@@ -10,7 +10,7 @@ import styles from './ProfileEditForm.module.scss';
 import { checkValidPhone } from '@/Utils/helpers';
 import heic2any from 'heic2any';
 import { EditIcon } from '../../../../public/svg';
-import { formatDateForBirth, isValidDate } from './helper';
+import { formatDateForBirth, isValidDate, checkDataDifference } from './helper';
 
 const validateField = (value, fieldType) => {
   if (fieldType === 'text') {
@@ -28,38 +28,9 @@ const validateField = (value, fieldType) => {
 };
 
 const validateAllFields = (fields) => {
-  console.log('data', Object.values(fields))
   return Object.values(fields).every((field) => field.isValid);
 };
 
-const checkDataDifference = (prevData, newData) => {
-  if (prevData.email !== newData.email.value) {
-    console.log('email', prevData.email !== newData.email.value)
-    return true;
-  }
-
-  if (prevData.full_name !== `${newData.name.value} ${newData.lastname.value}`) {
-    console.log('full_name', prevData.full_name !== `${newData.name.value} ${newData.lastname.value}`)
-    return true;
-  }
-
-  if (prevData.image !== newData.image.value && newData.image.value != null) {
-    console.log('image', prevData.image !== newData.image.value && newData.image.value != null)
-    return true;
-  }
-
-  if (prevData.phone !== checkValidPhone(newData.phone.value).value) {
-    console.log('phone', prevData.phone !== checkValidPhone(newData.phone.value).value)
-    return true;
-  }
-
-  console.log('birth', prevData.birth !== newData.birth.value)
-  if (prevData.birth !== newData.birth.value) {
-    return true;
-  }
-
-  return false;
-};
 
 const ProfileEditForm = () => {
   const { data: sessionData, update: updateSession } = useSession();
@@ -72,42 +43,50 @@ const ProfileEditForm = () => {
     name: {
       name: 'name',
       value: '',
-      isValid: true,
+      isValid: false,
       type: 'text',
     },
     lastname: {
       name: 'lastname',
       value: '',
-      isValid: true,
+      isValid: false,
       type: 'text',
     },
     email: {
       name: 'email',
       value: '',
-      isValid: true,
+      isValid: false,
       type: 'email',
     },
     phone: {
       name: 'phone',
       value: '',
-      isValid: true,
+      isValid: false,
       type: 'tel',
     },
     image: {
       name: 'image',
       value: null,
       preview: null,
-      isValid: true,
+      isValid: false,
       type: 'file',
       error: false,
     },
     birth: {
       name: 'birth',
       value: '',
-      isValid: true,
+      isValid: false,
       type: 'date',
     }
   });
+  const [validateData, setValideteData] = useState({
+    name: false,
+    lastname: false,
+    email: false,
+    phone: false,
+    image: false,
+    birth: false,
+  })
 
   const handleChangeInput = (value, fieldName) => {
     const sanitizedValue = value.replace(/\s/g, '');
@@ -123,8 +102,52 @@ const ProfileEditForm = () => {
     });
   };
 
+  const validateName = () => {
+    setValideteData(prev => ({
+      ...prev,
+      name: data.name.length > 0
+    }))
+  }
+
+  const validateLastName = () => {
+    setValideteData(prev => ({
+      ...prev,
+      lastname: data.name.length > 0
+    }))
+  }
+
+  const validateEmail = () => {
+    const pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    setValideteData(prev => ({
+      ...prev,
+      email: pattern.test(data.email)
+    }))
+  }
+
+  const validatePhone = () => {
+    setValideteData(prev => ({
+      ...prev,
+      phone: checkValidPhone(data.phone.value).valid
+    }))
+  }
+
+  const validateImage = () => {
+    setValideteData(prev => ({
+      ...prev,
+      image: checkValidPhone(data.phone.value).valid
+    }))
+  }
+
+  const validateAllInputs = () => {
+    console.log("valid All inputs")
+    validateName()
+    validateLastName()
+    validateEmail()
+    validatePhone()
+    // if(data.)
+  }
+
   useEffect(() => {
-    console.log('difference', isDifference, canSubmit)
     setData((prev) => {
       return {
         name: {
@@ -157,13 +180,15 @@ const ProfileEditForm = () => {
 
   useEffect(() => {
     if (!sessionData || !data) return;
-    const isDifference = checkDataDifference(sessionData.user, data);
-    console.log('isDifference', isDifference)
-    if (isDifference) {
-      setCanSubmit(validateAllFields(data));
-    } else {
-      setCanSubmit(false);
-    }
+    console.log('upload')
+    validateAllInputs() 
+    // const isDifference = checkDataDifference(sessionData.user, data);
+    setIsDifference(checkDataDifference(sessionData.user, data))
+    // if (isDifference) {
+    setCanSubmit(validateAllFields(data));
+    // } else {
+    //   setCanSubmit(false);
+    // }
   }, [data]);
 
   const handleUploadFile = (e) => {
@@ -359,7 +384,7 @@ const ProfileEditForm = () => {
           </div>
           <Button
             onClick={handleSubmit}
-            disabled={!canSubmit}
+            disabled={!canSubmit && !isDifference}
             size="l"
             label={loading ? 'Загрузка' : 'Сохранить'}
             variant="blue-gradient"

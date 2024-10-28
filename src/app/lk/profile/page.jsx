@@ -21,7 +21,7 @@ import { getUserData } from '@/Utils/updateDataUser';
 
 const Profile = () => {
   const { data: sessionData, update } = useSession();
-  const [modalBirthisShow, setModalBirthisShow] = useState(!sessionData?.user?.birth)
+  const [modalBirthisShow, setModalBirthisShow] = useState(false)
   const router = useRouter()
 
   const userData = () => {
@@ -39,12 +39,13 @@ const Profile = () => {
   }
 
   useEffect(() => {
+    // setModalBirthisShow(!sessionData?.user?.birth)
     userData()
   }, [sessionData?.user?.accessToken])
 
   return (
     <>
-    {!modalBirthisShow && (
+    {modalBirthisShow && (
       <Modal text={'Укажите свою дату рождения, чтобы мы могли радовать вас каждый год :)'}>
         <Button
           onClick={modalHandlerClick}
