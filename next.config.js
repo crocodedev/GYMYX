@@ -16,7 +16,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'api.gymyx.ru',
+        hostname: 'workspace.gymyx.ru',
         pathname: '**',
       },
     ],
