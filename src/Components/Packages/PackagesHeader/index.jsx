@@ -14,7 +14,15 @@ const PackagesHeader = ({packagesData, packageIdActive, setPackageIdActive}) => 
       <div className={styles['package-header__inner']}>
       <Container classTitle={styles['container']}>
         <div className={styles['package-header__items']}>
-          {packagesData.map((packageItem, i) => <PackagesTagItem id={i} name={packageItem.name} isActive={packageIdActive == i} key={i} handlerClick={handlerClick}/>)}
+          {packagesData.map((packageItem, i) => (
+            <PackagesTagItem 
+              isOnly={!!packageItem?.only_one}
+              id={i} 
+              name={packageItem.name} 
+              isActive={packageIdActive == i} 
+              key={i} 
+              handlerClick={handlerClick}/>
+            ))}
           <div className={styles['last']}>x</div>
         </div>
       </Container>
