@@ -31,7 +31,6 @@ const validateAllFields = (fields) => {
   return Object.values(fields).every((field) => field.isValid);
 };
 
-
 const ProfileEditForm = () => {
   const { data: sessionData, update: updateSession } = useSession();
   const imagePreviewRef = useRef();
@@ -79,7 +78,7 @@ const ProfileEditForm = () => {
       type: 'date',
     }
   });
-  const [validateData, setValideteData] = useState({
+  const [validateData, setValidateData] = useState({
     name: false,
     lastname: false,
     email: false,
@@ -103,38 +102,46 @@ const ProfileEditForm = () => {
   };
 
   const validateName = () => {
-    setValideteData(prev => ({
+    setValidateData(prev => ({
       ...prev,
-      name: data.name.length > 0
+      name: data.name.value.length > 0
     }))
   }
 
   const validateLastName = () => {
-    setValideteData(prev => ({
+    setValidateData(prev => ({
       ...prev,
-      lastname: data.name.length > 0
+      lastname: data.lastname.value.length > 0
     }))
   }
 
   const validateEmail = () => {
     const pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    setValideteData(prev => ({
+    setValidateData(prev => ({
       ...prev,
       email: pattern.test(data.email)
     }))
   }
 
   const validatePhone = () => {
-    setValideteData(prev => ({
+    setValidateData(prev => ({
       ...prev,
       phone: checkValidPhone(data.phone.value).valid
     }))
   }
 
   const validateImage = () => {
-    setValideteData(prev => ({
+    setValidateData(prev => ({
       ...prev,
-      image: checkValidPhone(data.phone.value).valid
+      image: checkValidPhone(data.phone.value)
+    }))
+  }
+
+  const validateBirthDate = () => {
+    console.log(data.birth.value)
+    setValidateData(prev => ({
+      ...prev,
+      birth: isValidDate(data.birth.value)
     }))
   }
 
@@ -144,7 +151,7 @@ const ProfileEditForm = () => {
     validateLastName()
     validateEmail()
     validatePhone()
-    // if(data.)
+    validateBirthDate()
   }
 
   useEffect(() => {
@@ -182,10 +189,11 @@ const ProfileEditForm = () => {
     if (!sessionData || !data) return;
     console.log('upload')
     validateAllInputs() 
+    console.log(validateData)
     // const isDifference = checkDataDifference(sessionData.user, data);
     setIsDifference(checkDataDifference(sessionData.user, data))
     // if (isDifference) {
-    setCanSubmit(validateAllFields(data));
+    // setCanSubmit(validateAllFields(data));
     // } else {
     //   setCanSubmit(false);
     // }

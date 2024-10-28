@@ -24,6 +24,7 @@ export function isValidDate(dateString) {
   minDate.setHours(0, 0, 0, 0);
 
   // console.log('is valid date', date >= minDate && date <= today)
+
   return date >= minDate && date <= today;
 }
 
