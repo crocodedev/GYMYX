@@ -39,7 +39,9 @@ const Profile = () => {
   }
 
   useEffect(() => {
-    // setModalBirthisShow(!sessionData?.user?.birth)
+    if(sessionData?.user) {
+      setModalBirthisShow(!sessionData?.user?.birth)
+    }
     userData()
   }, [sessionData?.user?.accessToken])
 

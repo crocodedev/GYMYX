@@ -58,7 +58,10 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: center;
+
+    @include media-breakpoint-down(lg) {
+      align-items: center;
+    }
   }
 
   &__title {
