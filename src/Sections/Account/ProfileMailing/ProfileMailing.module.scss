@@ -46,42 +46,13 @@
 
     @include media-breakpoint-between(xl, xxxl) {
       margin-top: 40px;
+      column-gap: 29px;
       row-gap: 18px;
     }
 
     @include media-breakpoint-up(xxxl) {
-      margin-top: 52px;
+      column-gap: 39px;
       row-gap: 24px;
-    }
-
-    > div:nth-child(1) {
-      @include media-breakpoint-down(md) {
-        margin-right: 13px;
-      }
-
-      @include media-breakpoint-up(md) {
-        margin-right: 44px;
-      }
-    }
-
-    > div:nth-child(2) {
-      @include media-breakpoint-down(md) {
-        margin-right: 0;
-      }
-
-      @include media-breakpoint-up(md) {
-        margin-right: 44px;
-      }
-    }
-
-    > div:nth-child(3) {
-      @include media-breakpoint-down(md) {
-        margin-right: 13px;
-      }
-
-      @include media-breakpoint-up(md) {
-        margin-right: 44px;
-      }
     }
   }
 }

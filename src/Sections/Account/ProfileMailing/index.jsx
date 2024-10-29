@@ -34,13 +34,7 @@ async function getUserData(token) {
 }
 
 export const ProfileMailing = () => {
-  const pcItems = [
-    { id: 1, label: 'Whatsapp', value: 'email' },
-    { id: 2, label: 'Telegram', value: 'phone' },
-    { id: 3, label: 'Не получать рассылку', value: 'none' },
-  ];
-
-  const mobileItems = [
+  const ITEMS = [
     { id: 1, label: 'Whatsapp', value: 'email' },
     { id: 2, label: 'Telegram', value: 'phone' },
     { id: 3, label: 'Не получать', value: 'none' },
@@ -60,13 +54,6 @@ export const ProfileMailing = () => {
       data.subscriptions.length > 0 ? setActiveVariant(data.subscriptions) : setActiveVariant(['none']);
     });
   }, [sessionData?.user?.accessToken]);
-
-  const [ITEMS, setItems] = useState([]);
-
-  useEffect(() => {
-    const isMobile = window.matchMedia('(max-width: 992px)').matches;
-    setItems(isMobile ? mobileItems : pcItems);
-  }, []);
 
   const updateData = () => {
     if (sessionData) {

@@ -176,7 +176,7 @@
   }
 
   &__date-birth {
-    width: max-content;
+    width: 100%;
     position: absolute;
     z-index: 1;
     left: 50%;
@@ -190,36 +190,42 @@
       padding: 12px 28px;
       gap: 10px;
       transform: translate(-50%);
+      max-width: 253px;
     }
 
     @include media-breakpoint-between(xxl, xxxl) {
       padding: 7px 20px;
       gap: 8px;
       transform: translate(-50%);
+      max-width: 183px;
     }
 
     @include media-breakpoint-between(xl, xxl) {
       padding: 7px 20px;
       gap: 8px;
       transform: translate(-50%, 23px);
+      max-width: 183px;
     }
 
     @include media-breakpoint-between(lg, xl) {
       padding: 7px 20px;
       gap: 8px;
       transform: translate(-50%, 15px);
+      max-width: 183px;
     }
 
     @include media-breakpoint-between(md, lg) {
       padding: 6px 18px;
       gap: 8px;
       transform: translate(-50%, 18px);
+      max-width: 155px;
     }
 
     @include media-breakpoint-down(md) {
       padding: 4px 14px;
       gap: 5px;
       transform: translate(-50%);
+      max-width: 112px;
     }
   }
 
@@ -238,32 +244,28 @@
       color: inherit;
     }
 
-    &::-webkit-calendar-picker-indicator {
-      display: none;
-    }
-
     @include media-breakpoint-up(xxxl) {
       font-size: 28px;
       line-height: 34.13px;
-      max-width: 168px;
+      // max-width: max-content;
     }
 
     @include media-breakpoint-between(lg, xxxl) {
       font-size: 20px;
       line-height: 24.38px;
-      max-width: 118px;
+      // max-width: 118px;
     }
 
     @include media-breakpoint-between(md, lg) {
       font-size: 18px;
       line-height: 22.38px;
-      max-width: 107px;
+      // max-width: 107px;
     }
 
     @include media-breakpoint-down(md) {
       font-size: 12px;
       line-height: 12px;
-      max-width: 71px;
+      // max-width: 71px;
     }
   }
 

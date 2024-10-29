@@ -50,11 +50,13 @@
 
   &__items {
     @include media-breakpoint-up(xxxl) {
-      padding: 0 50px;
+      padding: 0 40px;
+      margin: 0 -30px;
     }
 
     @include media-breakpoint-between(xl, xxxl) {
-      padding: 0 47px;
+      padding: 0 37px;
+      margin: 0 -30px;
     }
 
     @include media-breakpoint-down(xl) {
@@ -65,27 +67,23 @@
   &__slider {
     position: relative;
 
-    @include media-breakpoint-down(xl) {
-      padding: 0 20px;
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      z-index: 2;
+      top: 0;
+      height: 100%;
+      background: #212428;
+      box-shadow: 0 0 18px 30px #212428;
+    }
 
-      &::before,
-      &::after {
-        content: '';
-        position: absolute;
-        z-index: 2;
-        top: 0;
-        height: 100%;
-        background: #212428;
-        box-shadow: 0 0 18px 30px #212428;
-      }
+    &::before {
+      left: 0;
+    }
 
-      &::before {
-        left: 0;
-      }
-
-      &::after {
-        right: 0;
-      }
+    &::after {
+      right: 0;
     }
   }
 

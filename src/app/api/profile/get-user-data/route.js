@@ -12,9 +12,6 @@
               'Content-Type': 'application/json',
               Authorization: `Bearer ${requestData.token}`,
             },
-            next: {
-              revalidate: 10,
-            },
           },
         );
   

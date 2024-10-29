@@ -26,7 +26,7 @@ export const metadata = {
 
 async function getData() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pages/account`, {
-    cache: 'no-store',
+    // cache: 'no-store',
     next: {
       revalidate: 60,
     },

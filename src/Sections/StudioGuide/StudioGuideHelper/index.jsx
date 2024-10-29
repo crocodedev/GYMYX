@@ -38,6 +38,7 @@ const StudioGuideHelper = ({data}) => {
           <h2 className={styles['studio-guide-helper__title']}>{title}</h2>
           <div className={styles['studio-guide-helper__items']}>
             <Swiper
+              style={{padding: '0 20px'}}
               className={styles['studio-guide-helper__slider']}
               a11y={false}
               modules={[Mousewheel]}

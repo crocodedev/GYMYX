@@ -10,7 +10,7 @@ import styles from './ProfileEditForm.module.scss';
 import { checkValidPhone } from '@/Utils/helpers';
 import heic2any from 'heic2any';
 import { EditIcon } from '../../../../public/svg';
-import { formatDateForBirth, isValidDate, checkDataDifference } from './helper';
+import { isValidDate, checkDataDifference, convertDate} from './helper';
 
 const ProfileEditForm = () => {
   const { data: sessionData, update: updateSession } = useSession();
@@ -116,7 +116,6 @@ const ProfileEditForm = () => {
   }
 
   const validateBirth = () => {
-    console.log(data.birth.value)
     setValidateData(prev => ({
       ...prev,
       birth: isValidDate(data.birth.value)
@@ -156,8 +155,8 @@ const ProfileEditForm = () => {
           value: sessionData?.user?.email || '',
         },
         birth: {
-          ...prev.birth,
-          value: sessionData?.user?.birth || '',
+          value: convertDate(sessionData?.user?.birth, 'toLocal'),
+
         }
       };
     });
@@ -257,7 +256,7 @@ const ProfileEditForm = () => {
     var formdata = new FormData();
     formdata.append('full_name', `${data.name.value} ${data.lastname.value}`);
     formdata.append('email', data.email.value);
-    formdata.append('birth', data.birth.value);
+    formdata.append('birth', convertDate(data.birth.value, 'toISO'));
 
     if (data.phone.value !== sessionData.user.phone) {
       formdata.append('phone', checkValidPhone(data.phone.value).value);
@@ -298,6 +297,50 @@ const ProfileEditForm = () => {
     setLoading(false);
   };
 
+  const handleDateInput = (e) => {
+    let input = e.target.value;
+
+    // Убираем все символы, кроме цифр
+    input = input.replace(/\D/g, '');
+
+    // Проверка на первую цифру дня
+    if (input.length === 1 && parseInt(input[0], 10) > 3) {
+      input = `0${input[0]}`;
+    }
+
+    // Проверка на первую цифру месяца
+    if (input.length === 3 && parseInt(input[2], 10) > 1) {
+      input = `${input.slice(0, 2)}0${input[2]}`;
+    }
+
+    // Ограничение значений для дня и месяца
+    if (input.length >= 2) {
+      const day = parseInt(input.slice(0, 2), 10);
+      if (day > 31) return; // Если день больше 31, останавливаем ввод
+    }
+    if (input.length >= 4) {
+      const month = parseInt(input.slice(2, 4), 10);
+      if (month > 12) return; // Если месяц больше 12, останавливаем ввод
+    }
+
+    // Форматирование с добавлением точек
+    if (input.length <= 2) {
+      input = input;
+    } else if (input.length <= 4) {
+      input = `${input.slice(0, 2)}.${input.slice(2)}`;
+    } else {
+      input = `${input.slice(0, 2)}.${input.slice(2, 4)}.${input.slice(4, 8)}`;
+    }
+
+    setData(prev => ({
+      ...prev,
+      birth: {
+        ...prev.birth,
+        value: input
+      }
+    }))
+  };
+
   return (
     <section className={styles['profile-edit-form']}>
       <Container size="M">
@@ -314,11 +357,11 @@ const ProfileEditForm = () => {
               </label>
                 <label className={styles['profile-edit-form__date-birth']}>
                   <input 
-                    type='date' 
+                    type='text' 
                     className={styles['profile-edit-form__date-birth-text']} 
-                    max={formatDateForBirth(new Date)} 
-                    onInput={(e) => handleChangeInput(e.target.value, 'birth')} 
+                    onInput={handleDateInput} 
                     value={data.birth.value}
+                    placeholder='дд.мм.гггг'
                   />
                   <span className={styles['profile-edit-form__date-birth-edit-icon']} type='button'>
                     <EditIcon/>

@@ -9,7 +9,11 @@ const Checkbox = ({ isActive, toggleActive, label, loading }) => {
           {isActive && <path d="M6 11.2308L10.4 17L17 7" strokeWidth="2" strokeLinejoin="bevel" />}
         </svg>
       </div>
-      <p className={styles.checkbox__label}>{label}</p>
+      <p className={styles.checkbox__label}>{label}
+        {label == 'Не получать' && (
+          <span> рассылку</span>
+        )}
+      </p>
     </div>
   );
 };

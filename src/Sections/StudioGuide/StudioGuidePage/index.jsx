@@ -10,8 +10,7 @@ import StudioGuideVideoSlider from '../StudioGuideVideoSlider'
 import StuduiGuideGuide from '../StuduiGuideGuide'
 
 const StudioGuidePage = ({data}) => {
-  const [switcherIdActive, setSwitcherIdActive] = useState(1)
-  // console.log('data', data)
+  const [switcherIdActive, setSwitcherIdActive] = useState(0)
 
   const studioGuideVideo = data?.find(module => module.alias === 'studioGuideVideo')?.fields
   const studioGuideElements = studioGuideVideo?.find(el => el.type === 'object')?.childrens
