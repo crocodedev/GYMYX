@@ -185,45 +185,46 @@
     border-radius: 50px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
 
     @include media-breakpoint-up(xxxl) {
       padding: 12px 28px;
-      gap: 10px;
+      // gap: 10px;
       transform: translate(-50%);
       max-width: 253px;
     }
 
     @include media-breakpoint-between(xxl, xxxl) {
       padding: 7px 20px;
-      gap: 8px;
+      // gap: 8px;
       transform: translate(-50%);
       max-width: 183px;
     }
 
     @include media-breakpoint-between(xl, xxl) {
       padding: 7px 20px;
-      gap: 8px;
+      // gap: 8px;
       transform: translate(-50%, 23px);
       max-width: 183px;
     }
 
     @include media-breakpoint-between(lg, xl) {
       padding: 7px 20px;
-      gap: 8px;
+      // gap: 8px;
       transform: translate(-50%, 15px);
       max-width: 183px;
     }
 
     @include media-breakpoint-between(md, lg) {
       padding: 6px 18px;
-      gap: 8px;
+      // gap: 8px;
       transform: translate(-50%, 18px);
-      max-width: 155px;
+      max-width: 160px;
     }
 
     @include media-breakpoint-down(md) {
       padding: 4px 14px;
-      gap: 5px;
+      // gap: 5px;
       transform: translate(-50%);
       max-width: 112px;
     }
