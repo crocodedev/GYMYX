@@ -57,8 +57,9 @@ export const ProfileMailing = () => {
 
   const updateData = () => {
     if (sessionData) {
-      getUserData(sessionData?.user?.accessToken).then(() => {
+      getUserData(sessionData?.user?.accessToken).then((data) => {
         setLoadingSubmit(false);
+        data.subscriptions.length > 0 ? setActiveVariant(data.subscriptions) : setActiveVariant(['none']);
       });
     }
   };
