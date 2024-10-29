@@ -11,7 +11,6 @@
     background: var(--white-transperent, rgba(255, 255, 255, 0.1));
     width: 100%;
     color: #fff;
-    // transition: height 0.5s ease;
 
     @include media-breakpoint-up(xxxl) {
       min-height: 122px;
@@ -46,7 +45,7 @@
       outline: none;
 
       @include media-breakpoint-down(md) {
-        height: 358px !important;
+        height: 300px;
       }
     }
 
