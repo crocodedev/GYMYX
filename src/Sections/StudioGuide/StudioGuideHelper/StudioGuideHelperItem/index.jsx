@@ -15,7 +15,7 @@ const StudioGuideHelperItem = ({itemData}) => {
         <p className={styles['studio-guide-helper-item__description']}>{description}</p>
       </div>
       <div className={styles['studio-guide-helper-item__bottom']}>
-        <Image className={styles['studio-guide-helper-item__image']} src={image} width={300} height={300} alt={'image-'+title}/>
+        <Image className={styles['studio-guide-helper-item__image']} src={image} width={450} height={450} loading={'eager'} quality={80} alt={'image-'+title}/>
       </div>
     </div>
   )

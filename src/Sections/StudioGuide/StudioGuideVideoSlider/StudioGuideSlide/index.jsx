@@ -47,7 +47,7 @@ const StudioGuideSlide = ({data}) => {
         </button>
 
         <div className={styles['studio-guide-slide__video-wrapper']}>
-          <video ref={videoRef} className={styles['studio-guide-slide__video']} poster={poster} playsInline onPlay={handlerPlayVideo} onPause={handlerPauseVideo} onEnded={endedVideo}>
+          <video ref={videoRef} className={styles['studio-guide-slide__video']} muted  preload='metadata' loading={'eager'} poster={poster} playsInline onPlay={handlerPlayVideo} onPause={handlerPauseVideo} onEnded={endedVideo}>
             <source src={video}/>
           </video>
         </div>

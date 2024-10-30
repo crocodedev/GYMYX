@@ -2,7 +2,7 @@
 
 import styles from './StudioGuidePage.module.scss'
 
-import { useState, useEffect } from 'react'
+import { useState} from 'react'
 
 import NavigationBack from '@/Sections/Account/NavigationBack'
 import StudioGuideSwitcher from '../StudioGuideSwitcher'
