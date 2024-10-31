@@ -42,6 +42,10 @@ const StudioGuidePage = ({data}) => {
   const onChangeSlide = () => {
     pauseAllVideo()
     setSwitcherIdActive(slider.activeIndex)
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth' // Плавная прокрутка
+    });
   }
 
   const handlerClick = (id) => {
@@ -50,6 +54,8 @@ const StudioGuidePage = ({data}) => {
       setSwitcherIdActive(id)
     }
   }
+
+  if(data) return (<p></p>)
 
   return (
     <section className={styles['stubio-guide']}>

@@ -1,4 +1,8 @@
+'use client'
+
+import Loading from "@/Components/Loading";
 import StudioGuidePage from "@/Sections/StudioGuide/StudioGuidePage";
+import { useState, useEffect } from "react";
 
 async function getData() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pages/studioGuide`, {
@@ -12,12 +16,19 @@ async function getData() {
   return res.json();
 }
 
-const StudioGuide = async () => {
-  const { data } = await getData()
+const StudioGuide = () => {
+  const [loading, setLoading] = useState(true)
+  const [data, setData] = useState(null)
+
+  useEffect(() => {
+    getData()
+    .then(res => setData(res?.data))
+    .finally(() => setLoading(false)) 
+  }, [])
 
   return (
     <>
-      {data && <StudioGuidePage data={data?.modules}/>}
+      {loading ? <Loading full_screen={true}/> : <StudioGuidePage data={data?.modules}/>}
     </>
   )
 }
