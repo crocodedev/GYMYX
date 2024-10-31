@@ -78,6 +78,10 @@ const GidePage = () => {
   const onChangeSlide = () => {
     pauseAllVideo()
     setSwitcherIdActive(slider.activeIndex)
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth' 
+    });
   }
 
   const handlerClick = (id) => {

@@ -17,20 +17,21 @@ async function getData() {
 }
 
 const StudioGuide = () => {
-  const [loading, setLoading] = useState(true)
-  const [data, setData] = useState(null)
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState(null);
 
   useEffect(() => {
     getData()
     .then(res => setData(res?.data))
-    .finally(() => setLoading(false)) 
-  }, [])
+    .finally(() => setLoading(false))
+  }, []);
 
   return (
     <>
-      {loading ? <Loading full_screen={true}/> : <StudioGuidePage data={data?.modules}/>}
+      {loading && (<Loading full_screen={true}/>)}
+      <StudioGuidePage data={data?.modules} />
     </>
-  )
+  );
 }
 
-export default StudioGuide
+export default StudioGuide;

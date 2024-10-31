@@ -13,6 +13,7 @@ import 'swiper/css';
 import { pauseAllVideo } from '@/Utils/video'
 
 const StudioGuidePage = ({data}) => {
+  console.log(data)
   const [switcherIdActive, setSwitcherIdActive] = useState(0)
   const [slider, setSlider] = useState();
 
@@ -44,7 +45,7 @@ const StudioGuidePage = ({data}) => {
     setSwitcherIdActive(slider.activeIndex)
     window.scrollTo({
       top: 0,
-      behavior: 'smooth' // Плавная прокрутка
+      behavior: 'smooth'
     });
   }
 
@@ -55,7 +56,7 @@ const StudioGuidePage = ({data}) => {
     }
   }
 
-  if(data) return (<p></p>)
+  if(!data) return (<p>error</p>)
 
   return (
     <section className={styles['stubio-guide']}>
