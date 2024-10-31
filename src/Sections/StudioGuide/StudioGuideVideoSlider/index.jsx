@@ -10,10 +10,11 @@ import SliderControls from '@/Components/Slider/SliderControls';
 import StudioGuideSlide from './StudioGuideSlide';
 import Container from '@/Components/Container';
 
-const StudioGuideVideoSlider = ({items}) => {
+const StudioGuideVideoSlider = ({videoData}) => {
   const [slider, setSlider] = useState();
   const [activeIndexSlide, setIndexActiveSlide] = useState(1);
   const [sliderSettings, setSliderSettings] = useState(null);
+  const items = videoData?.find(el => el.type === 'object')?.childrens || []
 
   const sliderPcSettings = {
     spaceBetween: 25,
@@ -68,8 +69,8 @@ const StudioGuideVideoSlider = ({items}) => {
 
   return (
     <Container>
-
-    <div className={styles['trainers-slider']}>
+    {items.length && (
+      <div className={styles['trainers-slider']}>
         <div className={styles['trainers-slider__title-wrapper']}>
           {sliderSettings ? (
             <SliderControls
@@ -109,7 +110,8 @@ const StudioGuideVideoSlider = ({items}) => {
           </div>
         )}
       
-    </div>
+      </div>
+    )}
     </Container>
   );
 };

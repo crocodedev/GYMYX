@@ -17,7 +17,7 @@ const StudioGuide = async () => {
 
   return (
     <>
-      {data && <StudioGuidePage data={data.modules}/>}
+      {data && <StudioGuidePage data={data?.modules}/>}
     </>
   )
 }

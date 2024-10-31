@@ -8,57 +8,62 @@ import Loading from '@/Components/Loading';
 import { useSession } from 'next-auth/react';
 import GideFilter from '@/Sections/Gide/GideFilter';
 import GideSwitcher from '@/Sections/Gide/GideSwitcher';
-import { getAllTags, sortByFavorites } from './helper';
-
-export const getGids = async (token) => {
-  const result = await fetch('/api/gids/get-gids', {
-    cache: 'no-store',
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ token }),
-  });
-
-  const response = await result.json();
-  if (!response.error) {
-    return response;
-  }
-};
+import { getGids, getAllTags, sortByFavorites } from './helper';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import { pauseAllVideo } from '@/Utils/video';
 
 const GidePage = () => {
   const [tags, setTags] = useState([]);
   const { data: sessionData } = useSession();
   const [activeTags, setActiveTags] = useState([]);
   const [gids, setGids] = useState([]);
-  const [gidsData, setGidsData] = useState({exercise: [], complex: []})
+  const [gidsData, setGidsData] = useState([])
   const [loading, setLoading] = useState(true);
   const [switcherIdActive, setSwitcherIdActive] = useState(0)
+  const [slider, setSlider] = useState();
 
   const SWITCHER_DATA = [
     {title: 'упражнения'},
     {title: 'комплекс'},
   ]
 
+  const sliderSettings = {
+    spaceBetween: 0,
+    slidesPerView: 1,
+    breakpoints: {
+      992: {
+        allowTouchMove: false,
+      },
+    },
+  };
+
   useEffect(() => {
     if (!sessionData?.user?.accessToken) return;
     setLoading(true);
-    getGids(sessionData?.user?.accessToken).then(res => {
+    getGids(sessionData?.user?.accessToken)
+    .then(res => {
       if (res?.data) {
         console.log(res?.data)
         setGids(res?.data);
         setTags(getAllTags(res?.data))
       }
-      setLoading(false);
-    });
+      // setLoading(false);
+    })
+    .finally(() => setLoading(false))
   }, [sessionData]);
 
+  const filterByType = (type) => {
+    return sortByFavorites(gids.filter(gid => gid?.type == type) || [])
+  }
+
   useEffect(() => {
-    setGidsData(prev => ({
-      exercise: sortByFavorites(gids.filter(gid => gid?.type == 'exercise')), 
-      complex: sortByFavorites(gids.filter(gid => gid?.type == 'complex')),
-    }))
+    setGidsData([filterByType('exercise'), filterByType('complex')])
   }, [gids])
+
+  useEffect(() => {
+    if(slider) slider.update()
+  }, [activeTags])
 
   const updateData = (id = -1) => {
     if (id > -1) {
@@ -70,21 +75,48 @@ const GidePage = () => {
     }
   };
 
+  const onChangeSlide = () => {
+    pauseAllVideo()
+    setSwitcherIdActive(slider.activeIndex)
+  }
+
+  const handlerClick = (id) => {
+    if(slider) {
+      slider.slideTo(id)
+      setSwitcherIdActive(id)
+    }
+  }
+
   if (loading) return <Loading full_screen={true} />;
   return (
     <div className={styles['gide-page']}>
       <PageHeading title={'Онлайн гид'} />
-      <GideSwitcher data={SWITCHER_DATA} activeId={switcherIdActive} handlerClick={setSwitcherIdActive}/>
+      <GideSwitcher data={SWITCHER_DATA} activeId={switcherIdActive} handlerClick={handlerClick}/>
 
       {!switcherIdActive && (
         <GideFilter tags={tags} activeTags={activeTags} setActiveTags={setActiveTags}/>
       )}
-      
-      <GidList 
-        activeTags={!switcherIdActive ? activeTags : []}
-        items={!switcherIdActive ? gidsData.exercise : gidsData.complex} 
-        updateData={updateData} 
-      />
+
+      {gidsData.length && (
+        <Swiper
+          style={{width: '100%', zIndex: '0'}}
+          onSlideChange={onChangeSlide}
+          onSwiper={setSlider}
+          a11y={false}
+          autoHeight={true}
+          {...sliderSettings}
+        >
+        {gidsData.map((gid, i) => (
+          <SwiperSlide key={i}>
+          <GidList 
+            activeTags={!i ? activeTags : []}
+            items={gid} 
+            updateData={updateData} 
+          />
+        </SwiperSlide>
+        ))}
+      </Swiper>
+      )}
     </div>
   );
 };

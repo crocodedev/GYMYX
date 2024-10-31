@@ -1,6 +1,6 @@
 export const metadata = {
   title: 'Гид по студии | GYMYX',
-  description: 'Помошь | GYMYX',
+  description: 'Гид по студии | GYMYX',
   manifest: '/manifest.json',
 };
 

@@ -4,10 +4,11 @@ import StudioGuideHelper from '../StudioGuideHelper'
 import StudioGuideRules from '../StudioGuideRules'
 
 const StuduiGuideGuide = ({helperData, rulesData}) => {
+  console.log(helperData)
   return (
     <div className={styles['studui-guide-guide']}>
-      <StudioGuideHelper data={helperData}/>
-      <StudioGuideRules data={rulesData}/>
+      {helperData && (<StudioGuideHelper data={helperData}/>)}
+      {rulesData && (<StudioGuideRules data={rulesData}/>)}
     </div>
   )
 }
