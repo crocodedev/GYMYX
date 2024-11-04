@@ -85,97 +85,59 @@
     // }
   }
   
-  &__items-shadow1, 
-  &__items-shadow2 {
-    position: absolute;
-    z-index: 2;
-    top: 0;
-    height: 100%;
-    background: #212428;
-    box-shadow: 0 0 18px 30px #212428;
+  // &__items-shadow1, 
+  // &__items-shadow2 {
+  //   position: absolute;
+  //   z-index: 2;
+  //   top: 0;
+  //   height: 100%;
+  //   background: #212428;
+  //   box-shadow: 0 0 18px 30px #212428;
     
-  }
+  // }
 
-  &__items-shadow1 {
-    left: 0;
-  }
+  // &__items-shadow1 {
+  //   left: 0;
+  // }
 
-  &__items-shadow2 {
-    right: 0;
-  }
+  // &__items-shadow2 {
+  //   right: 0;
+  // }
 
   &__items {
-    // padding: 0 20px;
-    // @include media-breakpoint-up(xxxl) {
-    //   padding: 0 40px;
-    //   margin: 0 -30px;
-    // }
+    @include media-breakpoint-up(xxxl) {
+      padding: 0 40px;
+      margin: 0 -30px;
+    }
 
-    // @include media-breakpoint-between(xl, xxxl) {
-    //   padding: 0 37px;
-    //   margin: 0 -30px;
-    // }
+    @include media-breakpoint-between(xl, xxxl) {
+      padding: 0 37px;
+      margin: 0 -30px;
+    }
 
-    // @include media-breakpoint-down(xl) {
-    //   margin: 0 -30px;
-    // }
+    @include media-breakpoint-down(xl) {
+      margin: 0 -30px;
+    }
 
-    // position: relative;
+    position: relative;
 
-    // &::before,
-    // &::after {
-    //   content: '';
-    //   position: absolute;
-    //   z-index: 2;
-    //   top: 0;
-    //   height: 100%;
-    //   background: #212428;
-    //   box-shadow: 0 0 18px 30px #212428;
-    // }
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      z-index: 2;
+      top: 0;
+      height: 100%;
+      background: #212428;
+      box-shadow: 0 0 18px 30px #212428;
+    }
 
-    // &::before {
-    //   left: 0;
-    // }
+    &::before {
+      left: 0;
+    }
 
-    // &::after {
-    //   right: 0;
-    // }
-  }
-
-  &__slider {
-    // position: relative;
-
-    // &::before,
-    // &::after {
-    //   content: '';
-    //   position: absolute;
-    //   z-index: 2;
-    //   top: 0;
-    //   height: 100%;
-    //   background: #212428;
-    //   box-shadow: 0 0 18px 30px #212428;
-    // }
-
-    // &::before {
-    //   left: 0;
-    // }
-
-    // &::after {
-    //   right: 0;
-    // }
-  }
-
-  &__slide {
-    // @include media-breakpoint-up(xxxl) {
-    //   padding: 40px 20px;
-    // }
-
-    // @include media-breakpoint-between(xl, xxxl) {
-    //   padding: 35px 17.5px;
-    // }
-
-    // @include media-breakpoint-down(xl) {
-    //   padding: 20px 10px;
-    // }
+    &::after {
+      right: 0;
+    }
   }
 }

@@ -11,8 +11,8 @@ const StudioGuideHelper = ({data}) => {
 
   const sliderPcSettings = {
     slidesPerView: 3,
-    observer: true,
-    observeParents: true,
+    // observer: true,
+    // observeParents: true,
     mousewheel: {
       thresholdDelta: 70,
       forceToAxis: true,
@@ -35,39 +35,38 @@ const StudioGuideHelper = ({data}) => {
 
   return (
     <div className={styles['studio-guide-helper']}>
-      {/* <Container> */}
+      <Container>
         <div className={styles['studio-guide-helper__inner']}>
           <Container>
             <h2 className={styles['studio-guide-helper__title']}>{title}</h2>
           </Container>
-          <div className={styles['studio-guide-helper__items2']}>
+          {/* <div className={styles['studio-guide-helper__items2']}>
             <span className={styles['studio-guide-helper__items-shadow1']} style={{zIndex: '3'}}></span>
-            <span className={styles['studio-guide-helper__items-shadow2']} style={{zIndex: '3'}}></span>
+            <span className={styles['studio-guide-helper__items-shadow2']} style={{zIndex: '3'}}></span> */}
           <div className={styles['studio-guide-helper__items']}>
-            <Swiper
-              style={{padding: '0 20px', zIndex: '2'}}
-              // className={styles['studio-guide-helper__slider']}
-              a11y={false}
-              modules={[Mousewheel]}
-              mousewheel={true}
-              {...sliderPcSettings}
-            >
+            {items.length && (
+              <Swiper
+                style={{padding: '0 20px', zIndex: '0'}}
+                a11y={false}
+                modules={[Mousewheel]}
+                mousewheel={true}
+                {...sliderPcSettings}
+              >
 
-              {items.map((item, i) => (
-                <SwiperSlide 
-                key={i} 
-                // className={styles['studio-guide-helper__slide']}
-                >
-                  <StudioGuideHelperItem itemData={item} key={i}/>
-                </SwiperSlide>
-              ))}
-            </Swiper>
-            
+                {items.map((item, i) => (
+                  <SwiperSlide 
+                  key={i} 
+                  >
+                    <StudioGuideHelperItem itemData={item} key={i}/>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            )}
           </div>
-          </div>
+          {/* </div> */}
           
         </div>
-      {/* </Container> */}
+      </Container>
     </div>
   )
 }
