@@ -11,6 +11,8 @@ const StudioGuideHelper = ({data}) => {
 
   const sliderPcSettings = {
     slidesPerView: 3,
+    observer: true,
+    observeParents: true,
     mousewheel: {
       thresholdDelta: 70,
       forceToAxis: true,
@@ -44,7 +46,7 @@ const StudioGuideHelper = ({data}) => {
           <div className={styles['studio-guide-helper__items']}>
             <Swiper
               style={{padding: '0 20px'}}
-              className={styles['studio-guide-helper__slider']}
+              // className={styles['studio-guide-helper__slider']}
               a11y={false}
               modules={[Mousewheel]}
               mousewheel={true}
@@ -52,7 +54,10 @@ const StudioGuideHelper = ({data}) => {
             >
 
               {items.map((item, i) => (
-                <SwiperSlide key={i} className={styles['studio-guide-helper__slide']}>
+                <SwiperSlide 
+                key={i} 
+                // className={styles['studio-guide-helper__slide']}
+                >
                   <StudioGuideHelperItem itemData={item} key={i}/>
                 </SwiperSlide>
               ))}

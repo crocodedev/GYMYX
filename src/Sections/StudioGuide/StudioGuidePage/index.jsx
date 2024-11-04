@@ -32,6 +32,8 @@ const StudioGuidePage = ({data}) => {
   const sliderSettings = {
     spaceBetween: 0,
     slidesPerView: 1,
+    observer: true,
+    observeParents: true,
     breakpoints: {
       992: {
         allowTouchMove: false,
@@ -46,6 +48,7 @@ const StudioGuidePage = ({data}) => {
       top: 0,
       behavior: 'smooth'
     });
+    slider.update()
   }
 
   const handlerClick = (id) => {
