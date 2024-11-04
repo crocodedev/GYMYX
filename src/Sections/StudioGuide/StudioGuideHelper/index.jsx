@@ -33,10 +33,14 @@ const StudioGuideHelper = ({data}) => {
 
   return (
     <div className={styles['studio-guide-helper']}>
-      <Container>
+      {/* <Container> */}
         <div className={styles['studio-guide-helper__inner']}>
-          <h2 className={styles['studio-guide-helper__title']}>{title}</h2>
+          <Container>
+            <h2 className={styles['studio-guide-helper__title']}>{title}</h2>
+          </Container>
           <div className={styles['studio-guide-helper__items2']}>
+            <span className={styles['studio-guide-helper__items-shadow1']}></span>
+            <span className={styles['studio-guide-helper__items-shadow2']}></span>
           <div className={styles['studio-guide-helper__items']}>
             <Swiper
               style={{padding: '0 20px'}}
@@ -58,7 +62,7 @@ const StudioGuideHelper = ({data}) => {
           </div>
           
         </div>
-      </Container>
+      {/* </Container> */}
     </div>
   )
 }
