@@ -15,6 +15,7 @@ const Hero = ({ alias, fields }) => {
   const title = fields.find((item) => item.name === 'title');
   const subtitle = fields.find((item) => item.name === 'subtitle');
   const price = fields.find((item) => item.name === 'price');
+  const bilet_image = fields.find((item) => item.name === 'bilet_image');
   const [isMobile, setMobile] = useState(false);
 
   useEffect(() => {
@@ -33,7 +34,8 @@ const Hero = ({ alias, fields }) => {
         )}
       </picture>
       <div className={styles['hero__billet']}>
-        <img src="./images/plashka.svg" alt="" />
+        {/* <img src="./images/plashka.svg" alt="" /> */}
+        <Image src={bilet_image.value} width={300} height={300}/>
       </div>
       <div className={styles['hero__content-wrapper']}>
         <Container size="XL">
