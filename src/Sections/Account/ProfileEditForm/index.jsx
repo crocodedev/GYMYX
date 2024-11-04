@@ -2,6 +2,7 @@
 
 import { useSession } from 'next-auth/react';
 import { useEffect, useRef, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 import Button from '@/Components/Button';
 import Container from '@/Components/Container';
@@ -65,6 +66,7 @@ const ProfileEditForm = () => {
     image: false,
     birth: false,
   })
+  const router = useRouter()
 
   const handleChangeInput = (value, fieldName) => {
     const sanitizedValue = value.replace(/\s/g, '');
@@ -283,16 +285,17 @@ const ProfileEditForm = () => {
         setIsErrorSubmit('Этот телефон уже занят другим пользователем!');
       }
     } else {
-      setData((prev) => {
-        return {
-          ...prev,
-          image: {
-            ...prev['image'],
-            value: null,
-          },
-        };
-      });
-      updateSession(response.data);
+      // setData((prev) => {
+      //   return {
+      //     ...prev,
+      //     image: {
+      //       ...prev['image'],
+      //       value: null,
+      //     },
+      //   };
+      // });
+      // updateSession(response.data);
+      router.push('/lk/profile')
     }
     setLoading(false);
   };

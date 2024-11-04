@@ -62,9 +62,7 @@
     @include media-breakpoint-down(xl) {
       margin: 0 -30px;
     }
-  }
 
-  &__slider {
     position: relative;
 
     &::before,
@@ -85,6 +83,29 @@
     &::after {
       right: 0;
     }
+  }
+
+  &__slider {
+    // position: relative;
+
+    // &::before,
+    // &::after {
+    //   content: '';
+    //   position: absolute;
+    //   z-index: 2;
+    //   top: 0;
+    //   height: 100%;
+    //   background: #212428;
+    //   box-shadow: 0 0 18px 30px #212428;
+    // }
+
+    // &::before {
+    //   left: 0;
+    // }
+
+    // &::after {
+    //   right: 0;
+    // }
   }
 
   &__slide {

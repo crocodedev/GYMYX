@@ -226,8 +226,8 @@
     display: -webkit-box;
     overflow: hidden;
     text-overflow: ellipsis;
-    line-clamp: 2;
-    -webkit-line-clamp: 2;
+    line-clamp: 3;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
 
     @include media-breakpoint-up(xxxl) {
@@ -237,7 +237,7 @@
 
     @include media-breakpoint-between(xl, xxxl) {
       font-size: 20px;
-      margin-bottom: 30px;
+      margin-bottom: 26.6px;
     }
 
     @include media-breakpoint-between(lg, xl) {
@@ -268,13 +268,13 @@
       background: #f5f5f5;
     }
 
-    @include media-breakpoint-up(xxl) {
+    @include media-breakpoint-up(xxxl) {
       padding: 14px;
       font-size: 28px;
       line-height: 34px;
     }
 
-    @include media-breakpoint-between(lg, xxl) {
+    @include media-breakpoint-between(lg, xxxl) {
       font-size: 20px;
       line-height: 24px;
       padding: 10px;

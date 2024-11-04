@@ -39,7 +39,7 @@ const Profile = () => {
   }
 
   useEffect(() => {
-    if(sessionData?.user?.birth) {
+    if(sessionData?.user) {
       setModalBirthisShow(!sessionData?.user?.birth)
     }
     userData()

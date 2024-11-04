@@ -121,7 +121,7 @@ const BookingCalendar = ({change = false}) => {
           locale="ru"
           selectionMode="multiple"
           maxDateCount={variant === 'single' ? 1 : null}
-          maxDate={new Date(new Date().getTime() + 14 * 24 * 60 * 60 * 1000)}
+          maxDate={new Date(new Date().getTime() + (change ? 30 : 14) * 24 * 60 * 60 * 1000)}
           enabledDates={availableDates}
         />
         <Button

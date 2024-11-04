@@ -41,7 +41,7 @@ const GideFilter = ({tags = [], activeTags, setActiveTags}) => {
 
   return (
     <section className={styles['gide-filter']}>
-      <Container>
+      <Container size='xl'>
         <div className={`${styles['gide-filter__wrapper']} ${filterIsOpen ? styles['gide-filter__wrapper--bg'] : ''}`}>
 
           <div ref={filterRef} className={`${styles['gide-filter__filter']} ${!activeTags.length ? styles['gide-filter__filter--down'] : ''}`}>

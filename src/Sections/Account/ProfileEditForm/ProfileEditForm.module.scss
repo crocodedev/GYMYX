@@ -53,17 +53,17 @@
     justify-content: center;
     width: 100%;
 
-    @include media-breakpoint-down(md) {
+    @include media-breakpoint-down(lg) {
       gap: 20px;
     }
 
-    @include media-breakpoint-between(md, xl) {
+    @include media-breakpoint-between(lg, xl) {
       gap: 20px;
     }
 
     @include media-breakpoint-between(xl, xxxl) {
       max-width: 440px;
-      gap: 40px;
+      gap: 30px;
     }
 
     @include media-breakpoint-up(xxxl) {
@@ -302,15 +302,15 @@
     position: relative;
 
     @include media-breakpoint-down(md) {
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
 
-    @include media-breakpoint-between(md, xxl) {
+    @include media-breakpoint-between(md, xxxl) {
       margin-bottom: 35px;
     }
 
-    @include media-breakpoint-up(xxl) {
-      margin-bottom: 45px;
+    @include media-breakpoint-up(xxxl) {
+      margin-bottom: 40px;
     }
   }
 
@@ -324,12 +324,12 @@
       margin-bottom: 20px;
     }
 
-    @include media-breakpoint-between(md, xxl) {
+    @include media-breakpoint-between(md, xxxl) {
       font-size: 24px;
       margin-bottom: 30px;
     }
 
-    @include media-breakpoint-up(xxl) {
+    @include media-breakpoint-up(xxxl) {
       font-size: 40px;
       margin-bottom: 40px;
     }
@@ -342,11 +342,15 @@
       grid-template-columns: repeat(2, 1fr);
     }
 
-    @include media-breakpoint-down(xl) {
+    @include media-breakpoint-down(lg) {
       gap: 20px;
     }
 
-    @include media-breakpoint-up(xl) {
+    @include media-breakpoint-between(lg, xxxl) {
+      gap: 30px;
+    }
+
+    @include media-breakpoint-up(xxxl) {
       gap: 40px;
     }
   }

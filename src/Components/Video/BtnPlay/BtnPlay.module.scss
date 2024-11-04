@@ -8,7 +8,7 @@
     justify-content: center;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, (calc(-50% - 4px)));
     border-radius: 50%;
     border: none;
     background: #294AE7;
@@ -60,8 +60,9 @@
       }
   
       @include media-breakpoint-down(lg) {
-        max-width: 25px;
-        max-height: 25px;
+        transform: translateX(3px);
+        max-width: 22px;
+        max-height: 22px;
     }
   }
 }

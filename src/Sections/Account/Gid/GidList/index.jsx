@@ -42,7 +42,7 @@ const GidList = ({ items = [], activeTags = [], updateData }) => {
 
   return (
     <section className={styles['grid-list']}>
-      <Container>
+      <Container size='xl'>
         {!items.length 
         ? <p className={styles['grid-list__message']}>{'Пока что здесь пусто =('}</p>
         : !filteredItems().length 

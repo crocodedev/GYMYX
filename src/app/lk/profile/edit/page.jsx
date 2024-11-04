@@ -5,7 +5,7 @@ const ProfileEdit = () => {
   return (
     <div className="account-page-wrapper">
       <ProfileEditHeading
-        buttonLabel={"Выйти из редактирования"}
+        buttonLabel={"Назад"}
         sectionTitle={"Редактирование профиля"}
       />
       <ProfileEditForm />

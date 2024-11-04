@@ -48,7 +48,6 @@ const GidePage = () => {
         setGids(res?.data);
         setTags(getAllTags(res?.data))
       }
-      // setLoading(false);
     })
     .finally(() => setLoading(false))
   }, [sessionData]);
@@ -93,8 +92,8 @@ const GidePage = () => {
 
   if (loading) return <Loading full_screen={true} />;
   return (
-    <div className={styles['gide-page']}>
-      <PageHeading title={'Онлайн гид'} />
+    <div className={`${styles['gide-page']} ${!switcherIdActive ? styles['gide-page--second'] : ''}`}>
+      <PageHeading title={'Онлайн гид'} containerSize='xl'/>
       <GideSwitcher data={SWITCHER_DATA} activeId={switcherIdActive} handlerClick={handlerClick}/>
 
       {!switcherIdActive && (
@@ -111,7 +110,7 @@ const GidePage = () => {
           {...sliderSettings}
         >
         {gidsData.map((gid, i) => (
-          <SwiperSlide key={i}>
+          <SwiperSlide key={i} className={styles['gide-page__slide']}>
           <GidList 
             activeTags={!i ? activeTags : []}
             items={gid} 

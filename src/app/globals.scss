@@ -74,6 +74,7 @@ button {
   flex-direction: column;
 
   @include media-breakpoint-down(xl) {
+    margin-top: -5px;
     gap: 20px;
   }
 

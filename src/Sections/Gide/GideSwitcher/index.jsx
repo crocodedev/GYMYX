@@ -7,7 +7,7 @@ const GideSwitcher = ({data, handlerClick, activeId = 0}) => {
 
   return (
     <div className={styles['gide-switcher']}>
-      <Container>
+      <Container size='xl'>
         <Switcher data={data} handlerClick={handlerClick} activeId={activeId}/>
       </Container>
     </div>

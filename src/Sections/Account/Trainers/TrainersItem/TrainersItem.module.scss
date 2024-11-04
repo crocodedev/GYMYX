@@ -33,7 +33,7 @@
     transition: 0.3s;
 
     @include media-breakpoint-down(lg) {
-      padding: 20px;
+      padding: 18px 18px 22px;
       gap: 15px;
     }
 
@@ -62,7 +62,7 @@
     transition: 0.3s;
 
     @include media-breakpoint-down(lg) {
-      gap: 15px;
+      gap: 8px;
     }
 
     @include media-breakpoint-between(lg, xxxl) {
@@ -102,18 +102,25 @@
   &__text {
     color: var(--white, #fff);
     font-weight: 500;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
 
     @include media-breakpoint-down(lg) {
-      font-size: 18px;
+      -webkit-line-clamp: 3;
+      font-size: 16px;
       line-height: 20.88px;
     }
     
     @include media-breakpoint-between(lg, xxxl) {
+      -webkit-line-clamp: 2;
       font-size: 20px;
       line-height: 27px;
     }
 
     @include media-breakpoint-up(xxxl) {
+      -webkit-line-clamp: 2;
       font-size: 26px;
       line-height: 35px;
     }

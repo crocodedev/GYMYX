@@ -2,6 +2,16 @@
 
 .profile-edit-heading {
   position: relative;
+  display: flex;
+  flex-direction: column;
+
+  @include media-breakpoint-between(lg, xxxl) {
+    gap: 6px;
+  }
+
+  @include media-breakpoint-down(lg) {
+    gap: 10px;
+  }
 
   &__wrapper {
   }
@@ -14,6 +24,7 @@
 
     @include media-breakpoint-down(md) {
       font-size: 24px;
+      max-width: 93%;
     }
 
     @include media-breakpoint-between(md, xl) {
