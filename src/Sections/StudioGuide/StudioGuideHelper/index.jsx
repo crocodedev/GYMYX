@@ -36,6 +36,7 @@ const StudioGuideHelper = ({data}) => {
       <Container>
         <div className={styles['studio-guide-helper__inner']}>
           <h2 className={styles['studio-guide-helper__title']}>{title}</h2>
+          <div className={styles['studio-guide-helper__items2']}>
           <div className={styles['studio-guide-helper__items']}>
             <Swiper
               style={{padding: '0 20px'}}
@@ -54,6 +55,8 @@ const StudioGuideHelper = ({data}) => {
             </Swiper>
             
           </div>
+          </div>
+          
         </div>
       </Container>
     </div>
