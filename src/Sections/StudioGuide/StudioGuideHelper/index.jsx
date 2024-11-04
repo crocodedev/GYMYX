@@ -37,9 +37,7 @@ const StudioGuideHelper = ({data}) => {
     <div className={styles['studio-guide-helper']}>
       <Container>
         <div className={styles['studio-guide-helper__inner']}>
-          <Container>
-            <h2 className={styles['studio-guide-helper__title']}>{title}</h2>
-          </Container>
+          <h2 className={styles['studio-guide-helper__title']}>{title}</h2>
           {/* <div className={styles['studio-guide-helper__items2']}>
             <span className={styles['studio-guide-helper__items-shadow1']} style={{zIndex: '3'}}></span>
             <span className={styles['studio-guide-helper__items-shadow2']} style={{zIndex: '3'}}></span> */}
