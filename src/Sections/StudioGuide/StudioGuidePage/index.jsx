@@ -13,7 +13,6 @@ import 'swiper/css';
 import { pauseAllVideo } from '@/Utils/video'
 
 const StudioGuidePage = ({data}) => {
-  console.log(data)
   const [switcherIdActive, setSwitcherIdActive] = useState(0)
   const [slider, setSlider] = useState();
 
