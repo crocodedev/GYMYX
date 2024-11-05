@@ -40,10 +40,7 @@ const StudioGuideHelper = ({data, active}) => {
       <Container>
         <div className={styles['studio-guide-helper__inner']}>
           <h2 className={styles['studio-guide-helper__title']}>{title}</h2>
-          {/* <div className={styles['studio-guide-helper__items2']}>
-            <span className={styles['studio-guide-helper__items-shadow1']} style={{zIndex: '3'}}></span>
-            <span className={styles['studio-guide-helper__items-shadow2']} style={{zIndex: '3'}}></span> */}
-          <div className={`${styles['studio-guide-helper__items']} ${active ? styles['studio-guide-helper__items--active'] : ''}`} style={{zIndex: '999!important'}}>
+          <div className={`${styles['studio-guide-helper__items']} ${active ? styles['studio-guide-helper__items--active'] : ''}`}>
             {items.length && (
               <Swiper
                 className={styles['studio-guide-helper__swiper']}
@@ -51,6 +48,7 @@ const StudioGuideHelper = ({data, active}) => {
                 a11y={false}
                 modules={[Mousewheel]}
                 mousewheel={true}
+                speed={1000}
                 {...sliderPcSettings}
               >
 

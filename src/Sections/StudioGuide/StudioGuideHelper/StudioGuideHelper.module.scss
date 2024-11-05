@@ -3,18 +3,6 @@
 .studio-guide-helper {
   position: relative;
 
-  // @include media-breakpoint-up(xxxl) {
-  //   padding-top: 40px;
-  // }
-
-  // @include media-breakpoint-between(lg, xxxl) {
-  //   padding-top: 30px;
-  // }
-
-  // @include media-breakpoint-down(lg) {
-  //   padding-top: 20px;
-  // }
-
   &__inner {
     display: flex;
     flex-direction: column;
@@ -48,65 +36,9 @@
     }
   }
 
-  // &__items2 {
-  //   @include media-breakpoint-up(xxxl) {
-  //     padding: 0 40px;
-  //     margin: 0 -30px;
-  //   }
-
-  //   @include media-breakpoint-between(xl, xxxl) {
-  //     padding: 0 37px;
-  //     margin: 0 -30px;
-  //   }
-
-  //   @include media-breakpoint-down(xl) {
-  //     // margin: 0 -30px;
-  //   }
-
-  //   position: relative;
-
-    // &::before,
-    // &::after {
-    //   content: '';
-    //   position: absolute;
-    //   z-index: 2;
-    //   top: 0;
-    //   height: 100%;
-    //   background: #212428;
-    //   box-shadow: 0 0 18px 30px #212428;
-    // }
-
-    // &::before {
-    //   left: 0;
-    // }
-
-    // &::after {
-    //   right: 0;
-    // }
-  // }
-  
-  // &__items-shadow1, 
-  // &__items-shadow2 {
-  //   position: absolute;
-  //   z-index: 2;
-  //   top: 0;
-  //   height: 100%;
-  //   background: #212428;
-  //   box-shadow: 0 0 18px 30px #212428;
-    
-  // }
-
-  // &__items-shadow1 {
-  //   left: 0;
-  // }
-
-  // &__items-shadow2 {
-  //   right: 0;
-  // }
-
   &__items {
-    opacity: 0;
-    transition: 0.5s;
+    opacity: 0.2;
+    transition: 0.3s 0.3s;
 
     @include media-breakpoint-up(xxxl) {
       padding: 0 40px;
@@ -122,38 +54,13 @@
       margin: 0 -30px;
     }
 
-    // position: relative;
-
-    // &::before,
-    // &::after {
-    //   content: '';
-    //   position: absolute;
-    //   z-index: 999 !important;
-    //   top: 0;
-    //   height: 100%;
-    //   background: #212428;
-    //   box-shadow: 0 0 18px 30px #212428;
-    // }
-
-    // &::before {
-    //   left: 0;
-    // }
-
-    // &::after {
-    //   right: 0;
-    // }
-
-    &--active {
-      opacity: 1;
-    }
-  }
-
-  &__swiper {
     position: relative;
 
     &::before,
     &::after {
       content: '';
+      // transition: 0.3s 0.4s;
+      // opacity: 0;
       position: absolute;
       z-index: 999 !important;
       top: 0;
@@ -168,6 +75,15 @@
 
     &::after {
       right: 0;
+    }
+
+    &--active {
+      opacity: 1;
+
+      &::before,
+      &::after {
+        opacity: 1;
+      }
     }
   }
 }
