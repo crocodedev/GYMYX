@@ -59,31 +59,47 @@
     &::before,
     &::after {
       content: '';
-      // transition: 0.3s 0.4s;
-      // opacity: 0;
       position: absolute;
-      z-index: 999 !important;
-      top: 0;
-      height: 100%;
+      z-index: 3;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 90%;
       background: #212428;
       box-shadow: 0 0 18px 30px #212428;
     }
 
-    &::before {
-      left: 0;
+    @include media-breakpoint-up(xxxl) {
+      &::before {
+        left: 30px;
+      }
+  
+      &::after {
+        right: 30px;
+      }
     }
 
-    &::after {
-      right: 0;
+    @include media-breakpoint-between(lg, xxxl) {
+      &::before {
+        left: 30px;
+      }
+  
+      &::after {
+        right: 30px;
+      }
+    }
+
+    @include media-breakpoint-down(lg) {
+      &::before {
+        left: 0;
+      }
+  
+      &::after {
+        right: 0;
+      }
     }
 
     &--active {
       opacity: 1;
-
-      &::before,
-      &::after {
-        opacity: 1;
-      }
     }
   }
 }

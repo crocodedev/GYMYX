@@ -43,8 +43,7 @@ const StudioGuideHelper = ({data, active}) => {
           <div className={`${styles['studio-guide-helper__items']} ${active ? styles['studio-guide-helper__items--active'] : ''}`}>
             {items.length && (
               <Swiper
-                className={styles['studio-guide-helper__swiper']}
-                style={{padding: '0 20px', zIndex: '1!important'}}
+                style={{padding: '0 20px'}}
                 a11y={false}
                 modules={[Mousewheel]}
                 mousewheel={true}
@@ -62,8 +61,6 @@ const StudioGuideHelper = ({data, active}) => {
               </Swiper>
             )}
           </div>
-          {/* </div> */}
-          
         </div>
       </Container>
     </div>

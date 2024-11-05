@@ -106,21 +106,20 @@
     overflow: hidden;
     text-overflow: ellipsis;
     -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
 
     @include media-breakpoint-down(lg) {
-      -webkit-line-clamp: 3;
       font-size: 16px;
       line-height: 20.88px;
     }
     
     @include media-breakpoint-between(lg, xxxl) {
-      -webkit-line-clamp: 2;
       font-size: 20px;
       line-height: 27px;
     }
 
     @include media-breakpoint-up(xxxl) {
-      -webkit-line-clamp: 2;
       font-size: 26px;
       line-height: 35px;
     }
