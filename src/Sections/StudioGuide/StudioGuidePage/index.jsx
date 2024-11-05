@@ -52,8 +52,8 @@ const StudioGuidePage = ({data}) => {
 
   const handlerClick = (id) => {
     if(slider) {
-      slider.slideTo(id)
       setSwitcherIdActive(id)
+      slider.slideTo(id)
     }
   }
 
@@ -73,12 +73,12 @@ const StudioGuidePage = ({data}) => {
           {...sliderSettings}
         >
 
-        <SwiperSlide key={1}>
+        <SwiperSlide>
           <StudioGuideVideoSlider videoData={studioGuideVideo}/>
         </SwiperSlide>
 
-        <SwiperSlide key={2}>
-          <StuduiGuideGuide helperData={studioGuideHelper} rulesData={studioGuideRules}/>
+        <SwiperSlide>
+          <StuduiGuideGuide helperData={studioGuideHelper} rulesData={studioGuideRules} active={switcherIdActive == 1}/>
         </SwiperSlide>
       </Swiper>
     </section>

@@ -6,7 +6,8 @@ import 'swiper/css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Mousewheel } from 'swiper/modules';
 
-const StudioGuideHelper = ({data}) => {
+const StudioGuideHelper = ({data, active}) => {
+  console.log(data)
   const title = data.find(el => el.name == 'title')?.value
   const items = data.find(el => el.type == 'object')?.childrens
 
@@ -42,10 +43,10 @@ const StudioGuideHelper = ({data}) => {
           {/* <div className={styles['studio-guide-helper__items2']}>
             <span className={styles['studio-guide-helper__items-shadow1']} style={{zIndex: '3'}}></span>
             <span className={styles['studio-guide-helper__items-shadow2']} style={{zIndex: '3'}}></span> */}
-          <div className={styles['studio-guide-helper__items']}>
+          <div className={`${styles['studio-guide-helper__items']} ${active ? styles['studio-guide-helper__items--active'] : ''}`} style={{zIndex: '999!important'}}>
             {items.length && (
               <Swiper
-                style={{padding: '0 20px', zIndex: '0'}}
+                style={{padding: '0 20px', zIndex: '1!important'}}
                 a11y={false}
                 modules={[Mousewheel]}
                 mousewheel={true}
