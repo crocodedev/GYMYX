@@ -2,6 +2,7 @@ import styles from './StudioGuideHelper.module.scss'
 
 import Container from '@/Components/Container'
 import StudioGuideHelperItem from './StudioGuideHelperItem'
+import 'swiper/css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Mousewheel } from 'swiper/modules';
 
@@ -11,8 +12,8 @@ const StudioGuideHelper = ({data}) => {
 
   const sliderPcSettings = {
     slidesPerView: 3,
-    // observer: true,
-    // observeParents: true,
+    observer: false,
+    observeParents: false,
     mousewheel: {
       thresholdDelta: 70,
       forceToAxis: true,
