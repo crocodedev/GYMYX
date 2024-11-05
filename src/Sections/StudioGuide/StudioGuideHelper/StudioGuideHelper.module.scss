@@ -122,6 +122,33 @@
       margin: 0 -30px;
     }
 
+    // position: relative;
+
+    // &::before,
+    // &::after {
+    //   content: '';
+    //   position: absolute;
+    //   z-index: 999 !important;
+    //   top: 0;
+    //   height: 100%;
+    //   background: #212428;
+    //   box-shadow: 0 0 18px 30px #212428;
+    // }
+
+    // &::before {
+    //   left: 0;
+    // }
+
+    // &::after {
+    //   right: 0;
+    // }
+
+    &--active {
+      opacity: 1;
+    }
+  }
+
+  &__swiper {
     position: relative;
 
     &::before,
@@ -141,10 +168,6 @@
 
     &::after {
       right: 0;
-    }
-
-    &--active {
-      opacity: 1;
     }
   }
 }
