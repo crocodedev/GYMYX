@@ -31,7 +31,7 @@ const BookingCard = ({
 
   useEffect(() => {
     if (transferIsShow) setTransferIsDisabled(isDifferenceMoreThan4Hours(date, time))
-  })
+  }, [transferIsShow])
 
   const handlerClickChange = () => {
     setTransferIsDisabled(isDifferenceMoreThan4Hours(date, time))

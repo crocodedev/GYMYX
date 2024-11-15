@@ -37,7 +37,7 @@ export const takeAvaliableTimesDay = async (token, gym_id, date) => {
   const currentYear = currentDate.getFullYear();
 
   const fetchCurrentDayTimes = getAvailableTimes(token, gym_id, currentDay, currentMonth, currentYear);
-
+  
   return fetchCurrentDayTimes.then(({ data }) => {
     return data ? data : [];
   });

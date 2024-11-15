@@ -25,8 +25,8 @@ const StudioGuidePage = ({data}) => {
   const studioGuideRules = findFields('studioGuideRules')
 
   const SwitcherData = [
-    {title: 'видео'},
     {title: 'гайд'},
+    {title: 'видео'},
   ]
 
   const sliderSettings = {
@@ -74,12 +74,14 @@ const StudioGuidePage = ({data}) => {
         >
 
         <SwiperSlide>
-          <StudioGuideVideoSlider videoData={studioGuideVideo}/>
+          <StuduiGuideGuide helperData={studioGuideHelper} rulesData={studioGuideRules} active={switcherIdActive == 0}/>
         </SwiperSlide>
 
         <SwiperSlide>
-          <StuduiGuideGuide helperData={studioGuideHelper} rulesData={studioGuideRules} active={switcherIdActive == 1}/>
+          <StudioGuideVideoSlider videoData={studioGuideVideo}/>
         </SwiperSlide>
+
+        
       </Swiper>
     </section>
   )

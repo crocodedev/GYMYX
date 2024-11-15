@@ -18,12 +18,13 @@ import { signOut, useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { getUserData } from '@/Utils/updateDataUser';
+import { uniqueUserData } from '@/Utils/helpers';
 
 const Profile = () => {
   const { data: sessionData, update } = useSession();
   const [modalBirthisShow, setModalBirthisShow] = useState(false)
   const router = useRouter()
-
+  
   const userData = () => {
     if(sessionData?.user?.accessToken) {
       getUserData(sessionData?.user?.accessToken)
@@ -39,6 +40,10 @@ const Profile = () => {
   }
 
   useEffect(() => {
+    if(sessionData?.user?.accessToken) {
+      uniqueUserData()
+    }
+
     if(sessionData?.user) {
       setModalBirthisShow(!sessionData?.user?.birth)
     }

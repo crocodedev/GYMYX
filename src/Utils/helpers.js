@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid';
+
 export const checkValidPhone = (value) => {
   const cleanedPhoneNumber = value.replace(/\D/g, '');
 
@@ -96,3 +98,13 @@ export const formatTime = (inputTime) => {
     return '';
   }
 };
+
+export const uniqueUserData = () => {
+  if(localStorage.getItem('uniqueUserId')) {
+    console.log('uniqueUserId', true)
+  } else {
+    console.log('uniqueUserId', false)
+    localStorage.setItem('uniqueUserId', uuidv4())
+  }
+  console.log(navigator.userAgent)
+}
