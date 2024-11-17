@@ -91,6 +91,9 @@ const BookingSignUpTags = ({change = false}) => {
       } else {
         takeAvaliableTimesDay(sessionData.user.accessToken, gym?.id, visitDate[currentDate].value)
         .then((data) => {
+          // console.log(data)
+          // data = data.map(el => el.time)
+          // console.log(data)
           dispatch(
             updateBookingData({
               avaliableTimesCurrentDay: data || [],
@@ -112,6 +115,7 @@ const BookingSignUpTags = ({change = false}) => {
         activeTagTemp = visitDate[0]
       }
     }
+    // console.log(activeTagTemp)
     setActiveTag(activeTagTemp)
   }, [visitDate])
 

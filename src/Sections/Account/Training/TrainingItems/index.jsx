@@ -33,6 +33,7 @@ const TrainingItems = ({
     <div className={styles['training-items']}>
       <div className={styles['training-items__list']}>
         {renderingItems.map(({ id, date, time, gym }) => {
+          // console.log(renderingItems)
           return (
             <BookingCard
               id={id}
@@ -46,6 +47,7 @@ const TrainingItems = ({
               gymTitle={gym?.name}
               address={gym?.address}
               modalType={modalType}
+              isTraining={true}
             />
           );
         })}

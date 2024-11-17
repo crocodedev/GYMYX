@@ -24,7 +24,7 @@ const CheckoutContent = () => {
         setBalance(res?.data?.balance)
       }
     })
-  }, [sessionData])
+  }, [sessionData, visitDate])
 
   return (
     <div className={styles['checkout-content']}>

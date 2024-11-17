@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import { timeToNumber, convertToTimeFormat } from './helpers';
 import Loading from '@/Components/Loading';
 
-const BookingTimeVariants = ({ loading, onChangeData, data, variants }) => {
+const BookingTimeVariants = ({ loading, onChangeData, data, variants, isChange }) => {
   const { avaliableTimesCurrentDay } = useSelector((state) => state.booking);
 
   return (
@@ -19,15 +19,18 @@ const BookingTimeVariants = ({ loading, onChangeData, data, variants }) => {
       )}
       {variants.map(({ start, end, bgColor }, index) => {
         const components = [];
-        for (let i = timeToNumber(start); i <= timeToNumber(end); i++) {
+        for (let i = timeToNumber(start), id = 0; i <= timeToNumber(end); i++, id++) {
           const formatedTime = convertToTimeFormat(i);
+          const isDisabled = isChange ? !avaliableTimesCurrentDay?.includes(formatedTime) : !avaliableTimesCurrentDay.map(el => el.time)?.includes(formatedTime)
+          const value = isChange ? formatedTime : avaliableTimesCurrentDay.find(el => el.time === formatedTime) || formatedTime;
+          const isActive = isChange ? data.includes(formatedTime) : data.find(el => el.time === formatedTime)
           components.push(
             <BookingTimeVariantsItem
               key={`${index}_${i}`}
-              isActive={data.includes(formatedTime)}
-              disabled={!avaliableTimesCurrentDay?.includes(formatedTime)}
+              isActive={isActive}
+              disabled={ isDisabled }
               handleClick={onChangeData}
-              value={formatedTime}
+              value={value}
               bgColor={bgColor}
             />,
           );

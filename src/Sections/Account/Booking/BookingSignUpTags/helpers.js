@@ -37,6 +37,93 @@ export const takeAvaliableTimesDay = async (token, gym_id, date) => {
   const currentYear = currentDate.getFullYear();
 
   const fetchCurrentDayTimes = getAvailableTimes(token, gym_id, currentDay, currentMonth, currentYear);
+
+  // return [
+  //   {
+  //     "time": "12:00",
+  //     "price": {
+  //       "default": 1190,
+  //       "first": 714
+  //     }
+  //   },
+  //   {
+  //     "time": "13:00",
+  //     "price": {
+  //       "default": 990,
+  //       "first": 594
+  //     }
+  //   },
+  //   {
+  //     "time": "14:00",
+  //     "price": {
+  //       "default": 990,
+  //       "first": 594
+  //     }
+  //   },
+  //   {
+  //     "time": "15:00",
+  //     "price": {
+  //       "default": 990,
+  //       "first": 594
+  //     }
+  //   },
+  //   {
+  //     "time": "16:00",
+  //     "price": {
+  //       "default": 990,
+  //       "first": 594
+  //     }
+  //   },
+  //   {
+  //     "time": "17:00",
+  //     "price": {
+  //       "default": 990,
+  //       "first": 594
+  //     }
+  //   },
+  //   {
+  //     "time": "18:00",
+  //     "price": {
+  //       "default": 990,
+  //       "first": 594
+  //     }
+  //   },
+  //   {
+  //     "time": "19:00",
+  //     "price": {
+  //       "default": 1390,
+  //       "first": 834
+  //     }
+  //   },
+  //   {
+  //     "time": "20:00",
+  //     "price": {
+  //       "default": 1390,
+  //       "first": 834
+  //     }
+  //   },
+  //   {
+  //     "time": "21:00",
+  //     "price": {
+  //       "default": 1390,
+  //       "first": 834
+  //     }
+  //   },
+  //   {
+  //     "time": "22:00",
+  //     "price": {
+  //       "default": 1390,
+  //       "first": 834
+  //     }
+  //   },
+  //   {
+  //     "time": "23:00",
+  //     "price": {
+  //       "default": 1390,
+  //       "first": 834
+  //     }
+  //   }
+  // ]
   
   return fetchCurrentDayTimes.then(({ data }) => {
     return data ? data : [];
@@ -54,6 +141,7 @@ export const takeAvaliableTimesToLine = async (token, line, date) => {
   return fetchCurrentDayTimes.then(({ data }) => {
     let times = []
     data.forEach(data => times.push(data.time))
+    console.log('data', times)
     return times
   });
 };

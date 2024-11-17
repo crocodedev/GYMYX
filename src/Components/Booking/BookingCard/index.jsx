@@ -15,9 +15,11 @@ const BookingCard = ({
   address = "",
   older = false,
   transferIsShow = true,
+  isTraining = false,
   modalType = () => {}
   
 }) => {
+  time = isTraining ? time : time.time
   const [transferIsDisabled, setTransferIsDisabled] = useState(false)
 
   const handleClickRemove = () => {

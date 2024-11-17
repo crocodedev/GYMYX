@@ -20,8 +20,8 @@
   }
 
   &.active {
-    background: var(--white, #fff);
-    color: var(--dark-grey, #37393d);
+    background: #fff !important;
+    color: #37393d;
   }
 
   @include media-breakpoint-down(lg) {

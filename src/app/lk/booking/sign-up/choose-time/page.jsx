@@ -65,17 +65,31 @@ const ChooseTime = () => {
   useEffect(() => {
     if (gym?.prices && sessionData) {
       let variantsTemp = [];
+      // console.log(gym)
 
       if (!sessionData.user.is_new) {
-        variantsTemp = gym.prices.map((item, index) => {
-          return { ...item, bgColor: variants[index]?.bgColor };
-        });
-      } else {
-        if (!checkIsOnlyTraining(visitDate)) {
+        // not new user
+        if (checkIsOnlyTraining(visitDate)) {
+          // first training
           variantsTemp = gym.prices.map((item, index) => {
             return { ...item, bgColor: variants[index]?.bgColor };
           });
         } else {
+          // now first training
+          variantsTemp = gym.prices.map((item, index) => {
+            return { ...item, bgColor: variants[index]?.bgColor };
+          });
+        }
+        
+      } else {
+        // new user
+        if (!checkIsOnlyTraining(visitDate)) {
+          // now first training
+          variantsTemp = gym.prices.map((item, index) => {
+            return { ...item, bgColor: variants[index]?.bgColor };
+          });
+        } else {
+          //first training
           variantsTemp = [
             {
               start: '00:00:00',
@@ -86,11 +100,6 @@ const ChooseTime = () => {
           ];
         }
       } 
-      // else {
-      //   variantsTemp = gym.prices.map((item, index) => {
-      //     return { ...item, bgColor: variants[index]?.bgColor };
-      //   });
-      // }
       setPricesVariants(variantsTemp);
       setCountBalace()
     }

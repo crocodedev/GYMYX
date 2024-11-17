@@ -87,6 +87,7 @@ export const formatDate = (inputDate) => {
 };
 
 export const formatTime = (inputTime) => {
+  // console.log(inputTime)
   const timeArray = inputTime.split(':');
   const hours = parseInt(timeArray[0], 10);
   const minutes = parseInt(timeArray[1], 10);
@@ -106,5 +107,7 @@ export const uniqueUserData = () => {
     console.log('uniqueUserId', false)
     localStorage.setItem('uniqueUserId', uuidv4())
   }
-  console.log(navigator.userAgent)
+  // console.log(navigator.userAgent)
+  console.log(localStorage.getItem('uniqueUserId'))
+  return localStorage.getItem('uniqueUserId')
 }
