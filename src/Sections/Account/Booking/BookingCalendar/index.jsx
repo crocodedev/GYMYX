@@ -39,7 +39,7 @@ addLocale('ru', {
   clear: 'Очистить',
 });
 
-const BookingCalendar = ({change = false}) => {
+const BookingCalendar = ({change = false, userIsFix = false}) => {
   const [loading, setLoading] = useState(true);
   const { gym, visitDate, variant } = useSelector((state) => state.booking);
   const { date } = useSelector((state) => state.transfer);
@@ -123,7 +123,7 @@ const BookingCalendar = ({change = false}) => {
           locale="ru"
           selectionMode="multiple"
           maxDateCount={variant === 'single' ? 1 : null}
-          maxDate={new Date(new Date().getTime() + (change ? 30 : 14) * 24 * 60 * 60 * 1000)}
+          maxDate={new Date(new Date().getTime() + (change ? 30 : userIsFix ? 42 : 14) * 24 * 60 * 60 * 1000)}
           enabledDates={availableDates}
         />}
         
