@@ -10,29 +10,49 @@ const BookingTimeVariantsItem = ({
   isActive,
   bgColor,
   value,
+  variants,
+  isChange,
 }) => {
   const [bg, setBg] = useState(bgColor)
   const { visitDate } = useSelector((state) => state.booking);
-  
-  // console.log(value)
 
   const handleOnClick = () => {
     handleClick(value)
   }
 
-  // function hasPositiveTimeValue(data) {
-  //   return data.some(item => 
-  //     item.time.some(timeItem => timeItem.value > 0)
-  //   );
-  // }
+  const selectOnceTime = () => {
+    return (visitDate.reduce((acc, el) => acc + el.time.length, 0)) > 0
+  }
+
+  function getBgColorByPrice(price, variants) {
+    const ranges = [...variants].sort((a, b) => a.price - b.price)
+    for (let i = 0; i < ranges.length; i++) {
+      const currentRange = ranges[i];
+      const nextRange = ranges[i + 1];
+  
+      if (
+        price >= currentRange.price &&
+        (!nextRange || price < nextRange.price)
+      ) {
+        return currentRange.bgColor;
+      }
+    }
+  
+    return '#7b92ff'; // или любой другой цвет
+  }
 
   useEffect(() => {
-    // console.log(hasPositiveTimeValue(visitDate))
-    // if(!hasPositiveTimeValue(visitDate)) {
-    //   setBg('red')
-    // } else {
-    //   setBg(bgColor)
-    // }
+    // console.log( value )
+    if(!isChange) {
+      const firstPrice = value?.price?.first
+      const defaultPrice = value?.price?.default
+      if(!selectOnceTime() && firstPrice) {
+        setBg(getBgColorByPrice(firstPrice, variants))
+      } else if(selectOnceTime() && defaultPrice) {
+        setBg(getBgColorByPrice(defaultPrice, variants))
+        // setBg('red')
+      } 
+    }
   }, [visitDate])
 
   return (

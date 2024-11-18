@@ -76,7 +76,9 @@ const BookingSignUpTags = ({change = false}) => {
 
   useEffect(()=>{
     dispatch(updateBookingData({ loading: true }))
+    console.log('upload outside')
     if(sessionData?.user?.accessToken) {
+      console.log('upload inner')
 
       if(change) {
         takeAvaliableTimesToLine(sessionData.user.accessToken, oldId, visitDate[currentDate].value)
@@ -91,9 +93,6 @@ const BookingSignUpTags = ({change = false}) => {
       } else {
         takeAvaliableTimesDay(sessionData.user.accessToken, gym?.id, visitDate[currentDate].value)
         .then((data) => {
-          // console.log(data)
-          // data = data.map(el => el.time)
-          // console.log(data)
           dispatch(
             updateBookingData({
               avaliableTimesCurrentDay: data || [],
@@ -103,7 +102,7 @@ const BookingSignUpTags = ({change = false}) => {
         })
       }
     }
-  },[currentDate])
+  },[currentDate, sessionData])
 
   useEffect(() => {
     setData(visitDate)

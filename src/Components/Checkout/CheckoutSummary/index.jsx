@@ -22,7 +22,7 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0 }) => {
   const [listShowInCheckout, setListShowInCheckout] = useState([])
   const [isFirstBooking, setIsFirstBooking] = useState();
   const [modalData, setModalData] = useState({
-    type: '', // successful, confirm, crowded
+    type: '', // successful, confirm, crowded, error
     isShow: false,
     text: '',
   })
@@ -31,9 +31,10 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0 }) => {
   const [isLoad, setIsLoad] = useState(false)
 
   const totalPrice = useMemo(() => {
+    console.log('use memo')
     return items.reduce((acc, el, i) => {
       return acc + el.time.reduce((acc, el, id) => {
-        return acc + ((i+id==0) ? el?.price?.first : el?.price?.default) || 0
+        return acc + ((i+id==0) ? el?.price.first : el?.price.default)
       }, 0)
     }, 0);
     
@@ -42,7 +43,7 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0 }) => {
   const handleSubmit = () => {
     setLoading(true);
     createBooking(sessionData.user.accessToken, gym?.id, false, prepareDataForBooking(list), {uuid: uniqueUserData()})
-    .then(({ data }) => {
+    .then(( data ) => {
       if (data?.payment_link) router.push(data?.payment_link);
       else if (data?.status) router.push('/lk/training');
       else setError(true);
@@ -234,6 +235,30 @@ function ModalInner(type, token, gym, trainingsObj, setModal, isLoad, setIsLoad,
         disabledShadow={true}
       />
     )}
+
+    {type == 'error' && (
+      <div className={styles['modal-inner']}>
+        <div className={styles['modal-inner__buttons']}>
+          <Button
+            onClick={closeModal}
+            size="l"
+            variant="blue-gradient"
+            fullSize={true}
+            label={'Да'}
+            disabledShadow={true}
+            disabled={isLoad}
+          />
+          <Button
+            onClick={closeModal}
+            size="l"
+            variant="black-gradient"
+            fullSize={true}
+            label={'Нет'}
+            disabledShadow={true}
+          />
+        </div>
+      </div>
+      )}
 
     {type == 'confirm' && (
       <div className={styles['modal-inner']}>
