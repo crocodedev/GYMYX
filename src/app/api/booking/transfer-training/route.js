@@ -19,10 +19,6 @@ export async function POST(request) {
         body: JSON.stringify(requestBody),
       });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
       const data = await response.json();
       return Response.json({ data });
     } catch (error) {

@@ -40,13 +40,21 @@ const ChangeTime = () => {
   const [pricesVariants, setPricesVariants] = useState([]);
   const [isLoad, setIsLoad] = useState(false)
   const [modalData, setModalData] = useState({
+    type: '', // error, completed, less
     text: 'Ваша тренировка успешно перенесена!',
     isShow: false
   })
   const router = useRouter()
 
   const hanglerModalButtonClick = () => {
-    router.push('/lk/workouts')
+    if(modalData.type == 'less') {
+      setModalData(prev => ({
+        ...prev,
+        isShow: false
+      }))
+    } else {
+      router.push('/lk/workouts')
+    }
   }
 
   useEffect(() => {
@@ -86,7 +94,7 @@ const ChangeTime = () => {
             onClick={hanglerModalButtonClick}
             fullSize={modalData.isShow}
             size="l"
-            label="К тренировкам"
+            label={modalData.type == 'less' ? 'Подтвердить' : "К тренировкам"}
             variant="blue"
             disabledShadow={true}
           />

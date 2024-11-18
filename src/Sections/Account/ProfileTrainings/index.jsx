@@ -33,10 +33,6 @@ const ProfileTrainings = ({isShowTranfer = false}) => {
 
   useEffect(() => {
     updateData();
-  }, [sessionData, sessionData]);
-
-  useEffect(() => {
-    updateData();
   }, [sessionData]);
 
   const updateData = () => {

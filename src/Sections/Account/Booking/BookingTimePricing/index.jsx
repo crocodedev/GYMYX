@@ -57,12 +57,21 @@ const BookingTimePricing = ({ variants = [], change = false, setModaldata, setIs
           if(res?.data?.message === "Practice has been rescheduled") {
             setModaldata((prevData) => ({
               ...prevData,
+              type: 'completed',
               text: 'Ваша тренировка успешно перенесена!',
+              isShow: true
+            }))
+          } else if(res?.data?.message === 'Less than 4 hours before the specified time') {
+            setModaldata((prevData) => ({
+              ...prevData,
+              type: 'less',
+              text: 'Перенос не возможен! Менее чем за 4 часа до указанного времени',
               isShow: true
             }))
           } else {
             setModaldata((prevData) => ({
               ...prevData,
+              type: 'error',
               text: 'Что то пошло не так, попробуйте позже =(',
               isShow: true
             }))
