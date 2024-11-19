@@ -25,18 +25,16 @@ const BookingTimePricing = ({ variants = [], change = false, setModaldata, setIs
     console.log(value)
     
     if(change) {
-      if (!data.includes(value)) {
+      if (!data.some(time => time === value)) {
         setData([value])
       } else {
-        const tempData = data.filter((item) => item !== value);
-        setData(tempData);
+        setData(data.filter((item) => item !== value));
       }
     } else {
-      if (!data.includes(value)) {
+      if (!data.some(item => item.time === value.time)) {
         setData([...data, value]);
       } else {
-        const tempData = data.filter((item) => item.time !== value.time);
-        setData(tempData);
+        setData(data.filter((item) => item.time !== value.time));
       }
     }
   };
@@ -84,11 +82,9 @@ const BookingTimePricing = ({ variants = [], change = false, setModaldata, setIs
     else {
       router.push('/lk/checkout');
     }
-    
   };
 
   useEffect(() => {
-    // console.log(data, visitDate)
     const result = prepareVisitDateWithTime(visitDate[currentDate], data);
     const updatedVisitDate = [...visitDate];
     updatedVisitDate[currentDate] = result;
@@ -99,7 +95,7 @@ const BookingTimePricing = ({ variants = [], change = false, setModaldata, setIs
   useEffect(() => {
     let tempData = [];
     if (!!visitDate[currentDate]?.time) {
-      tempData = visitDate[currentDate].time;
+      tempData = visitDate[currentDate]?.time;
     }
     setData(tempData);
   }, [currentDate]);

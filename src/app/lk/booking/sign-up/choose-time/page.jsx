@@ -37,7 +37,7 @@ const ChooseTime = () => {
   const [pricesVariants, setPricesVariants] = useState([]);
   const packageBalance = sessionData?.user?.balance || 0
   const [balance, setBalance] = useState({
-    full_balance: packageBalance,
+    full_balance: 0,
     count_bacance: 0,
   })
 
@@ -45,7 +45,7 @@ const ChooseTime = () => {
     const countTime = visitDate.reduce((acc, el) => acc + el.time.length, 0)
     setBalance(prev => ({
       ...prev,
-      count_bacance: balance.full_balance - countTime
+      count_bacance: prev.full_balance - countTime
     }))
   }
 
@@ -58,6 +58,7 @@ const ChooseTime = () => {
           ...prev,
           full_balance: res?.data?.balance,
         }))
+        setCountBalace()
       }
     })
   }, [sessionData])
@@ -103,6 +104,7 @@ const ChooseTime = () => {
       setPricesVariants(variantsTemp);
       setCountBalace()
     }
+    console.log(visitDate)
   }, [gym, sessionData, visitDate]);
 
   return (

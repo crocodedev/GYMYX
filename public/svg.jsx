@@ -16,13 +16,13 @@ export const RepeatIcon = () => (
 
 export const ChevronIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17 10" fill="none">
-    <path d="M16 0.933742L8.5 8.06622L0.999999 0.933742" stroke="currentColor" stroke-width="2.57652"/>
+    <path d="M16 0.933742L8.5 8.06622L0.999999 0.933742" stroke="currentColor" strokeWidth="2.57652"/>
   </svg>
 )
 
 export const CrossIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 17" fill="none">
-    <path d="M16.8047 1.034L1.87302 15.9657" stroke="currentColor" stroke-width="2.82198"/>
-    <path d="M1.875 1.034L16.8067 15.9657" stroke="currentColor" stroke-width="2.82198"/>
+    <path d="M16.8047 1.034L1.87302 15.9657" stroke="currentColor" strokeWidth="2.82198"/>
+    <path d="M1.875 1.034L16.8067 15.9657" stroke="currentColor" strokeWidth="2.82198"/>
   </svg>
 )

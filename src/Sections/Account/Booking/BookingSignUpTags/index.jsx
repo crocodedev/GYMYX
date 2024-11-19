@@ -76,9 +76,7 @@ const BookingSignUpTags = ({change = false}) => {
 
   useEffect(()=>{
     dispatch(updateBookingData({ loading: true }))
-    console.log('upload outside')
     if(sessionData?.user?.accessToken) {
-      console.log('upload inner')
 
       if(change) {
         takeAvaliableTimesToLine(sessionData.user.accessToken, oldId, visitDate[currentDate].value)
@@ -114,7 +112,6 @@ const BookingSignUpTags = ({change = false}) => {
         activeTagTemp = visitDate[0]
       }
     }
-    // console.log(activeTagTemp)
     setActiveTag(activeTagTemp)
   }, [visitDate])
 

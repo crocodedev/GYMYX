@@ -9,7 +9,6 @@ import Loading from '@/Components/Loading';
 
 const BookingTimeVariants = ({ loading, onChangeData, data, variants, isChange }) => {
   const { avaliableTimesCurrentDay } = useSelector((state) => state.booking);
-  console.log(variants)
 
   return (
     <div className={styles['booking-time-variants']}>

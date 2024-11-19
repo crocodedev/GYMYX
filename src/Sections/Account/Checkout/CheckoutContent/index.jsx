@@ -21,6 +21,7 @@ const CheckoutContent = () => {
     getUserData(sessionData?.user?.accessToken)
     .then(res => {
       if(res?.data) {
+        console.log(res?.data?.balance)
         setBalance(res?.data?.balance)
       }
     })
@@ -31,7 +32,7 @@ const CheckoutContent = () => {
       <Container>
         <div className={styles['checkout-content__wrapper']}>
           <CheckoutList items={visitDate} />
-          <CheckoutSummary items={visitDate} gym={gym} isActivePackage={balance > 0}/>
+          <CheckoutSummary items={visitDate} gym={gym} isActivePackage={balance > 0} balance={balance}/>
         </div>
       </Container>
     </div>

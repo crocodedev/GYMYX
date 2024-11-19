@@ -15,7 +15,7 @@ const ProfileGid = ({}) => {
             <div className={styles['profile-gid__aside']}>
               <span className={styles['profile-gid__aside-icon']}>
                 <svg viewBox="0 0 42 37" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M38 18.5H0.68044M38 18.5L22.5787 2.46184M38 18.5L22.5787 34.5382" stroke="white" stroke-width="5"/>
+                  <path d="M38 18.5H0.68044M38 18.5L22.5787 2.46184M38 18.5L22.5787 34.5382" stroke="white" strokeWidth="5"/>
                 </svg>
               </span>
             </div>
