@@ -105,35 +105,10 @@ export function prepareDataForBooking(data) {
 }
 
 export const separation = (balance, list) => {
-  // const paid = [];
-  // const not_paid = [];
-  // let remainingTrainings = balance;
-  // console.log(data, balance)
-
-  // data.forEach(({ price, count }) => {
-  //   if (remainingTrainings > 0) {
-  //     const paidCount = Math.min(count, remainingTrainings);
-  //     const unpaidCount = count - paidCount;
-
-  //     if (paidCount > 0) {
-  //       paid.push({ price, count: paidCount });
-  //     }
-  //     if (unpaidCount > 0) {
-  //       not_paid.push({ price, count: unpaidCount });
-  //     }
-
-  //     remainingTrainings -= paidCount;
-  //   } else {
-  //     not_paid.push({ price, count });
-  //   }
-  // });
-  // ==============================================================
-
   const paidTrainings = [];
   const unpaidTrainings = [];
 
   let remainingBalance = balance;
-  let isFirstSession = true; // Флаг для первой тренировки
 
   list.forEach(({ value, time }, id) => {
     const paidTime = [];
@@ -141,7 +116,6 @@ export const separation = (balance, list) => {
 
     time.forEach((session, i) => {
       const price = id+i==0 ? session.price.first : session.price.default;
-      isFirstSession = false; // Сбрасываем флаг после первого элемента
 
       const sessionWithPrice = { ...session, price }; // Заменяем price объект на значение
 

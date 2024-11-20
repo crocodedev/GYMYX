@@ -60,7 +60,9 @@ const BookingSignUpTags = ({change = false}) => {
   }
 
   const handleDeleteTag = (value) => {
+    console.log('delete tag', value)
     if (data.length > 1) {
+      console.log('inner')
       const newData = [...data.filter((item) => item.value !== value)]
       setData(newData)
       dispatch(updateBookingData({ visitDate: newData }))

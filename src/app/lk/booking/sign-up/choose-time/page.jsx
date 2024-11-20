@@ -33,9 +33,8 @@ const checkIsOnlyTraining = (data) => {
 
 const ChooseTime = () => {
   const { data: sessionData } = useSession();
-  const { gym, visitDate } = useSelector((state) => state.booking);
+  const { gym, visitDate, avaliableTimesCurrentDay } = useSelector((state) => state.booking);
   const [pricesVariants, setPricesVariants] = useState([]);
-  const packageBalance = sessionData?.user?.balance || 0
   const [balance, setBalance] = useState({
     full_balance: 0,
     count_bacance: 0,
@@ -70,17 +69,17 @@ const ChooseTime = () => {
 
       if (!sessionData.user.is_new) {
         // not new user
-        if (checkIsOnlyTraining(visitDate)) {
-          // first training
-          variantsTemp = gym.prices.map((item, index) => {
-            return { ...item, bgColor: variants[index]?.bgColor };
-          });
-        } else {
+        // if (checkIsOnlyTraining(visitDate)) {
+        //   // first training
+        //   variantsTemp = gym.prices.map((item, index) => {
+        //     return { ...item, bgColor: variants[index]?.bgColor };
+        //   });
+        // } else {
           // now first training
           variantsTemp = gym.prices.map((item, index) => {
             return { ...item, bgColor: variants[index]?.bgColor };
           });
-        }
+        // }
         
       } else {
         // new user

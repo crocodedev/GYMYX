@@ -14,7 +14,7 @@ import { transferTraining } from './helpers';
 
 const BookingTimePricing = ({ variants = [], change = false, setModaldata, setIsLoad }) => {
   const dispatch = useDispatch();
-  const { visitDate, currentDate, loading } = useSelector((state) => state.booking);
+  const { visitDate, currentDate, loading, avaliableTimesCurrentDay } = useSelector((state) => state.booking);
   const { oldId } = useSelector((state) => state.transfer);
   const [data, setData] = useState([]);
   const [canSubmit, setCanSubmit] = useState(false);
@@ -85,20 +85,21 @@ const BookingTimePricing = ({ variants = [], change = false, setModaldata, setIs
   };
 
   useEffect(() => {
-    const result = prepareVisitDateWithTime(visitDate[currentDate], data);
-    const updatedVisitDate = [...visitDate];
-    updatedVisitDate[currentDate] = result;
-    dispatch(updateBookingVisitDate(updatedVisitDate));
-    setCanSubmit(checkData(updatedVisitDate));
-  }, [data]);
-
-  useEffect(() => {
     let tempData = [];
     if (!!visitDate[currentDate]?.time) {
       tempData = visitDate[currentDate]?.time;
     }
     setData(tempData);
-  }, [currentDate]);
+  }, [currentDate, sessionData]);
+
+  useEffect(() => {
+    console.log('update')
+    const result = prepareVisitDateWithTime(visitDate[currentDate], data);
+    const updatedVisitDate = [...visitDate];
+    updatedVisitDate[currentDate] = result;
+    dispatch(updateBookingVisitDate(updatedVisitDate));
+    setCanSubmit(checkData(updatedVisitDate));
+  }, [data, sessionData, avaliableTimesCurrentDay]);
 
   return (
     <section className={styles['booking-time-pricing']}>
