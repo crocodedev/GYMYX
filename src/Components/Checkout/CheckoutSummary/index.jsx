@@ -21,7 +21,7 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0, balance = 0 }) => {
   const [listShowInCheckout, setListShowInCheckout] = useState([])
   const [isFirstBooking, setIsFirstBooking] = useState();
   const [modalData, setModalData] = useState({
-    type: '', // successful, confirm, crowded, error, different
+    type: '', // successful, confirm, crowded, error, different, priceMore, priceLess
     isShow: false,
     text: '',
     payment_link: '',
@@ -46,7 +46,11 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0, balance = 0 }) => {
     .then(( data ) => {
       console.log(data)
       if(data?.message == 'price has been changed') {
-        setModal('different', `${data?.total_price || null}`, `${data?.total_price}`)
+        if(data?.total_price > price) {
+          setModal('priceMore', `${data?.total_price || null}`, `${data?.total_price}`)
+        } else {
+          setModal('priceLess', `${data?.total_price || null}`, `${data?.total_price}`)
+        }
       } else if (data?.payment_link) router.push(data?.payment_link);
       else if (data?.status) router.push('/lk/workouts');
       else setError(true);
@@ -107,12 +111,20 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0, balance = 0 }) => {
         text: 'Что то пошло не так =(',
         price
       }))
-    } else if(type == 'different') {
+    } else if(type == 'priceMore') {
       setModalData(prev => ({
         ...prev,
-        type: 'different',
+        type: 'priceMore',
         isShow: true,
-        text: `Цена изменилась на: ${text} ₽. Подтвердить оплату?`,
+        text: `К сожалению, размер скидки на выбранный слот изменился, и текущая цена составляет ${text} ₽. Хотите продолжить покупку по актуальной стоимости?`,
+        price
+      }))
+    } else if(type == 'priceLess') {
+      setModalData(prev => ({
+        ...prev,
+        type: 'priceLess',
+        isShow: true,
+        text: `Приятная новость! Размер скидки на выбранный слот увеличился, и текущая цена составляет ${text} ₽.`,
         price
       }))
     }
@@ -138,7 +150,7 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0, balance = 0 }) => {
       text={modalData.text} 
       handleClose={modalData.type == 'successful' ? ()=>{} : () => setModal('close')} 
       size={modalData.type == 'crowded' ? 'xl' : ''}>
-        {modalData.type == 'different' 
+        {modalData.type == 'priceMore' 
         ? (
         <div className={styles['modal-inner']}>
           <div className={styles['modal-inner__buttons']}>
@@ -162,6 +174,18 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0, balance = 0 }) => {
           </div>
         </div>
         )
+        : (modalData.type == 'priceLess') 
+        ? (
+            <Button
+              onClick={() => handleSubmit(modalData.price)}
+              size="l"
+              variant="blue-gradient"
+              fullSize={true}
+              label={'Спасибо!'}
+              disabledShadow={true}
+              disabled={isLoad}
+            />
+        ) 
         : (ModalInner(modalData.type, sessionData.user.accessToken, gym, paidData, setModal, isLoad, setIsLoad, list))}
       </Modal>
     )}
@@ -247,7 +271,11 @@ function ModalInner(type, token, gym, trainingsObj, setModal, isLoad, setIsLoad,
     .then((res) => {
       console.log(res)
       if(res?.message == 'price has been changed') {
-        setModal('different', `${res?.total_price || null}`, `${res?.total_price}`)
+        if(res?.total_price > totalPrice) {
+          setModal('priceMore', `${data?.total_price || null}`, `${data?.total_price}`)
+        } else {
+          setModal('priceLess', `${data?.total_price || null}`, `${data?.total_price}`)
+        }
       } else if(res?.payment_link) {
         router.push(res?.payment_link)
       } else {
