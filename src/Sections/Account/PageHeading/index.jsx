@@ -1,11 +1,11 @@
 import Container from '@/Components/Container';
 import styles from './PageHeading.module.scss';
 
-const PageHeading = ({ title, container = true }) => {
+const PageHeading = ({ title, container = true, containerSize= '' }) => {
   return (
     <section className={styles['page-heading']}>
       {container ? (
-        <Container>
+        <Container size={containerSize}>
           <div className={styles['page-heading__wrapper']}>
             <p className={styles['page-heading__title']}>{title}</p>
           </div>

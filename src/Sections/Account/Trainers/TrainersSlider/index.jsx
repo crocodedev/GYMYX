@@ -33,18 +33,23 @@ const TrainersSlider = ({isShowVideo = false}) => {
         slidesPerView: 3,
       },
       992: {
-        spaceBetween: 25,
-        slidesPerView: 2.2,
+        spaceBetween: 20,
+        slidesPerView: 1.9,
       },
 
       1200: {
-        spaceBetween: 35,
-        slidesPerView: 2.2,
+        spaceBetween: 20,
+        slidesPerView: 2.3,
       },
 
-      1400: {
+      1440: {
+        spaceBetween: 30,
+        slidesPerView: 2.58,
+      },
+
+      1765: {
         spaceBetween: 40,
-        slidesPerView: 2.4,
+        slidesPerView: 2.655,
       },
     },
   };
@@ -102,6 +107,7 @@ const TrainersSlider = ({isShowVideo = false}) => {
             activeSlide={activeIndexSlide}
             countSlides={slider?.slides?.length}
             isTrainers={true}
+            isShowCount={false}
           />
         ) : null}
       </div>

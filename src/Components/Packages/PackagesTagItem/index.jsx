@@ -1,8 +1,13 @@
 import styles from './PackagesTagItem.module.scss'
 
-const PackagesTagItem = ({id, name, isActive = false, handlerClick}) => {
+const PackagesTagItem = ({isOnly, id, name, isActive = false, handlerClick}) => {
   return (
-    <button type='button' className={`${styles['packages-tag-item']} ${isActive ? styles['packages-tag-item--active'] : ''}`}
+    <button 
+    type='button' 
+    className={`
+      ${styles['packages-tag-item']} 
+      ${isActive && isOnly ? styles['packages-tag-item--active-only'] : ''}
+      ${isActive && !isOnly ? styles['packages-tag-item--active-default'] : ''}`}
     onClick={() => handlerClick(id)}
     >
       {name}

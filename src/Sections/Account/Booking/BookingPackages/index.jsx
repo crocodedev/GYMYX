@@ -45,9 +45,14 @@ const BookingPackages = ({setLoadIsShow}) => {
   useEffect(() => {
     setLoadIsShow(true)
     if(sessionData?.user?.accessToken) {
-      getPackages(sessionData.user.accessToken).then(res => {
+      getPackages(sessionData?.user?.accessToken).then(res => {
         if(res?.data) {
-          setPackages(res.data)
+          const sortPascages = res.data.sort((a,b) => {
+            if(a.only_one > b.only_one) return -1
+            if(a.only_one < b.only_one) return 1
+            return 0
+          })
+          setPackages(sortPascages)
           setLoadIsShow(false)
         }
       })

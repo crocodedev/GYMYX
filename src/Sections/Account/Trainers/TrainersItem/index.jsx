@@ -85,7 +85,7 @@ const TrainersItem = ({ data, className, isShowVideo = false }) => {
             {formattedPhoneNumber}
           </a>{' '}
           <a href={`https://t.me/${phone.value.split(' ').join('')}`} target="_blank" onClick={(e) => handleClick(e)}>
-            <Button size="sl" label="Написать в Telegram" fullSize={true} icon={'telegram'} />
+            <Button size="sl" label="Написать в telegram" fullSize={true} />
           </a>
         </div>
       </div>

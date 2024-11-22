@@ -3,10 +3,6 @@
 .profile-heading {
   position: relative;
 
-  @include media-breakpoint-down(lg) {
-    margin-bottom: 10px;
-  }
-
   &__wrapper {
     display: flex;
     justify-content: space-between;
@@ -27,6 +23,7 @@
     @include media-breakpoint-down(lg) {
       justify-content: space-between;
       margin-top: 20px;
+      display: none;
     }
 
     @include media-breakpoint-up(lg) {

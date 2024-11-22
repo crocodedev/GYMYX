@@ -2,6 +2,7 @@
 
 import { useSession } from 'next-auth/react';
 import { useEffect, useRef, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 import Button from '@/Components/Button';
 import Container from '@/Components/Container';
@@ -9,78 +10,128 @@ import ProfileField from '@/Components/Account/Profile/ProfileField';
 import styles from './ProfileEditForm.module.scss';
 import { checkValidPhone } from '@/Utils/helpers';
 import heic2any from 'heic2any';
-
-const validateField = (value, fieldType) => {
-  if (fieldType === 'text') {
-    return value.length > 0 ? true : false;
-  } else if (fieldType === 'email') {
-    const pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    return pattern.test(value);
-  } else if (fieldType === 'file') {
-    return true;
-  } else if (fieldType === 'tel') {
-    return checkValidPhone(value).valid;
-  }
-};
-
-const validateAllFields = (fields) => {
-  return Object.values(fields).every((field) => field.isValid);
-};
-
-const checkDataDifference = (prevData, newData) => {
-  if (prevData.email !== newData.email.value) {
-    return true;
-  }
-
-  if (prevData.full_name !== `${newData.name.value} ${newData.lastname.value}`) {
-    return true;
-  }
-
-  if (prevData.image !== newData.image.value && newData.image.value != null) {
-    return true;
-  }
-  if (prevData.phone !== checkValidPhone(newData.phone.value).value) {
-    return true;
-  }
-
-  return false;
-};
+import { EditIcon } from '../../../../public/svg';
+import { isValidDate, checkDataDifference, convertDate} from './helper';
 
 const ProfileEditForm = () => {
   const { data: sessionData, update: updateSession } = useSession();
-  const imagePreviewRef = useRef();
+  const imagePreviewRef = useRef(null);
   const [isErrorSubmit, setIsErrorSubmit] = useState();
   const [loading, setLoading] = useState(false);
-  const [canSubmit, setCanSubmit] = useState(false);
   const [data, setData] = useState({
     name: {
+      name: 'name',
       value: '',
-      isValid: true,
+      isValid: false,
       type: 'text',
     },
     lastname: {
+      name: 'lastname',
       value: '',
       isValid: false,
       type: 'text',
     },
     email: {
+      name: 'email',
       value: '',
-      isValid: true,
+      isValid: false,
       type: 'email',
     },
     phone: {
+      name: 'phone',
       value: '',
-      isValid: true,
+      isValid: false,
       type: 'tel',
     },
     image: {
+      name: 'image',
       value: null,
       preview: null,
-      isValid: true,
+      isValid: false,
       type: 'file',
       error: false,
     },
+    birth: {
+      name: 'birth',
+      value: '',
+      isValid: false,
+      type: 'date',
+    }
   });
+  const [validateData, setValidateData] = useState({
+    name: false,
+    lastname: false,
+    email: false,
+    phone: false,
+    image: false,
+    birth: false,
+  })
+  const router = useRouter()
+
+  const handleChangeInput = (value, fieldName) => {
+    const sanitizedValue = value.replace(/\s/g, '');
+    setData((prev) => {
+      return {
+        ...prev,
+        [fieldName]: {
+          ...prev[fieldName],
+          value: sanitizedValue,
+        },
+      };
+    });
+  };
+
+  const validateName = () => {
+    setValidateData(prev => ({
+      ...prev,
+      name: data.name.value.length > 0
+    }))
+  }
+
+  const validateLastName = () => {
+    setValidateData(prev => ({
+      ...prev,
+      lastname: data.lastname.value.length > 0
+    }))
+  }
+
+  const validateEmail = () => {
+    const pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    setValidateData(prev => ({
+      ...prev,
+      email: pattern.test(data.email.value)
+    }))
+  }
+
+  const validatePhone = () => {
+    setValidateData(prev => ({
+      ...prev,
+      phone: checkValidPhone(data.phone.value).valid
+    }))
+  }
+
+  const validateImage = () => {
+    setValidateData(prev => ({
+      ...prev,
+      image: (data.image.value?.size / 1024 <= 10240) || data.image.value == null
+    }))
+  }
+
+  const validateBirth = () => {
+    setValidateData(prev => ({
+      ...prev,
+      birth: isValidDate(data.birth.value)
+    }))
+  }
+
+  const validateAllInputs = () => {
+    validateName()
+    validateLastName()
+    validateEmail()
+    validatePhone()
+    validateImage()
+    validateBirth()
+  }
 
   useEffect(() => {
     setData((prev) => {
@@ -105,18 +156,17 @@ const ProfileEditForm = () => {
           ...prev.email,
           value: sessionData?.user?.email || '',
         },
+        birth: {
+          value: convertDate(sessionData?.user?.birth, 'toLocal'),
+
+        }
       };
     });
   }, [sessionData]);
 
   useEffect(() => {
     if (!sessionData || !data) return;
-    const isDifference = checkDataDifference(sessionData.user, data);
-    if (isDifference) {
-      setCanSubmit(validateAllFields(data));
-    } else {
-      setCanSubmit(false);
-    }
+    validateAllInputs() 
   }, [data]);
 
   const handleUploadFile = (e) => {
@@ -199,20 +249,6 @@ const ProfileEditForm = () => {
     }
   };
 
-  const handleChangeInput = (value, fieldName) => {
-    const sanitizedValue = value.replace(/\s/g, '');
-    setData((prev) => {
-      return {
-        ...prev,
-        [fieldName]: {
-          ...prev[fieldName],
-          value: sanitizedValue,
-          isValid: validateField(sanitizedValue, prev[fieldName].type),
-        },
-      };
-    });
-  };
-
   const handleSubmit = async () => {
     setLoading(true);
     setIsErrorSubmit(false);
@@ -222,6 +258,7 @@ const ProfileEditForm = () => {
     var formdata = new FormData();
     formdata.append('full_name', `${data.name.value} ${data.lastname.value}`);
     formdata.append('email', data.email.value);
+    formdata.append('birth', convertDate(data.birth.value, 'toISO'));
 
     if (data.phone.value !== sessionData.user.phone) {
       formdata.append('phone', checkValidPhone(data.phone.value).value);
@@ -248,18 +285,63 @@ const ProfileEditForm = () => {
         setIsErrorSubmit('Этот телефон уже занят другим пользователем!');
       }
     } else {
-      setData((prev) => {
-        return {
-          ...prev,
-          image: {
-            ...prev['image'],
-            value: null,
-          },
-        };
-      });
-      updateSession(response.data);
+      // setData((prev) => {
+      //   return {
+      //     ...prev,
+      //     image: {
+      //       ...prev['image'],
+      //       value: null,
+      //     },
+      //   };
+      // });
+      // updateSession(response.data);
+      router.push('/lk/profile')
     }
     setLoading(false);
+  };
+
+  const handleDateInput = (e) => {
+    let input = e.target.value;
+
+    // Убираем все символы, кроме цифр
+    input = input.replace(/\D/g, '');
+
+    // Проверка на первую цифру дня
+    if (input.length === 1 && parseInt(input[0], 10) > 3) {
+      input = `0${input[0]}`;
+    }
+
+    // Проверка на первую цифру месяца
+    if (input.length === 3 && parseInt(input[2], 10) > 1) {
+      input = `${input.slice(0, 2)}0${input[2]}`;
+    }
+
+    // Ограничение значений для дня и месяца
+    if (input.length >= 2) {
+      const day = parseInt(input.slice(0, 2), 10);
+      if (day > 31) return; // Если день больше 31, останавливаем ввод
+    }
+    if (input.length >= 4) {
+      const month = parseInt(input.slice(2, 4), 10);
+      if (month > 12) return; // Если месяц больше 12, останавливаем ввод
+    }
+
+    // Форматирование с добавлением точек
+    if (input.length <= 2) {
+      input = input;
+    } else if (input.length <= 4) {
+      input = `${input.slice(0, 2)}.${input.slice(2)}`;
+    } else {
+      input = `${input.slice(0, 2)}.${input.slice(2, 4)}.${input.slice(4, 8)}`;
+    }
+
+    setData(prev => ({
+      ...prev,
+      birth: {
+        ...prev.birth,
+        value: input
+      }
+    }))
   };
 
   return (
@@ -267,19 +349,29 @@ const ProfileEditForm = () => {
       <Container size="M">
         <div className={styles['profile-edit-form__wrapper']}>
           <div className={styles['profile-edit-form__data']}>
-            <label className={styles['profile-edit-form__avatar']}>
-              <input onChange={handleUploadFile} type="file" accept=".jpg, .jpeg, .png, .pdf, .webp, .heic" />
-              <img ref={imagePreviewRef} src={data.image.preview || '/icons/account.svg'} alt="profile image" />
-              <span className={styles['profile-edit-form__avatar-edit']}>
-                <img src="/icons/edit.svg" alt="edit" className={styles['profile-edit-form__edit-icon']} />
-              </span>
-              {/* <span className={styles['profile-edit-form__date-birth']}>
-                02.12.2001 
-                <span className={styles['profile-edit-form__date-birth-edit-icon']}>
 
+            <div className={styles['profile-edit-form__avatar-wrapper']}>
+              <label className={styles['profile-edit-form__avatar']}>
+                <input onChange={handleUploadFile} type="file" accept=".jpg, .jpeg, .png, .pdf, .webp, .heic" />
+                <img ref={imagePreviewRef} src={data.image.preview || '/icons/account.svg'} alt="profile image" />
+                <span className={styles['profile-edit-form__avatar-edit']}>
+                  <img src="/icons/edit.svg" alt="edit" className={styles['profile-edit-form__edit-icon']} />
                 </span>
-              </span> */}
-            </label>
+              </label>
+                <label className={styles['profile-edit-form__date-birth']}>
+                  <input 
+                    type='text' 
+                    className={styles['profile-edit-form__date-birth-text']} 
+                    onInput={handleDateInput} 
+                    value={data.birth.value}
+                    placeholder='дд.мм.гггг'
+                  />
+                  <span className={styles['profile-edit-form__date-birth-edit-icon']} type='button'>
+                    <EditIcon/>
+                  </span>
+                </label>
+            </div>
+            
             <div className={styles['profile-edit-form__data-col']}>
               <ProfileField 
                 prefix="Имя" 
@@ -316,10 +408,10 @@ const ProfileEditForm = () => {
           </div>
           <Button
             onClick={handleSubmit}
-            disabled={!canSubmit}
+            disabled={ !(Object.values(validateData).every((field) => field) && checkDataDifference(sessionData.user, data)) }
             size="l"
             label={loading ? 'Загрузка' : 'Сохранить'}
-            variant="blue"
+            variant="blue-gradient"
             fullSize={true}
           />
           {isErrorSubmit && <p className={styles['profile-edit-form__error-field']}>{isErrorSubmit}</p>}

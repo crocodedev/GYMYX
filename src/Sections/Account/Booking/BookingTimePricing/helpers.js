@@ -28,9 +28,7 @@ export const transferTraining = async (token, line, date, time) => {
   });
 
     const response = await result.json();
-    if (!response.error) {
-      return response;
-    }
+    return response;
 };
 
 export const takeAvaliableTimesToLine = async (token, line, date, time) => {

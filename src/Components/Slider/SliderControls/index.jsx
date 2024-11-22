@@ -1,6 +1,6 @@
 import styles from './SliderControls.module.scss';
 
-const SliderControls = ({ handlePrevSlide, handleNextSlide, activeSlide, countSlides, isTrainers, isShowCount = true }) => {
+const SliderControls = ({ handlePrevSlide, handleNextSlide, activeSlide = 0, countSlides, isTrainers, isShowCount = true }) => {
   return (
     <div className={styles['slider-controls']}>
       {isShowCount && 
