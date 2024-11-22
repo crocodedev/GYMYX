@@ -57,7 +57,7 @@ const StudioGuidePage = ({data}) => {
     }
   }
 
-  if(!data) return (<p>error</p>)
+  if(!data) return (<p className={styles['stubio-guide__error']}>Страница не найдена</p>)
 
   return (
     <section className={styles['stubio-guide']}>
