@@ -47,7 +47,7 @@ const BookingSignUp = () => {
         headingTitle={'Запишитесь на тренировки'}
       />
       <BookingSignUpContent gymTitle={gym?.name} handleChangeGym={() => setShowModal((prev) => !prev)}>
-        <BookingCalendar change={false}/>
+        <BookingCalendar change={false} userIsFix={!!sessionData?.user?.is_fix}/>
         <BookingSteps stepNumber={1} stepTitle={'Выберите день'} balance={balance} packageIsActive={balance > 0}/>
       </BookingSignUpContent>
     </>

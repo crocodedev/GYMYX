@@ -5,96 +5,79 @@ import styles from './CheckoutSummary.module.scss';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useMemo, useState, useEffect } from 'react';
-import { findPrice, createBooking, countValues, prepareDataForBooking, fun, sortByDate } from './helpers';
+import { createBooking, prepareDataForBooking, separation, combinedList } from './helpers';
 import CheckoutConfirm from '@/Components/Checkout/CheckoutConfirm';
 import Modal from '@/Components/Modal';
+import { uniqueUserData } from '@/Utils/helpers';
 
-const CheckoutSummary = ({ items, gym, isActivePackage = 0 }) => {
+const CheckoutSummary = ({ items, gym, isActivePackage = 0, balance = 0 }) => {
   const router = useRouter();
   const { data: sessionData } = useSession();
   const [canSubmit, setCanSubmit] = useState(false);
   const [loading, setLoading] = useState(false);
   const [loadingPage, setLoadingPage] = useState(true);
   const [error, setError] = useState(false);
-  const [list, setList] = useState([]);
-  const [finalArr, setFinalArr] = useState([]);
+  const [list, setList] = useState(items);
+  const [listShowInCheckout, setListShowInCheckout] = useState([])
   const [isFirstBooking, setIsFirstBooking] = useState();
   const [modalData, setModalData] = useState({
-    type: '', // successful, confirm, crowded
+    type: '', // successful, confirm, crowded, error, different, priceMore, priceLess
     isShow: false,
     text: '',
+    payment_link: '',
   })
-  const balance = sessionData?.user?.balance || 0
   const [paidData, setPaidData] = useState({})
   const [isLoad, setIsLoad] = useState(false)
 
   const totalPrice = useMemo(() => {
-    let total = 0;
-
-    items.forEach((entry, indexFirst) => {
-      entry.time.map((time, indexSecond) => {
-        if (isFirstBooking && indexFirst === 0 && indexSecond === 0) {
-          total += gym.min_price;
-        } else {
-          total += findPrice(time, gym?.prices);
-        }
-      });
-    });
-    setList(sortByDate(countValues(items, gym?.prices)));
-    return total;
+    return items.reduce((acc, el, i) => {
+      return acc + el.time.reduce((acc, el, id) => {
+        return acc + ((i+id==0) ? el?.price.first : el?.price.default)
+      }, 0)
+    }, 0);
+    
   }, [isFirstBooking, items, gym, modalData]);
 
-  const sortArr = () => {
-    const tmpArr = list.reduce((acc, el) => {
-      if (isFirstBooking) {
-        list[0].price = gym.min_price;
-      }
-      const existingEl = acc.find((item) => item.price === el.price);
+  const splitTrainingsByBalance = useMemo(() => separation(balance, list), [list, balance])
 
-      if (existingEl) {
-        existingEl.count += el.count;
-      } else {
-        acc.push({ ...el, count: el.count });
-      }
-      return acc;
-    }, []);
-
-    setFinalArr(tmpArr);
-  };
-
-  const handleSubmit = () => {
+  const handleSubmit = (price) => {
     setLoading(true);
-    createBooking(sessionData.user.accessToken, gym?.id, false, prepareDataForBooking(list))
-    .then(({ data }) => {
-      if (data?.payment_link) router.push(data?.payment_link);
-      else if (data?.status) router.push('/lk/training');
+    createBooking(sessionData.user.accessToken, gym?.id, false, prepareDataForBooking(list), `${price}`, {uuid: uniqueUserData()})
+    .then(( data ) => {
+      console.log(data)
+      if(data?.message == 'price has been changed') {
+        if(data?.total_price > price) {
+          setModal('priceMore', `${data?.total_price || null}`, `${data?.total_price}`)
+        } else {
+          setModal('priceLess', `${data?.total_price || null}`, `${data?.total_price}`)
+        }
+      } else if (data?.payment_link) router.push(data?.payment_link);
+      else if (data?.status) router.push('/lk/workouts');
       else setError(true);
       setLoading(false);
     });
   };
 
   const handlerClicktByBalance = () => {
+    setPaidData(splitTrainingsByBalance)
+    const countTrainint = listShowInCheckout.reduce((acc, el) => acc + (el?.count || 0), 0)
 
-    setPaidData(fun(list, balance, gym.min_price))
-    const countTrainint = finalArr.reduce((acc, el) => acc + (el?.count || 0), 0)
-
-    if(countTrainint <= balance) setModal('confirm')
+    console.log(countTrainint, balance)
+    if(countTrainint <= balance) {
+      const text = `${countTrainint} ${countTrainint == 1 ? 'тренировку' : countTrainint > 1 && countTrainint <= 4 ? 'тренировки' : 'тренировок'}`
+      setModal('confirm', text)
+    }
     else setModal('crowded')
   }
 
-  const setModal = (type) => {
+  const setModal = (type = '', text = '', price='0') => {
     if(type == 'confirm') {
-      const countTrainint = finalArr.reduce((acc, el) => acc + (el?.count || 0), 0)
-      const text = countTrainint == 1 
-      ? 'тренировку' 
-      : countTrainint > 1 && countTrainint <= 4 
-      ? 'тренировки' 
-      : 'тренировок'
       setModalData(prev => ({
         ...prev,
         type: 'confirm',
         isShow: true,
-        text: `Списать ${countTrainint} ${text} с баланса?`,
+        text: `Списать ${text} с баланса?`,
+        price
       }))
     } else if(type == 'crowded') {
       setModalData(prev => ({
@@ -102,6 +85,7 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0 }) => {
         type: 'crowded',
         isShow: true,
         text: '',
+        price
       }))
     } else if(type == 'successful') {
       setModalData(prev => ({
@@ -109,6 +93,7 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0 }) => {
         type: 'successful',
         isShow: true,
         text: 'Спасибо за покупку!',
+        price
       }))
     } else if(type == 'close') {
       setModalData(prev => ({
@@ -116,24 +101,45 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0 }) => {
         type: '',
         isShow: false,
         text: '',
+        price
+      }))
+    } else if(type == 'error') {
+      setModalData(prev => ({
+        ...prev,
+        type: 'error',
+        isShow: true,
+        text: 'Что то пошло не так =(',
+        price
+      }))
+    } else if(type == 'priceMore') {
+      setModalData(prev => ({
+        ...prev,
+        type: 'priceMore',
+        isShow: true,
+        text: `К сожалению, размер скидки на выбранный слот изменился, и текущая цена составляет ${text} ₽. Хотите продолжить покупку по актуальной стоимости?`,
+        price
+      }))
+    } else if(type == 'priceLess') {
+      setModalData(prev => ({
+        ...prev,
+        type: 'priceLess',
+        isShow: true,
+        text: `Приятная новость! Размер скидки на выбранный слот увеличился, и текущая цена составляет ${text} ₽.`,
+        price
       }))
     }
   }
 
-  const closeModal = () => {
-    setModalData(prev => ({
-      ...prev,
-      isShow: false,
-    }))
-  }
-
   useEffect(() => {
     if (sessionData?.user) {
-      setIsFirstBooking(sessionData?.user?.is_new);
-      sortArr();
+      setList(items)
+      console.log('list', list)
+      console.log('sortList', combinedList(list))
+      setListShowInCheckout(combinedList(items))
+      setIsFirstBooking(sessionData?.user?.is_new)
       setLoadingPage(false);
     }
-  }, [sessionData, isFirstBooking, list]);
+  }, [sessionData, isFirstBooking, items, list]);
 
   if (loadingPage) return;
 
@@ -142,19 +148,55 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0 }) => {
     {modalData.isShow && sessionData && (
       <Modal 
       text={modalData.text} 
-      handleClose={modalData.type == 'successful' ? ()=>{} : closeModal} 
+      handleClose={modalData.type == 'successful' ? ()=>{} : () => setModal('close')} 
       size={modalData.type == 'crowded' ? 'xl' : ''}>
-        {ModalInner(modalData.type, sessionData.user.accessToken, gym, paidData, setModal, isLoad, setIsLoad, list)}
+        {modalData.type == 'priceMore' 
+        ? (
+        <div className={styles['modal-inner']}>
+          <div className={styles['modal-inner__buttons']}>
+            <Button
+              onClick={() => handleSubmit(modalData.price)}
+              size="l"
+              variant="blue-gradient"
+              fullSize={true}
+              label={'Да'}
+              disabledShadow={true}
+              disabled={isLoad}
+            />
+            <Button
+              onClick={() => setModal('close')}
+              size="l"
+              variant="black-gradient"
+              fullSize={true}
+              label={'Нет'}
+              disabledShadow={true}
+            />
+          </div>
+        </div>
+        )
+        : (modalData.type == 'priceLess') 
+        ? (
+            <Button
+              onClick={() => handleSubmit(modalData.price)}
+              size="l"
+              variant="blue-gradient"
+              fullSize={true}
+              label={'Спасибо!'}
+              disabledShadow={true}
+              disabled={isLoad}
+            />
+        ) 
+        : (ModalInner(modalData.type, sessionData.user.accessToken, gym, paidData, setModal, isLoad, setIsLoad, list))}
       </Modal>
     )}
     
     <div className={styles['checkout-summary']}>
       <div className={styles['checkout-summary__wrapper']}>
         <div className={styles['checkout-summary__list']}>
-          {finalArr.map(({ value, count, price }, index) => (
-            <div key={`${value}_${index}`} className={styles['checkout-summary__item']}>
-              <p>Тренировка {price} ₽/ч ({count})</p>
-              <p>{price} ₽</p>
+          {listShowInCheckout.map((group, i) => (
+            <div key={i} className={styles['checkout-summary__item']}>
+              <p>Тренировка {group.price} ₽/ч ({group.count})</p>
+              <p>{group.price * group.count} ₽</p>
             </div>
           ))}
         </div>
@@ -164,7 +206,7 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0 }) => {
         </div>
         <div className={styles['checkout-summary__buttons']}>
           <Button
-            onClick={handleSubmit}
+            onClick={() => handleSubmit(totalPrice)}
             size="l"
             variant="blue-gradient"
             fullSize={true}
@@ -207,11 +249,15 @@ function ModalInner(type, token, gym, trainingsObj, setModal, isLoad, setIsLoad,
   }
 
   const paymentFullByBalance = () => {
+    console.log('send', prepareDataForBooking(list), list)
     setIsLoad(true)
-    createBooking(token, gym?.id, true, prepareDataForBooking(list))
+    createBooking(token, gym?.id, true, prepareDataForBooking(list), '0', {uuid: uniqueUserData()})
     .then((res) => {
-      if(res?.data?.payment_link) {
+      console.log(res)
+      if(res?.payment_link) {
         setModal('successful')
+      } else {
+        setModal('error')
       }
     })
     .finally(() => {
@@ -221,10 +267,19 @@ function ModalInner(type, token, gym, trainingsObj, setModal, isLoad, setIsLoad,
 
   const partialPayment = () => {
     setIsLoad(true)
-    createBooking(token, gym?.id, true, prepareDataForBooking(list))
+    createBooking(token, gym?.id, true, prepareDataForBooking(list), `${totalPrice}`, {uuid: uniqueUserData()})
     .then((res) => {
-      if(res?.data?.payment_link) {
-        router.push(res?.data?.payment_link)
+      console.log(res)
+      if(res?.message == 'price has been changed') {
+        if(res?.total_price > totalPrice) {
+          setModal('priceMore', `${data?.total_price || null}`, `${data?.total_price}`)
+        } else {
+          setModal('priceLess', `${data?.total_price || null}`, `${data?.total_price}`)
+        }
+      } else if(res?.payment_link) {
+        router.push(res?.payment_link)
+      } else {
+        setModal('error')
       }
       setIsLoad(false)
     })
@@ -285,13 +340,13 @@ function ModalInner(type, token, gym, trainingsObj, setModal, isLoad, setIsLoad,
           {trainingsObj?.paid && trainingsObj.paid.map(({count, price }, index) => (
             <div key={`${index}`} className={`${styles['modal-inner__list-item']} ${styles['modal-inner__list-item--paid']}`}>
               <p>Тренировка {price} ₽/ч ({count})</p>
-              <p>{price} ₽</p>
+              <p>{price * count} ₽</p>
             </div>
           ))}
           {trainingsObj?.not_paid && trainingsObj.not_paid.map(({count, price }, index) => (
             <div key={`${index}`} className={styles['modal-inner__list-item']}>
               <p>Тренировка {price} ₽/ч ({count})</p>
-              <p>{price} ₽</p>
+              <p>{price * count} ₽</p>
             </div>
           ))}
         </div>

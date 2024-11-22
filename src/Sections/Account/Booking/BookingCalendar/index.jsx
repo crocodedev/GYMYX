@@ -39,7 +39,7 @@ addLocale('ru', {
   clear: 'Очистить',
 });
 
-const BookingCalendar = ({change = false}) => {
+const BookingCalendar = ({change = false, userIsFix = false}) => {
   const [loading, setLoading] = useState(true);
   const { gym, visitDate, variant } = useSelector((state) => state.booking);
   const { date } = useSelector((state) => state.transfer);
@@ -105,14 +105,16 @@ const BookingCalendar = ({change = false}) => {
     }
   }, [gym, sessionData]);
 
-  if (loading) {
-    return <Loading />;
-  }
+  // if (loading) {
+    // return <Loading />;
+  // }
 
   return (
     <div className={styles['booking-calendar']}>
       <div>
-        <Calendar
+        {loading 
+        ? <Loading /> 
+        : <Calendar
           minDate={new Date()}
           className={`${styles['booking-calendar__calendar']} booking-calendar__calendar`}
           value={dates?.map(({ value }) => new Date(value))}
@@ -121,9 +123,10 @@ const BookingCalendar = ({change = false}) => {
           locale="ru"
           selectionMode="multiple"
           maxDateCount={variant === 'single' ? 1 : null}
-          maxDate={new Date(new Date().getTime() + 14 * 24 * 60 * 60 * 1000)}
+          maxDate={new Date(new Date().getTime() + (change ? 30 : userIsFix ? 42 : 14) * 24 * 60 * 60 * 1000)}
           enabledDates={availableDates}
-        />
+        />}
+        
         <Button
           onClick={handleSubmit}
           disabled={!dates.length}

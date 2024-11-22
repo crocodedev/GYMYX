@@ -14,7 +14,7 @@ import { transferTraining } from './helpers';
 
 const BookingTimePricing = ({ variants = [], change = false, setModaldata, setIsLoad }) => {
   const dispatch = useDispatch();
-  const { visitDate, currentDate, loading } = useSelector((state) => state.booking);
+  const { visitDate, currentDate, loading, avaliableTimesCurrentDay } = useSelector((state) => state.booking);
   const { oldId } = useSelector((state) => state.transfer);
   const [data, setData] = useState([]);
   const [canSubmit, setCanSubmit] = useState(false);
@@ -22,12 +22,20 @@ const BookingTimePricing = ({ variants = [], change = false, setModaldata, setIs
   const router = useRouter();
 
   const handleChangeData = (value) => {
-    if (!data.includes(value)) {
-      if(change) setData([value]);
-      else setData([...data, value]);
+    console.log(value)
+    
+    if(change) {
+      if (!data.some(time => time === value)) {
+        setData([value])
+      } else {
+        setData(data.filter((item) => item !== value));
+      }
     } else {
-      const tempData = data.filter((item) => item !== value);
-      setData(tempData);
+      if (!data.some(item => item.time === value.time)) {
+        setData([...data, value]);
+      } else {
+        setData(data.filter((item) => item.time !== value.time));
+      }
     }
   };
 
@@ -40,17 +48,28 @@ const BookingTimePricing = ({ variants = [], change = false, setModaldata, setIs
       if(value) {
         const avalibleData = (num) => num > 9 ? num : '0'+num 
         const date = `${value.getFullYear()}-${avalibleData(value.getMonth()+1)}-${value.getDate()}`
+        console.log(sessionData.user.accessToken, oldId, date, time)
         transferTraining(sessionData.user.accessToken, oldId, date, time)
         .then(res => {
+          console.log('transfer result', res)
           if(res?.data?.message === "Practice has been rescheduled") {
             setModaldata((prevData) => ({
               ...prevData,
+              type: 'completed',
               text: 'Ваша тренировка успешно перенесена!',
+              isShow: true
+            }))
+          } else if(res?.data?.message === 'Less than 4 hours before the specified time') {
+            setModaldata((prevData) => ({
+              ...prevData,
+              type: 'less',
+              text: 'Перенос не возможен! Менее чем за 4 часа до указанного времени',
               isShow: true
             }))
           } else {
             setModaldata((prevData) => ({
               ...prevData,
+              type: 'error',
               text: 'Что то пошло не так, попробуйте позже =(',
               isShow: true
             }))
@@ -63,30 +82,30 @@ const BookingTimePricing = ({ variants = [], change = false, setModaldata, setIs
     else {
       router.push('/lk/checkout');
     }
-    
   };
 
   useEffect(() => {
+    let tempData = [];
+    if (!!visitDate[currentDate]?.time) {
+      tempData = visitDate[currentDate]?.time;
+    }
+    setData(tempData);
+  }, [currentDate, sessionData]);
+
+  useEffect(() => {
+    console.log('update')
     const result = prepareVisitDateWithTime(visitDate[currentDate], data);
     const updatedVisitDate = [...visitDate];
     updatedVisitDate[currentDate] = result;
     dispatch(updateBookingVisitDate(updatedVisitDate));
     setCanSubmit(checkData(updatedVisitDate));
-  }, [data]);
-
-  useEffect(() => {
-    let tempData = [];
-    if (!!visitDate[currentDate]?.time) {
-      tempData = visitDate[currentDate].time;
-    }
-    setData(tempData);
-  }, [currentDate]);
+  }, [data, sessionData, avaliableTimesCurrentDay]);
 
   return (
     <section className={styles['booking-time-pricing']}>
       <div className={styles['booking-time-pricing__wrapper']}>
         <BookingTimePricingLine variants={variants} />
-        <BookingTimeVariants loading={loading} data={data} onChangeData={handleChangeData} variants={variants} />
+        <BookingTimeVariants loading={loading} data={data} onChangeData={handleChangeData} variants={variants} isChange={change}/>
         <Button
           onClick={handleSubmit}
           disabled={!canSubmit}

@@ -131,7 +131,14 @@
   &__date {
     display: flex;
     align-items: center;
-    margin-bottom: 50px;
+
+    @include media-breakpoint-up(lg) {
+      margin-bottom: 50px;
+    }
+
+    @include media-breakpoint-down(lg) {
+      margin-bottom: 18px;
+    }
   }
 
   &__date-value {

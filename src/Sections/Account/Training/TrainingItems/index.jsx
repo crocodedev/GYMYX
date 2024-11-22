@@ -2,8 +2,6 @@ import styles from './TrainingItems.module.scss';
 
 import { useState, useEffect } from 'react';
 import BookingCard from '@/Components/Booking/BookingCard';
-import { useSelector, useDispatch } from 'react-redux';
-import { updateBookingData, bookingSlice } from '@/redux/bookingSlice';
 
 const TrainingItems = ({
   items = [],
@@ -17,7 +15,6 @@ const TrainingItems = ({
   token,
   modalType
 }) => {
-  const dispatch = useDispatch();
 
   const [renderingItems, setRenderingItems] = useState([]);
 
@@ -26,17 +23,17 @@ const TrainingItems = ({
       const filteredItems = items
         .filter((training) => training.date === selectedDate.date)
         .sort((a, b) => new Date(`${a.date} ${a.time}`) - new Date(`${b.date} ${b.time}`))
-        .map((training) => training);
       setRenderingItems(filteredItems);
     } else {
-      setRenderingItems(items);
+      setRenderingItems(archive ? items.reverse() : items)
     }
-  }, [items, selectedDate]);
+  }, [items, selectedDate, archive]);
 
   return (
     <div className={styles['training-items']}>
       <div className={styles['training-items__list']}>
         {renderingItems.map(({ id, date, time, gym }) => {
+          // console.log(renderingItems)
           return (
             <BookingCard
               id={id}
@@ -50,6 +47,7 @@ const TrainingItems = ({
               gymTitle={gym?.name}
               address={gym?.address}
               modalType={modalType}
+              isTraining={true}
             />
           );
         })}

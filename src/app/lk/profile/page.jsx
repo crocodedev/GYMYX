@@ -10,15 +10,22 @@ import ProfileMailing from '@/Sections/Account/ProfileMailing';
 import ProfileTextField from '@/Sections/Account/ProfileTextField';
 import ProfileBalace from '@/Components/Account/Profile/ProfileBalace';
 import ProfileGid from '@/Sections/Account/ProfileGid';
+import Modal from '@/Components/Modal';
+import Button from '@/Components/Button';
+import ProfileLogoutHeader from '@/Components/Account/Profile/ProfileLogoutHeader';
 
 import { signOut, useSession } from 'next-auth/react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { getUserData } from '@/Utils/updateDataUser';
+import { uniqueUserData } from '@/Utils/helpers';
 
 const Profile = () => {
   const { data: sessionData, update } = useSession();
-
-  useEffect(() => {
+  const [modalBirthisShow, setModalBirthisShow] = useState(false)
+  const router = useRouter()
+  
+  const userData = () => {
     if(sessionData?.user?.accessToken) {
       getUserData(sessionData?.user?.accessToken)
       .then(data => {
@@ -26,22 +33,53 @@ const Profile = () => {
         else signOut({ callbackUrl: '/lk/login' });
       })
     }
+  }
+
+  const modalHandlerClick = () => {
+    router.push('/lk/profile/edit')
+  }
+
+  useEffect(() => {
+    if(sessionData?.user?.accessToken) {
+      uniqueUserData()
+    }
+
+    if(sessionData?.user) {
+      setModalBirthisShow(!sessionData?.user?.birth)
+    }
+    userData()
   }, [sessionData?.user?.accessToken])
 
   return (
-    <div className="account-page-wrapper">
-      <ProfileHeading />
-      <ProfileBalace/>
-      <ProfilePersonalData />
-      <ProfileTrainings isShowTranfer={true}/>
-      {/* <ProfileGid/> */}
-      <ProfileStats />
-      <ProfileContactOptions>
-        <ProfileMailing />
-        <ProfileContacts />
-      </ProfileContactOptions>
-      <ProfileTextField />
-    </div>
+    <>
+    {modalBirthisShow && (
+      <Modal text={'Укажите свою дату рождения, чтобы мы могли радовать вас каждый год :)'}>
+        <Button
+          onClick={modalHandlerClick}
+          fullSize={true}
+          size="l"
+          label="Редактировать"
+          variant="blue-gradient"
+          disabledShadow={true}
+        />
+      </Modal>
+    )}
+
+      <div className="account-page-wrapper">
+        <ProfileLogoutHeader/>
+        <ProfileHeading />
+        <ProfileBalace/>
+        {/* <ProfilePersonalData /> */}
+        <ProfileTrainings isShowTranfer={true}/>
+        <ProfileGid/>
+        <ProfileStats />
+        <ProfileContactOptions>
+          <ProfileMailing />
+          <ProfileContacts />
+        </ProfileContactOptions>
+        <ProfileTextField />
+      </div>
+    </>
   );
 };
 

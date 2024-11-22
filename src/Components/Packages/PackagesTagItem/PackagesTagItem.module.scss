@@ -48,7 +48,12 @@
     }
   }
 
-  &--active {
+  &--active-only {
+    background: linear-gradient(270deg, #5871E8 10%, #7B92FF 100%);
+  }
+
+  &--active-default {
     background: linear-gradient(270deg, #0d2dc8 25%, #294ae7 100%);
+    // background: linear-gradient(270deg, #5871E8 10%, #7B92FF 100%);
   }
 }

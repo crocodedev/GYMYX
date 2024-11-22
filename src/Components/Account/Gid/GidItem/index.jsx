@@ -8,6 +8,7 @@ const GidItem = (props) => {
     isViewed,
     link,
     time,
+    tags,
     duration,
     isFavorited,
     title,
@@ -29,7 +30,7 @@ const GidItem = (props) => {
           onClickFavorite={onClickFavorite}
           onClickVideo={onClickVideo}
         />
-        <GidInfo trainingTime={time} description={description} />
+        <GidInfo trainingTime={time} description={description} tags={tags}/>
       </div>
     </div>
   );

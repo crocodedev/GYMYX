@@ -16,7 +16,7 @@ const Trainings = async () => {
   return (
     <section className="trainers-page-wrapper">
       <Container>
-        <TrainersSlider isShowVideo={false}/>
+        <TrainersSlider isShowVideo={true}/>
       </Container>
     </section>
   );

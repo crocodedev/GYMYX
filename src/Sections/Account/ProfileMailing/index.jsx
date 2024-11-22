@@ -1,4 +1,5 @@
 'use client';
+
 import ProfileBlockTitle from '@/Components/Account/Profile/ProfileBlockTitle';
 import Checkbox from '@/Components/Checkbox';
 import { useEffect, useState } from 'react';
@@ -33,15 +34,9 @@ async function getUserData(token) {
 }
 
 export const ProfileMailing = () => {
-  const pcItems = [
-    { id: 1, label: 'E-mail', value: 'email' },
-    { id: 2, label: 'Sms', value: 'phone' },
-    { id: 3, label: 'Не получать рассылку', value: 'none' },
-  ];
-
-  const mobileItems = [
-    { id: 1, label: 'E-mail', value: 'email' },
-    { id: 2, label: 'Sms', value: 'phone' },
+  const ITEMS = [
+    { id: 1, label: 'Whatsapp', value: 'email' },
+    { id: 2, label: 'Telegram', value: 'phone' },
     { id: 3, label: 'Не получать', value: 'none' },
   ];
 
@@ -60,17 +55,11 @@ export const ProfileMailing = () => {
     });
   }, [sessionData?.user?.accessToken]);
 
-  const [ITEMS, setItems] = useState([]);
-
-  useEffect(() => {
-    const isMobile = window.matchMedia('(max-width: 992px)').matches;
-    setItems(isMobile ? mobileItems : pcItems);
-  }, []);
-
   const updateData = () => {
     if (sessionData) {
-      getUserData(sessionData?.user?.accessToken).then(() => {
+      getUserData(sessionData?.user?.accessToken).then((data) => {
         setLoadingSubmit(false);
+        data.subscriptions.length > 0 ? setActiveVariant(data.subscriptions) : setActiveVariant(['none']);
       });
     }
   };

@@ -8,6 +8,7 @@ export async function POST(request) {
         gym_id: requestData.gym_id,
         with_balance: requestData.with_balance,
         lines: requestData.lines,
+        anti_frod: requestData.anti_frod
       };
 
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/bookings`, {

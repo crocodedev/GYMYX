@@ -33,10 +33,6 @@ const ProfileTrainings = ({isShowTranfer = false}) => {
 
   useEffect(() => {
     updateData();
-  }, [sessionData, sessionData]);
-
-  useEffect(() => {
-    updateData();
   }, [sessionData]);
 
   const updateData = () => {
@@ -175,11 +171,18 @@ const ProfileTrainings = ({isShowTranfer = false}) => {
               fullSize={true}
               size="l"
               label={!loadingDelete ? 'Да' : 'Загрузка'}
-              variant="blue-gradient"
+              variant="black-gradient"
               onClick={handleClickDelete}
               disabledShadow={true}
             />
-            <Button fullSize={true} size="l" label="Нет" variant="black-gradient" onClick={handleShow} disabledShadow={true} />
+            <Button 
+              fullSize={true} 
+              size="l" 
+              label="Нет" 
+              variant="blue-gradient" 
+              onClick={handleShow} 
+              disabledShadow={true} 
+            />
             </>
           )}
           {showModal.type === 'notification' && (

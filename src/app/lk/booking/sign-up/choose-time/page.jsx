@@ -33,11 +33,10 @@ const checkIsOnlyTraining = (data) => {
 
 const ChooseTime = () => {
   const { data: sessionData } = useSession();
-  const { gym, visitDate } = useSelector((state) => state.booking);
+  const { gym, visitDate, avaliableTimesCurrentDay } = useSelector((state) => state.booking);
   const [pricesVariants, setPricesVariants] = useState([]);
-  const packageBalance = sessionData?.user?.balance || 0
   const [balance, setBalance] = useState({
-    full_balance: packageBalance,
+    full_balance: 0,
     count_bacance: 0,
   })
 
@@ -45,7 +44,7 @@ const ChooseTime = () => {
     const countTime = visitDate.reduce((acc, el) => acc + el.time.length, 0)
     setBalance(prev => ({
       ...prev,
-      count_bacance: balance.full_balance - countTime
+      count_bacance: prev.full_balance - countTime
     }))
   }
 
@@ -58,6 +57,7 @@ const ChooseTime = () => {
           ...prev,
           full_balance: res?.data?.balance,
         }))
+        setCountBalace()
       }
     })
   }, [sessionData])
@@ -65,17 +65,31 @@ const ChooseTime = () => {
   useEffect(() => {
     if (gym?.prices && sessionData) {
       let variantsTemp = [];
+      // console.log(gym)
 
       if (!sessionData.user.is_new) {
-        variantsTemp = gym.prices.map((item, index) => {
-          return { ...item, bgColor: variants[index]?.bgColor };
-        });
+        // not new user
+        // if (checkIsOnlyTraining(visitDate)) {
+        //   // first training
+        //   variantsTemp = gym.prices.map((item, index) => {
+        //     return { ...item, bgColor: variants[index]?.bgColor };
+        //   });
+        // } else {
+          // now first training
+          variantsTemp = gym.prices.map((item, index) => {
+            return { ...item, bgColor: variants[index]?.bgColor };
+          });
+        // }
+        
       } else {
+        // new user
         if (!checkIsOnlyTraining(visitDate)) {
+          // now first training
           variantsTemp = gym.prices.map((item, index) => {
             return { ...item, bgColor: variants[index]?.bgColor };
           });
         } else {
+          //first training
           variantsTemp = [
             {
               start: '00:00:00',
@@ -86,14 +100,10 @@ const ChooseTime = () => {
           ];
         }
       } 
-      // else {
-      //   variantsTemp = gym.prices.map((item, index) => {
-      //     return { ...item, bgColor: variants[index]?.bgColor };
-      //   });
-      // }
       setPricesVariants(variantsTemp);
       setCountBalace()
     }
+    console.log(visitDate)
   }, [gym, sessionData, visitDate]);
 
   return (
