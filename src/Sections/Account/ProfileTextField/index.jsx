@@ -12,7 +12,6 @@ const ProfileTextField = () => {
   const [isMobile, setIsModile] = useState(false)
 
   useEffect(() => {
-    console.log('effect')
     setIsModile((window.innerWidth < 768))
   }, [textFiedIsFocus])
 

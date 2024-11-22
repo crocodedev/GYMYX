@@ -65,7 +65,6 @@ const ChooseTime = () => {
   useEffect(() => {
     if (gym?.prices && sessionData) {
       let variantsTemp = [];
-      // console.log(gym)
 
       if (!sessionData.user.is_new) {
         // not new user
@@ -103,7 +102,6 @@ const ChooseTime = () => {
       setPricesVariants(variantsTemp);
       setCountBalace()
     }
-    console.log(visitDate)
   }, [gym, sessionData, visitDate]);
 
   return (

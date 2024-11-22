@@ -21,7 +21,6 @@ const CheckoutContent = () => {
     getUserData(sessionData?.user?.accessToken)
     .then(res => {
       if(res?.data) {
-        console.log(res?.data?.balance)
         setBalance(res?.data?.balance)
       }
     })

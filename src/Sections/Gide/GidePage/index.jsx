@@ -44,7 +44,6 @@ const GidePage = () => {
     getGids(sessionData?.user?.accessToken)
     .then(res => {
       if (res?.data) {
-        console.log(res?.data)
         setGids(res?.data);
         setTags(getAllTags(res?.data))
       }

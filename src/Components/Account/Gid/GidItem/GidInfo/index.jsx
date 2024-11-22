@@ -1,7 +1,6 @@
 import styles from './GidInfo.module.scss';
 
 const GidInfo = ({ description, trainingTime, tags }) => {
-  // console.log(tags)
   tags = tags.sort((a, b) =>  (a.tag_blue && !b.tag_blue) ? -1 : (!a.tag_blue && b.tag_blue) ? 1 : 0)
 
   return (

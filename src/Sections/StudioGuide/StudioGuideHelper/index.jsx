@@ -7,7 +7,6 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Mousewheel } from 'swiper/modules';
 
 const StudioGuideHelper = ({data, active}) => {
-  console.log(data)
   const title = data.find(el => el.name == 'title')?.value
   const items = data.find(el => el.type == 'object')?.childrens
 

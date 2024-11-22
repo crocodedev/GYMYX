@@ -1,5 +1,4 @@
 export async function createBooking(token, gym_id, with_balance, lines, total_price = '0', anti_frod) {
-  console.log(token, gym_id, with_balance, lines, anti_frod)
   try {
     const result = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/bookings`, {
       method: 'POST',
@@ -135,10 +134,8 @@ export const separation = (balance, list) => {
     }
   });
 
-  console.log('result',{ paidTrainings, unpaidTrainings });
   const paid = aggregateByPrice(paidTrainings);
   const not_paid = aggregateByPrice(unpaidTrainings);
-  console.log(paid, not_paid)
 
   return { paid, not_paid };
 }

@@ -141,7 +141,6 @@ export const takeAvaliableTimesToLine = async (token, line, date) => {
   return fetchCurrentDayTimes.then(({ data }) => {
     let times = []
     data.forEach(data => times.push(data.time))
-    console.log('data', times)
     return times
   });
 };
