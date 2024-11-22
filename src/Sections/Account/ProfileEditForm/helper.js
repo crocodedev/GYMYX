@@ -1,7 +1,6 @@
 import { checkValidPhone } from '@/Utils/helpers';
 
 export function convertDate(date, type= 'toISO') {
-  console.log(date)
   // type = toISO || toLocal
   if(!date) return ''
   if (type === 'toISO') {
@@ -25,10 +24,8 @@ export function isValidDate(date) {
     const maxDate = new Date();
 
     if (inputDate < minDate) {
-      // console.log("Ошибка: дата не может быть меньше минимальной (1900-01-01).");
       return false
     } else if (inputDate > maxDate) {
-      // console.log("Ошибка: дата не может быть больше сегодняшней даты.");
       return false
     } else {
       return true

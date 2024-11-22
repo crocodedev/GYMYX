@@ -44,7 +44,6 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0, balance = 0 }) => {
     setLoading(true);
     createBooking(sessionData.user.accessToken, gym?.id, false, prepareDataForBooking(list), `${price}`, {uuid: uniqueUserData()})
     .then(( data ) => {
-      console.log(data)
       if(data?.message == 'price has been changed') {
         if(data?.total_price > price) {
           setModal('priceMore', `${data?.total_price || null}`, `${data?.total_price}`)
@@ -62,7 +61,6 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0, balance = 0 }) => {
     setPaidData(splitTrainingsByBalance)
     const countTrainint = listShowInCheckout.reduce((acc, el) => acc + (el?.count || 0), 0)
 
-    console.log(countTrainint, balance)
     if(countTrainint <= balance) {
       const text = `${countTrainint} ${countTrainint == 1 ? 'тренировку' : countTrainint > 1 && countTrainint <= 4 ? 'тренировки' : 'тренировок'}`
       setModal('confirm', text)
@@ -133,8 +131,6 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0, balance = 0 }) => {
   useEffect(() => {
     if (sessionData?.user) {
       setList(items)
-      console.log('list', list)
-      console.log('sortList', combinedList(list))
       setListShowInCheckout(combinedList(items))
       setIsFirstBooking(sessionData?.user?.is_new)
       setLoadingPage(false);
@@ -249,11 +245,9 @@ function ModalInner(type, token, gym, trainingsObj, setModal, isLoad, setIsLoad,
   }
 
   const paymentFullByBalance = () => {
-    console.log('send', prepareDataForBooking(list), list)
     setIsLoad(true)
     createBooking(token, gym?.id, true, prepareDataForBooking(list), '0', {uuid: uniqueUserData()})
     .then((res) => {
-      console.log(res)
       if(res?.payment_link) {
         setModal('successful')
       } else {
@@ -269,7 +263,6 @@ function ModalInner(type, token, gym, trainingsObj, setModal, isLoad, setIsLoad,
     setIsLoad(true)
     createBooking(token, gym?.id, true, prepareDataForBooking(list), `${totalPrice}`, {uuid: uniqueUserData()})
     .then((res) => {
-      console.log(res)
       if(res?.message == 'price has been changed') {
         if(res?.total_price > totalPrice) {
           setModal('priceMore', `${data?.total_price || null}`, `${data?.total_price}`)

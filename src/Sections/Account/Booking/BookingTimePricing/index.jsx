@@ -22,8 +22,6 @@ const BookingTimePricing = ({ variants = [], change = false, setModaldata, setIs
   const router = useRouter();
 
   const handleChangeData = (value) => {
-    console.log(value)
-    
     if(change) {
       if (!data.some(time => time === value)) {
         setData([value])
@@ -48,10 +46,8 @@ const BookingTimePricing = ({ variants = [], change = false, setModaldata, setIs
       if(value) {
         const avalibleData = (num) => num > 9 ? num : '0'+num 
         const date = `${value.getFullYear()}-${avalibleData(value.getMonth()+1)}-${value.getDate()}`
-        console.log(sessionData.user.accessToken, oldId, date, time)
         transferTraining(sessionData.user.accessToken, oldId, date, time)
         .then(res => {
-          console.log('transfer result', res)
           if(res?.data?.message === "Practice has been rescheduled") {
             setModaldata((prevData) => ({
               ...prevData,
@@ -93,7 +89,6 @@ const BookingTimePricing = ({ variants = [], change = false, setModaldata, setIs
   }, [currentDate, sessionData]);
 
   useEffect(() => {
-    console.log('update')
     const result = prepareVisitDateWithTime(visitDate[currentDate], data);
     const updatedVisitDate = [...visitDate];
     updatedVisitDate[currentDate] = result;

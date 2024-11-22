@@ -42,7 +42,6 @@ const BookingTimeVariantsItem = ({
   }
 
   useEffect(() => {
-    // console.log( value )
     if(!isChange) {
       const firstPrice = value?.price?.first
       const defaultPrice = value?.price?.default
@@ -50,7 +49,6 @@ const BookingTimeVariantsItem = ({
         setBg(getBgColorByPrice(firstPrice, variants))
       } else if(selectOnceTime() && defaultPrice) {
         setBg(getBgColorByPrice(defaultPrice, variants))
-        // setBg('red')
       } 
     }
   }, [visitDate])
