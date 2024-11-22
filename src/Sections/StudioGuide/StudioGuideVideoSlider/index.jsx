@@ -69,7 +69,7 @@ const StudioGuideVideoSlider = ({videoData}) => {
 
   return (
     <Container>
-    {items.length && (
+    {items.length ? (
       <div className={styles['trainers-slider']}>
         <div className={styles['trainers-slider__title-wrapper']}>
           {sliderSettings ? (
@@ -111,7 +111,7 @@ const StudioGuideVideoSlider = ({videoData}) => {
         )}
       
       </div>
-    )}
+    ) : (<p className={styles['error']}>Эта секция пока что пуста</p>)}
     </Container>
   );
 };
