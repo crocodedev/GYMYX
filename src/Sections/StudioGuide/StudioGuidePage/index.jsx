@@ -20,9 +20,14 @@ const StudioGuidePage = ({data}) => {
     return data?.find(module => module.alias === alias)?.fields
   } 
 
+
+  const findAllFields = (alias) => {
+    return data?.filter(el => el.alias === alias)
+  }
+
   const studioGuideVideo = findFields('studioGuideVideo')
-  const studioGuideHelper = findFields('studioGuideHelper')
-  const studioGuideRules = findFields('studioGuideRules')
+  const studioGuideHelper = findAllFields('studioGuideHelper')
+  const studioGuideRules = findAllFields('studioGuideRules')
 
   const SwitcherData = [
     {title: 'гайд'},
