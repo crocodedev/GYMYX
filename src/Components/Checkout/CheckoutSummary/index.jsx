@@ -42,6 +42,7 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0, balance = 0 }) => {
 
   const handleSubmit = (price) => {
     setLoading(true);
+    setError(false);
     createBooking(sessionData.user.accessToken, gym?.id, false, prepareDataForBooking(list), `${price}`, {uuid: uniqueUserData()})
     .then(( data ) => {
       if(data?.message == 'price has been changed') {
@@ -53,8 +54,8 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0, balance = 0 }) => {
       } else if (data?.payment_link) router.push(data?.payment_link);
       else if (data?.status) {
         console.log(data)
-        setError(true)
-      }
+        setError(true);
+      } //router.push('/lk/workouts');
       else setError(true);
       setLoading(false);
     });

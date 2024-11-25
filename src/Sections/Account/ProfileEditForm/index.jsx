@@ -294,7 +294,7 @@ const ProfileEditForm = () => {
       //     },
       //   };
       // });
-      updateSession(response.data);
+      await updateSession(response.data);
       router.push('/lk/profile')
     }
     setLoading(false);

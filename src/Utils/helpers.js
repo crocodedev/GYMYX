@@ -99,13 +99,57 @@ export const formatTime = (inputTime) => {
   }
 };
 
+// export const uniqueUserData = () => {
+//   if(localStorage.getItem('uniqueUserId')) {
+//     // console.log('uniqueUserId', true)
+//   } else {
+//     // console.log('uniqueUserId', false)
+//     localStorage.setItem('uniqueUserId', uuidv4())
+//   }
+//   // console.log(localStorage.getItem('uniqueUserId'))
+//   return localStorage.getItem('uniqueUserId')
+// }
+
+const setCookie = (name, value) => {
+  // Устанавливаем дату истечения на максимально возможную
+  const expires = 'Fri, 31 Dec 9999 23:59:59 GMT';
+  document.cookie = `${name}=${value}; expires=${expires}; path=/`;
+};
+
+const getCookie = (name) => {
+  const match = document.cookie.match(new RegExp(`(^| )${name}=([^;]+)`));
+  return match ? match[2] : null;
+};
+
 export const uniqueUserData = () => {
-  if(localStorage.getItem('uniqueUserId')) {
-    // console.log('uniqueUserId', true)
-  } else {
-    // console.log('uniqueUserId', false)
-    localStorage.setItem('uniqueUserId', uuidv4())
+  const storageKey = 'uniqueUserId';
+
+  // Получаем UUID из localStorage и куков
+  const localStorageUUID = localStorage.getItem(storageKey);
+  const cookieUUID = getCookie(storageKey);
+
+  // Если UUID есть в обоих местах, но они разные
+  if (localStorageUUID && cookieUUID && localStorageUUID !== cookieUUID) {
+    // console.warn('UUID рассинхронизирован. Используем localStorage и синхронизируем куки.');
+    setCookie(storageKey, localStorageUUID);
+    return localStorageUUID;
   }
-  // console.log(localStorage.getItem('uniqueUserId'))
-  return localStorage.getItem('uniqueUserId')
-}
+
+  // Если UUID есть только в localStorage — сохраняем его в куки
+  if (localStorageUUID && !cookieUUID) {
+    setCookie(storageKey, localStorageUUID);
+    return localStorageUUID;
+  }
+
+  // Если UUID есть только в куках — сохраняем его в localStorage
+  if (cookieUUID && !localStorageUUID) {
+    localStorage.setItem(storageKey, cookieUUID);
+    return cookieUUID;
+  }
+
+  // Если UUID нигде нет — генерируем новый, сохраняем в оба хранилища
+  const newUUID = uuidv4();
+  localStorage.setItem(storageKey, newUUID);
+  setCookie(storageKey, newUUID);
+  return newUUID;
+};
