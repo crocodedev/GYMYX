@@ -28,6 +28,10 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0, balance = 0 }) => {
   })
   const [paidData, setPaidData] = useState({})
   const [isLoad, setIsLoad] = useState(false)
+  const [errorData, setErrorData] = useState({
+    isShow: false,
+    data: null
+  })
 
   const totalPrice = useMemo(() => {
     return items.reduce((acc, el, i) => {
@@ -42,8 +46,12 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0, balance = 0 }) => {
 
   const handleSubmit = (price) => {
     setLoading(true);
+    setErrorData(prev => ({
+      ...prev,
+      isShow: false,
+    }))
     setError(false);
-    createBooking(sessionData.user.accessToken, gym?.id, false, prepareDataForBooking(list), `${price}`, {uuid: uniqueUserData()})
+    createBooking(sessionData.user.accessToken, gym?.id, false, prepareDataForBooking(list), `${price}`, {uuid: uniqueUserData()}) //uniqueUserData()
     .then(( data ) => {
       if(data?.message == 'price has been changed') {
         if(data?.total_price > price) {
@@ -51,12 +59,23 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0, balance = 0 }) => {
         } else {
           setModal('priceLess', `${data?.total_price || null}`, `${data?.total_price}`)
         }
-      } else if (data?.payment_link) router.push(data?.payment_link);
-      else if (data?.status) {
+      } else if (data?.payment_link) {
+        console.log('ok')
+        router.push(data?.payment_link)
+      } 
+      // else if (data?.status) {
+      //   console.log(data)
+      //   setError(true);
+      // } //router.push('/lk/workouts');
+      else {
         console.log(data)
         setError(true);
-      } //router.push('/lk/workouts');
-      else setError(true);
+        setErrorData(prev => ({
+          ...prev,
+          isShow: true,
+          data: data
+        }))
+      } 
       setLoading(false);
     });
   };
@@ -231,8 +250,13 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0, balance = 0 }) => {
         
         <CheckoutConfirm handleChangeCanSubmit={() => setCanSubmit((prev) => !prev)} isActive={canSubmit} />
         {error && <p className={styles['checkout-summary__summary-error']}>Произошла ошибка</p>}
+        
       </div>
+      
     </div>
+    {errorData.isShow && (
+          <pre style={{color: '#fff', textWrap: 'wrap', wordWrap: 'break-word', maxWidth: '300px'}}>{JSON.stringify(errorData.data, null, 2)}</pre>
+        )}
     </>
   );
 };

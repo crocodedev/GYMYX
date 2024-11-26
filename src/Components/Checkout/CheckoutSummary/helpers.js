@@ -10,14 +10,23 @@ export async function createBooking(token, gym_id, with_balance, lines, total_pr
       body: JSON.stringify({ gym_id, with_balance, lines, total_price, anti_frod}),
     });
   
-    const response = await result.json();
+    const response = await result.json()
+    console.log('response to json is ok')
     if (!response.error) {
       return response;
     } else {
       return response
     }
   } catch(error) {
-    return Response.json({ error: 'Error fetching data' });
+    console.log('ошибка запроса', error)
+    return { 
+      error: true, 
+      params: [token, gym_id, with_balance, lines, total_price, anti_frod],
+      data: error,
+      message: error.message || 'Ошибка запроса', 
+      stack: error.stack,
+      details: error.response || null,
+    };
   }
 }
 
