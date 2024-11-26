@@ -95,11 +95,19 @@ export const combinedList = (list, type='def') => {
 // }
 
 export function prepareDataForBooking(data) {
+  console.log(data)
   const result = {};
 
   data.forEach(({ value, time }) => {
     const date = new Date(value);
-    const localDate = date.toLocaleDateString("en-CA");
+    console.log('date', date)
+    // const localDate = date.toLocaleDateString("en-CA");
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // месяцы от 0 до 11
+    const day = String(date.getDate()).padStart(2, '0');
+
+    const localDate = `${year}-${month}-${day}`;
+
     const times = time.map(({ time }) => time);
 
     if (!result[localDate]) {
