@@ -1,22 +1,18 @@
 import { useSession } from 'next-auth/react';
-import { useEffect, useState } from 'react';
 import styles from './ProfileInfo.module.scss';
 import { EditIcon } from '../../../../../public/svg';
 import Link from 'next/link';
 
 const ProfileInfo = () => {
-  const session = useSession();
-  const [userData, setUserData] = useState({});
+  const { data: sessionData } = useSession();
 
-  useEffect(() => {
-    setUserData({
-      name: session?.data?.user?.full_name?.split(' ')[0] || '',
-      lastname: session?.data?.user?.full_name?.split(' ')[1] || '',
-      image: session?.data?.user?.image || '',
-      enter_code: session?.data?.user?.enter_code || null,
-      is_active_enter_code: session?.data?.user?.is_active_enter_code || null,
-    });
-  }, [session]);
+  const userData = {
+    name: sessionData?.user?.full_name?.split(' ')[0] || '',
+    lastname: sessionData?.user?.full_name?.split(' ')[1] || '',
+    image: sessionData?.user?.image || '',
+    enter_code: sessionData?.user?.enter_code || null,
+    is_active_enter_code: sessionData?.user?.is_active_enter_code || null,
+  }
 
   return (
     <div className={styles['profile-info']}>
@@ -34,11 +30,7 @@ const ProfileInfo = () => {
         {userData.enter_code && (
           <div className={`${styles['profile-info__code']}`}>
             <p className={styles['profile-info__code-text']}>код доступа</p>
-            <p
-              className={`${styles['profile-info__code-value']} ${
-                userData?.is_active_enter_code ? styles['active'] : ''
-              }`}
-            >
+            <p className={`${styles['profile-info__code-value']} ${userData?.is_active_enter_code ? styles['active'] : ''}`}>
               {userData.enter_code}
             </p>
           </div>

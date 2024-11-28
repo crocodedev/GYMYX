@@ -1,6 +1,5 @@
 'use client';
 
-import ProfilePersonalData from '@/Sections/Account/ProfilePersonalData';
 import ProfileHeading from '@/Sections/Account/ProfileHeading';
 import ProfileTrainings from '@/Sections/Account/ProfileTrainings';
 import ProfileStats from '@/Sections/Account/ProfileStats';
@@ -18,7 +17,6 @@ import { signOut, useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { getUserData } from '@/Utils/updateDataUser';
-import { uniqueUserData } from '@/Utils/helpers';
 
 const Profile = () => {
   const { data: sessionData, update } = useSession();
@@ -28,8 +26,11 @@ const Profile = () => {
   const userData = () => {
     if(sessionData?.user?.accessToken) {
       getUserData(sessionData?.user?.accessToken)
-      .then(data => {
-        if(data?.data) update(data?.data)
+      .then(res => {
+        if(res?.data) {
+          setModalBirthisShow(!res?.data?.birth)
+          update(res?.data)
+        }
         else signOut({ callbackUrl: '/lk/login' });
       })
     }
@@ -40,13 +41,6 @@ const Profile = () => {
   }
 
   useEffect(() => {
-    if(sessionData?.user?.accessToken) {
-      uniqueUserData()
-    }
-
-    if(sessionData?.user) {
-      setModalBirthisShow(!sessionData?.user?.birth)
-    }
     userData()
   }, [sessionData?.user?.accessToken])
 
@@ -69,7 +63,6 @@ const Profile = () => {
         <ProfileLogoutHeader/>
         <ProfileHeading />
         <ProfileBalace/>
-        {/* <ProfilePersonalData /> */}
         <ProfileTrainings isShowTranfer={true}/>
         <ProfileGid/>
         <ProfileStats />
