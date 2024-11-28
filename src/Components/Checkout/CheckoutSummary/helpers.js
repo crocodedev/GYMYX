@@ -11,26 +11,17 @@ export async function createBooking(token, gym_id, with_balance, lines, total_pr
     });
   
     const response = await result.json()
-    console.log('response to json is ok')
     if (!response.error) {
       return response;
     } else {
       return response
     }
   } catch(error) {
-    console.log('ошибка запроса', error)
-    return { 
-      error: true, 
-      params: [token, gym_id, with_balance, lines, total_price, anti_frod],
-      data: error,
-      message: error.message || 'Ошибка запроса', 
-      stack: error.stack,
-      details: error.response || null,
-    };
+    return { error: true }
   }
 }
 
-export const combinedList = (list, type='def') => {
+export const combinedList = (list) => {
   const priceCounts = {};
 
   list.forEach(({ time}, id) => {
@@ -46,54 +37,6 @@ export const combinedList = (list, type='def') => {
   }));
 }
 
-// export function findPrice(timeStr, priceRanges = []) {
-//   const inputTime = new Date(`2000-01-01T${timeStr}`);
-
-//   for (const priceRange of priceRanges) {
-//     const startTime = new Date(`2000-01-01T${priceRange.start}`);
-//     const endTime = new Date(`2000-01-01T${priceRange.end}`);
-
-//     if (inputTime >= startTime && inputTime <= endTime) {
-//       return priceRange.price;
-//     }
-//   }
-
-//   return 0;
-// }
-
-// function formatDate(date) {
-//   const originalDate = new Date(date);
-
-//   const year = originalDate.getFullYear();
-//   const month = originalDate.getMonth() + 1;
-//   const day = originalDate.getDate();
-
-//   const formattedDate = `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
-
-//   return formattedDate;
-// }
-
-// export function countValues(arr, pricesRange) {
-//   const countArray = [];
-
-//   arr.forEach((entry) => {
-//     entry.time.map((time) => {
-//       const existingObj = countArray.find((obj) => obj.value === entry.value);
-//       if (existingObj) {
-//         existingObj.count++;
-//       } else {
-//         countArray.push({
-//           value: formatDate(entry.value),
-//           count: 1,
-//           time: time,
-//           price: findPrice(time, pricesRange),
-//         });
-//       }
-//     });
-//   });
-//   return countArray;
-// }
-
 export function prepareDataForBooking(data) {
   console.log(data)
   const result = {};
@@ -103,7 +46,7 @@ export function prepareDataForBooking(data) {
     console.log('date', date)
     // const localDate = date.toLocaleDateString("en-CA");
     const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0'); // месяцы от 0 до 11
+    const month = String(date.getMonth() + 1).padStart(2, '0');
     const day = String(date.getDate()).padStart(2, '0');
 
     const localDate = `${year}-${month}-${day}`;
