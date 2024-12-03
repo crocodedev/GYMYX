@@ -12,6 +12,7 @@ const BookingTimeVariantsItem = ({
   value,
   variants,
   isChange,
+  priceVariant
 }) => {
   const [bg, setBg] = useState(bgColor)
   const { visitDate } = useSelector((state) => state.booking);
@@ -25,20 +26,9 @@ const BookingTimeVariantsItem = ({
   }
 
   function getBgColorByPrice(price, variants) {
-    const ranges = [...variants].sort((a, b) => a.price - b.price)
-    for (let i = 0; i < ranges.length; i++) {
-      const currentRange = ranges[i];
-      const nextRange = ranges[i + 1];
-  
-      if (
-        price >= currentRange.price &&
-        (!nextRange || price < nextRange.price)
-      ) {
-        return currentRange.bgColor;
-      }
-    }
-  
-    return '#7b92ff'; // или любой другой цвет
+    const element = variants.find(el => price === el.price)
+    if(element) return element.color
+    else return 'blue'
   }
 
   useEffect(() => {
@@ -46,9 +36,9 @@ const BookingTimeVariantsItem = ({
       const firstPrice = value?.price?.first
       const defaultPrice = value?.price?.default
       if(!selectOnceTime() && firstPrice) {
-        setBg(getBgColorByPrice(firstPrice, variants))
+        setBg(getBgColorByPrice(firstPrice, priceVariant.first))
       } else if(selectOnceTime() && defaultPrice) {
-        setBg(getBgColorByPrice(defaultPrice, variants))
+        setBg(getBgColorByPrice(defaultPrice, priceVariant.default))
       } 
     }
   }, [visitDate])

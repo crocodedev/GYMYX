@@ -12,7 +12,7 @@ import { checkData, prepareVisitDateWithTime } from './helpers';
 import { useSession } from 'next-auth/react';
 import { transferTraining } from './helpers';
 
-const BookingTimePricing = ({ variants = [], change = false, setModaldata, setIsLoad }) => {
+const BookingTimePricing = ({ variants = [], change = false, setModaldata, setIsLoad, priceVariant }) => {
   const dispatch = useDispatch();
   const { visitDate, currentDate, loading, avaliableTimesCurrentDay } = useSelector((state) => state.booking);
   const { oldId } = useSelector((state) => state.transfer);
@@ -99,8 +99,8 @@ const BookingTimePricing = ({ variants = [], change = false, setModaldata, setIs
   return (
     <section className={styles['booking-time-pricing']}>
       <div className={styles['booking-time-pricing__wrapper']}>
-        <BookingTimePricingLine variants={variants} />
-        <BookingTimeVariants loading={loading} data={data} onChangeData={handleChangeData} variants={variants} isChange={change}/>
+        <BookingTimePricingLine variants={variants} priceVariant={priceVariant} isChange={change}/>
+        <BookingTimeVariants loading={loading} data={data} onChangeData={handleChangeData} variants={variants} isChange={change} priceVariant={priceVariant}/>
         <Button
           onClick={handleSubmit}
           disabled={!canSubmit}

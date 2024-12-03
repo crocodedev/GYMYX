@@ -15,13 +15,25 @@ const findIndexByValue = (data, searchValue) => {
   return foundIndex !== -1 ? foundIndex : false
 }
 
-const BookingSignUpTags = ({change = false}) => {
+const BookingSignUpTags = ({change = false, setPricesVariant}) => {
   const { data: sessionData } = useSession();
   const dispatch = useDispatch()
   const { gym, currentDate, visitDate, loading } = useSelector((state) => state.booking)
   const { oldId } = useSelector((state) => state.transfer)
   const [activeTag, setActiveTag] = useState({})
   const [data, setData] = useState([])
+
+  const colorVariant = [
+    '#7B92FF',
+    '#4c64d9',
+    '#3b58eb',
+    '#294AE7',
+    '#173be8',
+    '#22389c',
+    '#1E318A',
+    '#071a4d',
+    '#061641',
+  ]
 
   const handleChangeActiveTag = (value) => {
     const index = findIndexByValue(data, value)
@@ -74,6 +86,24 @@ const BookingSignUpTags = ({change = false}) => {
     }
   }
 
+  const setPrice = (data) => {
+    const priceDefault = new Set()
+    const priceFirst = new Set()
+    
+    data.forEach(el => {
+      priceDefault.add(el.price.default)
+      priceFirst.add(el.price.first)
+    }) 
+    // console.log('default', priceDefault)
+    // console.log('first', priceFirst)
+
+    setPricesVariant(prev=> ({
+      ...prev,
+      first: Array.from(priceFirst).sort((a, b) => a - b).map((el, i) => ({price: el, color: colorVariant[i] || 'blue'})),
+      default: Array.from(priceDefault).sort((a, b) => a - b).map((el, i) => ({price: el, color: colorVariant[i] || 'blue'}))
+    }))
+  }
+
   useEffect(()=>{
     dispatch(updateBookingData({ loading: true }))
     if(sessionData?.user?.accessToken) {
@@ -91,6 +121,7 @@ const BookingSignUpTags = ({change = false}) => {
       } else {
         takeAvaliableTimesDay(sessionData.user.accessToken, gym?.id, visitDate[currentDate].value)
         .then((data) => {
+          setPrice(data)
           dispatch(
             updateBookingData({
               avaliableTimesCurrentDay: data || [],
