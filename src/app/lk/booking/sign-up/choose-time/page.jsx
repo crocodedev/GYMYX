@@ -70,39 +70,43 @@ const ChooseTime = () => {
     if (gym?.prices && sessionData) {
       let variantsTemp = [];
 
-      if (!sessionData.user.is_new) {
-        // not new user
-        // if (checkIsOnlyTraining(visitDate)) {
-        //   // first training
-        //   variantsTemp = gym.prices.map((item, index) => {
-        //     return { ...item, bgColor: variants[index]?.bgColor };
-        //   });
-        // } else {
-          // now first training
-          variantsTemp = gym.prices.map((item, index) => {
-            return { ...item, bgColor: variants[index]?.bgColor };
-          });
-        // }
+      variantsTemp = gym.prices.map((item, index) => {
+        return { ...item, bgColor: variants[index]?.bgColor };
+      });
+
+      // if (!sessionData.user.is_new) {
+      //   // not new user
+      //   // if (checkIsOnlyTraining(visitDate)) {
+      //   //   // first training
+      //   //   variantsTemp = gym.prices.map((item, index) => {
+      //   //     return { ...item, bgColor: variants[index]?.bgColor };
+      //   //   });
+      //   // } else {
+      //     // now first training
+      //     variantsTemp = gym.prices.map((item, index) => {
+      //       return { ...item, bgColor: variants[index]?.bgColor };
+      //     });
+      //   // }
         
-      } else {
-        // new user
-        if (!checkIsOnlyTraining(visitDate)) {
-          // now first training
-          variantsTemp = gym.prices.map((item, index) => {
-            return { ...item, bgColor: variants[index]?.bgColor };
-          });
-        } else {
-          //first training
-          variantsTemp = [
-            {
-              start: '00:00:00',
-              end: '23:00:00',
-              price: gym?.min_price,
-              bgColor: variants[0]?.bgColor,
-            },
-          ];
-        }
-      } 
+      // } else {
+      //   // new user
+      //   // if (!checkIsOnlyTraining(visitDate)) {
+      //     // now first training
+      //     variantsTemp = gym.prices.map((item, index) => {
+      //       return { ...item, bgColor: variants[index]?.bgColor };
+      //     });
+      //   // } else {
+      //   //   //first training
+      //   //   variantsTemp = [
+      //   //     {
+      //   //       start: '00:00:00',
+      //   //       end: '23:00:00',
+      //   //       price: gym?.min_price,
+      //   //       bgColor: variants[0]?.bgColor,
+      //   //     },
+      //   //   ];
+      //   // }
+      // } 
       setPricesVariants(variantsTemp);
       setCountBalace()
     }

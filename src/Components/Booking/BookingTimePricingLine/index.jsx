@@ -37,8 +37,6 @@ const BookingTimePricingLine = ({ variants, priceVariant, isChange = false }) =>
           ))
         )
       )}
-      
-      
     </div>
   )
 }

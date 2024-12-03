@@ -25,13 +25,13 @@ const BookingSignUpTags = ({change = false, setPricesVariant}) => {
 
   const colorVariant = [
     '#7B92FF',
-    '#4c64d9',
-    '#3b58eb',
-    '#294AE7',
-    '#173be8',
-    '#22389c',
-    '#1E318A',
-    '#071a4d',
+    '#4060ff',
+    '#143cff',
+    '#23389e',
+    '#0723a8',
+    '#162463',
+    '#021361',
+    '#15254f',
     '#061641',
   ]
 
@@ -89,7 +89,7 @@ const BookingSignUpTags = ({change = false, setPricesVariant}) => {
   const setPrice = (data) => {
     const priceDefault = new Set()
     const priceFirst = new Set()
-    
+
     data.forEach(el => {
       priceDefault.add(el.price.default)
       priceFirst.add(el.price.first)
