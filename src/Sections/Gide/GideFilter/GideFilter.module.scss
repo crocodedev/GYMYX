@@ -36,16 +36,25 @@
       }
     }
 
+    &--select {
+      @include media-breakpoint-down(lg) {
+        &::before {
+          height: 150px;
+          bottom: 100px;
+        }
+      }
+    }
+
     &--bg {
       @include media-breakpoint-down(lg) {
         &::before {
           background: linear-gradient(0deg, rgba(33, 36, 40, 0.9) 15%, rgba(88,113,232,0) 100%);
-          // background: linear-gradient(0deg, rgba(33, 36, 40, 0.9) 50%, rgba(88,113,232,0) 100%);
           height: 500px;
-          // height: 200px;
         }
       }
     }
+
+    
   }
 
   &__filter {

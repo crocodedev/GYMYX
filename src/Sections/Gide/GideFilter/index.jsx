@@ -10,6 +10,7 @@ import { useState, useEffect, useRef } from 'react'
 const GideFilter = ({tags = [], activeTags, setActiveTags}) => {
   const [filterIsOpen, setFilterIsOpen] = useState(false)
   const filterRef = useRef(null)
+  console.log(activeTags.length)
 
   const filterToggle = () => {
     setFilterIsOpen(prev => !prev)
@@ -42,7 +43,7 @@ const GideFilter = ({tags = [], activeTags, setActiveTags}) => {
   return (
     <section className={styles['gide-filter']}>
       <Container size='xl'>
-        <div className={`${styles['gide-filter__wrapper']} ${filterIsOpen ? styles['gide-filter__wrapper--bg'] : ''}`}>
+        <div className={`${styles['gide-filter__wrapper']} ${filterIsOpen ? styles['gide-filter__wrapper--bg'] : ''} ${activeTags.length ? styles['gide-filter__wrapper--select'] : ''}`}>
 
           <div ref={filterRef} className={`${styles['gide-filter__filter']} ${!activeTags.length ? styles['gide-filter__filter--down'] : ''}`}>
             <div className={styles['gide-filter__filter-inner']}>
