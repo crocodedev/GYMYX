@@ -47,7 +47,7 @@ const GideFilter = ({tags = [], activeTags, setActiveTags}) => {
           <div ref={filterRef} className={`${styles['gide-filter__filter']} ${!activeTags.length ? styles['gide-filter__filter--down'] : ''}`}>
             <div className={styles['gide-filter__filter-inner']}>
               <button type='button' className={styles['gide-filter__filter-header']} onClick={filterToggle}>
-                <span className={styles['gide-filter__filter-header-text']}>всe</span>
+                <span className={styles['gide-filter__filter-header-text']}>Выберите фильтры</span>
                 <span className={styles['gide-filter__filter-header-icon']}><ChevronIcon/></span>
               </button>
               {filterIsOpen && (

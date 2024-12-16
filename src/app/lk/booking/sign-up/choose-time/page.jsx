@@ -19,18 +19,6 @@ const variants = [
   { value: '19:00', bgColor: '#061641' },
 ];
 
-const checkIsOnlyTraining = (data) => {
-  let result = true;
-  data.forEach(({ time }) => {
-    if (!!time.length) {
-      result = false;
-      return;
-    }
-  });
-
-  return result;
-};
-
 const ChooseTime = () => {
   const { data: sessionData } = useSession();
   const { gym, visitDate, avaliableTimesCurrentDay } = useSelector((state) => state.booking);

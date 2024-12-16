@@ -11,7 +11,7 @@
     @include media-breakpoint-down(lg) {
       display: flex;
       flex-direction: column;
-      gap: 15px;
+      // gap: 15px;
       padding: 15px 0 18px;
       border-radius: 15px;
     }

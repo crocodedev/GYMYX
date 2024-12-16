@@ -25,13 +25,8 @@ const BookingSignUpTags = ({change = false, setPricesVariant}) => {
 
   const colorVariant = [
     '#7B92FF',
-    '#4060ff',
-    '#143cff',
-    '#23389e',
-    '#0723a8',
-    '#162463',
-    '#021361',
-    '#15254f',
+    '#294AE7',
+    '#1E318A',
     '#061641',
   ]
 
@@ -94,8 +89,6 @@ const BookingSignUpTags = ({change = false, setPricesVariant}) => {
       priceDefault.add(el.price.default)
       priceFirst.add(el.price.first)
     }) 
-    // console.log('default', priceDefault)
-    // console.log('first', priceFirst)
 
     setPricesVariant(prev=> ({
       ...prev,

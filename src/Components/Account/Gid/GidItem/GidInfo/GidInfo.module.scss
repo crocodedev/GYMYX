@@ -2,6 +2,7 @@
 
 .gid-item-info {
   @include media-breakpoint-down(lg) {
+    padding-top: 15px;
     overflow: hidden;
   }
 
