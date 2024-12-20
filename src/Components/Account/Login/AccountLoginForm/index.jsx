@@ -148,6 +148,17 @@ const AccountLoginForm = ({ handleToogleModal, setIsShowLoading }) => {
   }
 
   useEffect(() => {
+    const tg = WebApp
+    if(tg) {
+      if (tg.initDataUnsafe.is_flexible === true) {
+        // Открыто через кнопку "Открыть" или с гибкой настройкой
+        console.log('Открыто через Открыть или с гибкой настройкой')
+      } else {
+        console.log('Открыто через Приложение')
+          // Открыто в другом режиме
+      }
+    }
+
     WebApp?.expand()
     if(session.status === 'loading') {
       setIsShowLoading(true);
