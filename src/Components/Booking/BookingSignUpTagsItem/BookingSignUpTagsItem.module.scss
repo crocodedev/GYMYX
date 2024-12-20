@@ -8,13 +8,23 @@
   width: fit-content;
   user-select: none;
 
-  @include media-breakpoint-down(xl) {
-    border-radius: 16px;
+  @include media-breakpoint-up(xxxl) {
+    width: 215px;
+  }
+
+  @include media-breakpoint-between(xl, xxxl) {
+    width: 160px;
   }
 
   @include media-breakpoint-up(xl) {
     border-radius: 31px;
   }
+
+  @include media-breakpoint-down(xl) {
+    border-radius: 16px;
+  }
+
+  
 
   &.active {
     background: var(--white, #fff);

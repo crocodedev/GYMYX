@@ -56,14 +56,12 @@
     }
 
     @include media-breakpoint-between(xl, xxl) {
-      column-gap: 25px;
-      row-gap: 8px;
+      gap: 25px;
       flex-wrap: wrap;
     }
 
     @include media-breakpoint-up(xxl) {
-      column-gap: 30px;
-      row-gap: 10px;
+      gap: 30px;
       flex-wrap: wrap;
     }
 

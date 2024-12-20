@@ -121,6 +121,7 @@ const AccountLoginForm = ({ handleToogleModal, setIsShowLoading }) => {
     const userId = userData?.id // 1685607638
 
     if(userId) {
+      console.log('dsfsdfsdf', tg.initDataUnsafe)
       authTelegram(userId).then(res => {
         if(res?.access_token) {
           signIn('credentials', {

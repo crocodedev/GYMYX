@@ -23,12 +23,7 @@ const BookingSignUpTags = ({change = false, setPricesVariant}) => {
   const [activeTag, setActiveTag] = useState({})
   const [data, setData] = useState([])
 
-  const colorVariant = [
-    '#7B92FF',
-    '#294AE7',
-    '#1E318A',
-    '#061641',
-  ]
+  
 
   const handleChangeActiveTag = (value) => {
     const index = findIndexByValue(data, value)
@@ -82,6 +77,13 @@ const BookingSignUpTags = ({change = false, setPricesVariant}) => {
   }
 
   const setPrice = (data) => {
+    const nameColorMap = {
+      'Ранее утро': '#7B92FF',
+      'Утро': '#294AE7',
+      'День': '#1E318A',
+      'Вечер': '#061641',
+    };
+
     const priceDefault = new Set()
     const priceFirst = new Set()
 
@@ -90,10 +92,15 @@ const BookingSignUpTags = ({change = false, setPricesVariant}) => {
       priceFirst.add(el.price.first)
     }) 
 
+    const getColorByPrice = (price, type) => {
+      const foundItem = data.find((el) => el.price[type] === price);
+      return nameColorMap[foundItem?.name] || 'blue';
+    };
+
     setPricesVariant(prev=> ({
       ...prev,
-      first: Array.from(priceFirst).sort((a, b) => a - b).map((el, i) => ({price: el, color: colorVariant[i] || 'blue'})),
-      default: Array.from(priceDefault).sort((a, b) => a - b).map((el, i) => ({price: el, color: colorVariant[i] || 'blue'}))
+      first: Array.from(priceFirst).sort((a, b) => a - b).map((price, i) => ({price, color: getColorByPrice(price, 'first')})),
+      default: Array.from(priceDefault).sort((a, b) => a - b).map((price, i) => ({price, color: getColorByPrice(price, 'default')}))
     }))
   }
 

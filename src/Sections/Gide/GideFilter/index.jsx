@@ -10,7 +10,6 @@ import { useState, useEffect, useRef } from 'react'
 const GideFilter = ({tags = [], activeTags, setActiveTags}) => {
   const [filterIsOpen, setFilterIsOpen] = useState(false)
   const filterRef = useRef(null)
-  console.log(activeTags.length)
 
   const filterToggle = () => {
     setFilterIsOpen(prev => !prev)
