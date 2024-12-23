@@ -143,15 +143,11 @@ const AccountLoginForm = ({ handleToogleModal, setIsShowLoading }) => {
     WebApp?.expand()
 
     if(WebApp) {
-      WebApp.requestFullscreen()
+      // WebApp?.requestFullscreen()
       console.log('Full screen', WebApp.isFullscreen)
       if (WebApp?.isFullscreen) {
         const main = document.querySelector('main.main')
         main.classList.add('full-screen')
-        console.log(main)
-        console.log('Открыто через Открыть или с гибкой настройкой')
-      } else {
-        console.log('Открыто через Приложение')
       }
     }
 
