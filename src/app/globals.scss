@@ -62,6 +62,12 @@ button {
       padding-top: calc(84px + 50px);
     }
   }
+
+  &.full-screen {
+    @include media-breakpoint-down(xl) {
+      padding-top: 50px;
+    }
+  }
 }
 
 .booking-page__wrapper {

@@ -148,9 +148,12 @@ const AccountLoginForm = ({ handleToogleModal, setIsShowLoading }) => {
   }
 
   useEffect(() => {
-    const tg = WebApp
-    if(tg) {
-      if (tg.initDataUnsafe.is_flexible === true) {
+    if(WebApp) {
+      console.log('Full screen', WebApp.isFullscreen)
+      if (WebApp?.isFullscreen) {
+        const main = document.querySelector('main.main')
+        main.classList.add('full-screen')
+        console.log(main)
         // Открыто через кнопку "Открыть" или с гибкой настройкой
         console.log('Открыто через Открыть или с гибкой настройкой')
       } else {
@@ -172,8 +175,6 @@ const AccountLoginForm = ({ handleToogleModal, setIsShowLoading }) => {
 
   const handlerClosePWA = () => {
     window.location = 'https://t.me/Gymyxtest_bot'
-    // WebApp.close();
-    // router.push('t.me/@Gymyxtest_bot')
   }
 
   return (
