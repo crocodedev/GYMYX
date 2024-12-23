@@ -143,6 +143,7 @@ const AccountLoginForm = ({ handleToogleModal, setIsShowLoading }) => {
     WebApp?.expand()
 
     if(WebApp) {
+      WebApp.requestFullscreen()
       console.log('Full screen', WebApp.isFullscreen)
       if (WebApp?.isFullscreen) {
         const main = document.querySelector('main.main')
