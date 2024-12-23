@@ -120,14 +120,6 @@ const AccountLoginForm = ({ handleToogleModal, setIsShowLoading }) => {
     const userData = tg.initDataUnsafe?.user
     const userId = userData?.id // 1685607638
 
-    if (tg.initDataUnsafe.is_flexible === true) {
-      // Открыто через кнопку "Открыть" или с гибкой настройкой
-      console.log('Открыто через Открыть или с гибкой настройкой')
-    } else {
-      console.log('Открыто через Приложение')
-        // Открыто в другом режиме
-    }
-
     if(userId) {
       authTelegram(userId).then(res => {
         if(res?.access_token) {
@@ -148,21 +140,22 @@ const AccountLoginForm = ({ handleToogleModal, setIsShowLoading }) => {
   }
 
   useEffect(() => {
+    WebApp?.expand()
+
     if(WebApp) {
       console.log('Full screen', WebApp.isFullscreen)
       if (WebApp?.isFullscreen) {
-        const main = document.querySelector('main.main')
-        main.classList.add('full-screen')
-        console.log(main)
-        // Открыто через кнопку "Открыть" или с гибкой настройкой
+        
         console.log('Открыто через Открыть или с гибкой настройкой')
       } else {
         console.log('Открыто через Приложение')
-          // Открыто в другом режиме
+
+        const main = document.querySelector('main.main')
+        main.classList.add('full-screen')
+        console.log(main)
       }
     }
 
-    WebApp?.expand()
     if(session.status === 'loading') {
       setIsShowLoading(true);
     } else if (session.status === 'authenticated') {
