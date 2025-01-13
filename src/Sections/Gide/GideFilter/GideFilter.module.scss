@@ -32,14 +32,14 @@
       }
 
       @include media-breakpoint-down(lg) {
-        height: 200px;
+        height: 150px;
       }
     }
 
     &--select {
       @include media-breakpoint-down(lg) {
         &::before {
-          height: 150px;
+          height: 120px;
           bottom: 100px;
         }
       }
