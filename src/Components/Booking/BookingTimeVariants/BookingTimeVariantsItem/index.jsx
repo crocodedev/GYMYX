@@ -24,10 +24,6 @@ const BookingTimeVariantsItem = ({
     handleClick(value)
   }
 
-  const selectOnceTime = () => {
-    return (visitDate.reduce((acc, el) => acc + el.time.length, 0)) > 0
-  }
-
   function getBgColorByPrice(price, variants) {
     const element = variants.find(el => price === el.price)
     if(element) return element.color
@@ -41,9 +37,9 @@ const BookingTimeVariantsItem = ({
       } else {
         const firstPrice = value?.price?.first
         const defaultPrice = value?.price?.default
-        if(!selectOnceTime() && firstPrice) {
+        if(!dateLength && firstPrice) {
           setBg(getBgColorByPrice(firstPrice, priceVariant.first))
-        } else if(selectOnceTime() && defaultPrice) {
+        } else if(dateLength && defaultPrice) {
           setBg(getBgColorByPrice(defaultPrice, priceVariant.default))
         } 
       }
