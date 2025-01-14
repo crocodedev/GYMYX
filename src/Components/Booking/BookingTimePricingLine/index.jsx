@@ -34,7 +34,7 @@ const BookingTimePricingLine = ({ variants, priceVariant, isChange = false }) =>
             value={price}
           />
         ))
-      ) : !dateLength && (
+      ) : (
         !dateLength ? (
           updatePrices(variantPrices, priceVariant.first).map(({price, color}) => (
             <BookingTimePricingLineItem
