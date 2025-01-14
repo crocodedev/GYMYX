@@ -1,8 +1,9 @@
-'use slient'
+'use client'
 
 import styles from "./BookingTimeVariantsItem.module.scss"
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
 
 const BookingTimeVariantsItem = ({
   handleClick,
@@ -16,6 +17,8 @@ const BookingTimeVariantsItem = ({
 }) => {
   const [bg, setBg] = useState(bgColor)
   const { visitDate } = useSelector((state) => state.booking);
+  const { data: sessionData } = useSession();
+  const dateLength = visitDate.reduce((acc, el) => acc + el.time.length, 0)
 
   const handleOnClick = () => {
     handleClick(value)
@@ -33,13 +36,17 @@ const BookingTimeVariantsItem = ({
 
   useEffect(() => {
     if(!isChange) {
-      const firstPrice = value?.price?.first
-      const defaultPrice = value?.price?.default
-      if(!selectOnceTime() && firstPrice) {
-        setBg(getBgColorByPrice(firstPrice, priceVariant.first))
-      } else if(selectOnceTime() && defaultPrice) {
-        setBg(getBgColorByPrice(defaultPrice, priceVariant.default))
-      } 
+      if(sessionData.user.is_new && !dateLength) {
+        setBg('#7B92FF')
+      } else {
+        const firstPrice = value?.price?.first
+        const defaultPrice = value?.price?.default
+        if(!selectOnceTime() && firstPrice) {
+          setBg(getBgColorByPrice(firstPrice, priceVariant.first))
+        } else if(selectOnceTime() && defaultPrice) {
+          setBg(getBgColorByPrice(defaultPrice, priceVariant.default))
+        } 
+      }
     }
   }, [visitDate])
 

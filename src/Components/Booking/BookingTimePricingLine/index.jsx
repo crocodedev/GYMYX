@@ -1,18 +1,26 @@
-'use client'
+'use client';
 
 import styles from "./BookingTimePricingLine.module.scss"
 import BookingTimePricingLineItem from "./BookingTimePricingLineItem"
 import { useSelector } from "react-redux";
+import { useSession } from "next-auth/react";
 
 const BookingTimePricingLine = ({ variants, priceVariant, isChange = false }) => {
   const { visitDate, gym } = useSelector((state) => state.booking)
   const dateLength = visitDate.reduce((acc, el) => acc + el.time.length, 0)
+  const { data: sessionData } = useSession();
+  // console.log(priceVariant)
+  // console.log(sessionData?.user?.is_new)
 
   const variantPrices = [
     {name: 'Ранее утро', price: gym.prices[0].price, color: '#7B92FF'},
     {name: 'Утро', price: gym.prices[1].price, color: '#294AE7'},
     {name: 'День', price: gym.prices[2].price, color: '#1E318A'},
     {name: 'Вечер', price: gym.prices[3].price, color: '#061641'},
+  ]
+
+  const firstVariantPrice = [
+    {name: 'Ранее утро', price: priceVariant?.first[0]?.price || 0, color: '#7B92FF'},
   ]
 
   function updatePrices(baseArray, updates) {
@@ -26,7 +34,7 @@ const BookingTimePricingLine = ({ variants, priceVariant, isChange = false }) =>
 
   return (
     <div className={styles["booking-time-pricing-line"]}>
-      {isChange ? (
+      {isChange && (
         variants.map(({ price, bgColor }) => (
           <BookingTimePricingLineItem
             key={price}
@@ -34,8 +42,17 @@ const BookingTimePricingLine = ({ variants, priceVariant, isChange = false }) =>
             value={price}
           />
         ))
-      ) : (
-        !dateLength ? (
+      )}  
+      
+      {!isChange && !dateLength && sessionData?.user?.is_new ? (
+        firstVariantPrice.map(({price, color}) => (
+          <BookingTimePricingLineItem
+            key={price}
+            bgColor={color}
+            value={price}
+          />
+        ))
+      ) : (!dateLength ? (
           updatePrices(variantPrices, priceVariant.first).map(({price, color}) => (
             <BookingTimePricingLineItem
               key={price}
@@ -51,8 +68,7 @@ const BookingTimePricingLine = ({ variants, priceVariant, isChange = false }) =>
               value={price}
             />
           ))
-        )
-      )}
+        ))}
     </div>
   )
 }
