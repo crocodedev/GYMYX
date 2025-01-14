@@ -94,13 +94,13 @@ const BookingSignUpTags = ({change = false, setPricesVariant}) => {
 
     const getColorByPrice = (price, type) => {
       const foundItem = data.find((el) => el.price[type] === price);
-      return nameColorMap[foundItem?.name] || 'blue';
+      return {color: nameColorMap[foundItem?.name] || 'blue', name: foundItem.name}
     };
 
     setPricesVariant(prev=> ({
       ...prev,
-      first: Array.from(priceFirst).sort((a, b) => a - b).map((price, i) => ({price, color: getColorByPrice(price, 'first')})),
-      default: Array.from(priceDefault).sort((a, b) => a - b).map((price, i) => ({price, color: getColorByPrice(price, 'default')}))
+      first: Array.from(priceFirst).sort((a, b) => a - b).map((price, i) => ({price, ...getColorByPrice(price, 'first')})),
+      default: Array.from(priceDefault).sort((a, b) => a - b).map((price, i) => ({price, ...getColorByPrice(price, 'default')}))
     }))
   }
 
