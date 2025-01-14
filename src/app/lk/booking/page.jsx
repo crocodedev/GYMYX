@@ -50,7 +50,7 @@ const Booking = () => {
 
   useEffect(() => {
 
-    setLoading(true);
+    // setLoading(true);
     if (sessionData) {
       getGyms(sessionData?.user?.accessToken).then(({ data }) => {
         if (data.length > 0) {
