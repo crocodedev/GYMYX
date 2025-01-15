@@ -34,7 +34,7 @@ const BookingTimePricingLine = ({ variants, priceVariant, isChange = false }) =>
 
   return (
     <div className={styles["booking-time-pricing-line"]}>
-      {isChange && (
+      {isChange ? (
         variants.map(({ price, bgColor }) => (
           <BookingTimePricingLineItem
             key={price}
@@ -42,33 +42,33 @@ const BookingTimePricingLine = ({ variants, priceVariant, isChange = false }) =>
             value={price}
           />
         ))
+      ) : (
+        !dateLength && sessionData?.user?.is_new ? (
+          firstVariantPrice.map(({price, color}) => (
+            <BookingTimePricingLineItem
+              key={price}
+              bgColor={color}
+              value={price}
+            />
+          ))
+        ) : (!dateLength ? (
+            updatePrices(variantPrices, priceVariant.first).map(({price, color}) => (
+              <BookingTimePricingLineItem
+                key={price}
+                bgColor={color}
+                value={price}
+              />
+            ))
+          ) : (
+            updatePrices(variantPrices, priceVariant.default).map(({price, color}) => (
+              <BookingTimePricingLineItem
+                key={price}
+                bgColor={color}
+                value={price}
+              />
+            ))
+          ))
       )}  
-      
-      {!isChange && !dateLength && sessionData?.user?.is_new ? (
-        firstVariantPrice.map(({price, color}) => (
-          <BookingTimePricingLineItem
-            key={price}
-            bgColor={color}
-            value={price}
-          />
-        ))
-      ) : (!dateLength ? (
-          updatePrices(variantPrices, priceVariant.first).map(({price, color}) => (
-            <BookingTimePricingLineItem
-              key={price}
-              bgColor={color}
-              value={price}
-            />
-          ))
-        ) : (
-          updatePrices(variantPrices, priceVariant.default).map(({price, color}) => (
-            <BookingTimePricingLineItem
-              key={price}
-              bgColor={color}
-              value={price}
-            />
-          ))
-        ))}
     </div>
   )
 }
