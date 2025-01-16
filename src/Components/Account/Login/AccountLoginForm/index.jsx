@@ -141,6 +141,16 @@ const AccountLoginForm = ({ handleToogleModal, setIsShowLoading }) => {
 
   useEffect(() => {
     WebApp?.expand()
+
+    if(WebApp) {
+      // WebApp?.requestFullscreen()
+      console.log('Full screen', WebApp.isFullscreen)
+      if (WebApp?.isFullscreen) {
+        const main = document.querySelector('main.main')
+        main.classList.add('full-screen')
+      }
+    }
+
     if(session.status === 'loading') {
       setIsShowLoading(true);
     } else if (session.status === 'authenticated') {
@@ -153,8 +163,6 @@ const AccountLoginForm = ({ handleToogleModal, setIsShowLoading }) => {
 
   const handlerClosePWA = () => {
     window.location = 'https://t.me/Gymyxtest_bot'
-    // WebApp.close();
-    // router.push('t.me/@Gymyxtest_bot')
   }
 
   return (

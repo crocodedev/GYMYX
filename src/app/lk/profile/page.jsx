@@ -12,6 +12,7 @@ import ProfileGid from '@/Sections/Account/ProfileGid';
 import Modal from '@/Components/Modal';
 import Button from '@/Components/Button';
 import ProfileLogoutHeader from '@/Components/Account/Profile/ProfileLogoutHeader';
+import Loading from '@/Components/Loading';
 
 import { signOut, useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
@@ -21,10 +22,11 @@ import { getUserData } from '@/Utils/updateDataUser';
 const Profile = () => {
   const { data: sessionData, update } = useSession();
   const [modalBirthisShow, setModalBirthisShow] = useState(false)
+  const [loading, setLoading] = useState(true)
   const router = useRouter()
   
   const userData = () => {
-    if(sessionData?.user?.accessToken) {
+    if(sessionData?.user) {
       getUserData(sessionData?.user?.accessToken)
       .then(res => {
         if(res?.data) {
@@ -32,6 +34,7 @@ const Profile = () => {
           update(res?.data)
         }
         else signOut({ callbackUrl: '/lk/login' });
+        setLoading(false)
       })
     }
   }
@@ -43,6 +46,9 @@ const Profile = () => {
   useEffect(() => {
     userData()
   }, [sessionData?.user?.accessToken])
+
+  if (loading) return <Loading full_screen={true} />;
+  
 
   return (
     <>

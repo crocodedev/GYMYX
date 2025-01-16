@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import { timeToNumber, convertToTimeFormat } from './helpers';
 import Loading from '@/Components/Loading';
 
-const BookingTimeVariants = ({ loading, onChangeData, data, variants, isChange }) => {
+const BookingTimeVariants = ({ loading, onChangeData, data, variants, isChange, priceVariant }) => {
   const { avaliableTimesCurrentDay } = useSelector((state) => state.booking);
 
   return (
@@ -32,8 +32,8 @@ const BookingTimeVariants = ({ loading, onChangeData, data, variants, isChange }
               handleClick={onChangeData}
               value={value}
               bgColor={bgColor}
-              variants={variants}
               isChange={isChange}
+              priceVariant={priceVariant}
             />,
           );
         }

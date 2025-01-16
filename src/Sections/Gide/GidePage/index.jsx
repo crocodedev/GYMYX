@@ -40,7 +40,7 @@ const GidePage = () => {
 
   useEffect(() => {
     if (!sessionData?.user?.accessToken) return;
-    setLoading(true);
+    // setLoading(true);
     getGids(sessionData?.user?.accessToken)
     .then(res => {
       if (res?.data) {

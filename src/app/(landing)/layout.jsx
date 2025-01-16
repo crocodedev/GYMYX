@@ -1,12 +1,12 @@
 import { Montserrat } from 'next/font/google';
-import './../globals.scss';
+import './../globalsLanding.scss';
 
 import Header from '@/Sections/Header';
 import Footer from '@/Sections/landing/Footer';
 
 import { Providers } from '@/Components/Providers';
 import Metrika from '@/Components/Metrika';
-const MontserratFont = Montserrat({ subsets: ['cyrillic-ext'] });
+const MontserratFont = Montserrat({ subsets: ['latin'] });
 
 import { authConfig } from '@/configs/auth';
 import { redirect } from 'next/navigation';

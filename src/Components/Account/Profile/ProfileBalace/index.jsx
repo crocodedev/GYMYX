@@ -5,12 +5,26 @@ import styles from'./ProfileBalace.module.scss'
 import Container from '@/Components/Container'
 import Button from '@/Components/Button'
 import Link from 'next/link'
+import { getUserData } from '@/Utils/updateDataUser'
 
 import { useSession } from 'next-auth/react'
+import { useEffect, useState } from 'react'
 
 const ProfileBalace = () => {
-  const { data: sessionData } = useSession();
-  const balance = sessionData?.user?.balance || 0
+  const { data: sessionData, update } = useSession();
+  const [balance, setBalance] = useState(0)
+
+  useEffect(() => {
+    if(sessionData?.user) {
+      getUserData(sessionData?.user?.accessToken)
+      .then(res => {
+        if(res?.data) {
+          setBalance(res?.data?.balance)
+          // update(res?.data)
+        }
+      })
+    }
+  }, [sessionData])
 
   return (
     <Container size='m'>

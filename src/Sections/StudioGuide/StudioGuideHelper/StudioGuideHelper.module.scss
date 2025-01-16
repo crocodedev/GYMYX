@@ -45,12 +45,12 @@
       margin: 0 -30px;
     }
 
-    @include media-breakpoint-between(xl, xxxl) {
+    @include media-breakpoint-between(lg, xxxl) {
       padding: 0 37px;
       margin: 0 -30px;
     }
 
-    @include media-breakpoint-down(xl) {
+    @include media-breakpoint-down(lg) {
       margin: 0 -30px;
     }
 
