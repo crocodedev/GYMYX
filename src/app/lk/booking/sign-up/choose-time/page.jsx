@@ -19,18 +19,6 @@ const variants = [
   { value: '19:00', bgColor: '#061641' },
 ];
 
-const checkIsOnlyTraining = (data) => {
-  let result = true;
-  data.forEach(({ time }) => {
-    if (!!time.length) {
-      result = false;
-      return;
-    }
-  });
-
-  return result;
-};
-
 const ChooseTime = () => {
   const { data: sessionData } = useSession();
   const { gym, visitDate, avaliableTimesCurrentDay } = useSelector((state) => state.booking);
@@ -38,6 +26,10 @@ const ChooseTime = () => {
   const [balance, setBalance] = useState({
     full_balance: 0,
     count_bacance: 0,
+  })
+  const [priceVariant, setPricesVariant] = useState({
+    first: [],
+    default: []
   })
 
   const setCountBalace = () => {
@@ -66,39 +58,43 @@ const ChooseTime = () => {
     if (gym?.prices && sessionData) {
       let variantsTemp = [];
 
-      if (!sessionData.user.is_new) {
-        // not new user
-        // if (checkIsOnlyTraining(visitDate)) {
-        //   // first training
-        //   variantsTemp = gym.prices.map((item, index) => {
-        //     return { ...item, bgColor: variants[index]?.bgColor };
-        //   });
-        // } else {
-          // now first training
-          variantsTemp = gym.prices.map((item, index) => {
-            return { ...item, bgColor: variants[index]?.bgColor };
-          });
-        // }
+      variantsTemp = gym.prices.map((item, index) => {
+        return { ...item, bgColor: variants[index]?.bgColor };
+      });
+
+      // if (!sessionData.user.is_new) {
+      //   // not new user
+      //   // if (checkIsOnlyTraining(visitDate)) {
+      //   //   // first training
+      //   //   variantsTemp = gym.prices.map((item, index) => {
+      //   //     return { ...item, bgColor: variants[index]?.bgColor };
+      //   //   });
+      //   // } else {
+      //     // now first training
+      //     variantsTemp = gym.prices.map((item, index) => {
+      //       return { ...item, bgColor: variants[index]?.bgColor };
+      //     });
+      //   // }
         
-      } else {
-        // new user
-        if (!checkIsOnlyTraining(visitDate)) {
-          // now first training
-          variantsTemp = gym.prices.map((item, index) => {
-            return { ...item, bgColor: variants[index]?.bgColor };
-          });
-        } else {
-          //first training
-          variantsTemp = [
-            {
-              start: '00:00:00',
-              end: '23:00:00',
-              price: gym?.min_price,
-              bgColor: variants[0]?.bgColor,
-            },
-          ];
-        }
-      } 
+      // } else {
+      //   // new user
+      //   // if (!checkIsOnlyTraining(visitDate)) {
+      //     // now first training
+      //     variantsTemp = gym.prices.map((item, index) => {
+      //       return { ...item, bgColor: variants[index]?.bgColor };
+      //     });
+      //   // } else {
+      //   //   //first training
+      //   //   variantsTemp = [
+      //   //     {
+      //   //       start: '00:00:00',
+      //   //       end: '23:00:00',
+      //   //       price: gym?.min_price,
+      //   //       bgColor: variants[0]?.bgColor,
+      //   //     },
+      //   //   ];
+      //   // }
+      // } 
       setPricesVariants(variantsTemp);
       setCountBalace()
     }
@@ -108,9 +104,9 @@ const ChooseTime = () => {
     <>
       <NavigationBack buttonLabel={'Вернуться к выбору дней'} link={'/lk/booking/sign-up'} />
       <BookingSignUpHeading showButtonEditGym={false} headingTitle={'Запишитесь на тренировки'} />
-      <BookingSignUpTags change={false}/>
+      <BookingSignUpTags change={false} setPricesVariant={setPricesVariant}/>
       <BookingSignUpContent gymIsShow={false}>
-        <BookingTimePricing variants={pricesVariants} change={false}/>
+        <BookingTimePricing variants={pricesVariants} change={false} priceVariant={priceVariant}/>
         <BookingSteps stepNumber={2} stepTitle={'Выберите время'} balance={balance.count_bacance} packageIsActive={balance.full_balance > 0}/>
       </BookingSignUpContent>
     </>

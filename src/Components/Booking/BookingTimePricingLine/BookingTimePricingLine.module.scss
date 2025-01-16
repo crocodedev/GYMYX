@@ -2,19 +2,23 @@
 
 .booking-time-pricing-line {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   width: 100%;
   justify-content: center;
 
   @include media-breakpoint-down(lg) {
-    gap: 8px;
+    column-gap: 8px;
+    row-gap: 5px;
   }
 
   @include media-breakpoint-between(lg, xxl) {
-    gap: 24px;
+    column-gap: 24px;
+    row-gap: 8px;
   }
 
   @include media-breakpoint-up(xxl) {
-    gap: 34px;
+    column-gap: 34px;
+    row-gap: 10px;
   }
 }

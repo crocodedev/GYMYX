@@ -53,7 +53,8 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0, balance = 0 }) => {
           setModal('priceLess', `${data?.total_price || null}`, `${data?.total_price}`)
         }
       } else if (data?.payment_link) {
-        router.push(data?.payment_link)
+        window.open(data?.payment_link, '_blank')
+        // router.push(data?.payment_link)
       } else {
         setError(true);
       } 
@@ -270,9 +271,9 @@ function ModalInner(type, token, gym, trainingsObj, setModal, isLoad, setIsLoad,
     .then((res) => {
       if(res?.message == 'price has been changed') {
         if(res?.total_price > totalPrice) {
-          setModal('priceMore', `${data?.total_price || null}`, `${data?.total_price}`)
+          setModal('priceMore', `${res?.total_price || null}`, `${res?.total_price}`)
         } else {
-          setModal('priceLess', `${data?.total_price || null}`, `${data?.total_price}`)
+          setModal('priceLess', `${res?.total_price || null}`, `${res?.total_price}`)
         }
       } else if(res?.payment_link) {
         router.push(res?.payment_link)

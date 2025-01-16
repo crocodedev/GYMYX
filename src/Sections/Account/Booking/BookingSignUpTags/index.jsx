@@ -15,13 +15,15 @@ const findIndexByValue = (data, searchValue) => {
   return foundIndex !== -1 ? foundIndex : false
 }
 
-const BookingSignUpTags = ({change = false}) => {
+const BookingSignUpTags = ({change = false, setPricesVariant}) => {
   const { data: sessionData } = useSession();
   const dispatch = useDispatch()
   const { gym, currentDate, visitDate, loading } = useSelector((state) => state.booking)
   const { oldId } = useSelector((state) => state.transfer)
   const [activeTag, setActiveTag] = useState({})
   const [data, setData] = useState([])
+
+  
 
   const handleChangeActiveTag = (value) => {
     const index = findIndexByValue(data, value)
@@ -74,6 +76,34 @@ const BookingSignUpTags = ({change = false}) => {
     }
   }
 
+  const setPrice = (data) => {
+    const nameColorMap = {
+      'Ранее утро': '#7B92FF',
+      'Утро': '#294AE7',
+      'День': '#1E318A',
+      'Вечер': '#061641',
+    };
+
+    const priceDefault = new Set()
+    const priceFirst = new Set()
+
+    data.forEach(el => {
+      priceDefault.add(el.price.default)
+      priceFirst.add(el.price.first)
+    }) 
+
+    const getColorByPrice = (price, type) => {
+      const foundItem = data.find((el) => el.price[type] === price);
+      return {color: nameColorMap[foundItem?.name] || 'blue', name: foundItem.name}
+    };
+
+    setPricesVariant(prev=> ({
+      ...prev,
+      first: Array.from(priceFirst).sort((a, b) => a - b).map((price, i) => ({price, ...getColorByPrice(price, 'first')})),
+      default: Array.from(priceDefault).sort((a, b) => a - b).map((price, i) => ({price, ...getColorByPrice(price, 'default')}))
+    }))
+  }
+
   useEffect(()=>{
     dispatch(updateBookingData({ loading: true }))
     if(sessionData?.user?.accessToken) {
@@ -91,6 +121,7 @@ const BookingSignUpTags = ({change = false}) => {
       } else {
         takeAvaliableTimesDay(sessionData.user.accessToken, gym?.id, visitDate[currentDate].value)
         .then((data) => {
+          setPrice(data)
           dispatch(
             updateBookingData({
               avaliableTimesCurrentDay: data || [],

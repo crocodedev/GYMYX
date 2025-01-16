@@ -46,6 +46,7 @@
   &__list {
     display: flex;
     align-items: center;
+    text-wrap: nowrap;
 
     @include media-breakpoint-down(xl) {
       gap: 15px;
@@ -56,10 +57,12 @@
 
     @include media-breakpoint-between(xl, xxl) {
       gap: 25px;
+      flex-wrap: wrap;
     }
 
     @include media-breakpoint-up(xxl) {
       gap: 30px;
+      flex-wrap: wrap;
     }
 
     &::-webkit-scrollbar {
