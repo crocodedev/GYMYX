@@ -78,7 +78,7 @@ const BookingSignUpTags = ({change = false, setPricesVariant}) => {
 
   const setPrice = (data) => {
     const nameColorMap = {
-      'Ранее утро': '#7B92FF',
+      'Ночь': '#7B92FF',
       'Утро': '#294AE7',
       'День': '#1E318A',
       'Вечер': '#061641',
