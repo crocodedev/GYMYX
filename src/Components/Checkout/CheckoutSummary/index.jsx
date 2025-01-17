@@ -53,7 +53,8 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0, balance = 0 }) => {
           setModal('priceLess', `${data?.total_price || null}`, `${data?.total_price}`)
         }
       } else if (data?.payment_link) {
-        window.open(data?.payment_link, '_blank')
+        // window.open(data?.payment_link, '_blank')
+        window.location.href = data?.payment_link;
         // router.push(data?.payment_link)
       } else {
         setError(true);
