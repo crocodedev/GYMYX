@@ -277,7 +277,8 @@ function ModalInner(type, token, gym, trainingsObj, setModal, isLoad, setIsLoad,
           setModal('priceLess', `${res?.total_price || null}`, `${res?.total_price}`)
         }
       } else if(res?.payment_link) {
-        router.push(res?.payment_link)
+        // router.push(res?.payment_link)
+        window.location.href = res?.payment_link;
       } else {
         setModal('error')
       }
