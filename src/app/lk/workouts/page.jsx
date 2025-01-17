@@ -59,6 +59,7 @@ const Training = () => {
   const [showModal, setShowModal] = useState(false);
   const [currentItemId, setCurrentItemId] = useState(null);
   const [loadingDelete, setLoadingDelete] = useState(false);
+  const [loadingItems, setLoadingItems] = useState(true)
   const [deleteIsError, setDeleteIsError] = useState(false)
   const [modalData, setModalData] = useState({
     type: '', //transfer, delete, toggle, confirmation
@@ -70,7 +71,7 @@ const Training = () => {
 
   useEffect(() => {
     updateDate();
-  }, [sessionData, sessionData]);
+  }, [sessionData]);
 
   useEffect(() => {
     const dataTemp = getDataForPeriod(selectedTab, allTrainingsDates);
@@ -101,6 +102,7 @@ const Training = () => {
 
   const updateDate = () => {
     if (!sessionData?.user?.accessToken) return;
+    setLoadingItems(true)
     let result;
 
     if (selectedDate) {
@@ -111,6 +113,7 @@ const Training = () => {
     getTrainingData(sessionData?.user?.accessToken).then(({ data = [] }) => {
       setAllTrainingsDates(data);
       setLoading(false);
+      setLoadingItems(false)
     });
   };
 
@@ -265,17 +268,21 @@ const Training = () => {
             onHandleChange={handleChangeSelectedDate}
             availableDates={sortedTrainingsDates}
           />
-          <TrainingItems
-            onDelete={deleteBookingItem}
-            token={sessionData?.user?.accessToken}
-            handleUpdateDate={updateDate}
-            handleDeleteItem={handleShow}
-            handlerChangeTraining={changeTraining}
-            selectedDate={selectedDate}
-            archive={selectedTab === 1}
-            items={sortedTrainingsDates}
-            modalType={modalType}
-          />
+          {loadingItems ? (
+            <Loading full_screen={false}/>
+          ) : (
+            <TrainingItems
+              onDelete={deleteBookingItem}
+              token={sessionData?.user?.accessToken}
+              handleUpdateDate={updateDate}
+              handleDeleteItem={handleShow}
+              handlerChangeTraining={changeTraining}
+              selectedDate={selectedDate}
+              archive={selectedTab === 1}
+              items={sortedTrainingsDates}
+              modalType={modalType}
+            />
+          )}
         </TrainingContent>
       </div>
     </>

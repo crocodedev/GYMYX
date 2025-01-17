@@ -65,7 +65,7 @@ button {
 
   &.full-screen {
     @include media-breakpoint-down(xl) {
-      padding-top: 80px;
+      padding-top: 120px;
     }
   }
 }
