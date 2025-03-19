@@ -2,6 +2,7 @@ import ProfileBlockTitle from '@/Components/Account/Profile/ProfileBlockTitle';
 
 import styles from './ProfileContacts.module.scss';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const ProfileContacts = () => {
 
@@ -24,10 +25,10 @@ const ProfileContacts = () => {
                 target="blank"
                 className={styles['profile-contacts__socials-item']}
               >
-                <img src="/icons/socials/whatsapp.svg" alt="" />
+                <Image src="/icons/socials/whatsapp.svg" alt="whatsapp icon" unoptimized />
               </Link>
               <Link href="https://t.me/helpgymyx" target="blank" className={styles['profile-contacts__socials-item']}>
-                <img src="/icons/socials/telegram.svg" alt="" />
+                <Image src="/icons/socials/telegram.svg" alt="tg icon" unoptimized />
               </Link>
             </div>
           </div>

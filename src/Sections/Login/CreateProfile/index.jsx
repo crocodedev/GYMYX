@@ -8,6 +8,7 @@ import ProfileField from '@/Components/Account/Profile/ProfileField';
 import Button from '@/Components/Button';
 import { useEffect, useRef, useState } from 'react';
 import heic2any from 'heic2any';
+import Image from 'next/image';
 
 const validateField = (value, fieldType) => {
   if (fieldType === 'text') {
@@ -192,7 +193,7 @@ const CreateProfile = () => {
           <div className={styles['profile-create-form__data']}>
             <label className={styles['profile-create-form__avatar']}>
               <input onChange={handleUploadFile} type="file" accept=".jpg, .jpeg, .png, .pdf, .webp, .heic" />
-              <img ref={imagePreviewRef} src="/icons/account.svg" alt="preview avatar logo" />
+              <Image ref={imagePreviewRef} src="/icons/account.svg" layout='fill' alt="preview avatar logo" unoptimized />
             </label>
             <div className={styles['profile-create-form__data-col']}>
               <ProfileField onInput={handleChangeInput} name={'name'} prefix="Имя" />

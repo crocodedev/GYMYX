@@ -15,6 +15,7 @@ import { useDispatch } from 'react-redux';
 import { resetTrainingData, setTrainingData } from '@/redux/transferTrainingData';
 import { updateBookingVisitDate } from '@/redux/bookingSlice';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 const ProfileTrainings = ({isShowTranfer = false}) => {
   const { data: sessionData } = useSession();
@@ -196,7 +197,7 @@ const ProfileTrainings = ({isShowTranfer = false}) => {
           <div className={styles['profile-trainings__wrapper']}>
             <div className={styles['profile-trainings__content']}>
               <div className={styles['profile-trainings__object']}>
-                <img src="/icons/icon.svg" alt="icon"/>
+                <Image src="/icons/icon.svg" alt="icon" unoptimized />
               </div>
               <div className={styles['profile-trainings__content']}>
                 <div className={styles['profile-trainings__date']}>
@@ -211,7 +212,7 @@ const ProfileTrainings = ({isShowTranfer = false}) => {
             </div>
             <div className={styles['profile-trainings__asside']}>
               <div className={styles['profile-trainings__btn']} onClick={() => handleClickItem(closestTraining?.id)}>
-                <img src="/icons/cross.svg" alt="cross" />
+                <Image src="/icons/cross.svg" alt="cross" unoptimized />
               </div>
               {isShowTranfer && 
               (

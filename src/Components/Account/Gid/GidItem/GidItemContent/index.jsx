@@ -3,6 +3,7 @@
 import { useState, useRef } from 'react';
 import { pauseAllVideo } from '@/Utils/video';
 import styles from './GidItemContent.module.scss';
+import Image from 'next/image';
 
 const GidItemContent = ({ duration, link, title, lock, isViewed, video_poster, onClickFavorite, onClickVideo }) => {
   const [isShowBg, setIsShowBg] = useState(true)
@@ -64,7 +65,7 @@ const GidItemContent = ({ duration, link, title, lock, isViewed, video_poster, o
         <div className={`${styles['gid-item-content__befor']} ${!isShowBg ? styles['gid-item-content__befor--hidden'] : ''}`}>
           <div className={styles['gid-item-content__befor-inner']}>
             <button type='button' className={`${styles['gid-item-content__btn-lock']} ${lock ? styles['active'] : ''}`} onClick={onClickFavorite}>
-              <img className={styles['gid-item-content__btn-icon']} src="/icons/key.svg" alt="lock  icon button" />
+              <Image className={styles['gid-item-content__btn-icon']} src="/icons/key.svg" alt="lock icon button" unoptimized />
               <span className={styles['gid-item-content__btn-text']}>{lock ? 'Закреплено' : 'Закрепить'}</span>
             </button>
             <button type='button' className={styles['gid-item-content__btn-play']} onClick={handleClickPlay}>
@@ -79,7 +80,7 @@ const GidItemContent = ({ duration, link, title, lock, isViewed, video_poster, o
               {isViewed && (
                 <p className={styles['gid-item-content__status']}>
                   <span className={styles['gid-item-content__status-icon']}>
-                    <img src="/icons/confirm.svg" alt="confirm icon" />
+                    <Image src="/icons/confirm.svg" alt="confirm icon" unoptimized />
                   </span>
                   <span className={styles['gid-item-content__status-text']}>просмотрено</span>
                 </p>

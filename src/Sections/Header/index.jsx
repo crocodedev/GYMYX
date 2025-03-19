@@ -50,7 +50,7 @@ const Header = ({ isLanding = false, data }) => {
     <header className={`${styles.header} ${isLanding ? styles['is-landing'] : ''}`}>
       <div className={styles.header__wrapper}>
         <Link href="/?redirect=false" className={styles.header__logo} aria-label="Вернуться на главную">
-          <Image alt="logo" width={200} height={50} src={logo || ''} aria-label="Логотип" />
+          <Image alt="logo" width={200} height={50} src={logo || ''} aria-label="Логотип" unoptimized />
         </Link>
         <div className={styles.header__nav}>
           {menu.slice(0, 5).map((item) => {
@@ -110,12 +110,12 @@ const Header = ({ isLanding = false, data }) => {
           )}
           {isLanding && (
             <Link href={userData ? '/lk/profile' : '/lk/login'} className={styles['header__controls-account']}>
-              <img src="/icons/account.svg" alt="account icon" />
+              <Image src="/icons/account.svg" width={36} height={36} alt="account icon" unoptimized />
             </Link>
           )}
           {!isLanding && (
             <Link href={userData ? '/lk/profile' : '#'} className={styles['header__controls-account']}>
-              <img src={userData?.image || '/icons/account.svg'} alt="account icon" />
+              <Image src={userData?.image || '/icons/account.svg'} width={36} height={36} alt="account icon" unoptimized />
             </Link>
           )}
         </div>

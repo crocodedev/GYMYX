@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import styles from './SliderControls.module.scss';
 
 const SliderControls = ({ handlePrevSlide, handleNextSlide, activeSlide = 0, countSlides, isTrainers, isShowCount = true }) => {
@@ -24,27 +25,27 @@ const SliderControls = ({ handlePrevSlide, handleNextSlide, activeSlide = 0, cou
               className={styles['slider-controls__btn-trainers']}
               aria-label="Предыдущий слайд"
             >
-              <img src="/icons/arrow.svg" alt="arrow-prev" width={30} height={30} />
+              <Image src="/icons/arrow.svg" alt="arrow-prev" width={30} height={30} unoptimized />
             </button>
             <button
               onClick={handleNextSlide}
               className={`${styles['slider-controls__btn-trainers']} ${styles['slider-controls__btn-right']}`}
               aria-label="Следующий слайд"
             >
-              <img src="/icons/arrow.svg" alt="arrow-next" width={30} height={30} />
+              <Image src="/icons/arrow.svg" alt="arrow-next" width={30} height={30} unoptimized />
             </button>
           </>
         ) : (
           <>
             <button onClick={handlePrevSlide} className={styles['slider-controls__btn']} aria-label="Предыдущий слайд">
-              <img src="/icons/arrow.svg" alt="arrow-prev" width={30} height={30} />
+              <Image src="/icons/arrow.svg" alt="arrow-prev" width={30} height={30} unoptimized />
             </button>
             <button
               onClick={handleNextSlide}
               className={`${styles['slider-controls__btn']} ${styles['slider-controls__btn-right']}`}
               aria-label="Следующий слайд"
             >
-              <img src="/icons/arrow.svg" alt="arrow-next" width={30} height={30} />
+              <Image src="/icons/arrow.svg" alt="arrow-next" width={30} height={30} unoptimized />
             </button>
           </>
         )}
