@@ -7,7 +7,7 @@ const Loading = ({ full_screen = false, background = false }) => {
       className={`${styles.loading} ${full_screen ? styles['full-screen'] : ''} ${ background ? styles['background'] : ''}`}
     >
       <div className={styles['loading__img-wrapper']}>
-        <Image className={styles.loading__img} src="/loading.gif" width="35" height="35" alt="Loading" />
+        <Image className={styles.loading__img} src="/loading.gif" width="35" height="35" alt="Loading" unoptimized />
       </div>
       <p className={styles['loading__text']}>Идёт загрузка</p>
     </div>

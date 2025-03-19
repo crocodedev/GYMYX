@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { signOut, useSession } from 'next-auth/react';
 import { useEffect } from 'react';
+import Image from 'next/image';
 
 const MobileMenu = ({ items, isShow, toggleVisibility }) => {
   const { data: sessionData } = useSession();
@@ -61,7 +62,7 @@ const MobileMenu = ({ items, isShow, toggleVisibility }) => {
                   <u>Войти</u>
                 </Link>
                 <span className={styles['mobile-menu__login-icon']}>
-                  <img src="/icons/login.svg" alt="login icon" />
+                  <Image src="/icons/login.svg" alt="login icon" layout='fill' unoptimized />
                 </span>
               </div>
             </>

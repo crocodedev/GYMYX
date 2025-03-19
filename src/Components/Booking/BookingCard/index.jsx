@@ -3,6 +3,7 @@
 import { formatDate, formatTime } from "@/Utils/helpers";
 import styles from "./BookingCard.module.scss";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 const BookingCard = ({
   id,
@@ -72,7 +73,7 @@ const BookingCard = ({
           <div className={styles["booking-card__aside"]}>
           {!isSingle && (
             <div className={styles["booking-card__aside-btn"]} onClick={handleClickRemove}>
-              <img src="/icons/cross.svg" alt="" />
+              <Image src="/icons/cross.svg" alt="cross icon" unoptimized />
             </div>
           )}
 

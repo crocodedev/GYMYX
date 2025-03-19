@@ -1,3 +1,4 @@
+import Image from "next/image"
 import styles from "./ProfileLogout.module.scss"
 
 const ProfileLogout = ({ handleClick }) => {
@@ -5,10 +6,11 @@ const ProfileLogout = ({ handleClick }) => {
     <button onClick={handleClick} className={styles["profile-logout"]}>
       <p className={styles["profile-logout__text"]}>Выйти</p>
       <div className={styles["profile-logout__icon"]}>
-        <img
+        <Image
           className={styles["profile-logout__img"]}
           src="/icons/logout.svg"
-          alt=""
+          alt="logout icon"
+          unoptimized
         />
       </div>
     </button>

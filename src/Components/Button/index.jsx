@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import styles from './Button.module.scss';
 
 const Button = ({
@@ -24,12 +25,14 @@ const Button = ({
       {label}
       {icon === 'telegram' ? (
         <div className={styles.button__icon}>
-          <img
+          <Image
             style={{
               filter:
                 'brightness(0) saturate(100%) invert(24%) sepia(86%) saturate(5642%) hue-rotate(233deg) brightness(93%) contrast(94%)',
             }}
             src="/icons/socials/telegram.svg"
+            alt='tg icon'
+            unoptimized
           />
         </div>
       ) : icon === 'split' ? (
@@ -48,7 +51,11 @@ const Button = ({
         </span>
       ) : icon ? (
         <div className={styles.button__icon}>
-          <img style={{ transform: 'rotate(180deg)' }} src="/icons/arrow.svg" alt="arrow" />
+          <svg width="63" height="55" viewBox="0 0 63 55" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line x1="62.8047" y1="28" x2="5.80469" y2="28" stroke="white" stroke-width="8"/>
+            <line x1="29.2705" y1="2.77806" x2="2.87888" y2="30.1182" stroke="white" stroke-width="8"/>
+            <line x1="29.1602" y1="52.2414" x2="2.91298" y2="24.7626" stroke="white" stroke-width="8"/>
+          </svg>
         </div>
       ) : null}
     </button>
