@@ -72,6 +72,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    max-width: 12px;
+    max-height: 12px;
 
     img {
       width: 100%;
