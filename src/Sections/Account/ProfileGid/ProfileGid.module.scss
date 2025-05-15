@@ -1,12 +1,11 @@
 @import '@/styles/mixins.scss';
 
 .profile-gid {
-
   &__inner {
     display: flex;
     align-items: center;
     gap: 20px;
-    background: linear-gradient(90deg, rgba(123,146,255,1) 20%, rgba(88,113,232,1) 100%);
+    background: linear-gradient(90deg, rgba(123, 146, 255, 1) 20%, rgba(88, 113, 232, 1) 100%);
 
     @include media-breakpoint-up(lg) {
       padding: 40px 40px 45px;
@@ -20,7 +19,8 @@
   }
 
   &__content {
-    flex: content;
+    justify-content: space-between;
+    width: 100%;
   }
 
   &__title {
