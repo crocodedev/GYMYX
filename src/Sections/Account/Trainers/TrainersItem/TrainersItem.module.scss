@@ -29,7 +29,7 @@
     flex-direction: column;
     justify-content: flex-end;
     background: linear-gradient(180deg, #ffffff00 45%, #2a4ae8c0 100%, transparent 100%),
-        transparent -50px -66px/108.945% 106.684% no-repeat;
+      transparent -50px -66px/108.945% 106.684% no-repeat;
     transition: 0.3s;
 
     @include media-breakpoint-down(lg) {
@@ -113,7 +113,7 @@
       font-size: 16px;
       line-height: 20.88px;
     }
-    
+
     @include media-breakpoint-between(lg, xxxl) {
       font-size: 20px;
       line-height: 27px;
@@ -216,12 +216,6 @@
     @include media-breakpoint-up(xxxl) {
       font-size: 30px;
       line-height: 36.57px;
-    }
-  }
-
-  &__more-list li:nth-child(n + 3) {
-    @include media-breakpoint-down(lg) {
-      display: none;
     }
   }
 

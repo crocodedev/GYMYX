@@ -1,6 +1,5 @@
 import { formatDate } from "@/Utils/helpers"
 import styles from "./BookingSignUpTagsItem.module.scss"
-import Image from "next/image"
 
 const BookingSignUpTagsItem = ({
   onClick,
@@ -26,7 +25,7 @@ const BookingSignUpTagsItem = ({
         onClick={() => onDelete(value)}
         className={styles["booking-sign-up-tags-item__btn"]}
       >
-        <Image src="/icons/cross.svg" alt="cross image btn" unoptimized />
+        <img src="/icons/cross.svg" alt="cross image btn" />
       </div>
     </div>
   )

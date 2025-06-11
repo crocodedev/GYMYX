@@ -40,7 +40,8 @@
   box-shadow: 0px 0px 21px 0px rgba(22, 23, 26, 0.6);
 
   @include media-breakpoint-down(md) {
-    width: 327px;
+    width: 100%;
+    max-width: 327px;
     height: 427px;
   }
 

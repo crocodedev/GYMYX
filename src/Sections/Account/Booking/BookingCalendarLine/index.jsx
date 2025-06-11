@@ -7,7 +7,6 @@ import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/css"
 import BookingCalendarLineItem from "@/Components/Booking/BookingCalendarLineItem"
 import { generateBookingDates } from "@/Utils/helpers"
-import Image from "next/image"
 
 const sliderSettings = {
   spaceBetween: 6,
@@ -73,7 +72,7 @@ const BookingCalendarLine = () => {
               onClick={prevSlide}
               className={`${styles["booking-calendar-line__btn"]} ${styles["prev"]}`}
             >
-              <Image src="/icons/arrow-2.svg" alt="arrow icon" unoptimized />
+              <img src="/icons/arrow-2.svg" alt="arrow icon" />
             </button>
             <div className={styles["booking-calendar-line__slider-wrapper"]}>
               {dates && (
@@ -105,7 +104,7 @@ const BookingCalendarLine = () => {
               onClick={nextSlide}
               className={`${styles["booking-calendar-line__btn"]} ${styles["next"]}`}
             >
-              <Image src="/icons/arrow-2.svg" alt="arrow icon" unoptimized />
+              <img src="/icons/arrow-2.svg" alt="arrow icon" />
             </button>
           </div>
         </div>

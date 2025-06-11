@@ -354,9 +354,9 @@ const ProfileEditForm = () => {
             <div className={styles['profile-edit-form__avatar-wrapper']}>
               <label className={styles['profile-edit-form__avatar']}>
                 <input onChange={handleUploadFile} type="file" accept=".jpg, .jpeg, .png, .pdf, .webp, .heic" />
-                <Image ref={imagePreviewRef} src={data.image.preview || '/icons/account.svg'} layout='fill' alt="profile image" unoptimized />
+                <Image ref={imagePreviewRef} src={data.image.preview || '/icons/account.svg'} width={150} height={150} alt="profile image" unoptimized />
                 <span className={styles['profile-edit-form__avatar-edit']}>
-                  <Image src="/icons/edit.svg" alt="edit" className={styles['profile-edit-form__edit-icon']} unoptimized />
+                  <img src="/icons/edit.svg" alt="edit" className={styles['profile-edit-form__edit-icon']} />
                 </span>
               </label>
                 <label className={styles['profile-edit-form__date-birth']}>
