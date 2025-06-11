@@ -2,6 +2,7 @@ import { useSession } from 'next-auth/react';
 import styles from './ProfileInfo.module.scss';
 import { EditIcon } from '../../../../../public/svg';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const ProfileInfo = () => {
   const { data: sessionData } = useSession();
@@ -17,7 +18,7 @@ const ProfileInfo = () => {
   return (
     <div className={styles['profile-info']}>
       <div className={styles['profile-info__avatar']}>
-        <img className={styles['profile-info__img']} src={userData.image || '/icons/account.svg'} alt="image profile" />
+        <Image className={styles['profile-info__img']} src={userData.image || '/icons/account.svg'} width={150} height={150} alt="image profile" unoptimized />
       </div>
       <div className={styles['profile-info__content']}>
         <p className={styles['profile-info__title']}>

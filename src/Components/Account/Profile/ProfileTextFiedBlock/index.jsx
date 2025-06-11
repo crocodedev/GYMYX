@@ -2,7 +2,7 @@
 
 import { sendMessage } from '@/Sections/Account/ProfileTextField/helpers';
 import styles from './ProfileTextFiedBlock.module.scss';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { useSession } from 'next-auth/react';
 
 const ProfileTextFiedBlock = ({
@@ -58,7 +58,7 @@ const ProfileTextFiedBlock = ({
           rows={1}
       />
       <button className={styles['profile-textfied-block__btn']} onTouchStart={() => handleSendMessage(text)}>
-        <img className={styles['profile-textfied-block__btn-icon']} src="/icons/arrowTextFied.svg" alt="" />
+        <img className={styles['profile-textfied-block__btn-icon']} src="/icons/arrowTextFied.svg" alt="arrow icon" />
       </button>
     </div>
   );

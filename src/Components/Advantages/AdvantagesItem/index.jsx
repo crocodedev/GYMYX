@@ -42,7 +42,7 @@ const AdvantagesItem = ({ props }) => {
         ? <video ref={videoRef} className={styles['advantages-item__video']} playsInline webkit-playsinline poster={image} onEnded={handleVideoEnd} onPause={() => setVideoIsPlay(false)} onPlay={() => setVideoIsPlay(true)}>
             <source src={video} type="video/mp4"/>
           </video>
-        : <Image src={image} width={500} height={800} quality={100} alt={title} loading="lazy" unoptimized />
+        : <Image src={image} width={500} height={800} quality={100} alt={title} loading="lazy" />
         }
       </div>
       <div className={styles['advantages-item__content']} onClick={playVideo}>

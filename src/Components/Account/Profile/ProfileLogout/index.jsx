@@ -8,7 +8,7 @@ const ProfileLogout = ({ handleClick }) => {
         <img
           className={styles["profile-logout__img"]}
           src="/icons/logout.svg"
-          alt=""
+          alt="logout icon"
         />
       </div>
     </button>

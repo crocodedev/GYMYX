@@ -12,6 +12,7 @@ import { checkValidPhone } from '@/Utils/helpers';
 import heic2any from 'heic2any';
 import { EditIcon } from '../../../../public/svg';
 import { isValidDate, checkDataDifference, convertDate} from './helper';
+import Image from 'next/image';
 
 const ProfileEditForm = () => {
   const { data: sessionData, update: updateSession } = useSession();
@@ -353,7 +354,7 @@ const ProfileEditForm = () => {
             <div className={styles['profile-edit-form__avatar-wrapper']}>
               <label className={styles['profile-edit-form__avatar']}>
                 <input onChange={handleUploadFile} type="file" accept=".jpg, .jpeg, .png, .pdf, .webp, .heic" />
-                <img ref={imagePreviewRef} src={data.image.preview || '/icons/account.svg'} alt="profile image" />
+                <Image ref={imagePreviewRef} src={data.image.preview || '/icons/account.svg'} width={150} height={150} alt="profile image" unoptimized />
                 <span className={styles['profile-edit-form__avatar-edit']}>
                   <img src="/icons/edit.svg" alt="edit" className={styles['profile-edit-form__edit-icon']} />
                 </span>

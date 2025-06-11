@@ -16,7 +16,7 @@ const Footer = ({ data }) => {
     <footer className={styles.footer}>
       <Container size="xlf">
         <div className={styles.footer__wrapper}>
-          <img className={styles.footer__bg} src="/images/footer_bg.webp" alt="" />
+          <Image className={styles.footer__bg} src="/images/footer_bg.webp" width={100} height={100} alt="footer_bg icon" unoptimized />
 
           <div className={styles['footer__inner-wrapper']}>
             <div className={styles.footer__leftside}>
@@ -29,7 +29,7 @@ const Footer = ({ data }) => {
                   const image = item.find((field) => field.name === 'image')?.value || '';
                   return (
                     <Link key={url} href={url} className={styles['footer__socials-item']}>
-                      <Image src={image} width={60} height={60} quality={100} alt="social logo" loading="lazy" />
+                      <Image src={image} width={60} height={60} quality={100} alt="social logo" loading="lazy" unoptimized />
                     </Link>
                   );
                 })}

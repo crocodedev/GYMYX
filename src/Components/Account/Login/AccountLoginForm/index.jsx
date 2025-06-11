@@ -172,7 +172,7 @@ const AccountLoginForm = ({ handleToogleModal, setIsShowLoading }) => {
       <div className={styles['error-login-telegram']}>
         <div className={styles['error-login-telegram__inner']}>
           <div className={styles['error-login-telegram__logo']}>
-            <Image src="/icons/loginFormIcon.svg" width={300} height={300} alt='Logo'/>
+            <Image src="/icons/loginFormIcon.svg" width={300} height={300} alt='Logo' unoptimized />
           </div>
           <p className={styles['error-login-telegram__text']}>Пожалуйста, поделитесь контактом в чате, чтобы продолжить</p>
           <Button
@@ -190,7 +190,7 @@ const AccountLoginForm = ({ handleToogleModal, setIsShowLoading }) => {
     <div className={styles['account-login-form']}>
       <div className={styles['account-login-form__wrapper']}>
         <div className={styles['account-login-form__logo']}>
-          <Image src="/icons/loginFormIcon.svg" width={300} height={300} alt='Logo'/>
+          <Image src="/icons/loginFormIcon.svg" width={300} height={300} alt='Logo' unoptimized />
         </div>
         <h1 className={styles['account-login-form__title']}>Войти или зарегистрироваться</h1>
         {!data.receivedCode && (

@@ -72,7 +72,7 @@ const BookingCalendarLine = () => {
               onClick={prevSlide}
               className={`${styles["booking-calendar-line__btn"]} ${styles["prev"]}`}
             >
-              <img src="/icons/arrow-2.svg" alt="" />
+              <img src="/icons/arrow-2.svg" alt="arrow icon" />
             </button>
             <div className={styles["booking-calendar-line__slider-wrapper"]}>
               {dates && (
@@ -104,7 +104,7 @@ const BookingCalendarLine = () => {
               onClick={nextSlide}
               className={`${styles["booking-calendar-line__btn"]} ${styles["next"]}`}
             >
-              <img src="/icons/arrow-2.svg" alt="" />
+              <img src="/icons/arrow-2.svg" alt="arrow icon" />
             </button>
           </div>
         </div>

@@ -64,7 +64,7 @@ const GidItemContent = ({ duration, link, title, lock, isViewed, video_poster, o
         <div className={`${styles['gid-item-content__befor']} ${!isShowBg ? styles['gid-item-content__befor--hidden'] : ''}`}>
           <div className={styles['gid-item-content__befor-inner']}>
             <button type='button' className={`${styles['gid-item-content__btn-lock']} ${lock ? styles['active'] : ''}`} onClick={onClickFavorite}>
-              <img className={styles['gid-item-content__btn-icon']} src="/icons/key.svg" alt="lock  icon button" />
+              <img className={styles['gid-item-content__btn-icon']} src="/icons/key.svg" alt="lock icon button" />
               <span className={styles['gid-item-content__btn-text']}>{lock ? 'Закреплено' : 'Закрепить'}</span>
             </button>
             <button type='button' className={styles['gid-item-content__btn-play']} onClick={handleClickPlay}>

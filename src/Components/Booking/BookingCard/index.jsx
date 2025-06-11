@@ -72,7 +72,7 @@ const BookingCard = ({
           <div className={styles["booking-card__aside"]}>
           {!isSingle && (
             <div className={styles["booking-card__aside-btn"]} onClick={handleClickRemove}>
-              <img src="/icons/cross.svg" alt="" />
+              <img src="/icons/cross.svg" alt="cross icon" unoptimized />
             </div>
           )}
 

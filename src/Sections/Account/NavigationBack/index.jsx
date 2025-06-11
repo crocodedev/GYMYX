@@ -7,7 +7,7 @@ const NavigationBack = ({ containerSize, buttonLabel, link = "" }) => {
     <Container size={containerSize}>
       <Link href={link} className={styles["navigation-back__btn"]}>
         <span className={styles["navigation-back__btn-icon"]}>
-          <img src="/icons/arrow-2.svg" />
+          <img src="/icons/arrow-2.svg" alt="arrow icon" />
         </span>
         <p className={styles["navigation-back__btn-text"]}>{buttonLabel}</p>
       </Link>

@@ -39,7 +39,7 @@ const AccountRepeatCode = ({ targetPhone, handleClickChange, handleClick }) => {
           <img
             className={styles["account-repeat-code__img"]}
             src="/icons/edit.svg"
-            alt=""
+            alt="edit icon"
           />
         </div>
       </div>

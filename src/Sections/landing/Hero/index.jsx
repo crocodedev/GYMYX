@@ -34,8 +34,7 @@ const Hero = ({ alias, fields }) => {
         )}
       </picture>
       <div className={styles['hero__billet']}>
-        {/* <img src="./images/plashka.svg" alt="" /> */}
-        <Image src={bilet_image.value} width={300} height={300}/>
+        <Image src={bilet_image.value} width={300} height={300} alt={bilet_image.name} />
       </div>
       <div className={styles['hero__content-wrapper']}>
         <Container size="XL">

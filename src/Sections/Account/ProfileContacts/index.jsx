@@ -24,10 +24,10 @@ const ProfileContacts = () => {
                 target="blank"
                 className={styles['profile-contacts__socials-item']}
               >
-                <img src="/icons/socials/whatsapp.svg" alt="" />
+                <img src="/icons/socials/whatsapp.svg" alt="whatsapp icon" />
               </Link>
               <Link href="https://t.me/helpgymyx" target="blank" className={styles['profile-contacts__socials-item']}>
-                <img src="/icons/socials/telegram.svg" alt="" />
+                <img src="/icons/socials/telegram.svg" alt="tg icon" />
               </Link>
             </div>
           </div>
