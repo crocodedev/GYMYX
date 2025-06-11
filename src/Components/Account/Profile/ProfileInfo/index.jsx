@@ -18,7 +18,7 @@ const ProfileInfo = () => {
   return (
     <div className={styles['profile-info']}>
       <div className={styles['profile-info__avatar']}>
-        <Image className={styles['profile-info__img']} src={userData.image || '/icons/account.svg'} alt="image profile" layout='fill' unoptimized />
+        <Image className={styles['profile-info__img']} src={userData.image || '/icons/account.svg'} width={150} height={150} alt="image profile" unoptimized />
       </div>
       <div className={styles['profile-info__content']}>
         <p className={styles['profile-info__title']}>

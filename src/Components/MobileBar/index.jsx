@@ -6,7 +6,6 @@ import { usePathname } from 'next/navigation';
 
 import styles from './MobileBar.module.scss';
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
 
 const MENU = [
   {
@@ -78,7 +77,7 @@ const MobileBar = ({ headerData }) => {
             }`}
           >
             <div className={styles['mobile-bar__btn-icon']}>
-              <Image src={icon} alt="mobile bar image" unoptimized />
+              <img src={icon} alt="mobile bar image" />
             </div>
             <p className={styles['mobile-bar__btn-title']}>{title}</p>
           </Link>

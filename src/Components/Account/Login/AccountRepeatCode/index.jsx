@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react"
 import styles from "./AccountRepeatCode.module.scss"
-import Image from "next/image"
 
 const INIT_TIMEOUT = 60
 
@@ -37,11 +36,10 @@ const AccountRepeatCode = ({ targetPhone, handleClickChange, handleClick }) => {
           onClick={handleOnClickChange}
           className={styles["account-repeat-code__icon"]}
         >
-          <Image
+          <img
             className={styles["account-repeat-code__img"]}
             src="/icons/edit.svg"
             alt="edit icon"
-            unoptimized
           />
         </div>
       </div>
