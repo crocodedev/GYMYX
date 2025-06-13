@@ -193,7 +193,7 @@ const CreateProfile = () => {
           <div className={styles['profile-create-form__data']}>
             <label className={styles['profile-create-form__avatar']}>
               <input onChange={handleUploadFile} type="file" accept=".jpg, .jpeg, .png, .pdf, .webp, .heic" />
-              <Image ref={imagePreviewRef} src="/icons/account.svg" layout='fill' alt="preview avatar logo" unoptimized />
+              <Image ref={imagePreviewRef} src="/icons/account.svg" width={150} height={150} alt="preview avatar logo" unoptimized />
             </label>
             <div className={styles['profile-create-form__data-col']}>
               <ProfileField onInput={handleChangeInput} name={'name'} prefix="Имя" />
