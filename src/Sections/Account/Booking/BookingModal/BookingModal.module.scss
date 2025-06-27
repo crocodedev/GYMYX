@@ -1,0 +1,37 @@
+.modal__inner {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.gyms {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  &__gym_btn {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    border: none;
+    border-radius: 10px;
+    padding: 5px 8px;
+    cursor: pointer;
+
+    &.select {
+      position: relative;
+      color: #f5f5f5;
+      background: linear-gradient(270deg, #0d2dc8 25%, #294ae7 100%);
+    }
+  }
+
+  &__gym_name {
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  &__gym_address {
+    font-size: 14px;
+  }
+}

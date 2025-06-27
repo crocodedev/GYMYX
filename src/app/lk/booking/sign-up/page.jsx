@@ -10,12 +10,44 @@ import BookingSignUpContent from '@/Sections/Account/Booking/BookingSignUpConten
 import { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { getUserData } from '@/Utils/updateDataUser';
+import BookingModal from '@/Sections/Account/Booking/BookingModal';
+import { useDispatch } from 'react-redux';
+import { updateBookingData } from '@/redux/bookingSlice';
 
 const BookingSignUp = () => {
+  const dispatch = useDispatch();
   const { data: sessionData, update } = useSession();
   const [showModal, setShowModal] = useState(false);
   const [balance, setBalance] = useState(0);
-  const { gym, variant } = useSelector((state) => state.booking);
+  const { gym, gyms, variant } = useSelector((state) => state.booking);
+  const [activeGym, setActiveGym] = useState(gym)
+
+  const handlerCloseModal = () => {
+    setShowModal(false)
+  }
+
+  const updateGym = (gym, gyms) => {
+      dispatch(
+        updateBookingData({
+          gym,
+          gyms,
+          variant: null,
+          visitDate: null,
+          currentDate: 0,
+          avaliableTimesCurrentDay: [],
+          loading: false,
+        })
+      );
+    }
+
+  const handleChangeGym = (gymData) => {
+    if (gymData !== activeGym) {
+      console.log(gymData)
+      setActiveGym(gymData)
+      updateGym(gymData, gyms)
+    }
+    setShowModal(false)
+  };
 
   useEffect(() => {
     if(sessionData?.user?.accessToken)
@@ -30,15 +62,12 @@ const BookingSignUp = () => {
   return (
     <>
       {showModal && (
-        <Modal handleClose={() => setShowModal((prev) => !prev)} text={'Извините, пока у нас только один зал :('}>
-          <Button
-            onClick={() => setShowModal((prev) => !prev)}
-            fullSize={true}
-            size="l"
-            label="Понятно"
-            variant="blue"
-          />
-        </Modal>
+        <BookingModal 
+          gyms={gyms} 
+          activeGym={gym} 
+          closeModal={handlerCloseModal} 
+          changeGym={handleChangeGym} 
+        />
       )}
 
       <BookingSignUpHeading
