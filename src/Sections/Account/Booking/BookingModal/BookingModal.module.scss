@@ -1,14 +1,30 @@
+@import '@/styles/mixins.scss';
+
 .modal__inner {
   display: flex;
   width: 100%;
   flex-direction: column;
-  gap: 20px;
+
+  @include media-breakpoint-up(xl) {
+    gap: 40px;
+  }
+
+  @include media-breakpoint-down(xl) {
+    gap: 20px;
+  }
 }
 
 .gyms {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+
+  @include media-breakpoint-up(xl) {
+    gap: 15px;
+  }
+
+  @include media-breakpoint-down(xl) {
+    gap: 8px;
+  }
 
   &__gym_btn {
     display: flex;
@@ -16,7 +32,7 @@
     text-align: left;
     border: none;
     border-radius: 10px;
-    padding: 5px 8px;
+    padding: 8px 15px;
     cursor: pointer;
 
     &.select {
@@ -27,11 +43,28 @@
   }
 
   &__gym_name {
-    font-size: 18px;
     font-weight: 700;
+
+    @include media-breakpoint-up(xl) {
+      font-size: 26px;
+    }
+
+    @include media-breakpoint-down(xl) {
+      font-size: 20px;
+    }
   }
 
   &__gym_address {
-    font-size: 14px;
+    @include media-breakpoint-up(xl) {
+      font-size: 18px;
+    }
+
+    @include media-breakpoint-between(sm, xl) {
+      font-size: 16px;
+    }
+
+    @include media-breakpoint-down(sm) {
+      font-size: 14px;
+    }
   }
 }

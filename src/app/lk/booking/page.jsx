@@ -55,10 +55,8 @@ const Booking = () => {
   }
 
   const handleChangeGym = (gym) => {
-    if (gym !== activeGym) {
-      setActiveGym(gym)
-      updateGym(gym, gyms)
-    }
+    setActiveGym(gym)
+    updateGym(gym, gyms)
     setShowModal(false)
   };
 
@@ -70,8 +68,16 @@ const Booking = () => {
           if (data.length > 0) {
             setGyms(data);
             const existingGym = data.find((gym) => gym.id === activeGymAxios?.id);
-            const gymToUse = existingGym || data[0];
-            updateGym(gymToUse, data)
+            if (existingGym) {
+              updateGym({}, data)
+            } else {
+              setActiveGym(data[0])
+              if (data.length > 1) {
+                setShowModal(true);
+              } else {
+                updateGym(data[0], data)
+              }
+            }
           }
         setLoading(false);
       });

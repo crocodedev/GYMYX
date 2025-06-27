@@ -15,7 +15,7 @@ const BookingModal = ({ closeModal, gyms, activeGym, changeGym }) => {
   return (
     <Modal
       handleClose={gymsLenIsOne ? closeModal : () => { }}
-      text={gymsLenIsOne ? 'Извините, пока у нас только один зал :(' : 'Выберете зал'}>
+      text={gymsLenIsOne ? 'Извините, пока у нас только один зал :(' : 'Выберите зал'}>
       {!gymsLenIsOne ? (
         <div className={styles.modal__inner}>
           <div className={styles.gyms}>

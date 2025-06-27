@@ -41,22 +41,31 @@ const BookingSignUp = () => {
     }
 
   const handleChangeGym = (gymData) => {
-    if (gymData !== activeGym) {
-      console.log(gymData)
-      setActiveGym(gymData)
-      updateGym(gymData, gyms)
-    }
+    setActiveGym(gymData)
+    updateGym(gymData, gyms)
     setShowModal(false)
   };
 
   useEffect(() => {
-    if(sessionData?.user?.accessToken)
-    getUserData(sessionData?.user?.accessToken)
-    .then(res => {
-      if(res?.data) {
-        setBalance(res?.data?.balance)
+    if (sessionData?.user?.accessToken) {
+      const existingGym = gyms.find((gymx) => gymx.id === gym?.id);
+      if (existingGym) {
+        updateGym(existingGym, gyms)
+      } else {
+        setActiveGym(gyms[0])
+        if (gyms.length > 1) {
+          setShowModal(true);
+        } else {
+          updateGym(gyms[0], gyms)
+        }
       }
-    })
+      getUserData(sessionData?.user?.accessToken)
+        .then(res => {
+          if (res?.data) {
+            setBalance(res?.data?.balance)
+          }
+        })
+    }
   }, [sessionData])
 
   return (
@@ -64,7 +73,7 @@ const BookingSignUp = () => {
       {showModal && (
         <BookingModal 
           gyms={gyms} 
-          activeGym={gym} 
+          activeGym={activeGym} 
           closeModal={handlerCloseModal} 
           changeGym={handleChangeGym} 
         />
