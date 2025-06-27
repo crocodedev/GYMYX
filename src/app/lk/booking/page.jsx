@@ -69,7 +69,7 @@ const Booking = () => {
             setGyms(data);
             const existingGym = data.find((gym) => gym.id === activeGymAxios?.id);
             if (existingGym) {
-              updateGym({}, data)
+              updateGym(existingGym, data)
             } else {
               setActiveGym(data[0])
               if (data.length > 1) {
