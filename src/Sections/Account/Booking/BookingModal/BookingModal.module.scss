@@ -31,9 +31,16 @@
     flex-direction: column;
     text-align: left;
     border: none;
-    border-radius: 10px;
     padding: 8px 15px;
     cursor: pointer;
+
+    @include media-breakpoint-up(xxl) {
+      border-radius: 22px;
+    }
+
+    @include media-breakpoint-down(xxl) {
+      border-radius: 15px;
+    }
 
     &.select {
       position: relative;
