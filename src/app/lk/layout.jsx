@@ -6,6 +6,7 @@ const MontserratFont = Montserrat({ subsets: ['latin'] });
 import Header from '@/Sections/Header';
 import MobileBar from '@/Components/MobileBar';
 import Metrika from '@/Components/Metrika';
+import MaintenanceOverlay from '@/Components/MaintenanceOverlay';
 
 import { getServerSession } from 'next-auth';
 import { authConfig } from '@/configs/auth';
@@ -61,6 +62,7 @@ export default async function AccountLayout({ children }) {
           <MobileBar headerData={headerData} />
           <main className="main account">{children}</main>
         </Providers>
+        <MaintenanceOverlay isShow={true} />
       </body>
     </html>
   );

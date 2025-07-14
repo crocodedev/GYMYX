@@ -1,0 +1,40 @@
+@import '@/styles/mixins.scss';
+
+.content {
+  width: 100%;
+
+  @include media-breakpoint-up(md) {
+    max-width: 700px;
+  }
+
+  &__title {
+    line-height: 150%;
+
+    @include media-breakpoint-up(md) {
+      font-size: 40px;
+      margin-bottom: 20px;
+    }
+
+    @include media-breakpoint-down(md) {
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+  }
+
+  &__text {
+    display: flex;
+    flex-wrap: wrap;
+    font-weight: 500;
+    line-height: 160%;
+
+    @include media-breakpoint-up(md) {
+      font-size: 22px;
+    }
+  }
+
+  &__link {
+    margin: 0 8px;
+    font-weight: 700;
+    color: #294ae7;
+  }
+}
