@@ -1,6 +1,6 @@
 import { Montserrat } from 'next/font/google';
 import './../globalsLanding.scss';
-
+import MaintenanceOverlay from '@/Components/MaintenanceOverlay';
 import Header from '@/Sections/Header';
 import Footer from '@/Sections/landing/Footer';
 
@@ -86,6 +86,7 @@ export default async function LandingLayout({ children }) {
           <main className="main">{children}</main>
           <Footer data={footerData} />
         </Providers>
+        <MaintenanceOverlay isShow={true} />
       </body>
     </html>
   );
