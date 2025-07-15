@@ -1,7 +1,7 @@
 @import '../styles/mixins.scss';
 
 * {
-  font-family: 'Montserrat';
+  // font-family: 'Montserrat';
   // font-family: inherit;
   box-sizing: border-box;
   padding: 0;
@@ -35,6 +35,10 @@ a {
 button {
   font-family: inherit;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+textarea {
+  font-family: inherit;
 }
 
 .main {
@@ -296,12 +300,10 @@ button {
 
   .p-datepicker:not(.p-disabled) table td span:not(.p-highlight):not(.p-disabled) {
     &:hover {
-
       @include media-breakpoint-up(xl) {
         background: var(--white, #ffffff36);
         color: var(--dark-grey, #37393d);
       }
-      
     }
   }
 
