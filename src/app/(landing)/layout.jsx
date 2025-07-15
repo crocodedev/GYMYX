@@ -1,5 +1,5 @@
 import { Montserrat } from 'next/font/google';
-import './../globalsLanding.scss';
+import './../globals.scss';
 import Header from '@/Sections/Header';
 import Footer from '@/Sections/landing/Footer';
 
