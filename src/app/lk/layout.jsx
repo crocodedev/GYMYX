@@ -10,6 +10,7 @@ import Metrika from '@/Components/Metrika';
 import { getServerSession } from 'next-auth';
 import { authConfig } from '@/configs/auth';
 import { redirect } from 'next/navigation';
+import MaintenanceOverlay from '@/Components/MaintenanceOverlay'
 
 export const viewport = {
   width: 'device-width',
@@ -58,6 +59,7 @@ export default async function AccountLayout({ children }) {
           <MobileBar headerData={headerData} />
           <main className="main account">{children}</main>
         </Providers>
+        <MaintenanceOverlay isShow={true} />
       </body>
     </html>
   );
