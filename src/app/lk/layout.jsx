@@ -62,7 +62,7 @@ export default async function AccountLayout({ children }) {
           <MobileBar headerData={headerData} />
           <main className="main account">{children}</main>
         </Providers>
-        <MaintenanceOverlay isShow={true} />
+        <MaintenanceOverlay isShow={false} />
       </body>
     </html>
   );

@@ -86,7 +86,7 @@ export default async function LandingLayout({ children }) {
           <main className="main">{children}</main>
           <Footer data={footerData} />
         </Providers>
-        <MaintenanceOverlay isShow={true} />
+        <MaintenanceOverlay isShow={false} />
       </body>
     </html>
   );
