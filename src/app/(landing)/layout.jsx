@@ -1,6 +1,5 @@
 import { Montserrat } from 'next/font/google';
 import './../globalsLanding.scss';
-import MaintenanceOverlay from '@/Components/MaintenanceOverlay';
 import Header from '@/Sections/Header';
 import Footer from '@/Sections/landing/Footer';
 
@@ -69,24 +68,17 @@ export default async function LandingLayout({ children }) {
   }
 
   const headerData = data.modules.find((item) => item.alias === 'header');
-  const heroData = data.modules.find((item) => item.alias === 'banner');
-
   const footerData = data.modules.find((item) => item.alias === 'footer');
 
   return (
     <html lang="en">
-      <link rel="preload" href={`${heroData.fields[0].value}?w=390&h=844`} as="image" />
       <Metrika />
-      <head>
-        <link href="https://fonts.googleapis.com/css?family=Montserrat&display=optional:100,200,300,regular,500,600,700,800,900" rel="stylesheet" />
-      </head>
       <body className={MontserratFont.className}>
         <Providers>
           <Header isLanding={true} data={headerData} />
           <main className="main">{children}</main>
           <Footer data={footerData} />
         </Providers>
-        <MaintenanceOverlay isShow={false} />
       </body>
     </html>
   );

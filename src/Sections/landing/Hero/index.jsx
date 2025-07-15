@@ -25,13 +25,22 @@ const Hero = ({ alias, fields }) => {
   return (
     <section id={alias} className={styles.hero}>
       <picture className={styles.hero__img}>
-        <source media="(max-width: 768px)" srcSet={`${image_mobile?.value}?w=390&h=844`} />
-        <source media="(max-width: 1760px)" srcSet={`${image_medium?.value}?w=1440&h=900`} />
-        {isMobile ? (
-          <Image src={`${image_mobile?.value}`} width={390} height={720} quality={100} alt={title.value} />
-        ) : (
-          <Image src={`${image?.value}`} width={1920} height={1080} quality={100} alt={title.value} />
-        )}
+        <source 
+          media="(max-width: 768px)" 
+          srcSet={`${image_mobile?.value}?w=390&h=844`} 
+        />
+        <source 
+          media="(max-width: 1760px)" 
+          srcSet={`${image_medium?.value}?w=1440&h=900`} 
+        />
+        <Image 
+          src={`${image?.value}`} 
+          width={1920} 
+          height={1080} 
+          quality={100}
+          priority
+          alt={title.value}
+        />
       </picture>
       <div className={styles['hero__billet']}>
         <Image src={bilet_image.value} width={300} height={300} alt={bilet_image.name} />
@@ -48,15 +57,9 @@ const Hero = ({ alias, fields }) => {
                   {price?.value} <span className={styles['hero__price-prefix']}>₽/час</span>
                 </span>
               </p>
-              {isMobile ? (
-                <Link href={'/lk/login'}>
-                  <Button size="l" variant="blue" label={'Записаться'} />
-                </Link>
-              ) : (
-                <Link href={'/lk/login'}>
-                  <Button size="l" variant="black" label={'Записаться'} />
-                </Link>
-              )}
+              <Link href={'/lk/login'}>
+                <Button size="l" variant={isMobile ? "blue" : "black"} label={'Записаться'} />
+              </Link>
             </div>
           </div>
         </Container>
