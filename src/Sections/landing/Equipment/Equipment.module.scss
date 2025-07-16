@@ -121,6 +121,18 @@
         }
 
         > div img {
+          @include media-breakpoint-between(xl, xxl) {
+            transform: scale(100%) translate(-2%, 0%) rotate(-3deg);
+          }
+
+          @include media-breakpoint-between(lg, xl) {
+            transform: scale(100%) translate(-2%, -2%) rotate(-3deg);
+          }
+
+          @include media-breakpoint-between(md, lg) {
+            transform: scale(100%) translate(-7%, 40%) rotate(-3deg);
+          }
+
           @include media-breakpoint-between(sm, md) {
             transform: scale(94%) translate(0%, 13%) rotate(-3deg);
           }
@@ -149,18 +161,6 @@
         }
 
         > div img {
-          // @include media-breakpoint-up(xl) {
-          //   transform: scale(140%) translate(25%, 16%) rotate(34deg);
-          // }
-
-          // @include media-breakpoint-between(lg, xl) {
-          //   transform: scaleX(-1) scale(115%) translate(-9%, 3%) rotate(-28deg);
-          // }
-
-          // @include media-breakpoint-between(md, lg) {
-          //   transform: scale(139%) translate(-3%, -4%) rotate(10deg);
-          // }
-
           @include media-breakpoint-between(sm, md) {
             transform: scale(105%) translate(5%, -2%);
           }
@@ -290,19 +290,23 @@
 
         > div img {
           @include media-breakpoint-up(xxl) {
-            transform: scaleX(-1) scale(140%) translate(-31%, 7%) rotate(10deg);
+            transform: scale(140%) translate(28%, 17%) rotate(31deg);
           }
 
-          @include media-breakpoint-between(lg, xxl) {
-            transform: scaleX(-1) scale(115%) translate(-29%, 11%) rotate(10deg);
+          @include media-breakpoint-between(xl, xxl) {
+            transform: scale(130%) translate(41%, 12%) rotate(33deg);
+          }
+
+          @include media-breakpoint-between(lg, xl) {
+            transform: scale(115%) translate(34%, 24%) rotate(33deg);
           }
 
           @include media-breakpoint-between(md, lg) {
-            transform: scale(110%) translate(8%, 17%) rotate(10deg);
+            transform: scale(143%) translate(-3%, -20%) rotate(20deg);
           }
 
           @include media-breakpoint-between(sm, md) {
-            transform: scale(131%) translate(13%, -1%) rotate(10deg);
+            transform: scale(131%) translate(0%, -13%) rotate(24deg);
           }
 
           @include media-breakpoint-down(sm) {
