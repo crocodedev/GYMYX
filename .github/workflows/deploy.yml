@@ -28,6 +28,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             cd /var/www/gymyx-front
+            git reset --hard HEAD
             git pull origin main
             npm install --production
             npm run build
