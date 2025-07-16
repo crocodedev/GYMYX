@@ -31,4 +31,4 @@ jobs:
             git pull origin main
             npm install --production
             npm run build
-            sudo pm2 restart gymyx-front
+            sudo pm2 restart gymyx-front --update-env
