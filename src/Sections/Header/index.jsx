@@ -14,7 +14,7 @@ import { usePathname } from 'next/navigation';
 import { getFioShort } from '@/Utils/helpers';
 
 const Header = ({ isLanding = false, data }) => {
-  const sesstion = useSession();
+  const session = useSession();
   const pathname = usePathname();
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [userData, setUserData] = useState(null);
@@ -29,20 +29,20 @@ const Header = ({ isLanding = false, data }) => {
   };
 
   useEffect(() => {
-    if (sesstion?.status === 'authenticated' && sesstion?.data?.user?.full_name) {
+    if (session?.status === 'authenticated' && session?.data?.user?.full_name) {
       setUserData({
         isLogined: true,
-        fio: getFioShort(sesstion?.data?.user?.full_name),
-        image: sesstion?.data?.user?.image,
+        fio: getFioShort(session?.data?.user?.full_name),
+        image: session?.data?.user?.image,
       });
 
-      if (sesstion && sesstion?.data?.user?.email !== null) {
+      if (session && session?.data?.user?.email !== null) {
         setDisableLink(false);
       } else {
         setDisableLink(true);
       }
     }
-  }, [sesstion]);
+  }, [session]);
 
   if (!fields) return null;
 
@@ -126,7 +126,7 @@ const Header = ({ isLanding = false, data }) => {
           <span></span>
         </div>
       </div>
-      <MobileMenu toggleVisibility={handleMobileMenuToggle} items={menu} isShow={isMobileMenuOpen} />
+        <MobileMenu toggleVisibility={handleMobileMenuToggle} items={menu} isShow={isMobileMenuOpen} />
     </header>
   ) : null;
 };

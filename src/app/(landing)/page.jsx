@@ -1,13 +1,17 @@
-import Hero from '@/Sections/landing/Hero';
-import AboutUs from '@/Sections/landing/AboutUs';
-import Advantages from '@/Sections/landing/Advantages';
-import Prices from '@/Sections/landing/Prices';
-import ChooseHealth from '@/Sections/landing/ChooseHealth';
-import Equipment from '@/Sections/landing/Equipment';
-import Map from '@/Sections/landing/Map';
-import Faq from '@/Sections/landing/Faq';
-import Studio from '@/Sections/landing/Studio';
-import Trainers from '@/Sections/landing/Trainers';
+import dynamic from 'next/dynamic';
+
+const Header = dynamic(() => import('@/Sections/Header'));
+const Hero = dynamic(() => import('@/Sections/landing/Hero'));
+const AboutUs = dynamic(() => import('@/Sections/landing/AboutUs'));
+const Advantages = dynamic(() => import('@/Sections/landing/Advantages'));
+const Prices = dynamic(() => import('@/Sections/landing/Prices'));
+const ChooseHealth = dynamic(() => import('@/Sections/landing/ChooseHealth'));
+const Equipment = dynamic(() => import('@/Sections/landing/Equipment'));
+const Map = dynamic(() => import('@/Sections/landing/Map'));
+const Faq = dynamic(() => import('@/Sections/landing/Faq'));
+const Studio = dynamic(() => import('@/Sections/landing/Studio'));
+const Trainers = dynamic(() => import('@/Sections/landing/Trainers'));
+const Footer = dynamic(() => import('@/Sections/landing/Footer'));
 
 async function getData() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pages/index`, {
@@ -40,6 +44,8 @@ export default async function Home() {
   const { data } = await getData();
 
   const sections = data.modules.map((section) => section);
+  const headerData = data.modules.find((item) => item.alias === 'header');
+  const footerData = data.modules.find((item) => item.alias === 'footer');
 
   const SECTIONS_RENDER = sections
     ? sections.map(({ name, alias, fields }) => {
@@ -50,5 +56,11 @@ export default async function Home() {
       })
     : null;
 
-  return <>{SECTIONS_RENDER}</>;
+  return <>
+    <Header isLanding={true} data={headerData} />
+    <main className="main">
+      {SECTIONS_RENDER}
+    </main>
+    <Footer data={footerData} />
+  </>;
 }
