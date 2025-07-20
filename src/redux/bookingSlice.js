@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
   gym: {},
+  gyms: [],
   visitDate: {
     value: "",
     time: [],
