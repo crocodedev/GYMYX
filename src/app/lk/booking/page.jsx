@@ -32,13 +32,11 @@ const Booking = () => {
   const { data: sessionData } = useSession();
   const hasFetchedGyms = useRef(false);
   const [showModal, setShowModal] = useState(false);
-  const [gyms, setGyms] = useState([{}]);
+  const [gyms, setGyms] = useState([]);
   const [loading, setLoading] = useState(true);
   const activeGymAxios = useSelector((state) => state.booking.gym);
   const [activeGym, setActiveGym] = useState(activeGymAxios);
-
-  const handlerOpenModal = () => setShowModal(true);
-  const handlerCloseModal = () => setShowModal(false);
+  const [isShowGyms, setIsShowGyms] = useState(false)
 
   const updateGym = (gym, gyms) => {
     dispatch(
@@ -57,14 +55,13 @@ const Booking = () => {
   const handleChangeGym = (gym) => {
     setActiveGym(gym)
     updateGym(gym, gyms)
-    setShowModal(false)
+    setIsShowGyms(false)
   };
 
   useEffect(() => {
     if (sessionData && !hasFetchedGyms.current) {
       hasFetchedGyms.current = true;
-      getGyms(sessionData?.user?.accessToken)
-        .then(({ data }) => {
+      getGyms(sessionData?.user?.accessToken).then(({ data }) => {
           if (data.length > 0) {
             setGyms(data);
             const existingGym = data.find((gym) => gym.id === activeGymAxios?.id);
@@ -73,7 +70,7 @@ const Booking = () => {
             } else {
               setActiveGym(data[0])
               if (data.length > 1) {
-                setShowModal(true);
+                setIsShowGyms(true);
               } else {
                 updateGym(data[0], data)
               }
@@ -82,7 +79,26 @@ const Booking = () => {
         setLoading(false);
       });
     }
+    
   }, [sessionData]);
+
+  const handleButtonClick = () => {
+    if(gyms.length > 1) setIsShowGyms(!isShowGyms)
+    else setShowModal(true)
+  }
+
+  const preparePlaceMarks = (gyms) => {
+    return gyms.map((gym, id) => {
+      const coords = !id ? '55.603095, 37.413754': '55.703095, 37.413754';
+      return {
+        id: gym.id,
+        coords,
+        name: gym.name || '',
+        description: gym.description,
+        address: gym.address,
+      };
+    });
+  };
 
   if (loading) {
     return <Loading full_screen={true} />;
@@ -91,14 +107,16 @@ const Booking = () => {
   return (
     <>
       {showModal && (
-        <BookingModal
-          closeModal={handlerCloseModal}
-          gyms={gyms}
-          activeGym={activeGym}
-          changeGym={handleChangeGym} />
+        <BookingModal closeModal={() => setShowModal(false)}/>
       )}
       <div className="booking-page__wrapper">
-        <BookingHero data={activeGym} handleButtonClick={handlerOpenModal} />
+        <BookingHero 
+          activeGym={activeGym} 
+          gyms={preparePlaceMarks(gyms)} 
+          isShowGyms={isShowGyms} 
+          handleButtonClick={handleButtonClick} 
+          handleChangeGym={handleChangeGym}
+        />
         <BookingVariants />
       </div>
     </>

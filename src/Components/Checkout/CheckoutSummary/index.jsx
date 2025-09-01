@@ -37,11 +37,7 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0, balance = 0 }) => {
   }, []);
 
   const handleChangeCanSubmit = () => {
-    setCanSubmit((prev) => {
-      const newValue = !prev;
-      localStorage.setItem('agreedToPolicy', newValue.toString());
-      return newValue
-    })
+    setCanSubmit(!canSubmit)
   }
 
   const totalPrice = useMemo(() => {
