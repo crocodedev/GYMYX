@@ -68,6 +68,7 @@
 
   &:nth-of-type(3) .About-us-item__img {
     @include media-breakpoint-down(lg) {
+      height: 120%;
       left: 0;
     }
 
@@ -81,8 +82,8 @@
       background: linear-gradient(180deg, #2949e700 0%, #294ae7 50%, #294ae7 100%);
 
       @include media-breakpoint-down(lg) {
-        top: 0;
-        height: 75%;
+        bottom: 0;
+        height: 120%;
       }
 
       @include media-breakpoint-up(lg) {
@@ -99,6 +100,7 @@
 
     @include media-breakpoint-down(lg) {
       top: 0;
+      height: 100%;
     }
 
     @include media-breakpoint-up(lg) {
