@@ -95,7 +95,8 @@ const Booking = () => {
         name: gym.name || '',
         description: gym.description,
         address: gym.address,
-        city: gym.geo_data.city || ''
+        city: gym.geo_data.city || '',
+        image: gym.image
       };
     });
   };

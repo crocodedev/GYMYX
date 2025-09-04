@@ -69,16 +69,17 @@
   position: relative;
   overflow: hidden;
   height: 100%;
-  background: linear-gradient(270deg, rgba(255, 255, 255, 0) -13%, #294ae7 100.21%);
   transition: 0.5s;
 
   @include media-breakpoint-down(lg) {
     padding: 15px 17px 19px;
     height: 310px;
+    background: linear-gradient(348deg, rgba(255, 255, 255, 0) 30.19%, rgba(41, 74, 231, 0.53) 45.33%, #294AE7 70.75%);
   }
 
   @include media-breakpoint-up(lg) {
     padding: 30px 30px 32px;
+    background: linear-gradient(342deg, rgba(255, 255, 255, 0) 30.19%, rgba(41, 74, 231, 0.53) 45.33%, #294AE7 67.75%);
   }
 
   &__bg {
