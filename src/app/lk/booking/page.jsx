@@ -88,14 +88,14 @@ const Booking = () => {
   }
 
   const preparePlaceMarks = (gyms) => {
-    return gyms.map((gym, id) => {
-      const coords = !id ? '55.603095, 37.413754': '55.703095, 37.413754';
+    return gyms.map((gym) => {
       return {
         id: gym.id,
-        coords,
+        coords: `${gym.geo_data.geo_point.latitude}, ${gym.geo_data.geo_point.longitude}`,
         name: gym.name || '',
         description: gym.description,
         address: gym.address,
+        city: gym.geo_data.city || ''
       };
     });
   };

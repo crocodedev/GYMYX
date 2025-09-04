@@ -36,7 +36,7 @@ const BookingMap = ({currentGym, Placemarks, updateData}) => {
 
   const toGym = () => {
     const map = mapRef.current;
-    map?.panTo(getCoords(currentGym?.coords), { flying: true, duration: 5000});
+    map?.panTo(getCoords(currentGym?.coords), { flying: false, duration: 800, safe: false, timingFunction: 'ease-in-out'});
   }
 
   useEffect(() => {
@@ -49,7 +49,7 @@ const BookingMap = ({currentGym, Placemarks, updateData}) => {
         <Map 
           defaultState={{
             center: getCoords(currentGym?.coords),
-            zoom: 13,
+            zoom: 15,
           }}
           width="100%" 
           height="100%"
