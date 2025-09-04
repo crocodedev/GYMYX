@@ -2,19 +2,21 @@
 
 import Button from '@/Components/Button';
 import Container from '@/Components/Container';
-import SectionTitle from '@/Components/SectionTitle';
 import Image from 'next/image';
 import styles from './BookingHero.module.scss';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import useScreenSize from '@/hooks/useScreenSize';
 import BookingMap from '../BookingMap';
 
 const BookingHero = ({ activeGym, gyms, isShowGyms, handleButtonClick, handleChangeGym }) => {
   const findActiveGym = gyms.find(gym => gym.id == activeGym.id)
 
   const [selectGym, setSelectGym] = useState(findActiveGym || {})
-  const [placeMarks, setPlaceMarks] = useState([]);
+  const [placeMarks, setPlaceMarks] = useState(gyms);
   const [isOpenMap, setIsOpenMap] = useState(false)
   const [isShowMap, setIsShowMap] = useState(false)
+  const gymsList = useRef(null)
+  const { isMobile } = useScreenSize()
 
   const updateData = (objData) => {
     setPlaceMarks((prev) => {
@@ -27,10 +29,6 @@ const BookingHero = ({ activeGym, gyms, isShowGyms, handleButtonClick, handleCha
       return prev;
     });
   };
-
-  useEffect(() => {
-    setPlaceMarks(gyms);
-  }, []);
 
   useEffect(() => {
     if (isShowGyms) {
@@ -64,17 +62,25 @@ const BookingHero = ({ activeGym, gyms, isShowGyms, handleButtonClick, handleCha
               <Image src={activeGym.image?.src || '/images/hero.png'} alt="gym image" width={1600} height={390} loading="lazy" />
             </div>
             <div className={styles['preview__content']}>
-              <SectionTitle align="left" title={activeGym.name} />
-              <p className={styles['preview__text']}>{activeGym.description}</p>
-              <div className={styles['preview__content-inner-wrapper']}>
-                <p className={styles['preview__address']}>{activeGym.address}</p>
-                <Button onClick={handleButtonClick} variant="blue" size="m" label={'Изменить зал'} />
+              <p className={styles.preview__title}>{activeGym.name}</p>
+              <div className={styles.preview__info}>
+                <span className={styles.preview__address}>{activeGym.address}</span>
+                <span className={styles.preview__city}>{activeGym?.city || 'г. Москва'}</span>
               </div>
+              <Button className={styles.preview__button} onClick={handleButtonClick} variant="blue" size="none" label={'Изменить стидию'} />
             </div>
           </div>
         </div>
-        <div className={`${styles['gym-list']} ${isShowGyms ? styles['gym-list--show'] : styles['gym-list--hidden']}`}>
-          <div className={styles['gym-list__inner']}>
+        <div 
+          className={`${styles['gym-list']} ${isShowGyms ? styles['gym-list--show'] : styles['gym-list--hidden']}`}
+          style={isMobile 
+            ? isShowGyms && gymsList.current 
+              ? { height: gymsList.current.scrollHeight }
+              : { height: '0px'}
+            : null
+          }
+        >
+          <div className={styles['gym-list__inner']} ref={gymsList}>
             <ul className={styles['gym-list__items']}>
               {gyms.map((gym, i) => (
                 <li className={`${styles['gym-list__item']} ${selectGym?.id === gym.id ? styles['gym-list__item--active'] : ''}`} key={i}>
