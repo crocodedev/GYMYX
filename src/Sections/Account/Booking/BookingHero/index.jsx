@@ -9,7 +9,6 @@ import useScreenSize from '@/hooks/useScreenSize';
 import BookingMap from '../BookingMap';
 
 const BookingHero = ({ activeGym, gyms, isShowGyms, handleButtonClick, handleChangeGym }) => {
-  console.log(activeGym)
   const findActiveGym = gyms.find(gym => gym.id == activeGym.id)
 
   const [selectGym, setSelectGym] = useState(findActiveGym || {})
