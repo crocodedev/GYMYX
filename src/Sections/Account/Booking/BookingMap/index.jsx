@@ -26,7 +26,12 @@ const BookingMap = ({currentGym, Placemarks, updateData}) => {
         const { latitude, longitude } = position.coords;
         const objData = {
           id: 'curPosition',
-          coords: `${latitude}, ${longitude}`,
+          geo_data: {
+            geo_point: {
+              latitude,
+              longitude
+            }
+          }
         };
         map.panTo([latitude, longitude], { flying: true });
         updateData(objData);
@@ -36,7 +41,7 @@ const BookingMap = ({currentGym, Placemarks, updateData}) => {
 
   const toGym = () => {
     const map = mapRef.current;
-    map?.panTo(getCoords(currentGym?.coords), { flying: false, duration: 800, safe: false, timingFunction: 'ease-in-out'});
+    map?.panTo(getCoords(`${currentGym?.geo_data?.geo_point.latitude}, ${currentGym?.geo_data?.geo_point.longitude}`), { flying: false, duration: 800, safe: false, timingFunction: 'ease-in-out'});
   }
 
   useEffect(() => {
@@ -48,7 +53,7 @@ const BookingMap = ({currentGym, Placemarks, updateData}) => {
       <YMaps>
         <Map 
           defaultState={{
-            center: getCoords(currentGym?.coords),
+            center: getCoords(`${currentGym?.geo_data?.geo_point.latitude}, ${currentGym?.geo_data?.geo_point.longitude}`),
             zoom: 15,
           }}
           width="100%" 
@@ -62,12 +67,12 @@ const BookingMap = ({currentGym, Placemarks, updateData}) => {
             mapRef.current = map;
           }}
         >
-          {Placemarks?.map(({ id, coords }) => (
+          {Placemarks?.map((item) => (
             <Placemark
-              key={id}
-              geometry={getCoords(coords)}
+              key={item.id}
+              geometry={getCoords(`${item?.geo_data?.geo_point.latitude}, ${item?.geo_data?.geo_point.longitude}`)}
               options={
-                id === 'curPosition'
+                item.id === 'curPosition'
                   ? createSvgMarkerCurPosition()
                   : createSvgMarker()
               }

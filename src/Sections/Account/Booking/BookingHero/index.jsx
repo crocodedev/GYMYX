@@ -10,7 +10,6 @@ import BookingMap from '../BookingMap';
 
 const BookingHero = ({ activeGym, gyms, isShowGyms, handleButtonClick, handleChangeGym }) => {
   const findActiveGym = gyms.find(gym => gym.id == activeGym.id)
-
   const [selectGym, setSelectGym] = useState(findActiveGym || {})
   const [placeMarks, setPlaceMarks] = useState(gyms);
   const [isOpenMap, setIsOpenMap] = useState(false)
@@ -67,7 +66,7 @@ const BookingHero = ({ activeGym, gyms, isShowGyms, handleButtonClick, handleCha
                 <span className={styles.preview__address}>{activeGym.address}</span>
                 <span className={styles.preview__city}>{activeGym?.city || ''}</span>
               </div>
-              <Button className={styles.preview__button} onClick={handleButtonClick} variant="blue" size="none" label={'Изменить стидию'} />
+              <Button className={styles.preview__button} onClick={handleButtonClick} variant="blue" size="none" label={'Изменить студию'} />
             </div>
           </div>
         </div>
@@ -93,7 +92,6 @@ const BookingHero = ({ activeGym, gyms, isShowGyms, handleButtonClick, handleCha
             </ul>
             <Button 
               className={styles['gym-list__button']} 
-              disabled={selectGym.id == activeGym.id} 
               size='static' 
               label={'Сохранить'} 
               variant='blue-gradient'

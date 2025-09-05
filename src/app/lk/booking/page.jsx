@@ -87,20 +87,6 @@ const Booking = () => {
     else setShowModal(true)
   }
 
-  const preparePlaceMarks = (gyms) => {
-    return gyms.map((gym) => {
-      return {
-        id: gym.id,
-        coords: `${gym.geo_data.geo_point.latitude}, ${gym.geo_data.geo_point.longitude}`,
-        name: gym.name || '',
-        description: gym.description,
-        address: gym.address,
-        city: gym.geo_data.city || '',
-        image: gym.image
-      };
-    });
-  };
-
   if (loading) {
     return <Loading full_screen={true} />;
   }
@@ -113,7 +99,7 @@ const Booking = () => {
       <div className="booking-page__wrapper">
         <BookingHero 
           activeGym={activeGym} 
-          gyms={preparePlaceMarks(gyms)} 
+          gyms={gyms} 
           isShowGyms={isShowGyms} 
           handleButtonClick={handleButtonClick} 
           handleChangeGym={handleChangeGym}

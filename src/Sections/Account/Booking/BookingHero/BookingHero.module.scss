@@ -199,10 +199,6 @@
     align-self: flex-end;
     border-radius: 50px;
 
-    @include media-breakpoint-down(md) {
-      width: 100%;
-    }
-
     @include media-breakpoint-down(lg) {
       padding: 10.5px 15.59px;
       font-size: 17px;
