@@ -1,7 +1,5 @@
 'use client';
 
-import Button from '@/Components/Button';
-import Modal from '@/Components/Modal';
 import BookingSignUpHeading from '@/Sections/Account/Booking/BookingSignUpHeading';
 import BookingCalendar from '@/Sections/Account/Booking/BookingCalendar';
 import BookingSteps from '@/Sections/Account/Booking/BookingSteps';
@@ -82,6 +80,7 @@ const BookingSignUp = () => {
       <BookingSignUpHeading
         handleChangeGym={() => setShowModal((prev) => !prev)}
         gymTitle={gym?.name}
+        showButtonEditGym={false}
         headingTitle={'Запишитесь на тренировки'}
       />
       <BookingSignUpContent gymTitle={gym?.name} handleChangeGym={() => setShowModal((prev) => !prev)}>

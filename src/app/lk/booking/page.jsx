@@ -69,10 +69,9 @@ const Booking = () => {
               updateGym(existingGym, data)
             } else {
               setActiveGym(data[0])
-              if (data.length > 1) {
+              updateGym(data[0], data)
+              if (data?.length > 1) {
                 setIsShowGyms(true);
-              } else {
-                updateGym(data[0], data)
               }
             }
           }

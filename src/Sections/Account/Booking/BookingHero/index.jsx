@@ -9,7 +9,7 @@ import useScreenSize from '@/hooks/useScreenSize';
 import BookingMap from '../BookingMap';
 
 const BookingHero = ({ activeGym, gyms, isShowGyms, handleButtonClick, handleChangeGym }) => {
-  const findActiveGym = gyms.find(gym => gym.id == activeGym.id)
+  const findActiveGym = gyms.find(gym => gym?.id == activeGym?.id)
   const [selectGym, setSelectGym] = useState(findActiveGym || {})
   const [placeMarks, setPlaceMarks] = useState(gyms);
   const [isOpenMap, setIsOpenMap] = useState(false)
@@ -58,13 +58,13 @@ const BookingHero = ({ activeGym, gyms, isShowGyms, handleButtonClick, handleCha
           )}
           <div className={styles['preview']}>
             <div className={styles['preview__bg']}>
-              <Image src={activeGym.image?.src || '/images/hero.png'} alt="gym image" width={1600} height={390} loading="lazy" />
+              <Image src={activeGym?.image?.src || '/images/hero.png'} alt="gym image" width={1600} height={390} loading="lazy" />
             </div>
             <div className={styles['preview__content']}>
-              <p className={styles.preview__title}>{activeGym.name}</p>
+              <p className={styles.preview__title}>{activeGym?.name}</p>
               <div className={styles.preview__info}>
-                <span className={styles.preview__address}>{activeGym.address}</span>
-                <span className={styles.preview__city}>{activeGym?.city || ''}</span>
+                <span className={styles.preview__address}>{activeGym?.address}</span>
+                <span className={styles.preview__city}>{activeGym?.geo_data?.city || ''}</span>
               </div>
               <Button className={styles.preview__button} onClick={handleButtonClick} variant="blue" size="none" label={'Изменить студию'} />
             </div>
