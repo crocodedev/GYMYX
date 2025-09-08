@@ -1,0 +1,12 @@
+@use 'sass:math';
+
+@function fluid-size($min-size, $max-size, $min-width: 320, $max-width: 1920) {
+  @return clamp(
+    #{math.div($min-size, 16)}rem,
+    calc(
+      #{math.div($min-size, 16)}rem + (#{$max-size} - #{$min-size}) *
+        (100vw - #{$min-width}px) / (#{$max-width} - #{$min-width})
+    ),
+    #{math.div($max-size, 16)}rem
+  );
+}

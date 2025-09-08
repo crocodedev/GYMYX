@@ -1,32 +1,85 @@
-@import '@/styles/mixins.scss';
-
 .booking-hero {
   position: relative;
+}
 
-  &__wrapper {
-    position: relative;
-    overflow: hidden;
-    background: linear-gradient(270deg, rgba(255, 255, 255, 0) -13%, #294ae7 100.21%);
+.container {
+  display: flex;
+  height: 100%;
 
-    @include media-breakpoint-down(lg) {
-      padding: 15px 17px 19px;
-      border-radius: 15px;
-    }
+  @include media-breakpoint-up(xxxl) {
+    min-height: 425px;
+  }
+  
+  @include media-breakpoint-between(lg, xxxl) {
+    min-height: fluid-size(325, 420);
+    max-height: fluid-size(325, 420);
+  }
 
-    @include media-breakpoint-between(lg, xxl) {
-      padding: 25px;
-      border-radius: 20px;
-    }
+  @include media-breakpoint-down(lg) {
+    flex-direction: column;
+  }
+}
 
-    @include media-breakpoint-between(xxl, xxxl) {
-      padding: 30px 30px 32px 30px;
-      border-radius: 22.5px;
-    }
+.main-card {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  transition: 0.5s;
 
-    @include media-breakpoint-up(xxxl) {
-      padding: 40px 40px 45px 40px;
-      border-radius: 30px;
-    }
+  @include media-breakpoint-down(lg) {
+    border-radius: 15px;
+    height: 310px;
+  }
+
+  @include media-breakpoint-between(lg, xxl) {
+    border-radius: 20px;
+  }
+
+  @include media-breakpoint-between(xxl, xxxl) {
+    border-radius: 22.5px;
+  }
+
+  @include media-breakpoint-up(xxxl) {
+    border-radius: 30px;
+  }
+}
+
+.map {
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  &--hidden {
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.3s;
+  }
+
+  &--show {
+    visibility: visible;
+    opacity: 1;
+    transition: .5s;
+  }
+}
+
+.preview {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  transition: 0.5s;
+
+  @include media-breakpoint-down(lg) {
+    padding: 15px 17px 19px;
+    height: 310px;
+    background: linear-gradient(348deg, rgba(255, 255, 255, 0) 30.19%, rgba(41, 74, 231, 0.53) 45.33%, #294AE7 70.75%);
+  }
+
+  @include media-breakpoint-up(lg) {
+    padding: 30px 30px 32px;
+    background: linear-gradient(342deg, rgba(255, 255, 255, 0) 30.19%, rgba(41, 74, 231, 0.53) 45.33%, #294AE7 67.75%);
   }
 
   &__bg {
@@ -44,109 +97,334 @@
     }
   }
 
-  &__text {
-    color: var(--white, #fff);
-    font-weight: 500;
-    line-height: 112%;
-    width: 100%;
+  &__content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    @include media-breakpoint-up(lg) {
+      gap: 20px;
+    }
 
     @include media-breakpoint-down(lg) {
-      font-size: 16px;
-      letter-spacing: -0.16px;
-      margin-top: 30px;
+      gap: 15px;
     }
+  }
 
-    @include media-breakpoint-down(sm) {
-      max-width: 230px;
-    }
+  &__title {
+    font-weight: 600;
+    line-height: 120%;
+    color: #fff;
 
-    @include media-breakpoint-between(sm, md) {
-      max-width: 65%;
-    }
-
-    @include media-breakpoint-between(md, lg) {
-      max-width: 57%;
+    @include media-breakpoint-down(lg) {
+      font-size: 28px;
     }
 
     @include media-breakpoint-between(lg, xl) {
-      max-width: 65%;
-    }
-
-    @include media-breakpoint-between(lg, xxl) {
-      margin-top: 50px;
-      font-size: 28px;
-      letter-spacing: -0.4px;
+      font-size: 30px;
     }
 
     @include media-breakpoint-between(xl, xxl) {
-      max-width: 55%;
+      font-size: 36px;
     }
 
     @include media-breakpoint-between(xxl, xxxl) {
-      font-size: 30px;
-      margin-top: 82.5px;
+      font-size: 48px;
     }
 
     @include media-breakpoint-up(xxxl) {
-      margin-top: 75px;
-      font-size: 40px;
-      letter-spacing: -0.4px;
+      font-size: 66px;
+    }
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 auto;
+
+    @include media-breakpoint-down(xxl) {
+      gap: 5px;
     }
 
-    @include media-breakpoint-between(xxl, xxxl) {
-      max-width: 65%;
-    }
-
-    @include media-breakpoint-up(xxxl) {
-      max-width: 50%;
+    @include media-breakpoint-up(xxl) {
+      gap: 8px;
     }
   }
 
   &__address {
-    color: var(--white, #fff);
     font-weight: 500;
-    line-height: 135%;
-    max-width: 521px;
+    line-height: 112%;
     width: 100%;
+    color: #fff;
 
     @include media-breakpoint-down(lg) {
-      font-size: 12px;
-      margin-bottom: 65px;
-      max-width: 260px;
-    }
-
-    @include media-breakpoint-up(lg) {
-      max-width: 521px;
+      font-size: 16px;
     }
 
     @include media-breakpoint-between(lg, xxl) {
       font-size: 20px;
     }
 
-    @include media-breakpoint-up(xxl) {
-      font-size: 26px;
-    }
-  }
-
-  &__content-inner-wrapper {
-    display: flex;
-    justify-content: space-between;
-
-    @include media-breakpoint-down(lg) {
-      flex-direction: column;
-      margin-top: 12px;
-    }
-
-    @include media-breakpoint-up(lg) {
-      align-items: center;
-    }
-
-    @include media-breakpoint-between(lg, xxxl) {
-      margin-top: 22px;
+    @include media-breakpoint-between(xxl, xxxl) {
+      font-size: 30px;
     }
 
     @include media-breakpoint-up(xxxl) {
-      margin-top: 30px;
+      font-size: 40px;
     }
+  }
+
+  &__city {
+    font-weight: 500;
+    color: #fff;
+
+    @include media-breakpoint-down(lg) {
+      font-size: 12px;
+    }
+
+    @include media-breakpoint-between(xl, xxl) {
+      font-size: 18px;
+    }
+
+    @include media-breakpoint-between(xxl, xxxl) {
+      font-size: 24px;
+    }
+
+    @include media-breakpoint-up(xxxl) {
+      font-size: 30px;
+    }
+  }
+
+  &__button {
+    align-self: flex-end;
+    border-radius: 50px;
+
+    @include media-breakpoint-down(lg) {
+      padding: 10.5px 15.59px;
+      font-size: 17px;
+    }
+
+    @include media-breakpoint-between(lg, xxxl) {
+      padding: 10px 20px;
+      font-size: 20px;
+    }
+
+    @include media-breakpoint-up(xxxl) {
+      padding: 14px 28px;
+      font-size: 28px;
+    }
+  }
+}
+
+.gym-list {
+  overflow: hidden;
+  transition: 0.4s;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(151, 150, 150, 0.1) 100%);
+
+  @include media-breakpoint-down(lg) {
+    border-radius: 15px;
+  }
+
+  @include media-breakpoint-between(lg, xxl) {
+    border-radius: 20px;
+  }
+
+  @include media-breakpoint-between(xxl, xxxl) {
+    border-radius: 22.5px;
+  }
+
+  @include media-breakpoint-up(xxxl) {
+    border-radius: 30px;
+  }
+
+  &--show {
+    @include media-breakpoint-up(lg) {
+      flex: 1 0 auto;
+    }
+
+    @include media-breakpoint-up(xxxl) {
+      width: 400px;
+      margin-left: 40px;
+    }
+
+    @include media-breakpoint-between(xxl, xxxl) {
+      width: 350px;
+      margin-left: 30px;
+    }
+
+    @include media-breakpoint-between(lg, xxl) {
+      width: 300px;
+      margin-left: 30px;
+    }
+
+    @include media-breakpoint-down(lg) {
+      flex: 1 0 auto;
+      margin-top: 20px;
+    }
+  }
+
+  &--hidden {
+    @include media-breakpoint-up(lg) {
+      width: 0px
+    }
+
+    @include media-breakpoint-down(lg) {
+      // height: 0px
+    }
+  }
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @include media-breakpoint-up(xl) {
+      padding: 25px 30px;
+      gap: 22px;
+    }
+
+    @include media-breakpoint-down(xl) {
+      padding: 18px 20px;
+      gap: 15px;
+    }
+
+    @include media-breakpoint-up(lg) {
+      overflow: hidden;
+      height: 100%;
+    }
+    
+    @include media-breakpoint-up(xxxl) {
+      width: 400px;
+    }
+
+    @include media-breakpoint-between(xxl, xxxl) {
+      width: 350px;
+    }
+
+    @include media-breakpoint-between(lg, xxl) {
+      width: 300px;
+    }
+  }
+
+  &__items {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    list-style: none;
+    max-height: content;
+    height: 100%;
+    background-color: #212428;
+
+    &::-webkit-scrollbar {
+      width: 3px;
+    }
+
+    &::-webkit-scrollbar-button {
+      display: none;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #294ae7;
+      border-radius: 50px;
+    }
+
+    @include media-breakpoint-up(lg) {
+      padding: 15px 18px 18px;
+      border-radius: 11.25px;
+      overflow: auto;
+    }
+
+    @include media-breakpoint-down(lg) {
+      padding: 12px 13px;
+      border-radius: 7px;
+      // overflow: auto;
+    }
+  }
+
+  &__item {
+    padding-right: 22px;
+    opacity: 0.9;
+
+    &--active {
+      position: relative;
+      opacity: 1;
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 8px;
+        right: 0;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background-color: white;
+      }
+
+      & .gym-list__item-name,
+      & .gym-list__item-address {
+        font-weight: 800;
+      }
+    }
+
+    &-btn {
+      width: 100%;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+
+    &-name {
+      font-weight: 500;
+      line-height: 135%;
+      color: white;
+
+      @include media-breakpoint-up(xxxl) {
+        font-size: 26px;
+      }
+
+      @include media-breakpoint-between(xxl, xxxl) {
+        font-size: 24px;
+      }
+
+      @include media-breakpoint-between(xl, xxl) {
+        font-size: 20px;
+      }
+
+      @include media-breakpoint-between(lg, xl) {
+        font-size: 18px;
+      }
+      @include media-breakpoint-down(lg) {
+        font-size: 16px;
+      }
+    }
+
+    &-address {
+      font-weight: 500;
+      color: white;
+
+      @include media-breakpoint-up(xxxl) {
+        font-size: 18px;
+      }
+
+      @include media-breakpoint-between(xl, xxxl) {
+        font-size: 16px;
+      }
+
+      @include media-breakpoint-between(lg, xl) {
+        font-size: 14px;
+      }
+
+      @include media-breakpoint-down(lg) {
+        font-size: 12px;
+      }
+    }
+  }
+
+  &__button {
+    width: 100%;
   }
 }

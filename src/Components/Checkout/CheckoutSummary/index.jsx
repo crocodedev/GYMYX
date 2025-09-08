@@ -29,6 +29,17 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0, balance = 0 }) => {
   const [paidData, setPaidData] = useState({})
   const [isLoad, setIsLoad] = useState(false)
 
+  useEffect(() => {
+    const stored = localStorage.getItem('agreedToPolicy');
+    if (stored === 'true') {
+      setCanSubmit(true);
+    }
+  }, []);
+
+  const handleChangeCanSubmit = () => {
+    setCanSubmit(!canSubmit)
+  }
+
   const totalPrice = useMemo(() => {
     return items.reduce((acc, el, i) => {
       return acc + el.time.reduce((acc, el, id) => {
@@ -231,7 +242,7 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0, balance = 0 }) => {
         )}
         </div>
         
-        <CheckoutConfirm handleChangeCanSubmit={() => setCanSubmit((prev) => !prev)} isActive={canSubmit} />
+        <CheckoutConfirm handleChangeCanSubmit={handleChangeCanSubmit} isActive={canSubmit} />
         {error && <p className={styles['checkout-summary__summary-error']}>Произошла ошибка</p>}
         
       </div>
