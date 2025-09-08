@@ -26,3 +26,4 @@ export const CrossIcon = () => (
     <path d="M1.875 1.034L16.8067 15.9657" stroke="currentColor" strokeWidth="2.82198"/>
   </svg>
 )
+

@@ -11,6 +11,10 @@ const nextConfig = {
   }),
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
+    additionalData: `
+      @use "@/styles/mixins" as *;
+      @use "@/styles/_functions" as *;
+    `,
   },
   images: {
     minimumCacheTTL: 2678400,
@@ -18,7 +22,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'workspace.gymyx.ru',
+        hostname: 'gymyx.dev.crocodelab.com',
         pathname: '**',
       },
     ],
