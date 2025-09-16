@@ -70,16 +70,20 @@
   overflow: hidden;
   height: 100%;
   transition: 0.5s;
-
-  @include media-breakpoint-down(lg) {
-    padding: 15px 17px 19px;
-    height: 310px;
-    background: linear-gradient(348deg, rgba(255, 255, 255, 0) 30.19%, rgba(41, 74, 231, 0.53) 45.33%, #294AE7 70.75%);
-  }
+  background: linear-gradient(346.75deg, rgba(255, 255, 255, 0) 30.99%, rgba(41, 74, 231, 0.56) 51.33%, #294AE7 74.19%);
 
   @include media-breakpoint-up(lg) {
     padding: 30px 30px 32px;
-    background: linear-gradient(342deg, rgba(255, 255, 255, 0) 30.19%, rgba(41, 74, 231, 0.53) 45.33%, #294AE7 67.75%);
+  }
+
+  @include media-breakpoint-between(sm, lg) {
+    padding: 15px 17px 19px;
+    height: 310px;
+  }
+
+  @include media-breakpoint-down(sm) {
+    padding: 13px 12px;
+    height: 310px;
   }
 
   &__bg {
@@ -199,9 +203,9 @@
     align-self: flex-end;
     border-radius: 50px;
 
-    @include media-breakpoint-down(lg) {
-      padding: 10.5px 15.59px;
-      font-size: 17px;
+    @include media-breakpoint-up(xxxl) {
+      padding: 14px 28px;
+      font-size: 28px;
     }
 
     @include media-breakpoint-between(lg, xxxl) {
@@ -209,9 +213,13 @@
       font-size: 20px;
     }
 
-    @include media-breakpoint-up(xxxl) {
-      padding: 14px 28px;
-      font-size: 28px;
+    @include media-breakpoint-down(lg) {
+      padding: 10.5px 15.59px;
+      font-size: 17px;
+    }
+
+    @include media-breakpoint-down(sm) {
+      width: 100% !important;
     }
   }
 }
@@ -266,10 +274,6 @@
   &--hidden {
     @include media-breakpoint-up(lg) {
       width: 0px
-    }
-
-    @include media-breakpoint-down(lg) {
-      // height: 0px
     }
   }
 
@@ -338,7 +342,6 @@
     @include media-breakpoint-down(lg) {
       padding: 12px 13px;
       border-radius: 7px;
-      // overflow: auto;
     }
   }
 

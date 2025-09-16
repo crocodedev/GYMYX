@@ -66,7 +66,7 @@ const BookingHero = ({ activeGym, gyms, isShowGyms, handleButtonClick, handleCha
                 <span className={styles.preview__address}>{activeGym?.address}</span>
                 <span className={styles.preview__city}>{activeGym?.geo_data?.city || ''}</span>
               </div>
-              <Button className={styles.preview__button} onClick={handleButtonClick} variant="blue" size="none" label={'Изменить студию'} />
+              <Button className={styles.preview__button} onClick={handleButtonClick} variant="blue-gradient" size="none" label={'Изменить студию'} />
             </div>
           </div>
         </div>
