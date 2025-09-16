@@ -82,8 +82,22 @@ const BookingMap = ({currentGym, Placemarks, updateData}) => {
       </YMaps>
       
         <div className={styles.map__nav_zooms}>
-          <button type='button' className={styles.map__zoom} aria-label="Ближе +" onClick={() => handleZoom('in')}>+</button>
-          <button type='button' className={styles.map__zoom} aria-label="Дальше -" onClick={() => handleZoom('out')}>-</button>
+          <button 
+            type='button' 
+            className={styles.map__zoom} 
+            aria-label="Ближе +" 
+            onClick={() => handleZoom('in')}
+          >
+            <span className={styles.map__zoom_sign}>+</span>
+          </button>
+          <button 
+            type='button' 
+            className={styles.map__zoom} 
+            aria-label="Дальше -" 
+            onClick={() => handleZoom('out')}
+          >
+            <span className={styles.map__zoom_sign}>-</span>
+          </button>
         </div>
         <button onClick={handleGeolocation} className={styles.map__geo} aria-label="Геопозиция">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 67 67" fill="none">
