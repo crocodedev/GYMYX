@@ -2,7 +2,7 @@ import styles from "./BookingSignUpContent.module.scss"
 import Container from "@/Components/Container"
 import BookingGym from "../BookingGym"
 
-const BookingSignUpContent = ({ children, gymTitle, handleChangeGym, gymIsShow = true}) => {
+const BookingSignUpContent = ({ children, gymTitle, handleChangeGym, gymIsShow = true, gymIsShowButton = false}) => {
   return (
     <section className={styles["booking-signup-content"]}>
       <Container>
@@ -14,6 +14,7 @@ const BookingSignUpContent = ({ children, gymTitle, handleChangeGym, gymIsShow =
             classTitle={styles['booking-signup-content__gym']}
             gymTitle={gymTitle}
             handleChangeGym={handleChangeGym}
+            isShowButton={gymIsShowButton}
           />
         )}
       </Container>

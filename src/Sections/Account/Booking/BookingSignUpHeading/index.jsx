@@ -7,6 +7,7 @@ const BookingSignUpHeading = ({
   handleChangeGym,
   gymTitle,
   headingTitle,
+  isShowGymButton = false
 }) => {
   return (
     <section className={styles["booking-sign-up-heading"]}>
@@ -20,6 +21,7 @@ const BookingSignUpHeading = ({
               classTitle={styles['booking-sign-up-heading__gym']}
               gymTitle={gymTitle}
               handleChangeGym={handleChangeGym}
+              isShowButton={isShowGymButton}
             />
           )}
         </div>
