@@ -1,3 +1,5 @@
+import { v4 } from "uuid";
+
 export const getPackages = async (token) => {
   const result = await fetch('/api/package/get-all-packages', {
     cache: 'no-store',
@@ -19,6 +21,7 @@ export const buyPackage = async (token, package_id, split = false) => {
     cache: 'no-store',
     method: 'POST',
     headers: {
+      'Idempotency-Key': v4(),
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({token, package_id, split})

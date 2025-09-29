@@ -3,7 +3,6 @@
 import Button from '@/Components/Button';
 import styles from './CheckoutSummary.module.scss';
 import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
 import { useMemo, useState, useEffect } from 'react';
 import { createBooking, prepareDataForBooking, separation, combinedList } from './helpers';
 import CheckoutConfirm from '@/Components/Checkout/CheckoutConfirm';
@@ -11,7 +10,6 @@ import Modal from '@/Components/Modal';
 import { uniqueUserData } from '@/Utils/helpers';
 
 const CheckoutSummary = ({ items, gym, isActivePackage = 0, balance = 0 }) => {
-  const router = useRouter();
   const { data: sessionData } = useSession();
   const [canSubmit, setCanSubmit] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -28,13 +26,6 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0, balance = 0 }) => {
   })
   const [paidData, setPaidData] = useState({})
   const [isLoad, setIsLoad] = useState(false)
-
-  useEffect(() => {
-    const stored = localStorage.getItem('agreedToPolicy');
-    if (stored === 'true') {
-      setCanSubmit(true);
-    }
-  }, []);
 
   const handleChangeCanSubmit = () => {
     setCanSubmit(!canSubmit)
