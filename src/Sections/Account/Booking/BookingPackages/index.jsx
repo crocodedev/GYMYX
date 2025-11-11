@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 
-const BookingPackages = ({setLoadIsShow}) => {
+const BookingPackages = ({setLoadIsShow, gimId}) => {
   const [packages, setPackages] = useState(null)
   const [packageIdActive, setPackageIdActive] = useState(0)
   const { data: sessionData } = useSession();
@@ -44,8 +44,9 @@ const BookingPackages = ({setLoadIsShow}) => {
  
   useEffect(() => {
     setLoadIsShow(true)
-    if(sessionData?.user?.accessToken) {
-      getPackages(sessionData?.user?.accessToken).then(res => {
+    if(sessionData?.user?.accessToken && gimId) {
+      getPackages(sessionData?.user?.accessToken, gimId)
+      .then(res => {
         if(res?.data) {
           const sortPascages = res.data.sort((a,b) => {
             if(a.only_one > b.only_one) return -1
@@ -54,6 +55,9 @@ const BookingPackages = ({setLoadIsShow}) => {
           })
           setPackages(sortPascages)
           setLoadIsShow(false)
+        } else {
+          setLoadIsShow(false)
+          console.log('Error fetching packages')
         }
       })
     }

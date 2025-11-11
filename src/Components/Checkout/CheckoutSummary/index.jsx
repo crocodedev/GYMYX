@@ -3,6 +3,7 @@
 import Button from '@/Components/Button';
 import styles from './CheckoutSummary.module.scss';
 import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import { useMemo, useState, useEffect } from 'react';
 import { createBooking, prepareDataForBooking, separation, combinedList } from './helpers';
 import CheckoutConfirm from '@/Components/Checkout/CheckoutConfirm';
