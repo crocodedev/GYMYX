@@ -14,6 +14,7 @@ export const getPackages = async (token) => {
     }
 };
 
+
 export const buyPackage = async (token, package_id, split = false) => {
   const result = await fetch('/api/package/buy-package', {
     cache: 'no-store',
