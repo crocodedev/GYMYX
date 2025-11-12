@@ -1,3 +1,5 @@
+import { v4 } from "uuid";
+
 export const getTrainingData = async (token) => {
   const result = await fetch('/api/booking/get-bookings', {
     method: 'POST',
@@ -18,6 +20,7 @@ export async function cancelBooking(token, id) {
     method: 'POST',
     cache: 'no-store',
     headers: {
+      'Idempotency-Key': v4(),
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({ token, id }),
