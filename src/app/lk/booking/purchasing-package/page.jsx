@@ -22,7 +22,7 @@ const PurchasingPackages = () => {
         headingTitle={'Выберите пакет тренировок'}
         showButtonEditGym={false}
       />
-    <BookingPackages setLoadIsShow={setLoadIsShow}/>
+    <BookingPackages setLoadIsShow={setLoadIsShow} gimId={gym.id}/>
     </>
   )
 }

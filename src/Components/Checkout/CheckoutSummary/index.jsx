@@ -11,7 +11,6 @@ import Modal from '@/Components/Modal';
 import { uniqueUserData } from '@/Utils/helpers';
 
 const CheckoutSummary = ({ items, gym, isActivePackage = 0, balance = 0 }) => {
-  const router = useRouter();
   const { data: sessionData } = useSession();
   const [canSubmit, setCanSubmit] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -28,13 +27,6 @@ const CheckoutSummary = ({ items, gym, isActivePackage = 0, balance = 0 }) => {
   })
   const [paidData, setPaidData] = useState({})
   const [isLoad, setIsLoad] = useState(false)
-
-  useEffect(() => {
-    const stored = localStorage.getItem('agreedToPolicy');
-    if (stored === 'true') {
-      setCanSubmit(true);
-    }
-  }, []);
 
   const handleChangeCanSubmit = () => {
     setCanSubmit(!canSubmit)
