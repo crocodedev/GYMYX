@@ -3,14 +3,21 @@ export async function POST(request) {
   if (request.method === 'POST') {
     try {
       const requestData = await request.json();
+      const idempotencyKey = request.headers.get('Idempotency-Key');
+
+      const headers = {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${requestData.token}`,
+      };
+
+      if (idempotencyKey) {
+        headers['Idempotency-Key'] = idempotencyKey;
+      }
 
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/bookings/${requestData.id}/cancel`, {
         method: 'POST',
         cache: 'no-store',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${requestData.token}`,
-        },
+        headers: headers,
       });
 
       if (!response.ok) {

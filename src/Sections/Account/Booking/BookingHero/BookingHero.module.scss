@@ -76,13 +76,8 @@
     padding: 30px 30px 32px;
   }
 
-  @include media-breakpoint-between(sm, lg) {
-    padding: 15px 17px 19px;
-    height: 310px;
-  }
-
-  @include media-breakpoint-down(sm) {
-    padding: 13px 12px;
+  @include media-breakpoint-down(lg) {
+    padding: 18px;
     height: 310px;
   }
 
@@ -428,6 +423,6 @@
   }
 
   &__button {
-    width: 100%;
+    width: 100% !important;
   }
 }

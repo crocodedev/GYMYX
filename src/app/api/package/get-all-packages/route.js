@@ -5,14 +5,16 @@ export async function POST(request) {
     try {
       const requestData = await request.json();
 
+      const { token, gym_id } = requestData;
+
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/packages`,
+        `${process.env.NEXT_PUBLIC_API_URL}/packages${gym_id ? '?gym_id='+gym_id : ''}`,
         {
           method: 'GET',
           cache: 'no-store',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${requestData.token}`,
+            Authorization: `Bearer ${token}`,
           },
         },
       )

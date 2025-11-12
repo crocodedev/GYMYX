@@ -1,9 +1,12 @@
+import { v4 } from "uuid";
+
 export async function createBooking(token, gym_id, with_balance, lines, total_price = '0', anti_frod = {uuid: ''}) {
   try {
     const result = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/bookings`, {
       method: 'POST',
       cache: 'no-store',
       headers: {
+        'Idempotency-Key': v4(),
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },

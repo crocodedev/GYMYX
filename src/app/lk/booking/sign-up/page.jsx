@@ -80,10 +80,11 @@ const BookingSignUp = () => {
       <BookingSignUpHeading
         handleChangeGym={() => setShowModal((prev) => !prev)}
         gymTitle={gym?.name}
-        showButtonEditGym={false}
+        showButtonEditGym={true}
         headingTitle={'Запишитесь на тренировки'}
+        isShowGymButton={false}
       />
-      <BookingSignUpContent gymTitle={gym?.name} handleChangeGym={() => setShowModal((prev) => !prev)}>
+      <BookingSignUpContent gymTitle={gym?.name} gymIsShowButton={false} handleChangeGym={() => setShowModal((prev) => !prev)}>
         <BookingCalendar change={false} userIsFix={!!sessionData?.user?.is_fix}/>
         <BookingSteps stepNumber={1} stepTitle={'Выберите день'} balance={balance} packageIsActive={balance > 0}/>
       </BookingSignUpContent>

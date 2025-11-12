@@ -1,3 +1,5 @@
+import { v4 } from "uuid";
+
 export function sortVisitDates(data, dateToRemove, timeToRemove) {
   const updatedData = data.filter((item) => {
     if (item.date === dateToRemove && item.time === timeToRemove) {
@@ -31,6 +33,7 @@ export async function cancelBooking(token, id) {
     method: 'POST',
     cache: 'no-store',
     headers: {
+      'Idempotency-Key': v4(),
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({ token, id }),
