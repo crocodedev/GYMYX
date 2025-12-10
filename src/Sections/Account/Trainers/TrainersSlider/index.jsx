@@ -11,6 +11,7 @@ import SliderControls from '@/Components/Slider/SliderControls';
 import TrainersItem from '../TrainersItem';
 import { getTrainersData } from '@/app/lk/trainers/page';
 import PageHeading from '../../PageHeading';
+import { useSelector } from "react-redux"
 
 const TrainersSlider = ({isShowVideo = false}) => {
   const [dataTrainers, setDataTrainers] = useState();
@@ -20,6 +21,7 @@ const TrainersSlider = ({isShowVideo = false}) => {
   const [endSlider, setEndSlider] = useState(false);
   const [startSlider, setStartSlider] = useState(true);
   const [loading, setLoading] = useState(true);
+  const { gym } = useSelector((state) => state.booking);
 
   const sliderPcSettings = {
     spaceBetween: 25,
@@ -84,12 +86,23 @@ const TrainersSlider = ({isShowVideo = false}) => {
     });
   }
 
+  const filteringTrainersByGym = (trainers) => {
+    const filtered = trainers.filter(trainer => {
+      const gymField = trainer.find(f => f.type === "gym_array");
+      return gymField && gymField.value.includes(gym.id);
+    });
+    return filtered
+  }
+
   useEffect(() => {
     const isMobile = window.matchMedia('(max-width: 992px)').matches;
     isMobile ? handleInit : setSliderSettings(sliderPcSettings);
 
     getTrainersData().then((dataTrainers) => {
-      setDataTrainers(sortForVideo(dataTrainers.data.modules[0].fields[0].childrens));
+      const trainersArray = dataTrainers.data.modules[0].fields[0].childrens
+      const trainersByGym = filteringTrainersByGym(trainersArray)
+      const trainersSortByVideo = sortForVideo(trainersByGym)
+      setDataTrainers(trainersSortByVideo);
       setLoading(false);
     });
   }, []);
