@@ -94,6 +94,26 @@ const TrainersSlider = ({isShowVideo = false}) => {
     return filtered
   }
 
+  const sortTrainersBySortOrder = (trainers) => {
+    return trainers.sort((a, b) => {
+        const fieldA = a.find(f => f.name === "sort_order");
+        const fieldB = b.find(f => f.name === "sort_order");
+
+        const valA = fieldA?.value;
+        const valB = fieldB?.value;
+
+        const isEmptyA = valA === "" || valA === null || valA === undefined;
+        const isEmptyB = valB === "" || valB === null || valB === undefined;
+
+        if (isEmptyA && !isEmptyB) return 1;
+        if (!isEmptyA && isEmptyB) return -1;
+
+        if (isEmptyA && isEmptyB) return 0;
+
+        return Number(valA) - Number(valB);
+    });
+}
+
   useEffect(() => {
     const isMobile = window.matchMedia('(max-width: 992px)').matches;
     isMobile ? handleInit : setSliderSettings(sliderPcSettings);
@@ -101,8 +121,9 @@ const TrainersSlider = ({isShowVideo = false}) => {
     getTrainersData().then((dataTrainers) => {
       const trainersArray = dataTrainers.data.modules[0].fields[0].childrens
       const trainersByGym = filteringTrainersByGym(trainersArray)
-      const trainersSortByVideo = sortForVideo(trainersByGym)
-      setDataTrainers(trainersSortByVideo);
+      const trainersSortByOrder = sortTrainersBySortOrder(trainersByGym)
+      // const trainersSortByVideo = sortForVideo(trainersByGym)
+      setDataTrainers(trainersSortByOrder);
       setLoading(false);
     });
   }, []);
